@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import ReminderReducer from './reminder_reducer'
+import RemindersReducer from './reminders_reducer'
 
-const RootReducer = combineReducers(
-  ReminderReducer
-)
+const RootReducer = combineReducers({
+  reminders: RemindersReducer
+})
 
 export default RootReducer
