@@ -58,7 +58,11 @@
 	
 	document.addEventListener('DOMContentLoaded', function () {
 	  var root = document.getElementById('root');
-	  _reactDom2.default.render(_react2.default.createElement(Root, { store: store }), root);
+	  _reactDom2.default.render(_react2.default.createElement(
+	    'h1',
+	    null,
+	    'TestYay!'
+	  ), root);
 	});
 
 /***/ },
