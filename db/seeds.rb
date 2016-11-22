@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+10.times do |n|
+  Reminder.create(
+    title: "Reminder ##{n}",
+    remind_date: Date.new + n % 7,
+    done: false
+  )
+end
