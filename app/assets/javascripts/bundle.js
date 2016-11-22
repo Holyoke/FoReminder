@@ -54,10 +54,20 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
+	var _reminder_api_util = __webpack_require__(178);
+	
+	var actions = _interopRequireWildcard(_reminder_api_util);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	document.addEventListener('DOMContentLoaded', function () {
 	  var root = document.getElementById('root');
+	
+	  //testing
+	  window.actions = actions;
+	
 	  _reactDom2.default.render(_react2.default.createElement(
 	    'h1',
 	    null,
@@ -21451,6 +21461,24 @@
 	
 	module.exports = ReactDOMInvalidARIAHook;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 178 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var fetchReminders = exports.fetchReminders = function fetchReminders(success, error) {
+	  $.ajax({
+	    method: 'GET',
+	    url: 'api/reminders',
+	    success: success,
+	    error: error
+	  });
+	};
 
 /***/ }
 /******/ ]);
