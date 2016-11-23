@@ -62,11 +62,12 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
+	var _selector = __webpack_require__(203);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	//  testing
 	document.addEventListener('DOMContentLoaded', function () {
 	  var root = document.getElementById('root');
 	  var store = (0, _store2.default)();
@@ -74,12 +75,16 @@
 	  //  testing
 	  window.actions = actions;
 	  window.store = store;
+	  window.allReminders = _selector.allReminders;
+	
 	  _reactDom2.default.render(_react2.default.createElement(
 	    'h1',
 	    null,
 	    'TestYay!'
 	  ), root);
 	});
+	
+	//  testing
 
 /***/ },
 /* 1 */
@@ -22587,6 +22592,23 @@
 	};
 	
 	exports.default = RemindersReducer;
+
+/***/ },
+/* 203 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var allReminders = exports.allReminders = function allReminders(_ref) {
+	  var reminders = _ref.reminders;
+	
+	  Object.keys(reminders).map(function (id) {
+	    return reminders[id];
+	  });
+	};
 
 /***/ }
 /******/ ]);
