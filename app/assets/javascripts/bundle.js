@@ -54,9 +54,13 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
+	var _App = __webpack_require__(206);
+	
+	var _App2 = _interopRequireDefault(_App);
+	
 	var _reminder_api_util = __webpack_require__(178);
 	
-	var actions = _interopRequireWildcard(_reminder_api_util);
+	var api = _interopRequireWildcard(_reminder_api_util);
 	
 	var _store = __webpack_require__(179);
 	
@@ -64,10 +68,15 @@
 	
 	var _selector = __webpack_require__(203);
 	
+	var _reminder_actions = __webpack_require__(205);
+	
+	var actions = _interopRequireWildcard(_reminder_actions);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	//  testing
 	document.addEventListener('DOMContentLoaded', function () {
 	  var root = document.getElementById('root');
 	  var store = (0, _store2.default)();
@@ -76,15 +85,12 @@
 	  window.actions = actions;
 	  window.store = store;
 	  window.allReminders = _selector.allReminders;
+	  window.api = api;
 	
-	  _reactDom2.default.render(_react2.default.createElement(
-	    'h1',
-	    null,
-	    'TestYay!'
-	  ), root);
+	  _reactDom2.default.render(_react2.default.createElement(_App2.default, null), root);
 	});
 	
-	//  testing
+	// components
 
 /***/ },
 /* 1 */
@@ -22574,18 +22580,30 @@
 
 /***/ },
 /* 202 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _reminder_actions = __webpack_require__(205);
+	
 	var RemindersReducer = function RemindersReducer() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var action = arguments[1];
 	
+	  Object.freeze(state);
+	  var newState = {};
 	  switch (action.type) {
+	    case _reminder_actions.RECEIVE_REMINDERS:
+	      action.reminders.forEach(function (reminder) {
+	        return newState[reminder.id] = reminder;
+	      });
+	      return newState;
+	    case _reminder_actions.RECEIVE_REMINDER:
+	      return newState[reminder.id] = reminder;
 	    default:
 	      return state;
 	  }
@@ -22609,6 +22627,66 @@
 	    return reminders[id];
 	  });
 	};
+
+/***/ },
+/* 204 */,
+/* 205 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var REQUEST_REMINDERS = exports.REQUEST_REMINDERS = 'REQUEST_REMINDERS';
+	var RECEIVE_REMINDERS = exports.RECEIVE_REMINDERS = 'RECEIVE_REMINDERS';
+	var RECEIVE_REMINDER = exports.RECEIVE_REMINDER = 'RECEIVE_REMINDER';
+	
+	var requestReminders = exports.requestReminders = function requestReminders() {
+	  return {
+	    type: REQUEST_REMINDERS
+	  };
+	};
+	
+	var receiveReminder = exports.receiveReminder = function receiveReminder(reminder) {
+	  return {
+	    type: RECEIVE_REMINDER,
+	    reminder: reminder
+	  };
+	};
+	
+	var receiveReminders = exports.receiveReminders = function receiveReminders(reminders) {
+	  return {
+	    type: RECEIVE_REMINDERS,
+	    reminders: reminders
+	  };
+	};
+
+/***/ },
+/* 206 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var App = function App() {
+	  return _react2.default.createElement(
+	    'h1',
+	    null,
+	    'FoReMinder Test'
+	  );
+	};
+	
+	exports.default = App;
 
 /***/ }
 /******/ ]);
