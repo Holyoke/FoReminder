@@ -4,15 +4,28 @@ import merge from 'lodash/merge'
 class ReminderListItem extends React.Component {
   constructor (props) {
     super(props)
+
+    this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this)
   }
 
+  handleDeleteButtonClick (e) {
+    e.preventDefault()
+    this.props.removeReminder(this.props.reminder)
+  }
+
+
   render () {
-    const { reminder } = this.props
-    const { title, remind_date } = reminder
+    const { reminder, removeReminder } = this.props
+    const { title, remind_date, body, done } = reminder
     return (
       <li className="reminder-list-item">
-        <p>Title: {title}</p>
-        <p>Remind Date: {remind_date}</p>
+        <div className='reminder'>
+          <h4>Title: {title}</h4>
+          <section>{body}</section>
+          <section>Done: {done.toString() }</section>
+          <section>Remind Date: {remind_date}</section>
+          <button onClick={this.handleDeleteButtonClick}>Delete reminder</button>
+        </div>
       </li>
     )
   }

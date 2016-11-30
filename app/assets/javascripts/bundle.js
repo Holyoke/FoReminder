@@ -23326,13 +23326,17 @@
 	  };
 	};
 	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
+	  var reminder = _ref.reminder;
 	  return {
 	    receiveReminder: function receiveReminder(reminder) {
 	      return dispatch((0, _reminder_actions.receiveReminder)(reminder));
 	    },
 	    receiveReminders: function receiveReminders() {
 	      return dispatch((0, _reminder_actions.receiveReminders)());
+	    },
+	    removeReminder: function removeReminder(reminder) {
+	      return dispatch((0, _reminder_actions.removeReminder)(reminder));
 	    }
 	  };
 	};
@@ -23388,12 +23392,15 @@
 	  _createClass(ReminderList, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      var reminders = this.props.reminders;
 	
 	      var reminderItems = reminders.map(function (reminder) {
 	        return _react2.default.createElement(_reminder_list_item2.default, {
 	          key: 'reminder-list-item' + reminder.id,
-	          reminder: reminder });
+	          reminder: reminder,
+	          removeReminder: _this2.props.removeReminder });
 	      });
 	
 	      return _react2.default.createElement(
@@ -23449,30 +23456,63 @@
 	  function ReminderListItem(props) {
 	    _classCallCheck(this, ReminderListItem);
 	
-	    return _possibleConstructorReturn(this, (ReminderListItem.__proto__ || Object.getPrototypeOf(ReminderListItem)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (ReminderListItem.__proto__ || Object.getPrototypeOf(ReminderListItem)).call(this, props));
+	
+	    _this.handleDeleteButtonClick = _this.handleDeleteButtonClick.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(ReminderListItem, [{
+	    key: 'handleDeleteButtonClick',
+	    value: function handleDeleteButtonClick(e) {
+	      e.preventDefault();
+	      this.props.removeReminder(this.props.reminder);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var reminder = this.props.reminder;
+	      var _props = this.props,
+	          reminder = _props.reminder,
+	          removeReminder = _props.removeReminder;
 	      var title = reminder.title,
-	          remind_date = reminder.remind_date;
+	          remind_date = reminder.remind_date,
+	          body = reminder.body,
+	          done = reminder.done;
 	
 	      return _react2.default.createElement(
 	        'li',
 	        { className: 'reminder-list-item' },
 	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Title: ',
-	          title
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Remind Date: ',
-	          remind_date
+	          'div',
+	          { className: 'reminder' },
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            'Title: ',
+	            title
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            body
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            'Done: ',
+	            done.toString()
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            'Remind Date: ',
+	            remind_date
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.handleDeleteButtonClick },
+	            'Delete reminder'
+	          )
 	        )
 	      );
 	    }
@@ -41200,15 +41240,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var REQUEST_REMINDERS = exports.REQUEST_REMINDERS = 'REQUEST_REMINDERS';
 	var RECEIVE_REMINDERS = exports.RECEIVE_REMINDERS = 'RECEIVE_REMINDERS';
 	var RECEIVE_REMINDER = exports.RECEIVE_REMINDER = 'RECEIVE_REMINDER';
-	
-	var requestReminders = exports.requestReminders = function requestReminders() {
-	  return {
-	    type: REQUEST_REMINDERS
-	  };
-	};
+	var REMOVE_REMINDER = exports.REMOVE_REMINDER = 'REMOVE_REMINDER';
 	
 	var receiveReminder = exports.receiveReminder = function receiveReminder(reminder) {
 	  return {
@@ -41221,6 +41255,13 @@
 	  return {
 	    type: RECEIVE_REMINDERS,
 	    reminders: reminders
+	  };
+	};
+	
+	var removeReminder = exports.removeReminder = function removeReminder(reminder) {
+	  return {
+	    type: REMOVE_REMINDER,
+	    reminder: reminder
 	  };
 	};
 
@@ -41362,6 +41403,10 @@
 	    case _reminder_actions.RECEIVE_REMINDER:
 	      var newReminder = _defineProperty({}, action.reminder.id, action.reminder);
 	      newState = (0, _merge2.default)({}, state, newReminder);
+	      return newState;
+	    case _reminder_actions.REMOVE_REMINDER:
+	      newState = (0, _merge2.default)({}, state);
+	      delete newState[action.reminder.id];
 	      return newState;
 	    default:
 	      return state;

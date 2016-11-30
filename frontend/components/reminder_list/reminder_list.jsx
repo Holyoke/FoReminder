@@ -14,7 +14,8 @@ class ReminderList extends React.Component {
       return (
         <ReminderListItem
           key={`reminder-list-item${reminder.id}`}
-          reminder={reminder} />
+          reminder={reminder}
+          removeReminder={ this.props.removeReminder } />
       )
     })
 

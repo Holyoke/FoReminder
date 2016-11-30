@@ -1,4 +1,4 @@
-import { RECEIVE_REMINDER, RECEIVE_REMINDERS } from '../actions/reminder_actions'
+import { RECEIVE_REMINDER, RECEIVE_REMINDERS, REMOVE_REMINDER } from '../actions/reminder_actions'
 import moment from 'moment'
 import merge from 'lodash/merge'
 
@@ -29,6 +29,10 @@ const remindersReducer = (state = initialState, action) => {
     case RECEIVE_REMINDER:
       const newReminder = { [action.reminder.id]: action.reminder }
       newState = merge({}, state, newReminder)
+      return newState
+    case REMOVE_REMINDER:
+      newState = merge({}, state)
+      delete newState[action.reminder.id]
       return newState
     default:
       return state
