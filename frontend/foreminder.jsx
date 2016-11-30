@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // components
-import App from './components/App'
+import Root from './components/root'
 
 //  testing
 import * as api from './util/reminder_api_util'
@@ -20,5 +20,5 @@ document.addEventListener('DOMContentLoaded', () => {
   window.allReminders = allReminders
   window.api = api
 
-  ReactDOM.render(<App />, root)
+  ReactDOM.render(<Root store={store} />, root)
 })

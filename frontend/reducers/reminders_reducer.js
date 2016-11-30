@@ -8,6 +8,7 @@ const RemindersReducer = (state = {}, action) => {
       action.reminders.forEach(reminder => newState[reminder.id] = reminder)
       return newState
     case RECEIVE_REMINDER:
+      let reminder = action.reminder
       return newState[reminder.id] = reminder
     default:
       return state
