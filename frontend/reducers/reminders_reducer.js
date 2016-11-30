@@ -1,4 +1,6 @@
 import { RECEIVE_REMINDER, RECEIVE_REMINDERS } from '../actions/reminder_actions'
+import moment from 'moment'
+import merge from 'lodash/merge'
 
 const initialState = {
   "1": {
@@ -6,14 +8,14 @@ const initialState = {
     title: "wash room",
     body: "it is dirty",
     done: false,
-    remind_date: new Date().toString()
+    remind_date: moment().add(24, 'hours').format('LLL')
   },
   "2": {
     id: 2,
     title: "wash dog",
     body: "dog is dirty",
     done: true,
-    remind_date: new Date().toString()
+    remind_date: moment().add(24, 'hours').format('LLL')
   }
 }
 
@@ -25,8 +27,9 @@ const remindersReducer = (state = initialState, action) => {
       action.reminders.forEach(reminder => newState[reminder.id] = reminder)
       return newState
     case RECEIVE_REMINDER:
-      let reminder = action.reminder
-      return newState[reminder.id] = reminder
+      const newReminder = { [action.reminder.id]: action.reminder }
+      newState = merge({}, state, newReminder)
+      return newState
     default:
       return state
   }

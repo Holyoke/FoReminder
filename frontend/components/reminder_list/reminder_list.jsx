@@ -2,6 +2,9 @@ import React from 'react'
 
 // components
 import ReminderListItem from './reminder_list_item'
+import ReminderForm from './reminder_form'
+
+//actions
 
 class ReminderList extends React.Component {
 
@@ -16,9 +19,10 @@ class ReminderList extends React.Component {
     })
 
     return (
-      <div>
+      <div className='reminder-list'>
         <p>Reminder List Presentational</p>
         { reminderItems }
+        <ReminderForm receiveReminder={ this.props.receiveReminder }/>
       </div>
     )
   }
