@@ -5,13 +5,9 @@ import ReminderList from './reminder_list'
 import { receiveReminders, receiveReminder } from '../../actions/reminder_actions'
 import { allReminders } from '../../reducers/selector'
 
-const mapStateToProps = state => {
-  debugger
-  ({
-    reminders: allReminders(state),
-    state
-  })
-}
+const mapStateToProps = state =>({
+  reminders: allReminders(state)
+})
 
 const mapDispatchToProps = dispatch => ({
   receiveReminder: (reminder) => dispatch(receiveReminder(reminder)),

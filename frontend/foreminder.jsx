@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.store = store
   window.allReminders = allReminders
   window.api = api
+  window.store.getState()
 
   ReactDOM.render(<Root store={store} />, root)
 })

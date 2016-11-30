@@ -1,7 +1,11 @@
 import React from 'react'
+import ReminderListContainer from './reminder_list/reminder_list_container'
 
 const App = () => (
-  <h1>FoReMinder Test</h1>
+  <div className="app">
+    <h1>FoReMinder App</h1>
+    <ReminderListContainer />
+  </div>
 )
 
 export default App

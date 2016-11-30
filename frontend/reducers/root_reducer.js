@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import RemindersReducer from './reminders_reducer'
+import remindersReducer from './reminders_reducer'
 
 const RootReducer = combineReducers({
-  reminders: RemindersReducer
+  reminders: remindersReducer
 })
 
 export default RootReducer
