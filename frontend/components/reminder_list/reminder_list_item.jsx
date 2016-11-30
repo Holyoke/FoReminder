@@ -1,13 +1,13 @@
 import React from 'react'
 import merge from 'lodash/merge'
 
-class ReminderlistItem extends react.Component {
+class ReminderListItem extends React.Component {
   constructor(props) {
     super(props)
   }
 
   render () {
-    const { reminders } = this.props
+    const { reminder } = this.props
     const { title } = reminder
 
     return (
@@ -17,3 +17,5 @@ class ReminderlistItem extends react.Component {
     )
   }
 }
+
+export default ReminderListItem
