@@ -23400,7 +23400,8 @@
 	        return _react2.default.createElement(_reminder_list_item2.default, {
 	          key: 'reminder-list-item' + reminder.id,
 	          reminder: reminder,
-	          removeReminder: _this2.props.removeReminder });
+	          removeReminder: _this2.props.removeReminder,
+	          receiveReminder: _this2.props.receiveReminder });
 	      });
 	
 	      return _react2.default.createElement(
@@ -23459,6 +23460,7 @@
 	    var _this = _possibleConstructorReturn(this, (ReminderListItem.__proto__ || Object.getPrototypeOf(ReminderListItem)).call(this, props));
 	
 	    _this.handleDeleteButtonClick = _this.handleDeleteButtonClick.bind(_this);
+	    _this.handleDoneButtonClick = _this.handleDoneButtonClick.bind(_this);
 	    return _this;
 	  }
 	
@@ -23466,14 +23468,29 @@
 	    key: 'handleDeleteButtonClick',
 	    value: function handleDeleteButtonClick(e) {
 	      e.preventDefault();
-	      this.props.removeReminder(this.props.reminder);
+	      var _props = this.props,
+	          removeReminder = _props.removeReminder,
+	          reminder = _props.reminder;
+	
+	      removeReminder(reminder);
+	    }
+	  }, {
+	    key: 'handleDoneButtonClick',
+	    value: function handleDoneButtonClick(e) {
+	      e.preventDefault(e);
+	      var _props2 = this.props,
+	          receiveReminder = _props2.receiveReminder,
+	          reminder = _props2.reminder;
+	
+	      var toggledReminder = (0, _merge2.default)({}, reminder, { done: !reminder.done });
+	      receiveReminder(toggledReminder);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props = this.props,
-	          reminder = _props.reminder,
-	          removeReminder = _props.removeReminder;
+	      var _props3 = this.props,
+	          reminder = _props3.reminder,
+	          removeReminder = _props3.removeReminder;
 	      var title = reminder.title,
 	          remind_date = reminder.remind_date,
 	          body = reminder.body,
@@ -23512,6 +23529,11 @@
 	            'button',
 	            { onClick: this.handleDeleteButtonClick },
 	            'Delete reminder'
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.handleDoneButtonClick },
+	            'Complete reminder'
 	          )
 	        )
 	      );

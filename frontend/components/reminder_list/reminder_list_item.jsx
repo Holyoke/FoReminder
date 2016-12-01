@@ -6,11 +6,24 @@ class ReminderListItem extends React.Component {
     super(props)
 
     this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this)
+    this.handleDoneButtonClick = this.handleDoneButtonClick.bind(this)
   }
 
   handleDeleteButtonClick (e) {
     e.preventDefault()
-    this.props.removeReminder(this.props.reminder)
+    const { removeReminder, reminder} = this.props
+    removeReminder(reminder)
+  }
+
+  handleDoneButtonClick (e) {
+    e.preventDefault(e)
+    const { receiveReminder, reminder } = this.props
+    const toggledReminder = merge(
+      {},
+      reminder,
+      { done: !reminder.done }
+    )
+    receiveReminder(toggledReminder)
   }
 
 
@@ -25,6 +38,7 @@ class ReminderListItem extends React.Component {
           <section>Done: {done.toString() }</section>
           <section>Remind Date: {remind_date}</section>
           <button onClick={this.handleDeleteButtonClick}>Delete reminder</button>
+          <button onClick={this.handleDoneButtonClick}>Complete reminder</button>
         </div>
       </li>
     )
