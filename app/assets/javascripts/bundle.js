@@ -70,19 +70,24 @@
 	
 	var _reminder_actions = __webpack_require__(417);
 	
-	var actions = _interopRequireWildcard(_reminder_actions);
+	var reminderActions = _interopRequireWildcard(_reminder_actions);
+	
+	var _comment_actions = __webpack_require__(425);
+	
+	var commentActions = _interopRequireWildcard(_comment_actions);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	//  testing
+	// components
 	document.addEventListener('DOMContentLoaded', function () {
 	  var root = document.getElementById('root');
 	  var store = (0, _store2.default)();
 	
 	  //  testing
-	  window.actions = actions;
+	  window.reminderActions = reminderActions;
+	  window.commentActions = commentActions;
 	  window.store = store;
 	  window.allReminders = _selector.allReminders;
 	  window.api = api;
@@ -91,7 +96,7 @@
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 	});
 	
-	// components
+	//  testing
 
 /***/ },
 /* 1 */
@@ -42032,31 +42037,35 @@
 	          'table',
 	          null,
 	          _react2.default.createElement(
-	            'tr',
+	            'tbody',
 	            null,
 	            _react2.default.createElement(
-	              'th',
+	              'tr',
 	              null,
-	              'Body'
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                'Body'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                'Remind Date'
+	              )
 	            ),
 	            _react2.default.createElement(
-	              'th',
+	              'tr',
 	              null,
-	              'Remind Date'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'tr',
-	            null,
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              body
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              remind_date
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                body
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                remind_date
+	              )
 	            )
 	          )
 	        ),
@@ -42073,6 +42082,40 @@
 	}(_react2.default.Component);
 	
 	exports.default = ReminderDetailView;
+
+/***/ },
+/* 425 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var RECEIVE_COMMENTS = exports.RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
+	var RECEIVE_COMMENT = exports.RECEIVE_COMMENT = 'RECEIVE_COMMENT';
+	var REMOVE_COMMENT = exports.REMOVE_COMMENT = 'REMOVE_COMMENT';
+	
+	var receiveComment = exports.receiveComment = function receiveComment(comment) {
+	  return {
+	    type: RECEIVE_COMMENT,
+	    comment: comment
+	  };
+	};
+	
+	var receiveComments = exports.receiveComments = function receiveComments(comments) {
+	  return {
+	    type: RECEIVE_COMMENTS,
+	    comments: comments
+	  };
+	};
+	
+	var removeComment = exports.removeComment = function removeComment(comment) {
+	  return {
+	    type: REMOVE_COMMENT,
+	    comment: comment
+	  };
+	};
 
 /***/ }
 /******/ ]);
