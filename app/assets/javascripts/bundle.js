@@ -23334,9 +23334,6 @@
 	    },
 	    receiveReminders: function receiveReminders() {
 	      return dispatch((0, _reminder_actions.receiveReminders)());
-	    },
-	    removeReminder: function removeReminder(reminder) {
-	      return dispatch((0, _reminder_actions.removeReminder)(reminder));
 	    }
 	  };
 	};
@@ -23443,6 +23440,10 @@
 	
 	var _merge2 = _interopRequireDefault(_merge);
 	
+	var _reminder_detail_view_container = __webpack_require__(423);
+	
+	var _reminder_detail_view_container2 = _interopRequireDefault(_reminder_detail_view_container);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23450,6 +23451,9 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// components
+	
 	
 	var ReminderListItem = function (_React$Component) {
 	  _inherits(ReminderListItem, _React$Component);
@@ -23459,28 +23463,25 @@
 	
 	    var _this = _possibleConstructorReturn(this, (ReminderListItem.__proto__ || Object.getPrototypeOf(ReminderListItem)).call(this, props));
 	
-	    _this.handleDeleteButtonClick = _this.handleDeleteButtonClick.bind(_this);
-	    _this.handleDoneButtonClick = _this.handleDoneButtonClick.bind(_this);
+	    _this.state = { detail: false };
+	    _this.toggleDone = _this.toggleDone.bind(_this);
+	    _this.toggleDetail = _this.toggleDetail.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(ReminderListItem, [{
-	    key: 'handleDeleteButtonClick',
-	    value: function handleDeleteButtonClick(e) {
+	    key: 'toggleDetail',
+	    value: function toggleDetail(e) {
 	      e.preventDefault();
-	      var _props = this.props,
-	          removeReminder = _props.removeReminder,
-	          reminder = _props.reminder;
-	
-	      removeReminder(reminder);
+	      this.setState({ detail: !this.state.detail });
 	    }
 	  }, {
-	    key: 'handleDoneButtonClick',
-	    value: function handleDoneButtonClick(e) {
+	    key: 'toggleDone',
+	    value: function toggleDone(e) {
 	      e.preventDefault(e);
-	      var _props2 = this.props,
-	          receiveReminder = _props2.receiveReminder,
-	          reminder = _props2.reminder;
+	      var _props = this.props,
+	          receiveReminder = _props.receiveReminder,
+	          reminder = _props.reminder;
 	
 	      var toggledReminder = (0, _merge2.default)({}, reminder, { done: !reminder.done });
 	      receiveReminder(toggledReminder);
@@ -23488,13 +23489,15 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props3 = this.props,
-	          reminder = _props3.reminder,
-	          removeReminder = _props3.removeReminder;
+	      var reminder = this.props.reminder;
 	      var title = reminder.title,
-	          remind_date = reminder.remind_date,
-	          body = reminder.body,
 	          done = reminder.done;
+	
+	      var detailView = void 0;
+	
+	      if (this.state.detail) {
+	        detailView = _react2.default.createElement(_reminder_detail_view_container2.default, { reminder: reminder });
+	      }
 	
 	      return _react2.default.createElement(
 	        'li',
@@ -23504,14 +23507,9 @@
 	          { className: 'reminder' },
 	          _react2.default.createElement(
 	            'h4',
-	            null,
+	            { onClick: this.toggleDetail },
 	            'Title: ',
 	            title
-	          ),
-	          _react2.default.createElement(
-	            'section',
-	            null,
-	            body
 	          ),
 	          _react2.default.createElement(
 	            'section',
@@ -23522,19 +23520,20 @@
 	          _react2.default.createElement(
 	            'section',
 	            null,
-	            'Remind Date: ',
-	            remind_date
+	            'Detail: ',
+	            !!this.state.detail.toString()
 	          ),
 	          _react2.default.createElement(
 	            'button',
-	            { onClick: this.handleDeleteButtonClick },
-	            'Delete reminder'
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.handleDoneButtonClick },
+	            { onClick: this.toggleDone },
 	            'Complete reminder'
-	          )
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.toggleDetail },
+	            'More Details'
+	          ),
+	          detailView
 	        )
 	      );
 	    }
@@ -41957,6 +41956,101 @@
 	};
 	
 	exports.default = remindersReducer;
+
+/***/ },
+/* 423 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(179);
+	
+	var _reminder_detail_view = __webpack_require__(424);
+	
+	var _reminder_detail_view2 = _interopRequireDefault(_reminder_detail_view);
+	
+	var _reminder_actions = __webpack_require__(417);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
+	  var reminder = _ref.reminder;
+	  return {
+	    removeReminder: function removeReminder(reminder) {
+	      return dispatch((0, _reminder_actions.removeReminder)(reminder));
+	    }
+	  };
+	};
+	
+	//  actions
+	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(_reminder_detail_view2.default);
+
+/***/ },
+/* 424 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ReminderDetailView = function (_React$Component) {
+	  _inherits(ReminderDetailView, _React$Component);
+	
+	  function ReminderDetailView() {
+	    _classCallCheck(this, ReminderDetailView);
+	
+	    return _possibleConstructorReturn(this, (ReminderDetailView.__proto__ || Object.getPrototypeOf(ReminderDetailView)).apply(this, arguments));
+	  }
+	
+	  _createClass(ReminderDetailView, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          reminder = _props.reminder,
+	          removeReminder = _props.removeReminder;
+	
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'reminder-detail-view' },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Reminder Detail View'
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: removeReminder },
+	          'Delete reminder'
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return ReminderDetailView;
+	}(_react2.default.Component);
+	
+	exports.default = ReminderDetailView;
 
 /***/ }
 /******/ ]);
