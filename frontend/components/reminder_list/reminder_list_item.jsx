@@ -39,7 +39,6 @@ class ReminderListItem extends React.Component {
         <div className="reminder">
           <h4 onClick={this.toggleDetail}>Title: {title}</h4>
           <section>Done: {done.toString()}</section>
-          <section>Detail: {!!this.state.detail.toString()}</section>
           <button onClick={this.toggleDone}>Complete reminder</button>
           <button onClick={this.toggleDetail}>More Details</button>
           { detailView }

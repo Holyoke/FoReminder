@@ -5,7 +5,7 @@ import ReminderDetailView from './reminder_detail_view'
 import { removeReminder } from '../../actions/reminder_actions'
 
 const mapDispatchToProps = (dispatch, { reminder }) => ({
-  removeReminder: (reminder) => dispatch(removeReminder(reminder))
+  removeReminder: () => dispatch(removeReminder(reminder))
 })
 
 export default connect(

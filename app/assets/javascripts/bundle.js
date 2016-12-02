@@ -23409,8 +23409,8 @@
 	          null,
 	          'Reminder List Presentational'
 	        ),
-	        reminderItems,
-	        _react2.default.createElement(_reminder_form2.default, { receiveReminder: this.props.receiveReminder })
+	        _react2.default.createElement(_reminder_form2.default, { receiveReminder: this.props.receiveReminder }),
+	        reminderItems
 	      );
 	    }
 	  }]);
@@ -23516,12 +23516,6 @@
 	            null,
 	            'Done: ',
 	            done.toString()
-	          ),
-	          _react2.default.createElement(
-	            'section',
-	            null,
-	            'Detail: ',
-	            !!this.state.detail.toString()
 	          ),
 	          _react2.default.createElement(
 	            'button',
@@ -41980,7 +41974,7 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
 	  var reminder = _ref.reminder;
 	  return {
-	    removeReminder: function removeReminder(reminder) {
+	    removeReminder: function removeReminder() {
 	      return dispatch((0, _reminder_actions.removeReminder)(reminder));
 	    }
 	  };
@@ -42028,15 +42022,43 @@
 	      var _props = this.props,
 	          reminder = _props.reminder,
 	          removeReminder = _props.removeReminder;
-	
+	      var body = reminder.body,
+	          remind_date = reminder.remind_date;
 	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'reminder-detail-view' },
 	        _react2.default.createElement(
-	          'p',
+	          'table',
 	          null,
-	          'Reminder Detail View'
+	          _react2.default.createElement(
+	            'tr',
+	            null,
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Body'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              'Remind Date'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'tr',
+	            null,
+	            _react2.default.createElement(
+	              'td',
+	              null,
+	              body
+	            ),
+	            _react2.default.createElement(
+	              'td',
+	              null,
+	              remind_date
+	            )
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'button',
