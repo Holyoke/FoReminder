@@ -68,6 +68,8 @@
 	
 	var _selector = __webpack_require__(418);
 	
+	var selectors = _interopRequireWildcard(_selector);
+	
 	var _reminder_actions = __webpack_require__(417);
 	
 	var reminderActions = _interopRequireWildcard(_reminder_actions);
@@ -89,7 +91,7 @@
 	  window.reminderActions = reminderActions;
 	  window.commentActions = commentActions;
 	  window.store = store;
-	  window.allReminders = _selector.allReminders;
+	  window.selectors = selectors;
 	  window.api = api;
 	  window.store.getState();
 	
@@ -41821,6 +41823,17 @@
 	    return reminders[id];
 	  });
 	};
+	
+	var commentsByReminderId = exports.commentsByReminderId = function commentsByReminderId(_ref2, reminder_id) {
+	  var comments = _ref2.comments;
+	
+	  var commentsByReminderId = [];
+	  Object.keys(comments).forEach(function (commentId) {
+	    var comment = comments[commentId];
+	    if (comments[commentId].reminder_id === reminder_id) commentsByReminderId.push(comment);
+	  });
+	  return commentsByReminderId;
+	};
 
 /***/ },
 /* 419 */
@@ -41880,10 +41893,15 @@
 	
 	var _reminders_reducer2 = _interopRequireDefault(_reminders_reducer);
 	
+	var _comments_reducer = __webpack_require__(426);
+	
+	var _comments_reducer2 = _interopRequireDefault(_comments_reducer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var RootReducer = (0, _redux.combineReducers)({
-	  reminders: _reminders_reducer2.default
+	  reminders: _reminders_reducer2.default,
+	  comments: _comments_reducer2.default
 	});
 	
 	exports.default = RootReducer;
@@ -42116,6 +42134,68 @@
 	    comment: comment
 	  };
 	};
+
+/***/ },
+/* 426 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _comment_actions = __webpack_require__(425);
+	
+	var _merge = __webpack_require__(213);
+	
+	var _merge2 = _interopRequireDefault(_merge);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	var initialState = {
+	  "1": { // this is the step with id = 1
+	    id: 1,
+	    title: "walk to store",
+	    active: false,
+	    reminder_id: 1
+	  },
+	  "2": { // this is the step with id = 2
+	    id: 2,
+	    title: "buy soap",
+	    active: false,
+	    reminder_id: 1
+	  }
+	};
+	
+	var commentsReducer = function commentsReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	  var action = arguments[1];
+	
+	  Object.freeze(state);
+	  var newState = {};
+	  switch (action.type) {
+	    case _comment_actions.RECEIVE_COMMENTS:
+	      action.comments.forEach(function (comment) {
+	        return newState[comment.id] = comment;
+	      });
+	      return newState;
+	    case _comment_actions.RECEIVE_COMMENT:
+	      var newComment = _defineProperty({}, action.comment.id, action.comment);
+	      newState = (0, _merge2.default)({}, state, newComment);
+	      return newState;
+	    case _comment_actions.REMOVE_COMMENT:
+	      newState = (0, _merge2.default)({}, state);
+	      delete newState[action.comment.id];
+	      return newState;
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = commentsReducer;
 
 /***/ }
 /******/ ]);

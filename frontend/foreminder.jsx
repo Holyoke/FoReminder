@@ -7,7 +7,7 @@ import Root from './components/root'
 //  testing
 import * as api from './util/reminder_api_util'
 import configureStore from './store/store.js'
-import { allReminders } from './reducers/selector.js'
+import * as selectors from './reducers/selector.js'
 import * as reminderActions from './actions/reminder_actions'
 import * as commentActions from './actions/comment_actions'
 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.reminderActions = reminderActions
   window.commentActions =commentActions
   window.store = store
-  window.allReminders = allReminders
+  window.selectors = selectors
   window.api = api
   window.store.getState()
 

@@ -1,6 +1,22 @@
 import { RECEIVE_COMMENT, RECEIVE_COMMENTS, REMOVE_COMMENT } from '../actions/comment_actions'
 import merge from 'lodash/merge'
 
+const initialState = {
+    "1": { // this is the step with id = 1
+      id: 1,
+      title: "walk to store",
+      active: false,
+      reminder_id: 1
+    },
+    "2": { // this is the step with id = 2
+      id: 2,
+      title: "buy soap",
+      active: false,
+      reminder_id: 1
+    }
+}
+
+
 const commentsReducer = (state = initialState, action) => {
   Object.freeze(state)
   let newState = {}
