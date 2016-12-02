@@ -4,8 +4,6 @@ import React from 'react'
 import ReminderListItem from './reminder_list_item'
 import ReminderForm from './reminder_form'
 
-//actions
-
 class ReminderList extends React.Component {
 
   render () {

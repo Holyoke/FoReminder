@@ -3,6 +3,8 @@ import ReminderList from './reminder_list'
 
 // actions
 import { receiveReminders, receiveReminder } from '../../actions/reminder_actions'
+
+// selectors
 import { allReminders } from '../../reducers/selector'
 
 const mapStateToProps = state => ({

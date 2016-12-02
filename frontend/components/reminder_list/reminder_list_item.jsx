@@ -37,7 +37,7 @@ class ReminderListItem extends React.Component {
     return (
       <li className="reminder-list-item">
         <div className="reminder">
-          <h4 onClick={this.toggleDetail}>Title: {title}</h4>
+          <h4 onClick={this.toggleDetail}>Reminder: {title}</h4>
           <section>Done: {done.toString()}</section>
           <button onClick={this.toggleDone}>Complete reminder</button>
           <button onClick={this.toggleDetail}>More Details</button>

@@ -5,15 +5,15 @@ import merge from 'lodash/merge'
 const initialState = {
   "1": {
     id: 1,
-    title: "wash room",
-    body: "it is dirty",
+    title: "reminder #1 think of chai",
+    body: "#1 it is dirty",
     done: false,
     remind_date: moment().add(24, 'hours').format('LLL')
   },
   "2": {
     id: 2,
-    title: "wash dog",
-    body: "dog is dirty",
+    title: "reminder #2",
+    body: "#2 dog is dirty",
     done: true,
     remind_date: moment().add(24, 'hours').format('LLL')
   }
