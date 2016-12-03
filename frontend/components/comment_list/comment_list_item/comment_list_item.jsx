@@ -2,11 +2,12 @@ import React from 'react'
 
 class CommentListItem extends React.Component {
   render () {
-    console.table(this.props)
-
+    const { comment } = this.props
+    const { title, body } = comment
     return (
       <li className='comment-list-item'>
-        <p onClick={ () => console.table(this.props) }> Comment List Item for</p>
+        <h5>{title}</h5>
+        <section>{body}</section>
       </li>
     )
   }

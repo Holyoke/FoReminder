@@ -1,6 +1,6 @@
 import React from 'react'
 
-import CommentListItemContainer from './comment_list_item_container'
+import CommentListItemContainer from './comment_list_item/comment_list_item_container'
 
 class CommentList extends React.Component {
 
@@ -11,7 +11,6 @@ class CommentList extends React.Component {
         <CommentListItemContainer
           key={`comment-list-item${comment.id}`}
           comment={comment}
-          reminder_id ={reminder_id}
         />
       )
     })
@@ -19,7 +18,6 @@ class CommentList extends React.Component {
       <div className='comment-list'>
         <h4 onClick={() => console.table(this.props)}>Comment List for reminder id:{reminder_id}</h4>
         <ul> { commentItems } </ul>
-
       </div>
     )
   }
