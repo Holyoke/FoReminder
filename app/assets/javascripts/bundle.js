@@ -26450,6 +26450,7 @@
 	          comment: comment
 	        });
 	      });
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'comment-list' },
@@ -26464,9 +26465,7 @@
 	        _react2.default.createElement(
 	          'ul',
 	          null,
-	          ' ',
-	          commentItems,
-	          ' '
+	          commentItems
 	        )
 	      );
 	    }
@@ -26550,18 +26549,29 @@
 	var CommentListItem = function (_React$Component) {
 	  _inherits(CommentListItem, _React$Component);
 	
-	  function CommentListItem() {
+	  function CommentListItem(props) {
 	    _classCallCheck(this, CommentListItem);
 	
-	    return _possibleConstructorReturn(this, (CommentListItem.__proto__ || Object.getPrototypeOf(CommentListItem)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (CommentListItem.__proto__ || Object.getPrototypeOf(CommentListItem)).call(this, props));
+	
+	    _this.state = { active: true };
+	    _this.toggleComment = _this.toggleComment.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(CommentListItem, [{
+	    key: 'toggleComment',
+	    value: function toggleComment(e) {
+	      e.preventDefault();
+	      this.setState({ active: !this.state.active });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var comment = this.props.comment;
 	      var title = comment.title,
 	          body = comment.body;
+	      var active = this.state.active;
 	
 	      return _react2.default.createElement(
 	        'li',
@@ -26575,6 +26585,22 @@
 	          'section',
 	          null,
 	          body
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          null,
+	          'active:',
+	          active.toString()
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.toggleComment },
+	          'Toggle Comment'
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          null,
+	          'Remove Comment'
 	        )
 	      );
 	    }

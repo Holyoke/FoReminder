@@ -14,10 +14,11 @@ class CommentList extends React.Component {
         />
       )
     })
-    return(
-      <div className='comment-list'>
+
+    return (
+      <div className="comment-list">
         <h4 onClick={() => console.table(this.props)}>Comment List for reminder id:{reminder_id}</h4>
-        <ul> { commentItems } </ul>
+        <ul>{commentItems}</ul>
       </div>
     )
   }

@@ -7,7 +7,7 @@ import ReminderDetailViewContainer from './reminder_detail_view_container'
 class ReminderListItem extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {detail: false}
+    this.state = { detail: false }
     this.toggleDone = this.toggleDone.bind(this)
     this.toggleDetail = this.toggleDetail.bind(this)
   }
