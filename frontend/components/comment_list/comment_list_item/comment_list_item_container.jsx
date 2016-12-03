@@ -11,8 +11,8 @@ const mapStateToProps = (state, {comment}) => ({
 })
 
 const mapDispatchToProps = (dispatch, {comment}) => ({
-  receiveComment: comment => receiveComment(comment),
-  removeComment: () => removeComment(comment)
+  receiveComment: comment => dispatch(receiveComment(comment)),
+  removeComment: () => dispatch(removeComment(comment))
 })
 
 export default connect(

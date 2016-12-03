@@ -26512,10 +26512,10 @@
 	  var comment = _ref2.comment;
 	  return {
 	    receiveComment: function receiveComment(comment) {
-	      return (0, _comment_actions.receiveComment)(comment);
+	      return dispatch((0, _comment_actions.receiveComment)(comment));
 	    },
 	    removeComment: function removeComment() {
-	      return (0, _comment_actions.removeComment)(comment);
+	      return dispatch((0, _comment_actions.removeComment)(comment));
 	    }
 	  };
 	};
@@ -26568,7 +26568,9 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var comment = this.props.comment;
+	      var _props = this.props,
+	          comment = _props.comment,
+	          removeComment = _props.removeComment;
 	      var title = comment.title,
 	          body = comment.body;
 	      var active = this.state.active;
@@ -26599,7 +26601,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'button',
-	          null,
+	          { onClick: removeComment },
 	          'Remove Comment'
 	        )
 	      );

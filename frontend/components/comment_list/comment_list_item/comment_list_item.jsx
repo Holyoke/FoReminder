@@ -12,8 +12,9 @@ class CommentListItem extends React.Component {
     this.setState({active: !this.state.active})
   }
 
+
   render () {
-    const { comment } = this.props
+    const { comment, removeComment } = this.props
     const { title, body } = comment
     const { active } = this.state
     return (
@@ -22,7 +23,7 @@ class CommentListItem extends React.Component {
         <section>{body}</section>
         <section>active:{ active.toString() }</section>
         <button onClick={this.toggleComment}>Toggle Comment</button>
-        <button>Remove Comment</button>
+        <button onClick={removeComment}>Remove Comment</button>
       </li>
     )
   }
