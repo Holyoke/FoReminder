@@ -19,9 +19,9 @@ class ReminderList extends React.Component {
     })
 
     return (
-      <div className='reminder-list'>
+      <div className="reminder-list">
         <p>Reminder List Presentational</p>
-        <ReminderForm receiveReminder={ this.props.receiveReminder }/>
+        <ReminderForm receiveReminder={this.props.receiveReminder}/>
         { reminderItems }
       </div>
     )

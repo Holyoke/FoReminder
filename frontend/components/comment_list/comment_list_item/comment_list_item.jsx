@@ -12,16 +12,14 @@ class CommentListItem extends React.Component {
     this.setState({active: !this.state.active})
   }
 
-
   render () {
     const { comment, removeComment } = this.props
-    const { title, body } = comment
+    const { body } = comment
     const { active } = this.state
     return (
-      <li className='comment-list-item'>
-        <h5>{title}</h5>
-        <section>{body}</section>
-        <section>active:{ active.toString() }</section>
+      <li className="comment-list-item">
+        <h5>{body}</h5>
+        <section>active:{active.toString()}</section>
         <button onClick={this.toggleComment}>Toggle Comment</button>
         <button onClick={removeComment}>Remove Comment</button>
       </li>

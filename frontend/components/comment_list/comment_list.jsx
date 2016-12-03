@@ -1,11 +1,14 @@
 import React from 'react'
 
+// components
 import CommentListItemContainer from './comment_list_item/comment_list_item_container'
+import CommentForm from './comment_form'
 
 class CommentList extends React.Component {
 
   render () {
-    const { reminder_id, comments } = this.props
+    const { reminder_id, comments, receiveComment } = this.props
+
     const commentItems = comments.map(comment => {
       return (
         <CommentListItemContainer
@@ -18,6 +21,7 @@ class CommentList extends React.Component {
     return (
       <div className="comment-list">
         <h4 onClick={() => console.table(this.props)}>Comment List for reminder id:{reminder_id}</h4>
+        <CommentForm reminder_id={reminder_id} receiveComment={receiveComment} />
         <ul>{commentItems}</ul>
       </div>
     )

@@ -11,7 +11,6 @@ const mapStateToProps = (state, {comment}) => ({
 })
 
 const mapDispatchToProps = (dispatch, {comment}) => ({
-  receiveComment: comment => dispatch(receiveComment(comment)),
   removeComment: () => dispatch(removeComment(comment))
 })
 

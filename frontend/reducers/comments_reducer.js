@@ -4,13 +4,13 @@ import merge from 'lodash/merge'
 const initialState = {
     "1": { // this is the step with id = 1
       id: 1,
-      title: "comment #1 walk to store",
+      body: "comment #1 walk to store",
       active: false,
       reminder_id: 1
     },
     "2": { // this is the step with id = 2
       id: 2,
-      title: "comment #2 buy soap",
+      body: "comment #2 buy soap",
       active: false,
       reminder_id: 1
     }

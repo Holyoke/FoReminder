@@ -16,7 +16,7 @@ class ReminderForm extends React.Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.handleDataChange = this.handleDataChange.bind(this)
   }
 
   update (property) {
@@ -39,7 +39,7 @@ class ReminderForm extends React.Component {
     })
   }
 
-  handleChange (date) {
+  handleDataChange (date) {
     this.setState({
       remind_date: date
     })
@@ -68,10 +68,9 @@ class ReminderForm extends React.Component {
             required />
         </label>
 
-        <link rel='stylesheets' href='dist/react-datepicker.css' />
         <DatePicker
-        selected={this.state.remind_date}
-        onChange={this.handleChange} />
+          selected={this.state.remind_date}
+          onChange={this.handleDataChange} />
 
         <button className="create-button">Create reminder!</button>
       </form>

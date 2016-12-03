@@ -12,7 +12,7 @@ const mapStateToProps = (state, {reminder_id}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  receiveComment: comment => receiveComment(comment)
+  receiveComment: comment => dispatch(receiveComment(comment))
 })
 
 export default connect(
