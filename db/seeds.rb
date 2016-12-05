@@ -11,5 +11,6 @@
     title: "Reminder ##{n}",
     remind_date: Date.new + n % 7,
     done: false
+    body: "Sample body"
   )
 end

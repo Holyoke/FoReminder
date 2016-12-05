@@ -23380,6 +23380,9 @@
 	    },
 	    receiveReminders: function receiveReminders() {
 	      return dispatch((0, _reminder_actions.receiveReminders)());
+	    },
+	    fetchReminders: function fetchReminders() {
+	      return dispatch((0, _reminder_actions.fetchReminders)());
 	    }
 	  };
 	};
@@ -23431,6 +23434,11 @@
 	  }
 	
 	  _createClass(ReminderList, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.props.fetchReminders();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;

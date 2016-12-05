@@ -6,6 +6,10 @@ import ReminderForm from './reminder_form'
 
 class ReminderList extends React.Component {
 
+  componentDidMount () {
+    this.props.fetchReminders()
+  }
+
   render () {
     const { reminders } = this.props
     const reminderItems = reminders.map(reminder => {
