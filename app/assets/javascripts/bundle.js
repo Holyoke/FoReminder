@@ -21504,12 +21504,16 @@
 	
 	var _root_reducer2 = _interopRequireDefault(_root_reducer);
 	
+	var _thunk_middleware = __webpack_require__(432);
+	
+	var _thunk_middleware2 = _interopRequireDefault(_thunk_middleware);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var configureStore = function configureStore() {
 	  var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
-	  var store = (0, _redux.createStore)(_root_reducer2.default, preloadedState);
+	  var store = (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_thunk_middleware2.default));
 	  store.subscribe(function () {
 	    localStorage.state = JSON.stringify(store.getState());
 	  });
@@ -42571,6 +42575,28 @@
 	};
 	
 	exports.default = commentsReducer;
+
+/***/ },
+/* 432 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var thunk = function thunk(_ref) {
+	  var getState = _ref.getState,
+	      dispatch = _ref.dispatch;
+	  return function (next) {
+	    return function (action) {
+	      if (typeof action === 'function') return action(dispatch, getState);
+	      return next(action);
+	    };
+	  };
+	};
+	
+	exports.default = thunk;
 
 /***/ }
 /******/ ]);
