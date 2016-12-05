@@ -26822,17 +26822,35 @@
 
 /***/ },
 /* 309 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.removeReminder = exports.receiveReminders = exports.receiveReminder = exports.fetchReminders = exports.REMOVE_REMINDER = exports.RECEIVE_REMINDER = exports.RECEIVE_REMINDERS = undefined;
+	
+	var _reminder_api_util = __webpack_require__(428);
+	
+	var util = _interopRequireWildcard(_reminder_api_util);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
 	var RECEIVE_REMINDERS = exports.RECEIVE_REMINDERS = 'RECEIVE_REMINDERS';
 	var RECEIVE_REMINDER = exports.RECEIVE_REMINDER = 'RECEIVE_REMINDER';
 	var REMOVE_REMINDER = exports.REMOVE_REMINDER = 'REMOVE_REMINDER';
 	
+	// api interactions
+	var fetchReminders = exports.fetchReminders = function fetchReminders() {
+	  return function (dispatch) {
+	    return util.fetchReminders().then(function (reminders) {
+	      return dispatch(receiveReminders(reminders));
+	    });
+	  };
+	};
+	
+	// sync actions
 	var receiveReminder = exports.receiveReminder = function receiveReminder(reminder) {
 	  return {
 	    type: RECEIVE_REMINDER,
@@ -42409,7 +42427,7 @@
 	  value: true
 	});
 	var fetchReminders = exports.fetchReminders = function fetchReminders(success, error) {
-	  $.ajax({
+	  return $.ajax({
 	    method: 'GET',
 	    url: 'api/reminders',
 	    success: success,
@@ -42586,11 +42604,13 @@
 	  value: true
 	});
 	var thunk = function thunk(_ref) {
-	  var getState = _ref.getState,
-	      dispatch = _ref.dispatch;
+	  var dispatch = _ref.dispatch,
+	      getState = _ref.getState;
 	  return function (next) {
 	    return function (action) {
-	      if (typeof action === 'function') return action(dispatch, getState);
+	      if (typeof action === 'function') {
+	        return action(dispatch, getState);
+	      }
 	      return next(action);
 	    };
 	  };

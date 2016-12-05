@@ -1,5 +1,5 @@
 export const fetchReminders = (success, error) => {
-  $.ajax({
+  return $.ajax({
     method: 'GET',
     url: 'api/reminders',
     success,
