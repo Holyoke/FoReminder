@@ -11,12 +11,12 @@ class Api::RemindersController < ApplicationController
   end
 
   def create
-    @reminder = reminder.new(reminder_params)
+    @reminder = Reminder.new(reminder_params)
 
     if @reminder.save
-      render json: @reminder, status: :created, location: @reminder
+      render json: @reminder, status: :created
     else
-      render json: @reminder.errors, status: :unprocessable_entity
+      render json: @reminder.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -38,6 +38,6 @@ class Api::RemindersController < ApplicationController
     end
 
     def reminder_params
-      params.require(:reminder).permit(:title, :body, :remind_date)
+      params.require(:reminder).permit(:title, :body, :remind_date, :done)
     end
 end

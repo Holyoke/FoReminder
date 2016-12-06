@@ -10,6 +10,7 @@ import * as api from './util/reminder_api_util'
 import * as selectors from './reducers/selector.js'
 import * as reminderActions from './actions/reminder_actions'
 import * as commentActions from './actions/comment_actions'
+import moment from 'moment'
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root')
@@ -18,11 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //  testing
   window.reminderActions = reminderActions
-  window.commentActions =commentActions
+  window.commentActions = commentActions
   window.store = store
   window.selectors = selectors
   window.api = api
   window.store.getState()
+  window.moment = moment
 
   ReactDOM.render(<Root store={store} />, root)
 })

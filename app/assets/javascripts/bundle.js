@@ -78,11 +78,15 @@
 	
 	var commentActions = _interopRequireWildcard(_comment_actions);
 	
+	var _moment = __webpack_require__(311);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	//  testing
+	// components
 	document.addEventListener('DOMContentLoaded', function () {
 	  var root = document.getElementById('root');
 	  var preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {};
@@ -95,11 +99,12 @@
 	  window.selectors = selectors;
 	  window.api = api;
 	  window.store.getState();
+	  window.moment = _moment2.default;
 	
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 	});
 	
-	// components
+	//  testing
 
 /***/ },
 /* 1 */
@@ -42438,6 +42443,16 @@
 	  return $.ajax({
 	    method: 'GET',
 	    url: 'api/reminders',
+	    success: success,
+	    error: error
+	  });
+	};
+	
+	var createReminder = exports.createReminder = function createReminder(reminder, success, error) {
+	  return $.ajax({
+	    method: 'POST',
+	    url: 'api/reminders',
+	    data: { reminder: reminder },
 	    success: success,
 	    error: error
 	  });
