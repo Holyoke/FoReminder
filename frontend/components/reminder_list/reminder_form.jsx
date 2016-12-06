@@ -56,7 +56,7 @@ class ReminderForm extends React.Component {
             value={this.state.title}
             placeholder="Please enter a reminder..."
             onChange={this.update('title')}
-            required />
+             />
         </label>
 
         <label>Body:
@@ -66,7 +66,7 @@ class ReminderForm extends React.Component {
             value={this.state.body}
             placeholder="..."
             onChange={this.update('body')}
-            required />
+             />
         </label>
 
         <DatePicker

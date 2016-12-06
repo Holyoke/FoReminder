@@ -78,6 +78,10 @@
 	
 	var commentActions = _interopRequireWildcard(_comment_actions);
 	
+	var _error_actions = __webpack_require__(433);
+	
+	var errorActions = _interopRequireWildcard(_error_actions);
+	
 	var _moment = __webpack_require__(311);
 	
 	var _moment2 = _interopRequireDefault(_moment);
@@ -86,7 +90,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// components
+	//  testing
 	document.addEventListener('DOMContentLoaded', function () {
 	  var root = document.getElementById('root');
 	  var preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {};
@@ -95,6 +99,7 @@
 	  //  testing
 	  window.reminderActions = reminderActions;
 	  window.commentActions = commentActions;
+	  window.errorActions = errorActions;
 	  window.store = store;
 	  window.selectors = selectors;
 	  window.api = api;
@@ -104,7 +109,7 @@
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 	});
 	
-	//  testing
+	// components
 
 /***/ },
 /* 1 */
@@ -26848,6 +26853,8 @@
 	
 	var util = _interopRequireWildcard(_reminder_api_util);
 	
+	var _error_actions = __webpack_require__(433);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	var RECEIVE_REMINDERS = exports.RECEIVE_REMINDERS = 'RECEIVE_REMINDERS';
@@ -26867,6 +26874,8 @@
 	  return function (dispatch) {
 	    return util.createReminder(reminder).then(function (reminder) {
 	      return dispatch(receiveReminder(reminder));
+	    }, function (err) {
+	      return dispatch((0, _error_actions.receiveErrors)(err.responseJSON));
 	    });
 	  };
 	};
@@ -27003,8 +27012,8 @@
 	            ref: 'title',
 	            value: this.state.title,
 	            placeholder: 'Please enter a reminder...',
-	            onChange: this.update('title'),
-	            required: true })
+	            onChange: this.update('title')
+	          })
 	        ),
 	        _react2.default.createElement(
 	          'label',
@@ -27015,8 +27024,8 @@
 	            ref: 'title',
 	            value: this.state.body,
 	            placeholder: '...',
-	            onChange: this.update('body'),
-	            required: true })
+	            onChange: this.update('body')
+	          })
 	        ),
 	        _react2.default.createElement(_reactDatepicker2.default, {
 	          selected: this.state.remind_date,
@@ -42449,7 +42458,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var _arguments = arguments;
 	var fetchReminders = exports.fetchReminders = function fetchReminders(success, error) {
 	  return $.ajax({
 	    method: 'GET',
@@ -42460,13 +42468,12 @@
 	};
 	
 	var createReminder = exports.createReminder = function createReminder(data, success, error) {
-	  console.table(data);
 	  return $.ajax({
 	    method: 'POST',
 	    url: 'api/reminders',
 	    data: data,
 	    success: success,
-	    error: console.error("Error: ", _arguments)
+	    error: error
 	  });
 	};
 
@@ -42490,11 +42497,16 @@
 	
 	var _comments_reducer2 = _interopRequireDefault(_comments_reducer);
 	
+	var _errors_reducer = __webpack_require__(434);
+	
+	var _errors_reducer2 = _interopRequireDefault(_errors_reducer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var RootReducer = (0, _redux.combineReducers)({
 	  reminders: _reminders_reducer2.default,
-	  comments: _comments_reducer2.default
+	  comments: _comments_reducer2.default,
+	  errors: _errors_reducer2.default
 	});
 	
 	exports.default = RootReducer;
@@ -42652,6 +42664,61 @@
 	};
 	
 	exports.default = thunk;
+
+/***/ },
+/* 433 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var RECEIVE_ERRORS = exports.RECEIVE_ERRORS = "RECEIVE_ERRORS";
+	var CLEAR_ERRORS = exports.CLEAR_ERRORS = "CLEAR_ERRORS";
+	
+	var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
+	  return {
+	    type: RECEIVE_ERRORS,
+	    errors: errors
+	  };
+	};
+	
+	var clearErrors = exports.clearErrors = function clearErrors() {
+	  return {
+	    type: CLEAR_ERRORS
+	  };
+	};
+
+/***/ },
+/* 434 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _error_actions = __webpack_require__(433);
+	
+	var errorsReducer = function errorsReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+	
+	  Object.freeze(state);
+	
+	  switch (action.type) {
+	    case _error_actions.RECEIVE_ERRORS:
+	      return action.errors;
+	    case _error_actions.CLEAR_ERRORS:
+	      return [];
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = errorsReducer;
 
 /***/ }
 /******/ ]);
