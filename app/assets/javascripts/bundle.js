@@ -23380,8 +23380,8 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
 	  var reminder = _ref.reminder;
 	  return {
-	    receiveReminder: function receiveReminder(reminder) {
-	      return dispatch((0, _reminder_actions.receiveReminder)(reminder));
+	    createReminder: function createReminder(reminder) {
+	      return dispatch((0, _reminder_actions.createReminder)({ reminder: reminder }));
 	    },
 	    receiveReminders: function receiveReminders() {
 	      return dispatch((0, _reminder_actions.receiveReminders)());
@@ -23466,7 +23466,7 @@
 	          null,
 	          'Reminder List Presentational'
 	        ),
-	        _react2.default.createElement(_reminder_form2.default, { receiveReminder: this.props.receiveReminder }),
+	        _react2.default.createElement(_reminder_form2.default, { createReminder: this.props.createReminder }),
 	        reminderItems
 	      );
 	    }
@@ -26842,7 +26842,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.removeReminder = exports.receiveReminders = exports.receiveReminder = exports.fetchReminders = exports.REMOVE_REMINDER = exports.RECEIVE_REMINDER = exports.RECEIVE_REMINDERS = undefined;
+	exports.removeReminder = exports.receiveReminders = exports.receiveReminder = exports.createReminder = exports.fetchReminders = exports.REMOVE_REMINDER = exports.RECEIVE_REMINDER = exports.RECEIVE_REMINDERS = undefined;
 	
 	var _reminder_api_util = __webpack_require__(428);
 	
@@ -26859,6 +26859,14 @@
 	  return function (dispatch) {
 	    return util.fetchReminders().then(function (reminders) {
 	      return dispatch(receiveReminders(reminders));
+	    });
+	  };
+	};
+	
+	var createReminder = exports.createReminder = function createReminder(reminder) {
+	  return function (dispatch) {
+	    return util.createReminder(reminder).then(function (reminder) {
+	      return dispatch(receiveReminder(reminder));
 	    });
 	  };
 	};
@@ -26957,18 +26965,20 @@
 	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(e) {
+	      var _this3 = this;
+	
 	      e.preventDefault();
 	      var reminder = Object.assign({}, this.state, { id: (0, _id_generator2.default)() });
 	
 	      //parse date
-	      reminder.remind_date = reminder.remind_date.format("LLL");
-	      this.props.receiveReminder(reminder);
+	      reminder.remind_date = reminder.remind_date.format('LLL');
 	
-	      // reset form
-	      this.setState({
-	        title: '',
-	        body: '',
-	        remind_date: (0, _moment2.default)().add(24, 'hours')
+	      this.props.createReminder(reminder).then(function () {
+	        _this3.setState({
+	          title: '',
+	          body: '',
+	          remind_date: (0, _moment2.default)().add(24, 'hours')
+	        });
 	      });
 	    }
 	  }, {
@@ -42439,6 +42449,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	var _arguments = arguments;
 	var fetchReminders = exports.fetchReminders = function fetchReminders(success, error) {
 	  return $.ajax({
 	    method: 'GET',
@@ -42448,13 +42459,14 @@
 	  });
 	};
 	
-	var createReminder = exports.createReminder = function createReminder(reminder, success, error) {
+	var createReminder = exports.createReminder = function createReminder(data, success, error) {
+	  console.table(data);
 	  return $.ajax({
 	    method: 'POST',
 	    url: 'api/reminders',
-	    data: { reminder: reminder },
+	    data: data,
 	    success: success,
-	    error: error
+	    error: console.error("Error: ", _arguments)
 	  });
 	};
 

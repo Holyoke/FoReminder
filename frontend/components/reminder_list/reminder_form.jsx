@@ -28,14 +28,15 @@ class ReminderForm extends React.Component {
     const reminder = Object.assign({}, this.state, {id: uniqueId()})
 
     //parse date
-    reminder.remind_date = reminder.remind_date.format("LLL")
-    this.props.receiveReminder(reminder)
+    reminder.remind_date = reminder.remind_date.format('LLL')
 
-    // reset form
-    this.setState({
-      title: '',
-      body: '',
-      remind_date: moment().add(24, 'hours')
+    this.props.createReminder(reminder).then(
+      () => {
+      this.setState({
+        title: '',
+        body: '',
+        remind_date: moment().add(24, 'hours')
+      })
     })
   }
 

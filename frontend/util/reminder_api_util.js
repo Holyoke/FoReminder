@@ -7,12 +7,13 @@ export const fetchReminders = (success, error) => {
   })
 }
 
-export const createReminder = (reminder, success, error) => {
+export const createReminder = (data, success, error) => {
+  console.table(data)
   return $.ajax({
     method: 'POST',
     url: 'api/reminders',
-    data: {reminder},
+    data: data,
     success,
-    error
+    error: console.error("Error: ", arguments)
   })
 }

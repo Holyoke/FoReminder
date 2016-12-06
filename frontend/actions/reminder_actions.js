@@ -11,6 +11,13 @@ export const fetchReminders = () => {
   }
 }
 
+export const createReminder = (reminder) => {
+  return (dispatch) => {
+    return util.createReminder(reminder)
+               .then(reminder => dispatch(receiveReminder(reminder)))
+  }
+}
+
 // sync actions
 export const receiveReminder = reminder => ({
   type: RECEIVE_REMINDER,
