@@ -11,7 +11,7 @@ class ReminderList extends React.Component {
   }
 
   render () {
-    const { reminders } = this.props
+    const { reminders, errors, createReminder, clearErrors } = this.props
     const reminderItems = reminders.map(reminder => {
       return (
         <ReminderListItem
@@ -25,8 +25,8 @@ class ReminderList extends React.Component {
     return (
       <div className="reminder-list">
         <p>Reminder List Presentational</p>
-        <ReminderForm createReminder={this.props.createReminder}/>
-        { reminderItems }
+        <ReminderForm createReminder={createReminder} clearErrors={clearErrors} errors={errors} />
+        {reminderItems}
       </div>
     )
   }

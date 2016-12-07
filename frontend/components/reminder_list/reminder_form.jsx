@@ -3,6 +3,9 @@ import uniqueId from '../../util/id_generator'
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
 
+// components
+import ErrorsList from './errors_list'
+
 import 'react-datepicker/dist/react-datepicker.css'
 
 class ReminderForm extends React.Component {
@@ -27,17 +30,18 @@ class ReminderForm extends React.Component {
     e.preventDefault()
     const reminder = Object.assign({}, this.state, {id: uniqueId()})
 
-    //parse date
+    //  parse date
     reminder.remind_date = reminder.remind_date.format('LLL')
 
     this.props.createReminder(reminder).then(
       () => {
-      this.setState({
-        title: '',
-        body: '',
-        remind_date: moment().add(24, 'hours')
+        this.setState({
+          title: '',
+          body: '',
+          remind_date: moment().add(24, 'hours')
+        })
+        this.props.clearErrors()
       })
-    })
   }
 
   handleDataChange (date) {
@@ -49,6 +53,7 @@ class ReminderForm extends React.Component {
   render () {
     return (
       <form className="reminder-form" onSubmit={this.handleSubmit}>
+        <ErrorsList errors={this.props.errors} />
         <label>Title:
           <input
             className="input"
