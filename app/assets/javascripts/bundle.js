@@ -22703,7 +22703,8 @@
 	var createReminder = exports.createReminder = function createReminder(reminder) {
 	  return function (dispatch) {
 	    return util.createReminder(reminder).then(function (reminder) {
-	      return dispatch(receiveReminder(reminder));
+	      dispatch(receiveReminder(reminder));
+	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
 	      return dispatch((0, _error_actions.receiveErrors)(err.responseJSON));
 	    });
@@ -41311,22 +41312,19 @@
 	
 	var _reminder_actions = __webpack_require__(202);
 	
-	var _error_actions = __webpack_require__(204);
-	
 	var _selector = __webpack_require__(417);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// actions
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    reminders: (0, _selector.allReminders)(state),
 	    errors: state.errors
 	  };
 	};
+	
 	// selectors
-	
-	
-	// actions
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
@@ -41340,9 +41338,6 @@
 	    },
 	    fetchReminders: function fetchReminders() {
 	      return dispatch((0, _reminder_actions.fetchReminders)());
-	    },
-	    clearErrors: function clearErrors() {
-	      return dispatch((0, _error_actions.clearErrors)());
 	    }
 	  };
 	};
@@ -41433,8 +41428,7 @@
 	      var _props = this.props,
 	          reminders = _props.reminders,
 	          errors = _props.errors,
-	          createReminder = _props.createReminder,
-	          clearErrors = _props.clearErrors;
+	          createReminder = _props.createReminder;
 	
 	      var reminderItems = reminders.map(function (reminder) {
 	        return _react2.default.createElement(_reminder_list_item2.default, {
@@ -41448,11 +41442,11 @@
 	        'div',
 	        { className: 'reminder-list' },
 	        _react2.default.createElement(
-	          'p',
+	          'h2',
 	          null,
-	          'Reminder List Presentational'
+	          'Reminder List'
 	        ),
-	        _react2.default.createElement(_reminder_form2.default, { createReminder: createReminder, clearErrors: clearErrors, errors: errors }),
+	        _react2.default.createElement(_reminder_form2.default, { createReminder: createReminder, errors: errors }),
 	        reminderItems
 	      );
 	    }
@@ -42183,7 +42177,6 @@
 	          body: '',
 	          remind_date: (0, _moment2.default)().add(24, 'hours')
 	        });
-	        _this3.props.clearErrors();
 	      });
 	    }
 	  }, {

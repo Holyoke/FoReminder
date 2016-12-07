@@ -40,8 +40,8 @@ class ReminderForm extends React.Component {
           body: '',
           remind_date: moment().add(24, 'hours')
         })
-        this.props.clearErrors()
-      })
+      }
+    )
   }
 
   handleDataChange (date) {

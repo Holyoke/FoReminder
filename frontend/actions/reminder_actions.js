@@ -1,5 +1,5 @@
 import * as util from '../util/reminder_api_util'
-import { receiveErrors } from './error_actions'
+import { receiveErrors, clearErrors } from './error_actions'
 
 export const RECEIVE_REMINDERS = 'RECEIVE_REMINDERS'
 export const RECEIVE_REMINDER = 'RECEIVE_REMINDER'
@@ -15,8 +15,11 @@ export const fetchReminders = () => {
 export const createReminder = (reminder) => {
   return (dispatch) => {
     return util.createReminder(reminder)
-               .then(reminder => dispatch(receiveReminder(reminder)),
-                     err => dispatch(receiveErrors(err.responseJSON)))
+               .then(reminder => {
+                 dispatch(receiveReminder(reminder))
+                 dispatch(clearErrors())
+               },
+                 err => dispatch(receiveErrors(err.responseJSON)))
   }
 }
 
