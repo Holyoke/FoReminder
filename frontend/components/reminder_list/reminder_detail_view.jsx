@@ -1,15 +1,26 @@
 import React from 'react'
 
 // components
+import Modal from 'react-bootstrap/lib/Modal'
 import CommentListContainer from '../comment_list/comment_list_container'
 
 class ReminderDetailView extends React.Component {
+  constructor (props) {
+    super(props)
+    this.debug = this.debug.bind(this)
+  }
+
+  debug (e) {
+    e.preventDefault()
+  }
+
   render () {
-    const { reminder, deleteReminder } = this.props
-    const { body, remind_date} = reminder
+    console.table(this.props)
+    const { reminder, deleteReminder, show } = this.props
+    const { body, remind_date } = reminder
     const reminder_id = reminder.id
     return (
-      <div className='reminder-detail-view'>
+      <Modal className='reminder-detail-view' show={show} onHide={this.props.onHide} >
         <table>
           <tbody>
             <tr>
@@ -22,9 +33,9 @@ class ReminderDetailView extends React.Component {
             </tr>
           </tbody>
         </table>
-        <button onClick={ deleteReminder }>Delete reminder</button>
+        <button onClick={deleteReminder}>Delete reminder</button>
         <CommentListContainer reminder_id={reminder_id} />
-      </div>
+      </Modal>
     )
   }
 }

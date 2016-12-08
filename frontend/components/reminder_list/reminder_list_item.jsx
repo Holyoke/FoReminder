@@ -14,7 +14,7 @@ class ReminderListItem extends React.Component {
   }
 
   toggleDetail (e) {
-    e.preventDefault()
+    if (e) e.preventDefault() // to catch nested events
     this.setState({detail: !this.state.detail})
   }
 
@@ -29,19 +29,18 @@ class ReminderListItem extends React.Component {
   render () {
     const { reminder } = this.props
     const { title, done } = reminder
-    let detailView
-
-    if (this.state.detail) {
-      detailView = <ReminderDetailViewContainer reminder={reminder} />
-    }
 
     return (
       <ListGroupItem className="reminder-list-item">
           <h4 onClick={this.toggleDetail}>Reminder: {title}</h4>
           <section>Done: {done.toString()}</section>
           <button onClick={this.toggleDone}>Complete reminder</button>
-          <button onClick={this.toggleDetail}>More Details</button>
-          { detailView }
+          <button onClick={this.toggleDetail}>Modal: {this.state.detail.toString()}</button>
+          <ReminderDetailViewContainer
+            reminder={reminder}
+            show={this.state.detail}
+            onHide={this.toggleDetail.bind(this)} />
+
       </ListGroupItem>
     )
   }
