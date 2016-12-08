@@ -32,7 +32,6 @@ const remindersReducer = (state = initialState, action) => {
       return newState
     case REMOVE_REMINDER:
       newState = merge({}, state)
-      debugger
       delete newState[action.reminder.id]
       return newState
     default:

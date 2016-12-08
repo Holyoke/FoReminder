@@ -3,6 +3,7 @@ import React from 'react'
 // components
 import ReminderListItem from './reminder_list_item'
 import ReminderForm from './reminder_form'
+import ListGroup from 'react-bootstrap/lib/ListGroup'
 
 class ReminderList extends React.Component {
 
@@ -23,11 +24,11 @@ class ReminderList extends React.Component {
     })
 
     return (
-      <div className="reminder-list">
+      <ListGroup className="reminder-list">
         <h2>Reminder List</h2>
         <ReminderForm createReminder={createReminder} errors={errors} />
         {reminderItems}
-      </div>
+      </ListGroup>
     )
   }
 }

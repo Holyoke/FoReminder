@@ -3,6 +3,7 @@ import merge from 'lodash/merge'
 
 // components
 import ReminderDetailViewContainer from './reminder_detail_view_container'
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
 
 class ReminderListItem extends React.Component {
   constructor (props) {
@@ -35,15 +36,13 @@ class ReminderListItem extends React.Component {
     }
 
     return (
-      <li className="reminder-list-item">
-        <div className="reminder">
+      <ListGroupItem className="reminder-list-item">
           <h4 onClick={this.toggleDetail}>Reminder: {title}</h4>
           <section>Done: {done.toString()}</section>
           <button onClick={this.toggleDone}>Complete reminder</button>
           <button onClick={this.toggleDetail}>More Details</button>
           { detailView }
-        </div>
-      </li>
+      </ListGroupItem>
     )
   }
 }
