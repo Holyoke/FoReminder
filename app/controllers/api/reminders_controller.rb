@@ -30,6 +30,7 @@ class Api::RemindersController < ApplicationController
 
   def destroy
     @reminder.destroy
+    render json: @reminder
   end
 
   private

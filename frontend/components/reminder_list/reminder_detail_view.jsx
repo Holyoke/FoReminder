@@ -5,7 +5,7 @@ import CommentListContainer from '../comment_list/comment_list_container'
 
 class ReminderDetailView extends React.Component {
   render () {
-    const { reminder, removeReminder } = this.props
+    const { reminder, deleteReminder } = this.props
     const { body, remind_date} = reminder
     const reminder_id = reminder.id
     return (
@@ -22,7 +22,7 @@ class ReminderDetailView extends React.Component {
             </tr>
           </tbody>
         </table>
-        <button onClick={ removeReminder }>Delete reminder</button>
+        <button onClick={ deleteReminder }>Delete reminder</button>
         <CommentListContainer reminder_id={reminder_id} />
       </div>
     )

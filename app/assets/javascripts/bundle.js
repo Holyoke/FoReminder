@@ -22658,6 +22658,7 @@
 	      return newState;
 	    case _reminder_actions.REMOVE_REMINDER:
 	      newState = (0, _merge2.default)({}, state);
+	      debugger;
 	      delete newState[action.reminder.id];
 	      return newState;
 	    default:
@@ -22676,7 +22677,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.removeReminder = exports.receiveReminders = exports.receiveReminder = exports.updateReminder = exports.createReminder = exports.fetchReminders = exports.REMOVE_REMINDER = exports.RECEIVE_REMINDER = exports.RECEIVE_REMINDERS = undefined;
+	exports.removeReminder = exports.receiveReminders = exports.receiveReminder = exports.deleteReminder = exports.updateReminder = exports.createReminder = exports.fetchReminders = exports.REMOVE_REMINDER = exports.RECEIVE_REMINDER = exports.RECEIVE_REMINDERS = undefined;
 	
 	var _reminder_api_util = __webpack_require__(203);
 	
@@ -22714,6 +22715,17 @@
 	  return function (dispatch) {
 	    return util.updateReminder(reminder).then(function (reminder) {
 	      dispatch(receiveReminder(reminder));
+	      dispatch((0, _error_actions.clearErrors)());
+	    }, function (err) {
+	      return dispatch((0, _error_actions.receiveErrors)(err.responseJSON));
+	    });
+	  };
+	};
+	
+	var deleteReminder = exports.deleteReminder = function deleteReminder(reminder) {
+	  return function (dispatch) {
+	    return util.deleteReminder(reminder).then(function (reminder) {
+	      dispatch(removeReminder(reminder));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
 	      return dispatch((0, _error_actions.receiveErrors)(err.responseJSON));
@@ -22775,6 +22787,17 @@
 	  var url = 'api/reminders/' + data.reminder.id;
 	  return $.ajax({
 	    method: 'PUT',
+	    url: url,
+	    data: data,
+	    success: success,
+	    error: error
+	  });
+	};
+	
+	var deleteReminder = exports.deleteReminder = function deleteReminder(data, success, error) {
+	  var url = 'api/reminders/' + data.reminder.id;
+	  return $.ajax({
+	    method: 'DELETE',
 	    url: url,
 	    data: data,
 	    success: success,
@@ -41595,8 +41618,8 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
 	  var reminder = _ref.reminder;
 	  return {
-	    removeReminder: function removeReminder() {
-	      return dispatch((0, _reminder_actions.removeReminder)(reminder));
+	    deleteReminder: function deleteReminder() {
+	      return dispatch((0, _reminder_actions.deleteReminder)({ reminder: reminder }));
 	    },
 	    receiveComments: function receiveComments() {
 	      return dispatch((0, _comment_actions.receiveComments)());
@@ -41651,7 +41674,7 @@
 	    value: function render() {
 	      var _props = this.props,
 	          reminder = _props.reminder,
-	          removeReminder = _props.removeReminder;
+	          deleteReminder = _props.deleteReminder;
 	      var body = reminder.body,
 	          remind_date = reminder.remind_date;
 	
@@ -41697,7 +41720,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'button',
-	          { onClick: removeReminder },
+	          { onClick: deleteReminder },
 	          'Delete reminder'
 	        ),
 	        _react2.default.createElement(_comment_list_container2.default, { reminder_id: reminder_id })

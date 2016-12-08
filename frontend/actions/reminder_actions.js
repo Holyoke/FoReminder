@@ -34,6 +34,17 @@ export const updateReminder = (reminder) => {
   }
 }
 
+export const deleteReminder = (reminder) => {
+  return (dispatch) => {
+    return util.deleteReminder(reminder)
+               .then(reminder => {
+                 dispatch(removeReminder(reminder))
+                 dispatch(clearErrors())
+               },
+                 err => dispatch(receiveErrors(err.responseJSON)))
+  }
+}
+
 // sync actions
 export const receiveReminder = reminder => ({
   type: RECEIVE_REMINDER,

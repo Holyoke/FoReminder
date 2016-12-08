@@ -27,3 +27,14 @@ export const updateReminder = (data, success, error) => {
     error
   })
 }
+
+export const deleteReminder = (data, success, error) => {
+  const url = 'api/reminders/' + data.reminder.id
+  return $.ajax({
+    method: 'DELETE',
+    url,
+    data,
+    success,
+    error
+  })
+}

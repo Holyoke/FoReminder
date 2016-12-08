@@ -2,11 +2,11 @@ import { connect } from 'react-redux'
 import ReminderDetailView from './reminder_detail_view'
 
 //  actions
-import { removeReminder } from '../../actions/reminder_actions'
+import { deleteReminder } from '../../actions/reminder_actions'
 import { receiveComments } from '../../actions/comment_actions'
 
 const mapDispatchToProps = (dispatch, { reminder }) => ({
-  removeReminder: () => dispatch(removeReminder(reminder)),
+  deleteReminder: () => dispatch(deleteReminder({reminder})),
   receiveComments: () => dispatch(receiveComments())
 })
 
