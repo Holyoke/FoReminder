@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.store = store
   window.selectors = selectors
   window.api = api
-  window.store.getState()
   window.moment = moment
 
   ReactDOM.render(<Root store={store} />, root)

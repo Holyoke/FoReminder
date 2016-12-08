@@ -66,7 +66,7 @@
 	
 	var api = _interopRequireWildcard(_reminder_api_util);
 	
-	var _selector = __webpack_require__(417);
+	var _selector = __webpack_require__(425);
 	
 	var selectors = _interopRequireWildcard(_selector);
 	
@@ -103,7 +103,6 @@
 	  window.store = store;
 	  window.selectors = selectors;
 	  window.api = api;
-	  window.store.getState();
 	  window.moment = _moment2.default;
 	
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
@@ -22677,7 +22676,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.removeReminder = exports.receiveReminders = exports.receiveReminder = exports.createReminder = exports.fetchReminders = exports.REMOVE_REMINDER = exports.RECEIVE_REMINDER = exports.RECEIVE_REMINDERS = undefined;
+	exports.removeReminder = exports.receiveReminders = exports.receiveReminder = exports.updateReminder = exports.createReminder = exports.fetchReminders = exports.REMOVE_REMINDER = exports.RECEIVE_REMINDER = exports.RECEIVE_REMINDERS = undefined;
 	
 	var _reminder_api_util = __webpack_require__(203);
 	
@@ -22703,6 +22702,17 @@
 	var createReminder = exports.createReminder = function createReminder(reminder) {
 	  return function (dispatch) {
 	    return util.createReminder(reminder).then(function (reminder) {
+	      dispatch(receiveReminder(reminder));
+	      dispatch((0, _error_actions.clearErrors)());
+	    }, function (err) {
+	      return dispatch((0, _error_actions.receiveErrors)(err.responseJSON));
+	    });
+	  };
+	};
+	
+	var updateReminder = exports.updateReminder = function updateReminder(reminder) {
+	  return function (dispatch) {
+	    return util.updateReminder(reminder).then(function (reminder) {
 	      dispatch(receiveReminder(reminder));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
@@ -22755,6 +22765,17 @@
 	  return $.ajax({
 	    method: 'POST',
 	    url: 'api/reminders',
+	    data: data,
+	    success: success,
+	    error: error
+	  });
+	};
+	
+	var updateReminder = exports.updateReminder = function updateReminder(data, success, error) {
+	  var url = 'api/reminders/' + data.reminder.id;
+	  return $.ajax({
+	    method: 'PUT',
+	    url: url,
 	    data: data,
 	    success: success,
 	    error: error
@@ -41306,13 +41327,13 @@
 	
 	var _reactRedux = __webpack_require__(406);
 	
-	var _reminder_list = __webpack_require__(418);
+	var _reminder_list = __webpack_require__(417);
 	
 	var _reminder_list2 = _interopRequireDefault(_reminder_list);
 	
 	var _reminder_actions = __webpack_require__(202);
 	
-	var _selector = __webpack_require__(417);
+	var _selector = __webpack_require__(425);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -41333,11 +41354,11 @@
 	    createReminder: function createReminder(reminder) {
 	      return dispatch((0, _reminder_actions.createReminder)({ reminder: reminder }));
 	    },
-	    receiveReminders: function receiveReminders() {
-	      return dispatch((0, _reminder_actions.receiveReminders)());
-	    },
 	    fetchReminders: function fetchReminders() {
 	      return dispatch((0, _reminder_actions.fetchReminders)());
+	    },
+	    updateReminder: function updateReminder(reminder) {
+	      return dispatch((0, _reminder_actions.updateReminder)({ reminder: reminder }));
 	    }
 	  };
 	};
@@ -41346,33 +41367,6 @@
 
 /***/ },
 /* 417 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var allReminders = exports.allReminders = function allReminders(_ref) {
-	  var reminders = _ref.reminders;
-	  return Object.keys(reminders).map(function (id) {
-	    return reminders[id];
-	  });
-	};
-	
-	var commentsByReminderId = exports.commentsByReminderId = function commentsByReminderId(_ref2, reminder_id) {
-	  var comments = _ref2.comments;
-	
-	  var commentsByReminderId = [];
-	  Object.keys(comments).forEach(function (commentId) {
-	    var comment = comments[commentId];
-	    if (comments[commentId].reminder_id === reminder_id) commentsByReminderId.push(comment);
-	  });
-	  return commentsByReminderId;
-	};
-
-/***/ },
-/* 418 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41387,7 +41381,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reminder_list_item = __webpack_require__(419);
+	var _reminder_list_item = __webpack_require__(418);
 	
 	var _reminder_list_item2 = _interopRequireDefault(_reminder_list_item);
 	
@@ -41435,7 +41429,7 @@
 	          key: 'reminder-list-item' + reminder.id,
 	          reminder: reminder,
 	          removeReminder: _this2.props.removeReminder,
-	          receiveReminder: _this2.props.receiveReminder });
+	          updateReminder: _this2.props.updateReminder });
 	      });
 	
 	      return _react2.default.createElement(
@@ -41458,7 +41452,7 @@
 	exports.default = ReminderList;
 
 /***/ },
-/* 419 */
+/* 418 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41477,7 +41471,7 @@
 	
 	var _merge2 = _interopRequireDefault(_merge);
 	
-	var _reminder_detail_view_container = __webpack_require__(420);
+	var _reminder_detail_view_container = __webpack_require__(419);
 	
 	var _reminder_detail_view_container2 = _interopRequireDefault(_reminder_detail_view_container);
 	
@@ -41517,11 +41511,11 @@
 	    value: function toggleDone(e) {
 	      e.preventDefault(e);
 	      var _props = this.props,
-	          receiveReminder = _props.receiveReminder,
+	          updateReminder = _props.updateReminder,
 	          reminder = _props.reminder;
 	
 	      var toggledReminder = (0, _merge2.default)({}, reminder, { done: !reminder.done });
-	      receiveReminder(toggledReminder);
+	      updateReminder(toggledReminder);
 	    }
 	  }, {
 	    key: 'render',
@@ -41576,7 +41570,7 @@
 	exports.default = ReminderListItem;
 
 /***/ },
-/* 420 */
+/* 419 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41587,7 +41581,7 @@
 	
 	var _reactRedux = __webpack_require__(406);
 	
-	var _reminder_detail_view = __webpack_require__(421);
+	var _reminder_detail_view = __webpack_require__(420);
 	
 	var _reminder_detail_view2 = _interopRequireDefault(_reminder_detail_view);
 	
@@ -41613,7 +41607,7 @@
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(_reminder_detail_view2.default);
 
 /***/ },
-/* 421 */
+/* 420 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41628,7 +41622,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _comment_list_container = __webpack_require__(422);
+	var _comment_list_container = __webpack_require__(421);
 	
 	var _comment_list_container2 = _interopRequireDefault(_comment_list_container);
 	
@@ -41717,7 +41711,7 @@
 	exports.default = ReminderDetailView;
 
 /***/ },
-/* 422 */
+/* 421 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41728,13 +41722,13 @@
 	
 	var _reactRedux = __webpack_require__(406);
 	
-	var _comment_list = __webpack_require__(423);
+	var _comment_list = __webpack_require__(422);
 	
 	var _comment_list2 = _interopRequireDefault(_comment_list);
 	
 	var _comment_actions = __webpack_require__(402);
 	
-	var _selector = __webpack_require__(417);
+	var _selector = __webpack_require__(425);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -41760,7 +41754,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_comment_list2.default);
 
 /***/ },
-/* 423 */
+/* 422 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41775,7 +41769,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _comment_list_item_container = __webpack_require__(424);
+	var _comment_list_item_container = __webpack_require__(423);
 	
 	var _comment_list_item_container2 = _interopRequireDefault(_comment_list_item_container);
 	
@@ -41848,7 +41842,7 @@
 	exports.default = CommentList;
 
 /***/ },
-/* 424 */
+/* 423 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41859,13 +41853,13 @@
 	
 	var _reactRedux = __webpack_require__(406);
 	
-	var _comment_list_item = __webpack_require__(425);
+	var _comment_list_item = __webpack_require__(424);
 	
 	var _comment_list_item2 = _interopRequireDefault(_comment_list_item);
 	
 	var _comment_actions = __webpack_require__(402);
 	
-	var _selector = __webpack_require__(417);
+	var _selector = __webpack_require__(425);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -41891,7 +41885,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_comment_list_item2.default);
 
 /***/ },
-/* 425 */
+/* 424 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41974,6 +41968,33 @@
 	}(_react2.default.Component);
 	
 	exports.default = CommentListItem;
+
+/***/ },
+/* 425 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var allReminders = exports.allReminders = function allReminders(_ref) {
+	  var reminders = _ref.reminders;
+	  return Object.keys(reminders).map(function (id) {
+	    return reminders[id];
+	  });
+	};
+	
+	var commentsByReminderId = exports.commentsByReminderId = function commentsByReminderId(_ref2, reminder_id) {
+	  var comments = _ref2.comments;
+	
+	  var commentsByReminderId = [];
+	  Object.keys(comments).forEach(function (commentId) {
+	    var comment = comments[commentId];
+	    if (comments[commentId].reminder_id === reminder_id) commentsByReminderId.push(comment);
+	  });
+	  return commentsByReminderId;
+	};
 
 /***/ },
 /* 426 */

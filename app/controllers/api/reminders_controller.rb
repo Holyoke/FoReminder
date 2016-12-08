@@ -34,7 +34,7 @@ class Api::RemindersController < ApplicationController
 
   private
     def set_reminder
-      @reminder = reminder.find(params[:id])
+      @reminder = Reminder.find(params[:id])
     end
 
     def reminder_params

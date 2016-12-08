@@ -16,3 +16,14 @@ export const createReminder = (data, success, error) => {
     error
   })
 }
+
+export const updateReminder = (data, success, error) => {
+  const url = 'api/reminders/' + data.reminder.id
+  return $.ajax({
+    method: 'PUT',
+    url,
+    data,
+    success,
+    error
+  })
+}

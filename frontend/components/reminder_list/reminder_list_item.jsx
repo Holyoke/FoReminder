@@ -19,9 +19,9 @@ class ReminderListItem extends React.Component {
 
   toggleDone (e) {
     e.preventDefault(e)
-    const { receiveReminder, reminder } = this.props
+    const { updateReminder, reminder } = this.props
     const toggledReminder = merge({}, reminder, { done: !reminder.done })
-    receiveReminder(toggledReminder)
+    updateReminder(toggledReminder)
   }
 
 

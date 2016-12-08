@@ -23,6 +23,17 @@ export const createReminder = (reminder) => {
   }
 }
 
+export const updateReminder = (reminder) => {
+  return (dispatch) => {
+    return util.updateReminder(reminder)
+               .then(reminder => {
+                 dispatch(receiveReminder(reminder))
+                 dispatch(clearErrors())
+               },
+                 err => dispatch(receiveErrors(err.responseJSON)))
+  }
+}
+
 // sync actions
 export const receiveReminder = reminder => ({
   type: RECEIVE_REMINDER,
