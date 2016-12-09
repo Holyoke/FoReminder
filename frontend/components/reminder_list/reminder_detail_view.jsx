@@ -5,15 +5,6 @@ import Modal from 'react-bootstrap/lib/Modal'
 import CommentListContainer from '../comment_list/comment_list_container'
 
 class ReminderDetailView extends React.Component {
-  constructor (props) {
-    super(props)
-    this.debug = this.debug.bind(this)
-  }
-
-  debug (e) {
-    e.preventDefault()
-  }
-
   render () {
     console.table(this.props)
     const { reminder, deleteReminder, show } = this.props

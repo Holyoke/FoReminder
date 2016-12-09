@@ -41329,7 +41329,7 @@
 	    _react2.default.createElement(
 	      'h1',
 	      null,
-	      'FoReMinder App'
+	      'foReminder App'
 	    ),
 	    _react2.default.createElement(_reminder_list_container2.default, null)
 	  );
@@ -41475,7 +41475,7 @@
 	        return _react2.default.createElement(_reminder_list_item2.default, {
 	          key: 'reminder-list-item' + reminder.id,
 	          reminder: reminder,
-	          selectReminder: _this2.selectReminder.bind(_this2),
+	          selectReminder: _this2.selectReminder,
 	          removeReminder: _this2.props.removeReminder,
 	          updateReminder: _this2.props.updateReminder });
 	      });
@@ -41485,7 +41485,7 @@
 	      var reminderModal = _react2.default.createElement(_reminder_detail_view_container2.default, {
 	        reminder: selectedReminder,
 	        show: this.state.showModal,
-	        onHide: this.toggleModal.bind(this) });
+	        onHide: this.toggleModal });
 	
 	      return _react2.default.createElement(
 	        _ListGroup2.default,
@@ -41599,7 +41599,6 @@
 	          { onClick: function onClick() {
 	              return selectReminder(reminder);
 	            } },
-	          'Reminder: ',
 	          title
 	        ),
 	        _react2.default.createElement(
@@ -41693,21 +41692,13 @@
 	var ReminderDetailView = function (_React$Component) {
 	  _inherits(ReminderDetailView, _React$Component);
 	
-	  function ReminderDetailView(props) {
+	  function ReminderDetailView() {
 	    _classCallCheck(this, ReminderDetailView);
 	
-	    var _this = _possibleConstructorReturn(this, (ReminderDetailView.__proto__ || Object.getPrototypeOf(ReminderDetailView)).call(this, props));
-	
-	    _this.debug = _this.debug.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, (ReminderDetailView.__proto__ || Object.getPrototypeOf(ReminderDetailView)).apply(this, arguments));
 	  }
 	
 	  _createClass(ReminderDetailView, [{
-	    key: 'debug',
-	    value: function debug(e) {
-	      e.preventDefault();
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      console.table(this.props);

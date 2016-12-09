@@ -33,7 +33,7 @@ class ReminderListItem extends React.Component {
                          {done ? 'Undo' : 'Complete'}</Button>
     return (
       <ListGroupItem className="reminder-list-item">
-          <h4 onClick={() => selectReminder(reminder)}>Reminder: {title}</h4>
+          <h4 onClick={() => selectReminder(reminder)}>{title}</h4>
           <section>Done: {done.toString()}</section>
           {toggleButton}
       </ListGroupItem>

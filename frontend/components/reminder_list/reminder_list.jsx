@@ -36,7 +36,7 @@ class ReminderList extends React.Component {
         <ReminderListItem
           key={`reminder-list-item${reminder.id}`}
           reminder={reminder}
-          selectReminder={this.selectReminder.bind(this)}
+          selectReminder={this.selectReminder}
           removeReminder={this.props.removeReminder}
           updateReminder={this.props.updateReminder} />
       )
@@ -46,7 +46,7 @@ class ReminderList extends React.Component {
     const reminderModal = <ReminderDetailViewContainer
                                 reminder={selectedReminder}
                                 show={this.state.showModal}
-                                onHide={this.toggleModal.bind(this)} />
+                                onHide={this.toggleModal} />
 
     return (
       <ListGroup className="reminder-list" onClick={this.debug}>
