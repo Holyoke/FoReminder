@@ -20,7 +20,7 @@ class CommentList extends React.Component {
 
     return (
       <div className="comment-list">
-        <h4 onClick={() => console.table(this.props)}>Comment List for reminder id:{reminder_id}</h4>
+        <h4>Comment List for reminder id:{reminder_id}</h4>
         <CommentForm reminder_id={reminder_id} receiveComment={receiveComment} />
         <ul>{commentItems}</ul>
       </div>

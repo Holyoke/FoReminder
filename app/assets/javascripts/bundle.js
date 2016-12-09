@@ -41485,6 +41485,7 @@
 	      var reminderModal = _react2.default.createElement(_reminder_detail_view_container2.default, {
 	        reminder: selectedReminder,
 	        show: this.state.showModal,
+	        toggleModal: this.toggleModal,
 	        onHide: this.toggleModal });
 	
 	      return _react2.default.createElement(
@@ -41674,6 +41675,10 @@
 	
 	var _Modal2 = _interopRequireDefault(_Modal);
 	
+	var _Button = __webpack_require__(580);
+	
+	var _Button2 = _interopRequireDefault(_Button);
+	
 	var _comment_list_container = __webpack_require__(421);
 	
 	var _comment_list_container2 = _interopRequireDefault(_comment_list_container);
@@ -41692,20 +41697,34 @@
 	var ReminderDetailView = function (_React$Component) {
 	  _inherits(ReminderDetailView, _React$Component);
 	
-	  function ReminderDetailView() {
+	  function ReminderDetailView(props) {
 	    _classCallCheck(this, ReminderDetailView);
 	
-	    return _possibleConstructorReturn(this, (ReminderDetailView.__proto__ || Object.getPrototypeOf(ReminderDetailView)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (ReminderDetailView.__proto__ || Object.getPrototypeOf(ReminderDetailView)).call(this, props));
+	
+	    _this.handleDeleteClick = _this.handleDeleteClick.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(ReminderDetailView, [{
+	    key: 'handleDeleteClick',
+	    value: function handleDeleteClick(e) {
+	      e.preventDefault();
+	      var _props = this.props,
+	          deleteReminder = _props.deleteReminder,
+	          reminder = _props.reminder,
+	          toggleModal = _props.toggleModal;
+	
+	      deleteReminder(reminder);
+	      toggleModal(e);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.table(this.props);
-	      var _props = this.props,
-	          reminder = _props.reminder,
-	          deleteReminder = _props.deleteReminder,
-	          show = _props.show;
+	      var _props2 = this.props,
+	          reminder = _props2.reminder,
+	          deleteReminder = _props2.deleteReminder,
+	          show = _props2.show;
 	      var body = reminder.body,
 	          remind_date = reminder.remind_date;
 	
@@ -41749,12 +41768,12 @@
 	            )
 	          )
 	        ),
+	        _react2.default.createElement(_comment_list_container2.default, { reminder_id: reminder_id }),
 	        _react2.default.createElement(
-	          'button',
-	          { onClick: deleteReminder },
+	          _Button2.default,
+	          { bsStyle: 'warning', bsSize: 'xsmall', onClick: this.handleDeleteClick },
 	          'Delete reminder'
-	        ),
-	        _react2.default.createElement(_comment_list_container2.default, { reminder_id: reminder_id })
+	        )
 	      );
 	    }
 	  }]);
@@ -41854,8 +41873,6 @@
 	  _createClass(CommentList, [{
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-	
 	      var _props = this.props,
 	          reminder_id = _props.reminder_id,
 	          comments = _props.comments,
@@ -41874,9 +41891,7 @@
 	        { className: 'comment-list' },
 	        _react2.default.createElement(
 	          'h4',
-	          { onClick: function onClick() {
-	              return console.table(_this2.props);
-	            } },
+	          null,
 	          'Comment List for reminder id:',
 	          reminder_id
 	        ),
