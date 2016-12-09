@@ -41415,6 +41415,10 @@
 	
 	var _ListGroup2 = _interopRequireDefault(_ListGroup);
 	
+	var _reminder_detail_view_container = __webpack_require__(419);
+	
+	var _reminder_detail_view_container2 = _interopRequireDefault(_reminder_detail_view_container);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41429,16 +41433,32 @@
 	var ReminderList = function (_React$Component) {
 	  _inherits(ReminderList, _React$Component);
 	
-	  function ReminderList() {
+	  function ReminderList(props) {
 	    _classCallCheck(this, ReminderList);
 	
-	    return _possibleConstructorReturn(this, (ReminderList.__proto__ || Object.getPrototypeOf(ReminderList)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (ReminderList.__proto__ || Object.getPrototypeOf(ReminderList)).call(this, props));
+	
+	    _this.state = { showModal: false, selectedReminder: {} };
+	    _this.selectReminder = _this.selectReminder.bind(_this);
+	    _this.toggleModal = _this.toggleModal.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(ReminderList, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.props.fetchReminders();
+	    }
+	  }, {
+	    key: 'toggleModal',
+	    value: function toggleModal(e) {
+	      if (e) e.preventDefault();
+	      this.setState({ showModal: !this.state.showModal });
+	    }
+	  }, {
+	    key: 'selectReminder',
+	    value: function selectReminder(reminder) {
+	      this.setState({ selectedReminder: reminder, showModal: true });
 	    }
 	  }, {
 	    key: 'render',
@@ -41450,24 +41470,34 @@
 	          errors = _props.errors,
 	          createReminder = _props.createReminder;
 	
+	
 	      var reminderItems = reminders.map(function (reminder) {
 	        return _react2.default.createElement(_reminder_list_item2.default, {
 	          key: 'reminder-list-item' + reminder.id,
 	          reminder: reminder,
+	          selectReminder: _this2.selectReminder.bind(_this2),
 	          removeReminder: _this2.props.removeReminder,
 	          updateReminder: _this2.props.updateReminder });
 	      });
 	
+	      var selectedReminder = this.state.selectedReminder;
+	
+	      var reminderModal = _react2.default.createElement(_reminder_detail_view_container2.default, {
+	        reminder: selectedReminder,
+	        show: this.state.showModal,
+	        onHide: this.toggleModal.bind(this) });
+	
 	      return _react2.default.createElement(
 	        _ListGroup2.default,
-	        { className: 'reminder-list' },
+	        { className: 'reminder-list', onClick: this.debug },
 	        _react2.default.createElement(
 	          'h2',
 	          null,
 	          'Reminder List'
 	        ),
 	        _react2.default.createElement(_reminder_form2.default, { createReminder: createReminder, errors: errors }),
-	        reminderItems
+	        reminderItems,
+	        reminderModal
 	      );
 	    }
 	  }]);
@@ -41497,13 +41527,13 @@
 	
 	var _merge2 = _interopRequireDefault(_merge);
 	
-	var _reminder_detail_view_container = __webpack_require__(419);
-	
-	var _reminder_detail_view_container2 = _interopRequireDefault(_reminder_detail_view_container);
-	
 	var _ListGroupItem = __webpack_require__(524);
 	
 	var _ListGroupItem2 = _interopRequireDefault(_ListGroupItem);
+	
+	var _Button = __webpack_require__(580);
+	
+	var _Button2 = _interopRequireDefault(_Button);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -41539,7 +41569,7 @@
 	  }, {
 	    key: 'toggleDone',
 	    value: function toggleDone(e) {
-	      e.preventDefault(e);
+	      e.preventDefault();
 	      var _props = this.props,
 	          updateReminder = _props.updateReminder,
 	          reminder = _props.reminder;
@@ -41550,17 +41580,25 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var reminder = this.props.reminder;
+	      var _props2 = this.props,
+	          reminder = _props2.reminder,
+	          selectReminder = _props2.selectReminder;
 	      var title = reminder.title,
 	          done = reminder.done;
 	
-	
+	      var toggleButton = _react2.default.createElement(
+	        _Button2.default,
+	        { onClick: this.toggleDone },
+	        done ? 'Undo' : 'Complete'
+	      );
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
 	        { className: 'reminder-list-item' },
 	        _react2.default.createElement(
 	          'h4',
-	          { onClick: this.toggleDetail },
+	          { onClick: function onClick() {
+	              return selectReminder(reminder);
+	            } },
 	          'Reminder: ',
 	          title
 	        ),
@@ -41570,21 +41608,7 @@
 	          'Done: ',
 	          done.toString()
 	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.toggleDone },
-	          'Complete reminder'
-	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.toggleDetail },
-	          'Modal: ',
-	          this.state.detail.toString()
-	        ),
-	        _react2.default.createElement(_reminder_detail_view_container2.default, {
-	          reminder: reminder,
-	          show: this.state.detail,
-	          onHide: this.toggleDetail.bind(this) })
+	        toggleButton
 	      );
 	    }
 	  }]);
@@ -48409,6 +48433,272 @@
 	  return [parentProps, childProps];
 	}
 	module.exports = exports["default"];
+
+/***/ },
+/* 580 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _values = __webpack_require__(525);
+	
+	var _values2 = _interopRequireDefault(_values);
+	
+	var _objectWithoutProperties2 = __webpack_require__(475);
+	
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+	
+	var _extends3 = __webpack_require__(437);
+	
+	var _extends4 = _interopRequireDefault(_extends3);
+	
+	var _classCallCheck2 = __webpack_require__(476);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(477);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(513);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _classnames = __webpack_require__(521);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _elementType = __webpack_require__(522);
+	
+	var _elementType2 = _interopRequireDefault(_elementType);
+	
+	var _bootstrapUtils = __webpack_require__(529);
+	
+	var _StyleConfig = __webpack_require__(533);
+	
+	var _SafeAnchor = __webpack_require__(581);
+	
+	var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var propTypes = {
+	  active: _react2['default'].PropTypes.bool,
+	  disabled: _react2['default'].PropTypes.bool,
+	  block: _react2['default'].PropTypes.bool,
+	  onClick: _react2['default'].PropTypes.func,
+	  componentClass: _elementType2['default'],
+	  href: _react2['default'].PropTypes.string,
+	  /**
+	   * Defines HTML button type attribute
+	   * @defaultValue 'button'
+	   */
+	  type: _react2['default'].PropTypes.oneOf(['button', 'reset', 'submit'])
+	};
+	
+	var defaultProps = {
+	  active: false,
+	  block: false,
+	  disabled: false
+	};
+	
+	var Button = function (_React$Component) {
+	  (0, _inherits3['default'])(Button, _React$Component);
+	
+	  function Button() {
+	    (0, _classCallCheck3['default'])(this, Button);
+	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
+	  }
+	
+	  Button.prototype.renderAnchor = function renderAnchor(elementProps, className) {
+	    return _react2['default'].createElement(_SafeAnchor2['default'], (0, _extends4['default'])({}, elementProps, {
+	      className: (0, _classnames2['default'])(className, elementProps.disabled && 'disabled')
+	    }));
+	  };
+	
+	  Button.prototype.renderButton = function renderButton(_ref, className) {
+	    var componentClass = _ref.componentClass,
+	        elementProps = (0, _objectWithoutProperties3['default'])(_ref, ['componentClass']);
+	
+	    var Component = componentClass || 'button';
+	
+	    return _react2['default'].createElement(Component, (0, _extends4['default'])({}, elementProps, {
+	      type: elementProps.type || 'button',
+	      className: className
+	    }));
+	  };
+	
+	  Button.prototype.render = function render() {
+	    var _extends2;
+	
+	    var _props = this.props,
+	        active = _props.active,
+	        block = _props.block,
+	        className = _props.className,
+	        props = (0, _objectWithoutProperties3['default'])(_props, ['active', 'block', 'className']);
+	
+	    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(props),
+	        bsProps = _splitBsProps[0],
+	        elementProps = _splitBsProps[1];
+	
+	    var classes = (0, _extends4['default'])({}, (0, _bootstrapUtils.getClassSet)(bsProps), (_extends2 = {
+	      active: active
+	    }, _extends2[(0, _bootstrapUtils.prefix)(bsProps, 'block')] = block, _extends2));
+	    var fullClassName = (0, _classnames2['default'])(className, classes);
+	
+	    if (elementProps.href) {
+	      return this.renderAnchor(elementProps, fullClassName);
+	    }
+	
+	    return this.renderButton(elementProps, fullClassName);
+	  };
+	
+	  return Button;
+	}(_react2['default'].Component);
+	
+	Button.propTypes = propTypes;
+	Button.defaultProps = defaultProps;
+	
+	exports['default'] = (0, _bootstrapUtils.bsClass)('btn', (0, _bootstrapUtils.bsSizes)([_StyleConfig.Size.LARGE, _StyleConfig.Size.SMALL, _StyleConfig.Size.XSMALL], (0, _bootstrapUtils.bsStyles)([].concat((0, _values2['default'])(_StyleConfig.State), [_StyleConfig.Style.DEFAULT, _StyleConfig.Style.PRIMARY, _StyleConfig.Style.LINK]), _StyleConfig.Style.DEFAULT, Button)));
+	module.exports = exports['default'];
+
+/***/ },
+/* 581 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _extends2 = __webpack_require__(437);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _objectWithoutProperties2 = __webpack_require__(475);
+	
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+	
+	var _classCallCheck2 = __webpack_require__(476);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(477);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(513);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _elementType = __webpack_require__(522);
+	
+	var _elementType2 = _interopRequireDefault(_elementType);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var propTypes = {
+	  href: _react2['default'].PropTypes.string,
+	  onClick: _react2['default'].PropTypes.func,
+	  disabled: _react2['default'].PropTypes.bool,
+	  role: _react2['default'].PropTypes.string,
+	  tabIndex: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.number, _react2['default'].PropTypes.string]),
+	  /**
+	   * this is sort of silly but needed for Button
+	   */
+	  componentClass: _elementType2['default']
+	};
+	
+	var defaultProps = {
+	  componentClass: 'a'
+	};
+	
+	function isTrivialHref(href) {
+	  return !href || href.trim() === '#';
+	}
+	
+	/**
+	 * There are situations due to browser quirks or Bootstrap CSS where
+	 * an anchor tag is needed, when semantically a button tag is the
+	 * better choice. SafeAnchor ensures that when an anchor is used like a
+	 * button its accessible. It also emulates input `disabled` behavior for
+	 * links, which is usually desirable for Buttons, NavItems, MenuItems, etc.
+	 */
+	
+	var SafeAnchor = function (_React$Component) {
+	  (0, _inherits3['default'])(SafeAnchor, _React$Component);
+	
+	  function SafeAnchor(props, context) {
+	    (0, _classCallCheck3['default'])(this, SafeAnchor);
+	
+	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props, context));
+	
+	    _this.handleClick = _this.handleClick.bind(_this);
+	    return _this;
+	  }
+	
+	  SafeAnchor.prototype.handleClick = function handleClick(event) {
+	    var _props = this.props,
+	        disabled = _props.disabled,
+	        href = _props.href,
+	        onClick = _props.onClick;
+	
+	
+	    if (disabled || isTrivialHref(href)) {
+	      event.preventDefault();
+	    }
+	
+	    if (disabled) {
+	      event.stopPropagation();
+	      return;
+	    }
+	
+	    if (onClick) {
+	      onClick(event);
+	    }
+	  };
+	
+	  SafeAnchor.prototype.render = function render() {
+	    var _props2 = this.props,
+	        Component = _props2.componentClass,
+	        disabled = _props2.disabled,
+	        props = (0, _objectWithoutProperties3['default'])(_props2, ['componentClass', 'disabled']);
+	
+	
+	    if (isTrivialHref(props.href)) {
+	      props.role = props.role || 'button';
+	      // we want to make sure there is a href attribute on the node
+	      // otherwise, the cursor incorrectly styled (except with role='button')
+	      props.href = props.href || '#';
+	    }
+	
+	    if (disabled) {
+	      props.tabIndex = -1;
+	      props.style = (0, _extends3['default'])({ pointerEvents: 'none' }, props.style);
+	    }
+	
+	    return _react2['default'].createElement(Component, (0, _extends3['default'])({}, props, {
+	      onClick: this.handleClick
+	    }));
+	  };
+	
+	  return SafeAnchor;
+	}(_react2['default'].Component);
+	
+	SafeAnchor.propTypes = propTypes;
+	SafeAnchor.defaultProps = defaultProps;
+	
+	exports['default'] = SafeAnchor;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

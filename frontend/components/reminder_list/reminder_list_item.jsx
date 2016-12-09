@@ -2,8 +2,8 @@ import React from 'react'
 import merge from 'lodash/merge'
 
 // components
-import ReminderDetailViewContainer from './reminder_detail_view_container'
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
+import Button from 'react-bootstrap/lib/Button'
 
 class ReminderListItem extends React.Component {
   constructor (props) {
@@ -19,7 +19,7 @@ class ReminderListItem extends React.Component {
   }
 
   toggleDone (e) {
-    e.preventDefault(e)
+    e.preventDefault()
     const { updateReminder, reminder } = this.props
     const toggledReminder = merge({}, reminder, { done: !reminder.done })
     updateReminder(toggledReminder)
@@ -27,20 +27,15 @@ class ReminderListItem extends React.Component {
 
 
   render () {
-    const { reminder } = this.props
+    const { reminder, selectReminder } = this.props
     const { title, done } = reminder
-
+    const toggleButton = <Button onClick={this.toggleDone}>
+                         {done ? 'Undo' : 'Complete'}</Button>
     return (
       <ListGroupItem className="reminder-list-item">
-          <h4 onClick={this.toggleDetail}>Reminder: {title}</h4>
+          <h4 onClick={() => selectReminder(reminder)}>Reminder: {title}</h4>
           <section>Done: {done.toString()}</section>
-          <button onClick={this.toggleDone}>Complete reminder</button>
-          <button onClick={this.toggleDetail}>Modal: {this.state.detail.toString()}</button>
-          <ReminderDetailViewContainer
-            reminder={reminder}
-            show={this.state.detail}
-            onHide={this.toggleDetail.bind(this)} />
-
+          {toggleButton}
       </ListGroupItem>
     )
   }
