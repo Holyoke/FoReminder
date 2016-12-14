@@ -13,16 +13,16 @@ export const login = (data, success, error) => {
     method: 'POST',
     url: 'auth/sign_in',
     data,
-    success,
+    success: (data, status, response) => {
+        $.ajaxSetup({
+          headers: {
+            'access-token': response.getResponseHeader('access-token'),
+            'uid': response.getResponseHeader('uid'),
+            'client': response.getResponseHeader('client')
+          }
+        })
+    },
     error
-  }).then((data, status, response) => {
-      $.ajaxSetup({
-        headers: {
-          'access-token': response.getResponseHeader('access-token'),
-          'uid': response.getResponseHeader('uid'),
-          'client': response.getResponseHeader('client')
-        }
-      })
   })
 }
 

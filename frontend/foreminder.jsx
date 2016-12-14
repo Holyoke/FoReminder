@@ -12,6 +12,8 @@ import * as selectors from './reducers/selector.js'
 import * as reminderActions from './actions/reminder_actions'
 import * as commentActions from './actions/comment_actions'
 import * as errorActions from './actions/error_actions'
+import * as sessionActions from './actions/session_actions'
+
 import moment from 'moment'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.reminderActions = reminderActions
   window.commentActions = commentActions
   window.errorActions = errorActions
+  window.sessionActions = sessionActions
   window.store = store
   window.selectors = selectors
   window.api = api
