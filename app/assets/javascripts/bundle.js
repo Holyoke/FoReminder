@@ -48900,18 +48900,29 @@
 	
 	var _greeting2 = _interopRequireDefault(_greeting);
 	
+	var _session_actions = __webpack_require__(405);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var mapStatetoProps = function mapStatetoProps(_ref) {
+	  var session = _ref.session;
+	  return {
+	    currentUser: session.currentUser
+	  };
+	};
+	
 	//  actions
-	// import { deleteReminder } from '../../actions/reminder_actions'
-	// import { receiveComments } from '../../actions/comment_actions'
 	
-	// const mapDispatchToProps = (dispatch, { reminder }) => ({
-	//   deleteReminder: () => dispatch(deleteReminder({reminder})),
-	//   receiveComments: () => dispatch(receiveComments())
-	// })
 	
-	exports.default = (0, _reactRedux.connect)(null, null)(_greeting2.default);
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    logout: function logout() {
+	      return dispatch((0, _session_actions.logout)());
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps, mapDispatchToProps)(_greeting2.default);
 
 /***/ },
 /* 587 */
@@ -48928,6 +48939,10 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _Link = __webpack_require__(607);
+	
+	var _Link2 = _interopRequireDefault(_Link);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -48949,10 +48964,52 @@
 	  _createClass(Greeting, [{
 	    key: 'render',
 	    value: function render() {
+	      var currentUser = this.props.currentUser;
+	
+	      var greeting = void 0;
+	
+	      if (!!currentUser) {
+	        greeting = _react2.default.createElement(
+	          'div',
+	          null,
+	          'Welcome ',
+	          currentUser.email,
+	          '.',
+	          _react2.default.createElement(
+	            'button',
+	            null,
+	            'Logout'
+	          )
+	        );
+	      } else {
+	        greeting = _react2.default.createElement(
+	          'ul',
+	          null,
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _Link2.default,
+	              { to: '/login' },
+	              'Login'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _Link2.default,
+	              { to: '/signup' },
+	              'Signup'
+	            )
+	          )
+	        );
+	      }
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'Greeting Components'
+	        greeting
 	      );
 	    }
 	  }]);
@@ -48961,6 +49018,346 @@
 	}(_react2.default.Component);
 	
 	exports.default = Greeting;
+
+/***/ },
+/* 588 */,
+/* 589 */,
+/* 590 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports.locationShape = exports.routerShape = undefined;
+	
+	var _react = __webpack_require__(1);
+	
+	var func = _react.PropTypes.func,
+	    object = _react.PropTypes.object,
+	    shape = _react.PropTypes.shape,
+	    string = _react.PropTypes.string;
+	var routerShape = exports.routerShape = shape({
+	  push: func.isRequired,
+	  replace: func.isRequired,
+	  go: func.isRequired,
+	  goBack: func.isRequired,
+	  goForward: func.isRequired,
+	  setRouteLeaveHook: func.isRequired,
+	  isActive: func.isRequired
+	});
+	
+	var locationShape = exports.locationShape = shape({
+	  pathname: string.isRequired,
+	  search: string.isRequired,
+	  state: object,
+	  action: string.isRequired,
+	  key: string
+	});
+
+/***/ },
+/* 591 */,
+/* 592 */,
+/* 593 */,
+/* 594 */,
+/* 595 */,
+/* 596 */,
+/* 597 */,
+/* 598 */,
+/* 599 */,
+/* 600 */,
+/* 601 */,
+/* 602 */,
+/* 603 */,
+/* 604 */,
+/* 605 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports.ContextProvider = ContextProvider;
+	exports.ContextSubscriber = ContextSubscriber;
+	
+	var _react = __webpack_require__(1);
+	
+	// Works around issues with context updates failing to propagate.
+	// Caveat: the context value is expected to never change its identity.
+	// https://github.com/facebook/react/issues/2517
+	// https://github.com/reactjs/react-router/issues/470
+	
+	var contextProviderShape = _react.PropTypes.shape({
+	  subscribe: _react.PropTypes.func.isRequired,
+	  eventIndex: _react.PropTypes.number.isRequired
+	});
+	
+	function makeContextName(name) {
+	  return '@@contextSubscriber/' + name;
+	}
+	
+	function ContextProvider(name) {
+	  var _childContextTypes, _ref2;
+	
+	  var contextName = makeContextName(name);
+	  var listenersKey = contextName + '/listeners';
+	  var eventIndexKey = contextName + '/eventIndex';
+	  var subscribeKey = contextName + '/subscribe';
+	
+	  return _ref2 = {
+	    childContextTypes: (_childContextTypes = {}, _childContextTypes[contextName] = contextProviderShape.isRequired, _childContextTypes),
+	
+	    getChildContext: function getChildContext() {
+	      var _ref;
+	
+	      return _ref = {}, _ref[contextName] = {
+	        eventIndex: this[eventIndexKey],
+	        subscribe: this[subscribeKey]
+	      }, _ref;
+	    },
+	    componentWillMount: function componentWillMount() {
+	      this[listenersKey] = [];
+	      this[eventIndexKey] = 0;
+	    },
+	    componentWillReceiveProps: function componentWillReceiveProps() {
+	      this[eventIndexKey]++;
+	    },
+	    componentDidUpdate: function componentDidUpdate() {
+	      var _this = this;
+	
+	      this[listenersKey].forEach(function (listener) {
+	        return listener(_this[eventIndexKey]);
+	      });
+	    }
+	  }, _ref2[subscribeKey] = function (listener) {
+	    var _this2 = this;
+	
+	    // No need to immediately call listener here.
+	    this[listenersKey].push(listener);
+	
+	    return function () {
+	      _this2[listenersKey] = _this2[listenersKey].filter(function (item) {
+	        return item !== listener;
+	      });
+	    };
+	  }, _ref2;
+	}
+	
+	function ContextSubscriber(name) {
+	  var _contextTypes, _ref4;
+	
+	  var contextName = makeContextName(name);
+	  var lastRenderedEventIndexKey = contextName + '/lastRenderedEventIndex';
+	  var handleContextUpdateKey = contextName + '/handleContextUpdate';
+	  var unsubscribeKey = contextName + '/unsubscribe';
+	
+	  return _ref4 = {
+	    contextTypes: (_contextTypes = {}, _contextTypes[contextName] = contextProviderShape, _contextTypes),
+	
+	    getInitialState: function getInitialState() {
+	      var _ref3;
+	
+	      if (!this.context[contextName]) {
+	        return {};
+	      }
+	
+	      return _ref3 = {}, _ref3[lastRenderedEventIndexKey] = this.context[contextName].eventIndex, _ref3;
+	    },
+	    componentDidMount: function componentDidMount() {
+	      if (!this.context[contextName]) {
+	        return;
+	      }
+	
+	      this[unsubscribeKey] = this.context[contextName].subscribe(this[handleContextUpdateKey]);
+	    },
+	    componentWillReceiveProps: function componentWillReceiveProps() {
+	      var _setState;
+	
+	      if (!this.context[contextName]) {
+	        return;
+	      }
+	
+	      this.setState((_setState = {}, _setState[lastRenderedEventIndexKey] = this.context[contextName].eventIndex, _setState));
+	    },
+	    componentWillUnmount: function componentWillUnmount() {
+	      if (!this[unsubscribeKey]) {
+	        return;
+	      }
+	
+	      this[unsubscribeKey]();
+	      this[unsubscribeKey] = null;
+	    }
+	  }, _ref4[handleContextUpdateKey] = function (eventIndex) {
+	    if (eventIndex !== this.state[lastRenderedEventIndexKey]) {
+	      var _setState2;
+	
+	      this.setState((_setState2 = {}, _setState2[lastRenderedEventIndexKey] = eventIndex, _setState2));
+	    }
+	  }, _ref4;
+	}
+
+/***/ },
+/* 606 */,
+/* 607 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	exports.__esModule = true;
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _invariant = __webpack_require__(417);
+	
+	var _invariant2 = _interopRequireDefault(_invariant);
+	
+	var _PropTypes = __webpack_require__(590);
+	
+	var _ContextUtils = __webpack_require__(605);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	var _React$PropTypes = _react2.default.PropTypes,
+	    bool = _React$PropTypes.bool,
+	    object = _React$PropTypes.object,
+	    string = _React$PropTypes.string,
+	    func = _React$PropTypes.func,
+	    oneOfType = _React$PropTypes.oneOfType;
+	
+	
+	function isLeftClickEvent(event) {
+	  return event.button === 0;
+	}
+	
+	function isModifiedEvent(event) {
+	  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+	}
+	
+	// TODO: De-duplicate against hasAnyProperties in createTransitionManager.
+	function isEmptyObject(object) {
+	  for (var p in object) {
+	    if (Object.prototype.hasOwnProperty.call(object, p)) return false;
+	  }return true;
+	}
+	
+	function resolveToLocation(to, router) {
+	  return typeof to === 'function' ? to(router.location) : to;
+	}
+	
+	/**
+	 * A <Link> is used to create an <a> element that links to a route.
+	 * When that route is active, the link gets the value of its
+	 * activeClassName prop.
+	 *
+	 * For example, assuming you have the following route:
+	 *
+	 *   <Route path="/posts/:postID" component={Post} />
+	 *
+	 * You could use the following component to link to that route:
+	 *
+	 *   <Link to={`/posts/${post.id}`} />
+	 *
+	 * Links may pass along location state and/or query string parameters
+	 * in the state/query props, respectively.
+	 *
+	 *   <Link ... query={{ show: true }} state={{ the: 'state' }} />
+	 */
+	var Link = _react2.default.createClass({
+	  displayName: 'Link',
+	
+	
+	  mixins: [(0, _ContextUtils.ContextSubscriber)('router')],
+	
+	  contextTypes: {
+	    router: _PropTypes.routerShape
+	  },
+	
+	  propTypes: {
+	    to: oneOfType([string, object, func]),
+	    query: object,
+	    hash: string,
+	    state: object,
+	    activeStyle: object,
+	    activeClassName: string,
+	    onlyActiveOnIndex: bool.isRequired,
+	    onClick: func,
+	    target: string
+	  },
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      onlyActiveOnIndex: false,
+	      style: {}
+	    };
+	  },
+	  handleClick: function handleClick(event) {
+	    if (this.props.onClick) this.props.onClick(event);
+	
+	    if (event.defaultPrevented) return;
+	
+	    var router = this.context.router;
+	
+	    !router ? process.env.NODE_ENV !== 'production' ? (0, _invariant2.default)(false, '<Link>s rendered outside of a router context cannot navigate.') : (0, _invariant2.default)(false) : void 0;
+	
+	    if (isModifiedEvent(event) || !isLeftClickEvent(event)) return;
+	
+	    // If target prop is set (e.g. to "_blank"), let browser handle link.
+	    /* istanbul ignore if: untestable with Karma */
+	    if (this.props.target) return;
+	
+	    event.preventDefault();
+	
+	    router.push(resolveToLocation(this.props.to, router));
+	  },
+	  render: function render() {
+	    var _props = this.props,
+	        to = _props.to,
+	        activeClassName = _props.activeClassName,
+	        activeStyle = _props.activeStyle,
+	        onlyActiveOnIndex = _props.onlyActiveOnIndex,
+	        props = _objectWithoutProperties(_props, ['to', 'activeClassName', 'activeStyle', 'onlyActiveOnIndex']);
+	
+	    // Ignore if rendered outside the context of router to simplify unit testing.
+	
+	
+	    var router = this.context.router;
+	
+	
+	    if (router) {
+	      // If user does not specify a `to` prop, return an empty anchor tag.
+	      if (to == null) {
+	        return _react2.default.createElement('a', props);
+	      }
+	
+	      var toLocation = resolveToLocation(to, router);
+	      props.href = router.createHref(toLocation);
+	
+	      if (activeClassName || activeStyle != null && !isEmptyObject(activeStyle)) {
+	        if (router.isActive(toLocation, onlyActiveOnIndex)) {
+	          if (activeClassName) {
+	            if (props.className) {
+	              props.className += ' ' + activeClassName;
+	            } else {
+	              props.className = activeClassName;
+	            }
+	          }
+	
+	          if (activeStyle) props.style = _extends({}, props.style, activeStyle);
+	        }
+	      }
+	    }
+	
+	    return _react2.default.createElement('a', _extends({}, props, { onClick: this.handleClick }));
+	  }
+	});
+	
+	exports.default = Link;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }
 /******/ ]);

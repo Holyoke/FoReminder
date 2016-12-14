@@ -2,15 +2,17 @@ import { connect } from 'react-redux'
 import Greeting from './greeting'
 
 //  actions
-// import { deleteReminder } from '../../actions/reminder_actions'
-// import { receiveComments } from '../../actions/comment_actions'
+import { logout } from '../../actions/session_actions'
 
-// const mapDispatchToProps = (dispatch, { reminder }) => ({
-//   deleteReminder: () => dispatch(deleteReminder({reminder})),
-//   receiveComments: () => dispatch(receiveComments())
-// })
+const mapStatetoProps = ({session}) => ({
+  currentUser: session.currentUser
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  logout: () => dispatch(logout())
+})
 
 export default connect(
-  null,
-  null,
+  mapStatetoProps,
+  mapDispatchToProps
 )(Greeting)
