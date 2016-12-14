@@ -8,7 +8,10 @@ import App from './App'
 const Root = ({store}) => (
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path="/" component={App}/>
+      <Route path="/" component={App}>
+        <Route path="signup" component={App} />
+        <Route path="login" component={App} />
+      </Route>
     </Router>
   </Provider>
 )

@@ -19,7 +19,7 @@ import moment from 'moment'
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root')
   const preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {}
-  const store = configureStore(preloadedState)
+  const store = configureStore({})
 
   //  testing
   window.reminderActions = reminderActions

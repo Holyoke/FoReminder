@@ -1,6 +1,9 @@
 import React from 'react'
 import Link from 'react-router/lib/Link'
 
+// components
+import Button from 'react-bootstrap/lib/Button'
+
 class Greeting extends React.Component {
   render () {
     const { currentUser } = this.props
@@ -9,7 +12,7 @@ class Greeting extends React.Component {
     if (!!currentUser) {
       greeting =
         <div>Welcome {currentUser.email}.
-          <button>Logout</button>
+          <Button onClick={this.props.logout}>Logout</Button>
         </div>
     } else {
       greeting =
