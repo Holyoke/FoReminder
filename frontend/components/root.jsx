@@ -1,12 +1,15 @@
 import React from 'react'
 import { Provider } from 'react-redux'
+import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 
 // components
 import App from './App'
 
 const Root = ({store}) => (
   <Provider store={store}>
-    <App />
+    <Router history={hashHistory}>
+      <Route path="/" component={App}/>
+    </Router>
   </Provider>
 )
 
