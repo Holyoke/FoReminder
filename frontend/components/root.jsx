@@ -4,13 +4,14 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 
 // components
 import App from './App'
+import SessionFormContainer from './session_form_container'
 
 const Root = ({store}) => (
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={App}>
-        <Route path="signup" component={App} />
-        <Route path="login" component={App} />
+        <Route path="signup" component={SessionFormContainer} />
+        <Route path="login" component={SessionFormContainer} />
       </Route>
     </Router>
   </Provider>

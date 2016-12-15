@@ -40632,7 +40632,9 @@
 	var signup = exports.signup = function signup(user) {
 	  return function (dispatch) {
 	    return util.signup(user).then(function (user) {
-	      return receiveCurrentUser(user);
+	      return dispatch(receiveCurrentUser(user));
+	    }, function (err) {
+	      dispatch((0, _error_actions.receiveErrors)(err.responseJSON.errors.full_messages));
 	    });
 	  };
 	};
@@ -40747,8 +40749,13 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
+	var _session_form_container = __webpack_require__(640);
+	
+	var _session_form_container2 = _interopRequireDefault(_session_form_container);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// components
 	var Root = function Root(_ref) {
 	  var store = _ref.store;
 	  return _react2.default.createElement(
@@ -40760,14 +40767,13 @@
 	      _react2.default.createElement(
 	        _reactRouter.Route,
 	        { path: '/', component: _App2.default },
-	        _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _App2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _App2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _session_form_container2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _session_form_container2.default })
 	      )
 	    )
 	  );
 	};
 	
-	// components
 	exports.default = Root;
 
 /***/ },
@@ -41509,7 +41515,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var App = function App() {
+	var App = function App(_ref) {
+	  var children = _ref.children;
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'app' },
@@ -41519,7 +41526,7 @@
 	      'foReminder App'
 	    ),
 	    _react2.default.createElement(_greeting_container2.default, null),
-	    _react2.default.createElement(_reminder_list_container2.default, null)
+	    children
 	  );
 	};
 	
@@ -53760,6 +53767,170 @@
 	  });
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 640 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(409);
+	
+	var _session_form = __webpack_require__(641);
+	
+	var _session_form2 = _interopRequireDefault(_session_form);
+	
+	var _session_actions = __webpack_require__(405);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStatetoProps = function mapStatetoProps(state) {
+	  return {
+	    loggedIn: Boolean(state.session.currentUser),
+	    errors: state.errors
+	  };
+	};
+	
+	//  actions
+	
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
+	  var location = _ref.location;
+	
+	  var formType = location.pathname.slice(1);
+	  var _processForm = formType === 'login' ? _session_actions.login : _session_actions.signup;
+	
+	  return {
+	    processForm: function processForm(user) {
+	      return dispatch(_processForm(user));
+	    },
+	    formType: formType
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps, mapDispatchToProps)(_session_form2.default);
+
+/***/ },
+/* 641 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _errors_list = __webpack_require__(525);
+	
+	var _errors_list2 = _interopRequireDefault(_errors_list);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// components
+	
+	
+	var SessionForm = function (_React$Component) {
+	  _inherits(SessionForm, _React$Component);
+	
+	  function SessionForm(props) {
+	    _classCallCheck(this, SessionForm);
+	
+	    var _this = _possibleConstructorReturn(this, (SessionForm.__proto__ || Object.getPrototypeOf(SessionForm)).call(this, props));
+	
+	    _this.state = {
+	      email: '',
+	      password: ''
+	    };
+	
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(SessionForm, [{
+	    key: 'update',
+	    value: function update(property) {
+	      var _this2 = this;
+	
+	      return function (e) {
+	        return _this2.setState(_defineProperty({}, property, e.target.value));
+	      };
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      var _this3 = this;
+	
+	      e.preventDefault();
+	      var user = Object.assign({}, this.state);
+	      this.props.processForm(user).then(function () {
+	        return _this3.redirect();
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var formButton = _react2.default.createElement(
+	        'button',
+	        null,
+	        this.props.location.pathname.slice(1)
+	      );
+	
+	      return _react2.default.createElement(
+	        'form',
+	        { className: 'session-form', onSubmit: this.handleSubmit },
+	        _react2.default.createElement(_errors_list2.default, { errors: this.props.errors }),
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Email:',
+	          _react2.default.createElement('input', {
+	            className: 'input',
+	            ref: 'title',
+	            value: this.state.email,
+	            placeholder: 'Enter email',
+	            onChange: this.update('email')
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Password:',
+	          _react2.default.createElement('input', {
+	            type: 'password',
+	            className: 'input',
+	            ref: 'title',
+	            value: this.state.password,
+	            placeholder: 'password',
+	            onChange: this.update('password')
+	          })
+	        ),
+	        formButton
+	      );
+	    }
+	  }]);
+	
+	  return SessionForm;
+	}(_react2.default.Component);
+	
+	exports.default = SessionForm;
 
 /***/ }
 /******/ ]);

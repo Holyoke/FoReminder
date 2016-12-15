@@ -19,7 +19,13 @@ export const logout = () => {
 
 export const signup = (user) => {
   return (dispatch) => {
-    return util.signup(user).then(user => receiveCurrentUser(user))
+    return util.signup(user)
+    .then(
+      user => dispatch(receiveCurrentUser(user)),
+      err => {
+        dispatch(receiveErrors(err.responseJSON.errors.full_messages))
+      }
+    )
   }
 }
 
