@@ -40616,7 +40616,10 @@
 	var login = exports.login = function login(user) {
 	  return function (dispatch) {
 	    return util.login(user).then(function (user) {
-	      return dispatch(receiveCurrentUser(user));
+	      dispatch(receiveCurrentUser(user));
+	      dispatch((0, _error_actions.clearErrors)());
+	    }, function (err) {
+	      return dispatch((0, _error_actions.receiveErrors)(err.responseJSON.errors));
 	    });
 	  };
 	};
@@ -40632,9 +40635,10 @@
 	var signup = exports.signup = function signup(user) {
 	  return function (dispatch) {
 	    return util.signup(user).then(function (user) {
-	      return dispatch(receiveCurrentUser(user));
+	      dispatch(receiveCurrentUser(user));
+	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
-	      dispatch((0, _error_actions.receiveErrors)(err.responseJSON.errors.full_messages));
+	      return dispatch((0, _error_actions.receiveErrors)(err.responseJSON.errors.full_messages));
 	    });
 	  };
 	};
@@ -40753,9 +40757,12 @@
 	
 	var _session_form_container2 = _interopRequireDefault(_session_form_container);
 	
+	var _reminder_list_container = __webpack_require__(419);
+	
+	var _reminder_list_container2 = _interopRequireDefault(_reminder_list_container);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// components
 	var Root = function Root(_ref) {
 	  var store = _ref.store;
 	  return _react2.default.createElement(
@@ -40768,12 +40775,14 @@
 	        _reactRouter.Route,
 	        { path: '/', component: _App2.default },
 	        _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _session_form_container2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _session_form_container2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _session_form_container2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'reminders', component: _reminder_list_container2.default })
 	      )
 	    )
 	  );
 	};
 	
+	// components
 	exports.default = Root;
 
 /***/ },
@@ -41504,10 +41513,6 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reminder_list_container = __webpack_require__(419);
-	
-	var _reminder_list_container2 = _interopRequireDefault(_reminder_list_container);
 	
 	var _greeting_container = __webpack_require__(586);
 	
@@ -49027,6 +49032,15 @@
 	              { to: '/signup' },
 	              'Signup'
 	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _Link2.default,
+	              { to: '/reminders' },
+	              'Reminders'
+	            )
 	          )
 	        );
 	      }
@@ -53786,17 +53800,17 @@
 	
 	var _session_actions = __webpack_require__(405);
 	
+	var _error_actions = __webpack_require__(204);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	//  actions
 	var mapStatetoProps = function mapStatetoProps(state) {
 	  return {
 	    loggedIn: Boolean(state.session.currentUser),
 	    errors: state.errors
 	  };
 	};
-	
-	//  actions
-	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
 	  var location = _ref.location;
@@ -53808,7 +53822,10 @@
 	    processForm: function processForm(user) {
 	      return dispatch(_processForm(user));
 	    },
-	    formType: formType
+	    formType: formType,
+	    clearErrors: function clearErrors() {
+	      return dispatch((0, _error_actions.clearErrors)());
+	    }
 	  };
 	};
 	
@@ -53865,6 +53882,11 @@
 	  }
 	
 	  _createClass(SessionForm, [{
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.props.clearErrors();
+	    }
+	  }, {
 	    key: 'update',
 	    value: function update(property) {
 	      var _this2 = this;

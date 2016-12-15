@@ -3,6 +3,7 @@ import SessionForm from './session_form'
 
 //  actions
 import { login, signup } from '../actions/session_actions'
+import { clearErrors } from '../actions/error_actions'
 
 const mapStatetoProps = (state) => ({
   loggedIn: Boolean(state.session.currentUser),
@@ -15,7 +16,8 @@ const mapDispatchToProps = (dispatch, {location}) => {
 
   return {
     processForm: user => dispatch(processForm(user)),
-    formType
+    formType,
+    clearErrors: () => dispatch(clearErrors())
   }
 }
 

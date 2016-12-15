@@ -1,5 +1,4 @@
 import React from 'react'
-import ReminderListContainer from './reminder_list/reminder_list_container'
 import GreetingContainer from './greeting/greeting_container'
 
 const App = ({children}) => (

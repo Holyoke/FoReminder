@@ -7,7 +7,14 @@ export const LOGOUT = 'LOGOUT'
 // async
 export const login = (user) => {
   return (dispatch) => {
-    return util.login(user).then(user => dispatch(receiveCurrentUser(user)))
+    return util.login(user)
+    .then(
+      user => {
+        dispatch(receiveCurrentUser(user))
+        dispatch(clearErrors())
+      },
+      err => dispatch(receiveErrors(err.responseJSON.errors))
+    )
   }
 }
 
@@ -21,10 +28,11 @@ export const signup = (user) => {
   return (dispatch) => {
     return util.signup(user)
     .then(
-      user => dispatch(receiveCurrentUser(user)),
-      err => {
-        dispatch(receiveErrors(err.responseJSON.errors.full_messages))
-      }
+      user => {
+        dispatch(receiveCurrentUser(user))
+        dispatch(clearErrors())
+      },
+      err => dispatch(receiveErrors(err.responseJSON.errors.full_messages))
     )
   }
 }
