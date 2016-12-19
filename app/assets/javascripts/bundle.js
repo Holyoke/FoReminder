@@ -49019,30 +49019,54 @@
 	var Greeting = function (_React$Component) {
 	  _inherits(Greeting, _React$Component);
 	
-	  function Greeting() {
+	  function Greeting(props) {
 	    _classCallCheck(this, Greeting);
 	
-	    return _possibleConstructorReturn(this, (Greeting.__proto__ || Object.getPrototypeOf(Greeting)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Greeting.__proto__ || Object.getPrototypeOf(Greeting)).call(this, props));
+	
+	    _this.handleLogOutButton = _this.handleLogOutButton.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Greeting, [{
+	    key: 'handleLogOutButton',
+	    value: function handleLogOutButton() {
+	      this.props.router.push('/');
+	      this.props.logout();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var currentUser = this.props.currentUser;
+	      var _props = this.props,
+	          currentUser = _props.currentUser,
+	          logout = _props.logout;
 	
 	      var greeting = void 0;
 	
 	      if (!!currentUser) {
 	        greeting = _react2.default.createElement(
-	          'div',
+	          'ul',
 	          null,
 	          'Welcome ',
 	          currentUser.email,
 	          '.',
 	          _react2.default.createElement(
-	            _Button2.default,
-	            { onClick: this.props.logout },
-	            'Logout'
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _Link2.default,
+	              { to: '/', onClick: logout },
+	              'Logout'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _Link2.default,
+	              { to: '/reminders' },
+	              'Reminders'
+	            )
 	          )
 	        );
 	      } else {
@@ -49065,15 +49089,6 @@
 	              _Link2.default,
 	              { to: '/signup' },
 	              'Signup'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              _Link2.default,
-	              { to: '/reminders' },
-	              'Reminders'
 	            )
 	          )
 	        );
