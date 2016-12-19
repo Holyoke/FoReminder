@@ -102,7 +102,18 @@
 	document.addEventListener('DOMContentLoaded', function () {
 	  var root = document.getElementById('root');
 	  var preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {};
-	  var store = (0, _store2.default)({});
+	  var store = (0, _store2.default)(preloadedState);
+	
+	  //load auth from localStorage
+	  var headers = {
+	    'access-token': localStorage.getItem('access-token'),
+	    'uid': localStorage.getItem('uid'),
+	    'client': localStorage.getItem('client')
+	  };
+	
+	  $.ajaxSetup({
+	    headers: headers
+	  });
 	
 	  //  testing
 	  window.reminderActions = reminderActions;
@@ -40615,7 +40626,7 @@
 	// async
 	var login = exports.login = function login(user) {
 	  return function (dispatch) {
-	    return util.login(user).then(function (user) {
+	    return util.login(user).then(function (user, resp, response) {
 	      dispatch(receiveCurrentUser(user));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
@@ -40682,12 +40693,18 @@
 	    url: 'auth/sign_in',
 	    data: data,
 	    success: function success(data, status, response) {
+	      var headers = {
+	        'access-token': response.getResponseHeader('access-token'),
+	        'uid': response.getResponseHeader('uid'),
+	        'client': response.getResponseHeader('client')
+	      };
+	
+	      localStorage.setItem('access-token', headers["access-token"]);
+	      localStorage.setItem('uid', headers["uid"]);
+	      localStorage.setItem('client', headers["client"]);
+	
 	      $.ajaxSetup({
-	        headers: {
-	          'access-token': response.getResponseHeader('access-token'),
-	          'uid': response.getResponseHeader('uid'),
-	          'client': response.getResponseHeader('client')
-	        }
+	        headers: headers
 	      });
 	    },
 	    error: error
@@ -40765,6 +40782,23 @@
 	
 	var Root = function Root(_ref) {
 	  var store = _ref.store;
+	
+	
+	  var _ensureLoggedIn = function _ensureLoggedIn(nextState, replace) {
+	    var currentUser = store.getState().session.currentUser;
+	
+	    if (!currentUser) {
+	      replace('/login');
+	    }
+	  };
+	  var _redirectIfLoggedIn = function _redirectIfLoggedIn(nextState, replace) {
+	    var currentUser = store.getState().session.currentUser;
+	
+	    if (currentUser) {
+	      replace('/');
+	    }
+	  };
+	
 	  return _react2.default.createElement(
 	    _reactRedux.Provider,
 	    { store: store },
@@ -40774,9 +40808,9 @@
 	      _react2.default.createElement(
 	        _reactRouter.Route,
 	        { path: '/', component: _App2.default },
-	        _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _session_form_container2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _session_form_container2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'reminders', component: _reminder_list_container2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _session_form_container2.default, onEnter: _redirectIfLoggedIn }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _session_form_container2.default, onEnter: _redirectIfLoggedIn }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'reminders', component: _reminder_list_container2.default, onEnter: _ensureLoggedIn })
 	      )
 	    )
 	  );
@@ -53905,6 +53939,11 @@
 	      this.props.processForm(user).then(function () {
 	        return _this3.redirect();
 	      });
+	    }
+	  }, {
+	    key: 'redirect',
+	    value: function redirect() {
+	      this.props.router.push("/reminders");
 	    }
 	  }, {
 	    key: 'render',

@@ -14,12 +14,18 @@ export const login = (data, success, error) => {
     url: 'auth/sign_in',
     data,
     success: (data, status, response) => {
+        const headers = {
+          'access-token': response.getResponseHeader('access-token'),
+          'uid': response.getResponseHeader('uid'),
+          'client': response.getResponseHeader('client')
+        }
+
+        localStorage.setItem('access-token', headers["access-token"])
+        localStorage.setItem('uid', headers["uid"])
+        localStorage.setItem('client', headers["client"])
+
         $.ajaxSetup({
-          headers: {
-            'access-token': response.getResponseHeader('access-token'),
-            'uid': response.getResponseHeader('uid'),
-            'client': response.getResponseHeader('client')
-          }
+          headers
         })
     },
     error

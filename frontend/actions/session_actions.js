@@ -9,7 +9,7 @@ export const login = (user) => {
   return (dispatch) => {
     return util.login(user)
     .then(
-      user => {
+      (user, resp, response) => {
         dispatch(receiveCurrentUser(user))
         dispatch(clearErrors())
       },

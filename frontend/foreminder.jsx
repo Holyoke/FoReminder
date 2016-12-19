@@ -19,7 +19,18 @@ import moment from 'moment'
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root')
   const preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {}
-  const store = configureStore({})
+  const store = configureStore(preloadedState)
+
+  //load auth from localStorage
+  const headers = {
+    'access-token': localStorage.getItem('access-token'),
+    'uid': localStorage.getItem('uid'),
+    'client': localStorage.getItem('client')
+  }
+
+  $.ajaxSetup({
+    headers
+  })
 
   //  testing
   window.reminderActions = reminderActions

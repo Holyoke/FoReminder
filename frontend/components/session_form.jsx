@@ -28,6 +28,10 @@ class SessionForm extends React.Component {
     this.props.processForm(user).then(() => this.redirect())
   }
 
+  redirect() {
+    this.props.router.push("/reminders")
+  }
+
   render () {
     const formButton = <button>{this.props.location.pathname.slice(1)}</button>
 
