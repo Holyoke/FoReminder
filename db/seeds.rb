@@ -6,11 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+#create users
+joe = User.create(email: "joe@foreminder.com", password: "secret123", password_confirmation: "secret123")
+jane = User.create(email: "jane@foreminder.com", password: "secret123", password_confirmation: "secret123")
+
 10.times do |n|
-  Reminder.create(
+  user = [joe, jane].sample
+
+  user.reminders.create(
     title: "Reminder ##{n}",
     remind_date: Date.new + n % 7,
-    done: false
+    done: false,
     body: "Sample body"
   )
 end

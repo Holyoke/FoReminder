@@ -9,9 +9,12 @@
 #  remind_date :datetime
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  user_id     :integer
 #
 
 class Reminder < ApplicationRecord
   validates :title, presence: true
   validates :done, inclusion: { in: [true, false] }
+
+  belongs_to :user
 end
