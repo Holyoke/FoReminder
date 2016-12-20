@@ -2,7 +2,7 @@ class Api::RemindersController < ApplicationController
   before_action :set_reminder, only: [:show, :update, :destroy]
 
   def index
-    @reminders = Reminder.all
+    @reminders = current_user.reminders
     render json: @reminders
   end
 
@@ -11,7 +11,7 @@ class Api::RemindersController < ApplicationController
   end
 
   def create
-    @reminder = Reminder.new(reminder_params)
+    @reminder = current_user.reminders.new(reminder_params)
 
     if @reminder.save
       render json: @reminder, status: :created
