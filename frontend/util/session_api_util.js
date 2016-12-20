@@ -32,6 +32,28 @@ export const login = (data, success, error) => {
   })
 }
 
+export const validateToken = (success, error) => {
+  return $.ajax({
+    method: 'GET',
+    url: 'auth/validate_token',
+    success: (data, status, response) => {
+      const headers = {
+        'access-token': response.getResponseHeader('access-token'),
+        'uid': response.getResponseHeader('uid'),
+        'client': response.getResponseHeader('client')
+      }
+
+      localStorage.setItem('access-token', headers["access-token"])
+      localStorage.setItem('uid', headers["uid"])
+      localStorage.setItem('client', headers["client"])
+
+      $.ajaxSetup({headers})
+    },
+    error
+  })
+}
+
+
 export const logout = (success, error) => {
   return $.ajax({
     method: 'DELETE',

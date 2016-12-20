@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     headers
   })
 
+  sessionApi.validateToken()
+
   //  testing
   window.reminderActions = reminderActions
   window.commentActions = commentActions
