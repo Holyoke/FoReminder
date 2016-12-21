@@ -1,4 +1,5 @@
 class Api::RemindersController < ApplicationController
+  before_action :authenticate_user! 
   before_action :set_reminder, only: [:show, :update, :destroy]
 
   def index
@@ -35,7 +36,7 @@ class Api::RemindersController < ApplicationController
 
   private
     def set_reminder
-      @reminder = Reminder.find(params[:id])
+      @reminder = current_user.reminders.find(params[:id])
     end
 
     def reminder_params

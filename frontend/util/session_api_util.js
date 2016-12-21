@@ -1,4 +1,34 @@
-export const signup = (data, success, error) => {
+import Auth from 'j-toker'
+
+export const login = (user) => {
+  return Auth.emailSignIn(user)
+}
+
+export const logout = () => {
+  return Auth.signOut()
+}
+
+export const validateToken = () => {
+  return Auth.validateToken()
+}
+
+export const _setHeaders = () => {
+  const authHeaders = Auth.retrieveData('authHeaders')
+  const headers = {
+    'access-token': authHeaders['access-token'],
+    'uid': authHeaders['uid'],
+    'client': authHeaders['client']
+  }
+  $.ajaxSetup({headers})
+  console.log("Headers set: ", headers)
+}
+
+export const signup = (user) => {
+  user['password_confirmation'] = user.password
+  return Auth.emailSignUp(user)
+}
+
+export const oldSignup = (data, success, error) => {
   return $.ajax({
     method: 'POST',
     url: 'auth',
@@ -8,7 +38,7 @@ export const signup = (data, success, error) => {
   })
 }
 
-export const login = (data, success, error) => {
+export const oldLogin = (data, success, error) => {
   return $.ajax({
     method: 'POST',
     url: 'auth/sign_in',
@@ -32,7 +62,7 @@ export const login = (data, success, error) => {
   })
 }
 
-export const validateToken = (success, error) => {
+export const oldValidateToken = (success, error) => {
   return $.ajax({
     method: 'GET',
     url: 'auth/validate_token',
@@ -54,7 +84,7 @@ export const validateToken = (success, error) => {
 }
 
 
-export const logout = (success, error) => {
+export const oldLogout = (success, error) => {
   return $.ajax({
     method: 'DELETE',
     url: 'auth/sign_out',

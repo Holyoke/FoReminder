@@ -5,8 +5,8 @@ gem 'rails', '~> 5.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
-gem 'thin', group: :development
+gem 'puma', '~> 3.0', group: :production
+gem 'webrick', group: :development
 
 gem 'mailgun-ruby', '~> 1.1.0', require: 'mailgun'
 # Use SCSS for stylesheets

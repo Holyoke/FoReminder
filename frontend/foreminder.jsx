@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import configureStore from './store/store.js'
+import Auth from 'j-toker'
 
 // components
 import Root from './components/root'
@@ -19,20 +20,20 @@ import moment from 'moment'
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root')
   const preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {}
-  const store = configureStore(preloadedState)
 
-  //load auth from localStorage
-  const headers = {
-    'access-token': localStorage.getItem('access-token'),
-    'uid': localStorage.getItem('uid'),
-    'client': localStorage.getItem('client')
-  }
 
-  $.ajaxSetup({
-    headers
+  //config Auth
+  Auth.configure({
+    apiUrl: 'http://localhost:3000'
   })
 
-  sessionApi.validateToken()
+  console.log("Auth user: ", Auth.user)
+  if (!!preloadedState.session) {
+    preloadedState.session.currentUser = Auth.user
+  }
+
+  const store = configureStore(preloadedState)
+
 
   //  testing
   window.reminderActions = reminderActions
@@ -45,5 +46,5 @@ document.addEventListener('DOMContentLoaded', () => {
   window.sessionApi = sessionApi
   window.moment = moment
 
-  ReactDOM.render(<Root store={store} />, root)
+  ReactDOM.render(<Root store={store} auth={Auth}/>, root)
 })

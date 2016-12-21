@@ -1,6 +1,7 @@
 import * as util from '../util/reminder_api_util'
-import { receiveErrors, clearErrors } from './error_actions'
+import { _setHeaders } from '../util/session_api_util'
 
+import { receiveErrors, clearErrors } from './error_actions'
 export const RECEIVE_REMINDERS = 'RECEIVE_REMINDERS'
 export const RECEIVE_REMINDER = 'RECEIVE_REMINDER'
 export const REMOVE_REMINDER = 'REMOVE_REMINDER'
