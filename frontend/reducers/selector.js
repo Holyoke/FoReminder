@@ -8,3 +8,9 @@ export const commentsByReminderId = ({ comments }, reminder_id) => {
   })
   return commentsByReminderId
 }
+
+export const parseErrors = ({ errors }) => {
+  console.log("selector parse error: ", errors)
+  const _errors = []
+  return errors
+}

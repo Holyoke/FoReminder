@@ -24,18 +24,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //config Auth
   Auth.configure({
-    apiUrl: 'http://localhost:3000'
+    apiUrl: 'http://localhost:3000',
+    handleLoginResponse: (resp) => {
+      sessionApi._setHeaders()
+      console.log("Headers set in loginhandle response.", resp)
+      return resp.data
+    }
   })
 
-  console.log("Auth user: ", Auth.user)
-  if (!!preloadedState.session) {
-    preloadedState.session.currentUser = Auth.user
+  if (!$.isEmptyObject(Auth.user)) {
+    const session = { currentUser: Auth.user }
+    preloadedState.session = session
   }
 
-  const store = configureStore(preloadedState)
+  const store = configureStore({})
 
 
   //  testing
+  window.Auth = Auth
   window.reminderActions = reminderActions
   window.commentActions = commentActions
   window.errorActions = errorActions

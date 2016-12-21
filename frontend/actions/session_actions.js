@@ -1,6 +1,7 @@
 import * as util from '../util/session_api_util'
-import { receiveErrors, clearErrors } from './error_actions'
+import { parseErrorResponse } from '../util/error_util'
 
+import { receiveErrors, clearErrors } from './error_actions'
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER'
 export const LOGOUT = 'LOGOUT'
 
@@ -13,7 +14,12 @@ export const login = (user) => {
         dispatch(receiveCurrentUser(user))
         dispatch(clearErrors())
       },
-      err => dispatch(receiveErrors(err.responseJSON.errors))
+      err => {
+        console.log("session actions login error:", err)
+        // login unregistered user
+        const { errors } = err.data
+        dispatch(receiveErrors(errors))
+      }
     )
   }
 }
@@ -32,7 +38,11 @@ export const signup = (user) => {
         dispatch(receiveCurrentUser(user))
         dispatch(clearErrors())
       },
-      err => dispatch(receiveErrors(err.responseJSON.errors.full_messages))
+      err => {
+        console.log("session actions signup error:", err)
+        const { full_messages } = err.data.errors
+        dispatch(receiveErrors(full_messages))
+      }
     )
   }
 }

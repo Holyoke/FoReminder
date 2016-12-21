@@ -5,9 +5,12 @@ import SessionForm from './session_form'
 import { login, signup } from '../actions/session_actions'
 import { clearErrors } from '../actions/error_actions'
 
+// selectors
+import { parseErrors } from '../reducers/selector.js'
+
 const mapStatetoProps = (state) => ({
   loggedIn: Boolean(state.session.currentUser),
-  errors: state.errors
+  errors: parseErrors(state)
 })
 
 const mapDispatchToProps = (dispatch, {location}) => {

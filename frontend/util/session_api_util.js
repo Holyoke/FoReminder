@@ -14,6 +14,7 @@ export const validateToken = () => {
 
 export const _setHeaders = () => {
   const authHeaders = Auth.retrieveData('authHeaders')
+  if ($.isEmptyObject(authHeaders)) { return }
   const headers = {
     'access-token': authHeaders['access-token'],
     'uid': authHeaders['uid'],
