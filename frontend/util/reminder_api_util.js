@@ -29,7 +29,7 @@ export const updateReminder = (data, success, error) => {
     method: 'PUT',
     url,
     data,
-    success,
+    success: _setHeaders,
     error
   })
 }

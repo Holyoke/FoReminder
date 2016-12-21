@@ -21554,9 +21554,9 @@
 	  var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
 	  var store = (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
-	  store.subscribe(function () {
-	    localStorage.state = JSON.stringify(store.getState());
-	  });
+	  // store.subscribe(() => {
+	  //   localStorage.state = JSON.stringify(store.getState())
+	  // })
 	
 	  return store;
 	};
@@ -22839,7 +22839,7 @@
 	    method: 'PUT',
 	    url: url,
 	    data: data,
-	    success: success,
+	    success: _session_api_util._setHeaders,
 	    error: error
 	  });
 	};
@@ -52776,8 +52776,6 @@
 	
 	var _session_actions = __webpack_require__(411);
 	
-	var _error_actions = __webpack_require__(210);
-	
 	var _merge = __webpack_require__(322);
 	
 	var _merge2 = _interopRequireDefault(_merge);
@@ -52798,7 +52796,7 @@
 	    case _session_actions.RECEIVE_CURRENT_USER:
 	      var currentUser = action.currentUser.data;
 	      return (0, _merge2.default)({}, _nullUser, { currentUser: currentUser });
-	    case _error_actions.RECEIVE_ERRORS:
+	    case _session_actions.RECEIVE_LOGIN_ERRORS:
 	      var errors = action.errors;
 	      return (0, _merge2.default)({}, _nullUser, { errors: errors });
 	    case _session_actions.LOGOUT:
@@ -52819,7 +52817,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.logoutCurrentUser = exports.receiveCurrentUser = exports.signup = exports.logout = exports.login = exports.LOGOUT = exports.RECEIVE_CURRENT_USER = undefined;
+	exports.logoutCurrentUser = exports.receiveLoginErrors = exports.receiveCurrentUser = exports.signup = exports.logout = exports.login = exports.RECEIVE_LOGIN_ERRORS = exports.LOGOUT = exports.RECEIVE_CURRENT_USER = undefined;
 	
 	var _session_api_util = __webpack_require__(204);
 	
@@ -52833,6 +52831,7 @@
 	
 	var RECEIVE_CURRENT_USER = exports.RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 	var LOGOUT = exports.LOGOUT = 'LOGOUT';
+	var RECEIVE_LOGIN_ERRORS = exports.RECEIVE_LOGIN_ERRORS = 'RECEIVE_LOGIN_ERRORS';
 	
 	// async
 	var login = exports.login = function login(user) {
@@ -52841,7 +52840,7 @@
 	      dispatch(receiveCurrentUser(user));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
-	      dispatch((0, _error_actions.receiveErrors)(err));
+	      dispatch(receiveLoginErrors(err));
 	    });
 	  };
 	};
@@ -52860,7 +52859,7 @@
 	      dispatch(receiveCurrentUser(user));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
-	      dispatch((0, _error_actions.receiveErrors)(err));
+	      dispatch(receiveErrors(err));
 	    });
 	  };
 	};
@@ -52870,6 +52869,13 @@
 	  return {
 	    type: RECEIVE_CURRENT_USER,
 	    currentUser: currentUser
+	  };
+	};
+	
+	var receiveLoginErrors = exports.receiveLoginErrors = function receiveLoginErrors(errors) {
+	  return {
+	    type: RECEIVE_LOGIN_ERRORS,
+	    errors: errors
 	  };
 	};
 	
@@ -61070,6 +61076,11 @@
 	  }
 	
 	  _createClass(SessionForm, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.props.clearErrors();
+	    }
+	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
 	      this.props.clearErrors();
@@ -66101,6 +66112,8 @@
 	    case 'error':
 	      return errors.responseJSON;
 	  }
+	
+	  return errors;
 	};
 
 /***/ },

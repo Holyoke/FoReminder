@@ -1,9 +1,10 @@
 import * as util from '../util/session_api_util'
 import { parseErrorResponse } from '../util/error_util'
 
-import { receiveErrors, clearErrors } from './error_actions'
+import { clearErrors } from './error_actions'
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER'
 export const LOGOUT = 'LOGOUT'
+export const RECEIVE_LOGIN_ERRORS = 'RECEIVE_LOGIN_ERRORS'
 
 // async
 export const login = (user) => {
@@ -15,7 +16,7 @@ export const login = (user) => {
         dispatch(clearErrors())
       },
       err => {
-        dispatch(receiveErrors(err))
+        dispatch(receiveLoginErrors(err))
       }
     )
   }
@@ -46,6 +47,11 @@ export const signup = (user) => {
 export const receiveCurrentUser = currentUser => ({
   type: RECEIVE_CURRENT_USER,
   currentUser
+})
+
+export const receiveLoginErrors = errors => ({
+  type: RECEIVE_LOGIN_ERRORS,
+  errors
 })
 
 export const logoutCurrentUser = () => ({

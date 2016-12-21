@@ -29,4 +29,6 @@ export const parseErrors = ({ errors }) => {
     case 'error':
       return errors.responseJSON
   }
+
+  return errors
 }

@@ -5,9 +5,9 @@ import thunk from 'redux-thunk'
 
 const configureStore = (preloadedState = {}) => {
   const store = createStore(RootReducer, preloadedState, applyMiddleware(thunk))
-  store.subscribe(() => {
-    localStorage.state = JSON.stringify(store.getState())
-  })
+  // store.subscribe(() => {
+  //   localStorage.state = JSON.stringify(store.getState())
+  // })
 
   return store
 }
