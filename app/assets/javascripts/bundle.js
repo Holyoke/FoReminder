@@ -22743,7 +22743,7 @@
 	      dispatch(receiveReminder(reminder));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
-	      return dispatch((0, _error_actions.receiveErrors)(err.responseJSON));
+	      dispatch((0, _error_actions.receiveErrors)(err));
 	    });
 	  };
 	};
@@ -22754,7 +22754,7 @@
 	      dispatch(receiveReminder(reminder));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
-	      return dispatch((0, _error_actions.receiveErrors)(err.responseJSON));
+	      dispatch((0, _error_actions.receiveErrors)(err));
 	    });
 	  };
 	};
@@ -22765,7 +22765,7 @@
 	      dispatch(removeReminder(reminder));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
-	      return dispatch((0, _error_actions.receiveErrors)(err.responseJSON));
+	      return dispatch((0, _error_actions.receiveErrors)(err));
 	    });
 	  };
 	};
@@ -52841,11 +52841,7 @@
 	      dispatch(receiveCurrentUser(user));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
-	      console.log("session actions login error:", err);
-	      // login unregistered user
-	      var errors = err.data.errors;
-	
-	      dispatch((0, _error_actions.receiveErrors)(errors));
+	      dispatch((0, _error_actions.receiveErrors)(err));
 	    });
 	  };
 	};
@@ -52864,10 +52860,7 @@
 	      dispatch(receiveCurrentUser(user));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
-	      console.log("session actions signup error:", err);
-	      var full_messages = err.data.errors.full_messages;
-	
-	      dispatch((0, _error_actions.receiveErrors)(full_messages));
+	      dispatch((0, _error_actions.receiveErrors)(err));
 	    });
 	  };
 	};
@@ -61217,7 +61210,7 @@
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    reminders: (0, _selector.allReminders)(state),
-	    errors: state.errors
+	    errors: (0, _selector.parseErrors)(state)
 	  };
 	};
 	
@@ -66063,7 +66056,7 @@
 /* 644 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -66090,8 +66083,24 @@
 	  var errors = _ref3.errors;
 	
 	  console.log("selector parse error: ", errors);
-	  var _errors = [];
-	  return errors;
+	
+	  // session errors
+	  switch (errors.reason) {
+	    case 'Invalid credentials.':
+	      return errors.data.errors;
+	    case 'Failed to submit email registration.':
+	      return errors.data.errors.full_messages;
+	    default:
+	      break;
+	  }
+	
+	  // api resources errors
+	  switch (errors.statusText) {
+	    case 'Unauthorized':
+	      return errors.responseJSON.errors;
+	    case 'error':
+	      return errors.responseJSON;
+	  }
 	};
 
 /***/ },

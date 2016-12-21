@@ -15,10 +15,7 @@ export const login = (user) => {
         dispatch(clearErrors())
       },
       err => {
-        console.log("session actions login error:", err)
-        // login unregistered user
-        const { errors } = err.data
-        dispatch(receiveErrors(errors))
+        dispatch(receiveErrors(err))
       }
     )
   }
@@ -39,9 +36,7 @@ export const signup = (user) => {
         dispatch(clearErrors())
       },
       err => {
-        console.log("session actions signup error:", err)
-        const { full_messages } = err.data.errors
-        dispatch(receiveErrors(full_messages))
+        dispatch(receiveErrors(err))
       }
     )
   }

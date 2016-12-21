@@ -20,7 +20,10 @@ export const createReminder = (reminder) => {
                  dispatch(receiveReminder(reminder))
                  dispatch(clearErrors())
                },
-                 err => dispatch(receiveErrors(err.responseJSON)))
+                 err => {
+                   dispatch(receiveErrors(err))
+                 }
+               )
   }
 }
 
@@ -31,7 +34,10 @@ export const updateReminder = (reminder) => {
                  dispatch(receiveReminder(reminder))
                  dispatch(clearErrors())
                },
-                 err => dispatch(receiveErrors(err.responseJSON)))
+                 err => {
+                   dispatch(receiveErrors(err))
+                 }
+               )
   }
 }
 
@@ -42,7 +48,7 @@ export const deleteReminder = (reminder) => {
                  dispatch(removeReminder(reminder))
                  dispatch(clearErrors())
                },
-                 err => dispatch(receiveErrors(err.responseJSON)))
+                 err => dispatch(receiveErrors(err)))
   }
 }
 

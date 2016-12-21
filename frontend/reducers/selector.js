@@ -11,6 +11,22 @@ export const commentsByReminderId = ({ comments }, reminder_id) => {
 
 export const parseErrors = ({ errors }) => {
   console.log("selector parse error: ", errors)
-  const _errors = []
-  return errors
+
+  // session errors
+  switch (errors.reason) {
+    case 'Invalid credentials.':
+      return errors.data.errors
+    case 'Failed to submit email registration.':
+      return errors.data.errors.full_messages
+    default:
+      break
+  }
+
+  // api resources errors
+  switch (errors.statusText) {
+    case 'Unauthorized':
+      return errors.responseJSON.errors
+    case 'error':
+      return errors.responseJSON
+  }
 }

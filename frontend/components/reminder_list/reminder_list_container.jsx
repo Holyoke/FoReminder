@@ -5,11 +5,11 @@ import ReminderList from './reminder_list'
 import { receiveReminders, fetchReminders, createReminder, updateReminder, removeReminder } from '../../actions/reminder_actions'
 
 // selectors
-import { allReminders } from '../../reducers/selector'
+import { allReminders, parseErrors } from '../../reducers/selector'
 
 const mapStateToProps = state => ({
   reminders: allReminders(state),
-  errors: state.errors
+  errors: parseErrors(state)
 })
 
 const mapDispatchToProps = (dispatch, { reminder }) => ({
