@@ -10,7 +10,7 @@ import { parseErrors } from '../reducers/selector.js'
 
 const mapStatetoProps = (state) => ({
   loggedIn: Boolean(state.session.currentUser),
-  errors: parseErrors(state)
+  errors: parseErrors(state.session)
 })
 
 const mapDispatchToProps = (dispatch, {location}) => {

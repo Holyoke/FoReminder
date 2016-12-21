@@ -52796,9 +52796,9 @@
 	    case _session_actions.RECEIVE_CURRENT_USER:
 	      var currentUser = action.currentUser.data;
 	      return (0, _merge2.default)({}, _nullUser, { currentUser: currentUser });
-	    case _session_actions.RECEIVE_LOGIN_ERRORS:
-	      var errors = action.errors;
-	      return (0, _merge2.default)({}, _nullUser, { errors: errors });
+	    case _session_actions.RECEIVE_FORM_ERRORS:
+	      var err = action.err;
+	      return (0, _merge2.default)({}, _nullUser, { errors: err });
 	    case _session_actions.LOGOUT:
 	      return (0, _merge2.default)({}, _nullUser);
 	    default:
@@ -52817,7 +52817,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.logoutCurrentUser = exports.receiveLoginErrors = exports.receiveCurrentUser = exports.signup = exports.logout = exports.login = exports.RECEIVE_LOGIN_ERRORS = exports.LOGOUT = exports.RECEIVE_CURRENT_USER = undefined;
+	exports.logoutCurrentUser = exports.receiveFormErrors = exports.receiveCurrentUser = exports.signup = exports.logout = exports.login = exports.RECEIVE_FORM_ERRORS = exports.LOGOUT = exports.RECEIVE_CURRENT_USER = undefined;
 	
 	var _session_api_util = __webpack_require__(204);
 	
@@ -52831,7 +52831,7 @@
 	
 	var RECEIVE_CURRENT_USER = exports.RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 	var LOGOUT = exports.LOGOUT = 'LOGOUT';
-	var RECEIVE_LOGIN_ERRORS = exports.RECEIVE_LOGIN_ERRORS = 'RECEIVE_LOGIN_ERRORS';
+	var RECEIVE_FORM_ERRORS = exports.RECEIVE_FORM_ERRORS = 'RECEIVE_FORM_ERRORS';
 	
 	// async
 	var login = exports.login = function login(user) {
@@ -52840,7 +52840,7 @@
 	      dispatch(receiveCurrentUser(user));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
-	      dispatch(receiveLoginErrors(err));
+	      dispatch(receiveFormErrors(err));
 	    });
 	  };
 	};
@@ -52859,7 +52859,7 @@
 	      dispatch(receiveCurrentUser(user));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
-	      dispatch(receiveErrors(err));
+	      dispatch(receiveFormErrors(err));
 	    });
 	  };
 	};
@@ -52872,10 +52872,10 @@
 	  };
 	};
 	
-	var receiveLoginErrors = exports.receiveLoginErrors = function receiveLoginErrors(errors) {
+	var receiveFormErrors = exports.receiveFormErrors = function receiveFormErrors(err) {
 	  return {
-	    type: RECEIVE_LOGIN_ERRORS,
-	    errors: errors
+	    type: RECEIVE_FORM_ERRORS,
+	    err: err
 	  };
 	};
 	
@@ -60996,7 +60996,7 @@
 	var mapStatetoProps = function mapStatetoProps(state) {
 	  return {
 	    loggedIn: Boolean(state.session.currentUser),
-	    errors: (0, _selector.parseErrors)(state)
+	    errors: (0, _selector.parseErrors)(state.session)
 	  };
 	};
 	
@@ -66094,7 +66094,6 @@
 	  var errors = _ref3.errors;
 	
 	  console.log("selector parse error: ", errors);
-	
 	  // session errors
 	  switch (errors.reason) {
 	    case 'Invalid credentials.':
