@@ -122,21 +122,21 @@
 	    preloadedState.session = session;
 	  }
 	
-	  var store = (0, _store2.default)({});
+	  var store = (0, _store2.default)(preloadedState);
 	
 	  //  testing
-	  window.Auth = _jToker2.default;
+	  // window.Auth = Auth
 	  window.reminderActions = reminderActions;
 	  window.commentActions = commentActions;
 	  window.errorActions = errorActions;
 	  window.sessionActions = sessionActions;
-	  window.store = store;
+	  // window.store = store
 	  window.selectors = selectors;
 	  window.api = api;
 	  window.sessionApi = sessionApi;
 	  window.moment = _moment2.default;
 	
-	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store, auth: _jToker2.default }), root);
+	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 	});
 	
 	// components
@@ -21554,9 +21554,9 @@
 	  var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
 	  var store = (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
-	  // store.subscribe(() => {
-	  //   localStorage.state = JSON.stringify(store.getState())
-	  // })
+	  store.subscribe(function () {
+	    localStorage.state = JSON.stringify(store.getState());
+	  });
 	
 	  return store;
 	};
@@ -22865,7 +22865,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.oldLogout = exports.oldValidateToken = exports.oldLogin = exports.oldSignup = exports.signup = exports._setHeaders = exports.validateToken = exports.logout = exports.login = undefined;
+	exports.signup = exports._setHeaders = exports.validateToken = exports.logout = exports.login = undefined;
 	
 	var _jToker = __webpack_require__(205);
 	
@@ -22896,76 +22896,11 @@
 	    'client': authHeaders['client']
 	  };
 	  $.ajaxSetup({ headers: headers });
-	  console.log("Headers set: ", headers);
 	};
 	
 	var signup = exports.signup = function signup(user) {
 	  user['password_confirmation'] = user.password;
 	  return _jToker2.default.emailSignUp(user);
-	};
-	
-	var oldSignup = exports.oldSignup = function oldSignup(data, success, error) {
-	  return $.ajax({
-	    method: 'POST',
-	    url: 'auth',
-	    data: data,
-	    success: success,
-	    error: error
-	  });
-	};
-	
-	var oldLogin = exports.oldLogin = function oldLogin(data, success, error) {
-	  return $.ajax({
-	    method: 'POST',
-	    url: 'auth/sign_in',
-	    data: data,
-	    success: function success(data, status, response) {
-	      var headers = {
-	        'access-token': response.getResponseHeader('access-token'),
-	        'uid': response.getResponseHeader('uid'),
-	        'client': response.getResponseHeader('client')
-	      };
-	
-	      localStorage.setItem('access-token', headers["access-token"]);
-	      localStorage.setItem('uid', headers["uid"]);
-	      localStorage.setItem('client', headers["client"]);
-	
-	      $.ajaxSetup({
-	        headers: headers
-	      });
-	    },
-	    error: error
-	  });
-	};
-	
-	var oldValidateToken = exports.oldValidateToken = function oldValidateToken(success, error) {
-	  return $.ajax({
-	    method: 'GET',
-	    url: 'auth/validate_token',
-	    success: function success(data, status, response) {
-	      var headers = {
-	        'access-token': response.getResponseHeader('access-token'),
-	        'uid': response.getResponseHeader('uid'),
-	        'client': response.getResponseHeader('client')
-	      };
-	
-	      localStorage.setItem('access-token', headers["access-token"]);
-	      localStorage.setItem('uid', headers["uid"]);
-	      localStorage.setItem('client', headers["client"]);
-	
-	      $.ajaxSetup({ headers: headers });
-	    },
-	    error: error
-	  });
-	};
-	
-	var oldLogout = exports.oldLogout = function oldLogout(success, error) {
-	  return $.ajax({
-	    method: 'DELETE',
-	    url: 'auth/sign_out',
-	    success: success,
-	    error: error
-	  });
 	};
 
 /***/ },
@@ -61352,7 +61287,7 @@
 	        _react2.default.createElement(
 	          'h2',
 	          null,
-	          'Reminder List'
+	          'Reminders'
 	        ),
 	        _react2.default.createElement(_reminder_form2.default, { createReminder: createReminder, errors: errors }),
 	        reminderItems,
@@ -66093,7 +66028,6 @@
 	var parseErrors = exports.parseErrors = function parseErrors(_ref3) {
 	  var errors = _ref3.errors;
 	
-	  console.log("selector parse error: ", errors);
 	  // session errors
 	  switch (errors.reason) {
 	    case 'Invalid credentials.':

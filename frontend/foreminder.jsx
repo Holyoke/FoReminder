@@ -37,20 +37,20 @@ document.addEventListener('DOMContentLoaded', () => {
     preloadedState.session = session
   }
 
-  const store = configureStore({})
+  const store = configureStore(preloadedState)
 
 
   //  testing
-  window.Auth = Auth
+  // window.Auth = Auth
   window.reminderActions = reminderActions
   window.commentActions = commentActions
   window.errorActions = errorActions
   window.sessionActions = sessionActions
-  window.store = store
+  // window.store = store
   window.selectors = selectors
   window.api = api
   window.sessionApi = sessionApi
   window.moment = moment
 
-  ReactDOM.render(<Root store={store} auth={Auth}/>, root)
+  ReactDOM.render(<Root store={store} />, root)
 })

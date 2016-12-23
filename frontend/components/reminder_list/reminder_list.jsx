@@ -51,7 +51,7 @@ class ReminderList extends React.Component {
 
     return (
       <ListGroup className="reminder-list" onClick={this.debug}>
-        <h2>Reminder List</h2>
+        <h2>Reminders</h2>
         <ReminderForm createReminder={createReminder} errors={errors} />
         {reminderItems}
         {reminderModal}

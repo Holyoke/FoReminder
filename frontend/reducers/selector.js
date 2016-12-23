@@ -10,7 +10,6 @@ export const commentsByReminderId = ({ comments }, reminder_id) => {
 }
 
 export const parseErrors = ({ errors }) => {
-  console.log("selector parse error: ", errors)
   // session errors
   switch (errors.reason) {
     case 'Invalid credentials.':

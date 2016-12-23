@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #create users
-joe = User.create(email: "joe@foreminder.com", password: "secret123", password_confirmation: "secret123")
-jane = User.create(email: "jane@foreminder.com", password: "secret123", password_confirmation: "secret123")
+joe = User.create(email: "joe@test.com", password: "passw0rd", password_confirmation: "passw0rd")
+jane = User.create(email: "jane@test.com", password: "passw0rd", password_confirmation: "passw0rd")
 
 10.times do |n|
   user = [joe, jane].sample

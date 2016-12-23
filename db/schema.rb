@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161220011831) do
+ActiveRecord::Schema.define(version: 20161223000422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.string  "body"
+    t.integer "reminder_id"
+    t.index ["reminder_id"], name: "index_comments_on_reminder_id", using: :btree
+  end
 
   create_table "reminders", force: :cascade do |t|
     t.string   "title"
@@ -54,5 +60,6 @@ ActiveRecord::Schema.define(version: 20161220011831) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "comments", "reminders"
   add_foreign_key "reminders", "users"
 end
