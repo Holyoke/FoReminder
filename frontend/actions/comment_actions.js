@@ -1,6 +1,20 @@
+import * as util from '../util/comment_api_util'
+import { _setHeaders } from '../util/session_api_util'
+
+import { receiveErrors, clearErrors } from './error_actions'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
 export const REMOVE_COMMENT = 'REMOVE_COMMENT'
+
+// async
+export const fetchComments = (reminder_id) => {
+  return (dispatch) => {
+    return util.fetchComments(reminder_id).then(
+      comments => dispatch(receiveComments(comments)),
+      err => alert(err)
+    )
+  }
+}
 
 export const receiveComment = comment => ({
   type: RECEIVE_COMMENT,
