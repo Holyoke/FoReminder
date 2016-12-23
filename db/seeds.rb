@@ -19,4 +19,8 @@ jane = User.create(email: "jane@test.com", password: "passw0rd", password_confir
     done: false,
     body: "Sample body"
   )
+
+  if n == 5
+    5.times { |body| user.reminders.first.comments.create(body: "test comment  #{body} ") }
+  end
 end
