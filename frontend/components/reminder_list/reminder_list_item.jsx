@@ -29,13 +29,17 @@ class ReminderListItem extends React.Component {
   render () {
     const { reminder, selectReminder } = this.props
     const { title, done } = reminder
-    const toggleButton = <Button onClick={this.toggleDone}>
-                         {done ? 'Undo' : 'Complete'}</Button>
+    const glyph = done ? "glyphicon glyphicon-check" : "glyphicon glyphicon-unchecked"
+    const toggleButton =
+      <Button onClick={this.toggleDone}>
+        <span className={glyph} aria-hidden="true"></span>
+      </Button>
+
     return (
       <ListGroupItem className="reminder-list-item">
+          {toggleButton}
           <h4 onClick={() => selectReminder(reminder)}>{title}</h4>
           <section>Done: {done.toString()}</section>
-          {toggleButton}
       </ListGroupItem>
     )
   }

@@ -61525,14 +61525,17 @@
 	      var title = reminder.title,
 	          done = reminder.done;
 	
+	      var glyph = done ? "glyphicon glyphicon-check" : "glyphicon glyphicon-unchecked";
 	      var toggleButton = _react2.default.createElement(
 	        _Button2.default,
 	        { onClick: this.toggleDone },
-	        done ? 'Undo' : 'Complete'
+	        _react2.default.createElement('span', { className: glyph, 'aria-hidden': 'true' })
 	      );
+	
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
 	        { className: 'reminder-list-item' },
+	        toggleButton,
 	        _react2.default.createElement(
 	          'h4',
 	          { onClick: function onClick() {
@@ -61545,8 +61548,7 @@
 	          null,
 	          'Done: ',
 	          done.toString()
-	        ),
-	        toggleButton
+	        )
 	      );
 	    }
 	  }]);
