@@ -61427,7 +61427,9 @@
 	      var _props = this.props,
 	          reminders = _props.reminders,
 	          errors = _props.errors,
-	          createReminder = _props.createReminder;
+	          createReminder = _props.createReminder,
+	          removeReminder = _props.removeReminder,
+	          updateReminder = _props.updateReminder;
 	
 	
 	      var reminderItems = reminders.map(function (reminder) {
@@ -61435,8 +61437,8 @@
 	          key: 'reminder-list-item' + reminder.id,
 	          reminder: reminder,
 	          selectReminder: _this2.selectReminder,
-	          removeReminder: _this2.props.removeReminder,
-	          updateReminder: _this2.props.updateReminder });
+	          removeReminder: removeReminder,
+	          updateReminder: updateReminder });
 	      });
 	
 	      var selectedReminder = this.state.selectedReminder;
@@ -62814,47 +62816,27 @@
 	          deleteReminder = _props2.deleteReminder,
 	          show = _props2.show;
 	      var body = reminder.body,
-	          remind_date = reminder.remind_date;
+	          remind_date = reminder.remind_date,
+	          title = reminder.title;
 	
 	      var reminder_id = reminder.id;
 	      return _react2.default.createElement(
 	        _Modal2.default,
 	        { className: 'reminder-detail-view', show: show, onHide: this.props.onHide },
 	        _react2.default.createElement(
-	          'table',
+	          'h1',
 	          null,
-	          _react2.default.createElement(
-	            'tbody',
-	            null,
-	            _react2.default.createElement(
-	              'tr',
-	              null,
-	              _react2.default.createElement(
-	                'th',
-	                null,
-	                'Body'
-	              ),
-	              _react2.default.createElement(
-	                'th',
-	                null,
-	                'Remind Date'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'tr',
-	              null,
-	              _react2.default.createElement(
-	                'td',
-	                null,
-	                body
-	              ),
-	              _react2.default.createElement(
-	                'td',
-	                null,
-	                remind_date
-	              )
-	            )
-	          )
+	          title
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          null,
+	          body
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          null,
+	          remind_date
 	        ),
 	        _react2.default.createElement(_comment_list_container2.default, { reminder_id: reminder_id }),
 	        _react2.default.createElement(

@@ -29,7 +29,7 @@ class ReminderList extends React.Component {
   }
 
   render () {
-    const { reminders, errors, createReminder } = this.props
+    const { reminders, errors, createReminder, removeReminder, updateReminder } = this.props
 
     const reminderItems = reminders.map(reminder => {
       return (
@@ -37,8 +37,8 @@ class ReminderList extends React.Component {
           key={`reminder-list-item${reminder.id}`}
           reminder={reminder}
           selectReminder={this.selectReminder}
-          removeReminder={this.props.removeReminder}
-          updateReminder={this.props.updateReminder} />
+          removeReminder={removeReminder}
+          updateReminder={updateReminder} />
       )
     })
 

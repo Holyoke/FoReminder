@@ -21,22 +21,13 @@ class ReminderDetailView extends React.Component {
 
   render () {
     const { reminder, deleteReminder, show } = this.props
-    const { body, remind_date } = reminder
+    const { body, remind_date, title } = reminder
     const reminder_id = reminder.id
     return (
       <Modal className='reminder-detail-view' show={show} onHide={this.props.onHide} >
-        <table>
-          <tbody>
-            <tr>
-              <th>Body</th>
-              <th>Remind Date</th>
-            </tr>
-            <tr>
-              <td>{body}</td>
-              <td>{remind_date}</td>
-            </tr>
-          </tbody>
-        </table>
+        <h1>{title}</h1>
+        <section>{body}</section>
+        <section>{remind_date}</section>
         <CommentListContainer reminder_id={reminder_id} />
         <Button bsStyle="warning" bsSize="xsmall" onClick={this.handleDeleteClick}>Delete reminder</Button>
       </Modal>
