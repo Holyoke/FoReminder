@@ -70,9 +70,9 @@
 	
 	var api = _interopRequireWildcard(_reminder_api_util);
 	
-	var _session_api_util = __webpack_require__(204);
+	var _comment_api_util = __webpack_require__(409);
 	
-	var sessionApi = _interopRequireWildcard(_session_api_util);
+	var commentApi = _interopRequireWildcard(_comment_api_util);
 	
 	var _selector = __webpack_require__(582);
 	
@@ -133,7 +133,7 @@
 	  window.store = store;
 	  window.selectors = selectors;
 	  window.api = api;
-	  window.sessionApi = sessionApi;
+	  window.commentApi = commentApi;
 	  window.moment = _moment2.default;
 	
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
@@ -52644,7 +52644,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.removeComment = exports.receiveComments = exports.receiveComment = exports.fetchComments = exports.REMOVE_COMMENT = exports.RECEIVE_COMMENT = exports.RECEIVE_COMMENTS = undefined;
+	exports.removeComment = exports.receiveComments = exports.receiveComment = exports.createComment = exports.fetchComments = exports.REMOVE_COMMENT = exports.RECEIVE_COMMENT = exports.RECEIVE_COMMENTS = undefined;
 	
 	var _comment_api_util = __webpack_require__(409);
 	
@@ -52667,6 +52667,14 @@
 	      return dispatch(receiveComments(comments));
 	    }, function (err) {
 	      return alert(err);
+	    });
+	  };
+	};
+	
+	var createComment = exports.createComment = function createComment(comment, reminder_id) {
+	  return function (dispatch) {
+	    return util.createComment({ comment: comment, reminder_id: reminder_id }).then(function (comment) {
+	      dispatch(receiveComment(comment));
 	    });
 	  };
 	};

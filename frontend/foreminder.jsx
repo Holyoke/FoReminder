@@ -8,7 +8,7 @@ import Root from './components/root'
 
 //  testing
 import * as api from './util/reminder_api_util'
-import * as sessionApi from './util/session_api_util'
+import * as commentApi from './util/comment_api_util'
 import * as selectors from './reducers/selector.js'
 import * as reminderActions from './actions/reminder_actions'
 import * as commentActions from './actions/comment_actions'
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.store = store
   window.selectors = selectors
   window.api = api
-  window.sessionApi = sessionApi
+  window.commentApi = commentApi
   window.moment = moment
 
   ReactDOM.render(<Root store={store} />, root)

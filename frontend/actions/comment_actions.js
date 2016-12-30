@@ -16,6 +16,15 @@ export const fetchComments = (reminder_id) => {
   }
 }
 
+export const createComment = (comment, reminder_id) => {
+  return (dispatch) => {
+    return util.createComment({comment, reminder_id})
+               .then(comment => {
+                 dispatch(receiveComment(comment))
+               })
+  }
+}
+
 export const receiveComment = comment => ({
   type: RECEIVE_COMMENT,
   comment
