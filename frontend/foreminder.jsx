@@ -8,6 +8,7 @@ import Root from './components/root'
 
 //  testing
 import * as api from './util/reminder_api_util'
+import * as sessionApi from './util/session_api_util'
 import * as commentApi from './util/comment_api_util'
 import * as selectors from './reducers/selector.js'
 import * as reminderActions from './actions/reminder_actions'

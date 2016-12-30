@@ -70,6 +70,10 @@
 	
 	var api = _interopRequireWildcard(_reminder_api_util);
 	
+	var _session_api_util = __webpack_require__(204);
+	
+	var sessionApi = _interopRequireWildcard(_session_api_util);
+	
 	var _comment_api_util = __webpack_require__(409);
 	
 	var commentApi = _interopRequireWildcard(_comment_api_util);
@@ -102,7 +106,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	//  testing
+	// components
 	document.addEventListener('DOMContentLoaded', function () {
 	  var root = document.getElementById('root');
 	  var preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {};
@@ -139,7 +143,7 @@
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 	});
 	
-	// components
+	//  testing
 
 /***/ },
 /* 1 */
