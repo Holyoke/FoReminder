@@ -6,6 +6,11 @@ import CommentForm from './comment_form'
 
 class CommentList extends React.Component {
 
+  componentDidMount () {
+    const { fetchComments, reminder_id } = this.props
+    fetchComments(reminder_id)
+  }
+
   render () {
     const { reminder_id, comments, receiveComment } = this.props
 

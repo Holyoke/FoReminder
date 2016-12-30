@@ -65925,6 +65925,9 @@
 	  return {
 	    receiveComment: function receiveComment(comment) {
 	      return dispatch((0, _comment_actions.receiveComment)(comment));
+	    },
+	    fetchComments: function fetchComments(id) {
+	      return dispatch((0, _comment_actions.fetchComments)(id));
 	    }
 	  };
 	};
@@ -65976,12 +65979,21 @@
 	  }
 	
 	  _createClass(CommentList, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _props = this.props,
+	          fetchComments = _props.fetchComments,
+	          reminder_id = _props.reminder_id;
+	
+	      fetchComments(reminder_id);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props = this.props,
-	          reminder_id = _props.reminder_id,
-	          comments = _props.comments,
-	          receiveComment = _props.receiveComment;
+	      var _props2 = this.props,
+	          reminder_id = _props2.reminder_id,
+	          comments = _props2.comments,
+	          receiveComment = _props2.receiveComment;
 	
 	
 	      var commentItems = comments.map(function (comment) {
