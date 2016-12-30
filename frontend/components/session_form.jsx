@@ -1,7 +1,7 @@
 import React from 'react'
 
 // components
-import ErrorsList from './reminder_list/errors_list'
+import ErrorsList from './errors_list/errors_list'
 
 class SessionForm extends React.Component {
   constructor (props) {
