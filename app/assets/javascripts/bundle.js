@@ -61191,7 +61191,7 @@
 /* 581 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -61209,15 +61209,15 @@
 	
 	  var errorItems = errors.map(function (error, idx) {
 	    return _react2.default.createElement(
-	      "li",
-	      { key: idx },
+	      'li',
+	      { style: { color: 'red' }, key: idx },
 	      error
 	    );
 	  });
 	
 	  return _react2.default.createElement(
-	    "ul",
-	    { className: "error-list" },
+	    'ul',
+	    { className: 'error-list' },
 	    errorItems
 	  );
 	};
@@ -61748,6 +61748,10 @@
 	
 	var _ListGroupItem2 = _interopRequireDefault(_ListGroupItem);
 	
+	var _Button = __webpack_require__(481);
+	
+	var _Button2 = _interopRequireDefault(_Button);
+	
 	__webpack_require__(591);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -61827,39 +61831,34 @@
 	        _react2.default.createElement(
 	          'form',
 	          { className: 'reminder-form', onSubmit: this.handleSubmit },
+	          _react2.default.createElement(_Button2.default, { onClick: this.handleSubmit, className: 'glyphicon glyphicon-plus-sign' }),
 	          _react2.default.createElement(_errors_list2.default, { errors: this.props.errors }),
 	          _react2.default.createElement(
 	            'label',
 	            null,
-	            'Title:',
 	            _react2.default.createElement('input', {
 	              className: 'input',
 	              ref: 'title',
 	              value: this.state.title,
-	              placeholder: 'Please enter a reminder...',
+	              placeholder: 'Anything on your mind?...',
 	              onChange: this.update('title')
 	            })
 	          ),
 	          _react2.default.createElement(
 	            'label',
 	            null,
-	            'Body:',
 	            _react2.default.createElement('input', {
 	              className: 'input',
 	              ref: 'title',
 	              value: this.state.body,
-	              placeholder: '...',
+	              placeholder: 'Add a description...',
 	              onChange: this.update('body')
 	            })
 	          ),
 	          _react2.default.createElement(_reactDatepicker2.default, {
 	            selected: this.state.remind_date,
 	            onChange: this.handleDataChange }),
-	          _react2.default.createElement(
-	            'button',
-	            { className: 'create-button' },
-	            'Create reminder!'
-	          )
+	          _react2.default.createElement('button', { style: { visibility: 'hidden' } })
 	        )
 	      );
 	    }
