@@ -12,7 +12,7 @@ class CommentList extends React.Component {
   }
 
   render () {
-    const { reminder_id, comments, receiveComment } = this.props
+    const { reminder_id, comments, createComment } = this.props
 
     const commentItems = comments.map(comment => {
       return (
@@ -26,7 +26,7 @@ class CommentList extends React.Component {
     return (
       <div className="comment-list">
         <h4>Comment List for reminder id:{reminder_id}</h4>
-        <CommentForm reminder_id={reminder_id} receiveComment={receiveComment} />
+        <CommentForm reminder_id={reminder_id} createComment={createComment} />
         <ul>{commentItems}</ul>
       </div>
     )

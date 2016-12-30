@@ -65929,13 +65929,14 @@
 	// selectors
 	
 	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref2) {
+	  var reminder_id = _ref2.reminder_id;
 	  return {
-	    receiveComment: function receiveComment(comment) {
-	      return dispatch((0, _comment_actions.receiveComment)(comment));
+	    createComment: function createComment(comment) {
+	      return dispatch((0, _comment_actions.createComment)(comment, reminder_id));
 	    },
-	    fetchComments: function fetchComments(id) {
-	      return dispatch((0, _comment_actions.fetchComments)(id));
+	    fetchComments: function fetchComments() {
+	      return dispatch((0, _comment_actions.fetchComments)(reminder_id));
 	    }
 	  };
 	};
@@ -66001,7 +66002,7 @@
 	      var _props2 = this.props,
 	          reminder_id = _props2.reminder_id,
 	          comments = _props2.comments,
-	          receiveComment = _props2.receiveComment;
+	          createComment = _props2.createComment;
 	
 	
 	      var commentItems = comments.map(function (comment) {
@@ -66020,7 +66021,7 @@
 	          'Comment List for reminder id:',
 	          reminder_id
 	        ),
-	        _react2.default.createElement(_comment_form2.default, { reminder_id: reminder_id, receiveComment: receiveComment }),
+	        _react2.default.createElement(_comment_form2.default, { reminder_id: reminder_id, createComment: createComment }),
 	        _react2.default.createElement(
 	          'ul',
 	          null,
@@ -66222,12 +66223,13 @@
 	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(e) {
+	      var _this3 = this;
+	
 	      e.preventDefault();
 	      var comment = Object.assign({}, this.state, { id: (0, _id_generator2.default)() });
 	
-	      this.props.receiveComment(comment);
-	      this.setState({
-	        body: ''
+	      this.props.createComment(comment).then(function () {
+	        _this3.setState({ body: '' });
 	      });
 	    }
 	  }, {

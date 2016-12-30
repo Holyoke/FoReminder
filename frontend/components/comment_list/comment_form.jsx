@@ -20,10 +20,9 @@ class CommentForm extends React.Component {
     e.preventDefault()
     const comment = Object.assign({}, this.state, {id: uniqueId() })
 
-    this.props.receiveComment(comment)
-    this.setState({
-      body: ''
-    })
+    this.props.createComment(comment).then(
+      () => { this.setState({ body:'' }) }
+    )
   }
 
   render () {
