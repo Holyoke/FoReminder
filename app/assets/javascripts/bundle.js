@@ -61268,6 +61268,8 @@
 	  switch (errors.statusText) {
 	    case 'Unauthorized':
 	      return errors.responseJSON.errors;
+	    case 'Unprocessable Entity':
+	      return errors.responseJSON;
 	    case 'error':
 	      return errors.responseJSON;
 	  }
@@ -61434,9 +61436,9 @@
 	          null,
 	          'Reminders'
 	        ),
-	        _react2.default.createElement(_reminder_form2.default, { createReminder: createReminder, errors: errors }),
 	        reminderItems,
-	        reminderModal
+	        reminderModal,
+	        _react2.default.createElement(_reminder_form2.default, { createReminder: createReminder, errors: errors })
 	      );
 	    }
 	  }]);
@@ -61465,6 +61467,10 @@
 	var _merge = __webpack_require__(322);
 	
 	var _merge2 = _interopRequireDefault(_merge);
+	
+	var _moment = __webpack_require__(211);
+	
+	var _moment2 = _interopRequireDefault(_moment);
 	
 	var _ListGroupItem = __webpack_require__(586);
 	
@@ -61523,9 +61529,11 @@
 	          reminder = _props2.reminder,
 	          selectReminder = _props2.selectReminder;
 	      var title = reminder.title,
-	          done = reminder.done;
+	          done = reminder.done,
+	          remind_date = reminder.remind_date;
 	
-	      var glyph = done ? "glyphicon glyphicon-check" : "glyphicon glyphicon-unchecked";
+	      remind_date = (0, _moment2.default)(remind_date).format('MM/DD');
+	      var glyph = done ? 'glyphicon glyphicon-check' : 'glyphicon glyphicon-unchecked';
 	      var toggleButton = _react2.default.createElement(
 	        _Button2.default,
 	        { onClick: this.toggleDone },
@@ -61537,17 +61545,17 @@
 	        { className: 'reminder-list-item' },
 	        toggleButton,
 	        _react2.default.createElement(
-	          'h4',
+	          'span',
 	          { onClick: function onClick() {
 	              return selectReminder(reminder);
 	            } },
-	          title
+	          title,
+	          ' | '
 	        ),
 	        _react2.default.createElement(
-	          'section',
+	          'span',
 	          null,
-	          'Done: ',
-	          done.toString()
+	          remind_date
 	        )
 	      );
 	    }
@@ -61736,6 +61744,10 @@
 	
 	var _errors_list2 = _interopRequireDefault(_errors_list);
 	
+	var _ListGroupItem = __webpack_require__(586);
+	
+	var _ListGroupItem2 = _interopRequireDefault(_ListGroupItem);
+	
 	__webpack_require__(591);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -61810,40 +61822,44 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'form',
-	        { className: 'reminder-form', onSubmit: this.handleSubmit },
-	        _react2.default.createElement(_errors_list2.default, { errors: this.props.errors }),
+	        _ListGroupItem2.default,
+	        null,
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Title:',
-	          _react2.default.createElement('input', {
-	            className: 'input',
-	            ref: 'title',
-	            value: this.state.title,
-	            placeholder: 'Please enter a reminder...',
-	            onChange: this.update('title')
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Body:',
-	          _react2.default.createElement('input', {
-	            className: 'input',
-	            ref: 'title',
-	            value: this.state.body,
-	            placeholder: '...',
-	            onChange: this.update('body')
-	          })
-	        ),
-	        _react2.default.createElement(_reactDatepicker2.default, {
-	          selected: this.state.remind_date,
-	          onChange: this.handleDataChange }),
-	        _react2.default.createElement(
-	          'button',
-	          { className: 'create-button' },
-	          'Create reminder!'
+	          'form',
+	          { className: 'reminder-form', onSubmit: this.handleSubmit },
+	          _react2.default.createElement(_errors_list2.default, { errors: this.props.errors }),
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Title:',
+	            _react2.default.createElement('input', {
+	              className: 'input',
+	              ref: 'title',
+	              value: this.state.title,
+	              placeholder: 'Please enter a reminder...',
+	              onChange: this.update('title')
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Body:',
+	            _react2.default.createElement('input', {
+	              className: 'input',
+	              ref: 'title',
+	              value: this.state.body,
+	              placeholder: '...',
+	              onChange: this.update('body')
+	            })
+	          ),
+	          _react2.default.createElement(_reactDatepicker2.default, {
+	            selected: this.state.remind_date,
+	            onChange: this.handleDataChange }),
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'create-button' },
+	            'Create reminder!'
+	          )
 	        )
 	      );
 	    }

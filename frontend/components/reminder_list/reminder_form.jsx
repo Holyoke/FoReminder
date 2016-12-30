@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker'
 
 // components
 import ErrorsList from './errors_list'
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -52,34 +53,36 @@ class ReminderForm extends React.Component {
 
   render () {
     return (
-      <form className="reminder-form" onSubmit={this.handleSubmit}>
-        <ErrorsList errors={this.props.errors} />
-        <label>Title:
-          <input
-            className="input"
-            ref="title"
-            value={this.state.title}
-            placeholder="Please enter a reminder..."
-            onChange={this.update('title')}
-             />
-        </label>
+      <ListGroupItem>
+        <form className="reminder-form" onSubmit={this.handleSubmit}>
+          <ErrorsList errors={this.props.errors} />
+          <label>Title:
+            <input
+              className="input"
+              ref="title"
+              value={this.state.title}
+              placeholder="Please enter a reminder..."
+              onChange={this.update('title')}
+               />
+          </label>
 
-        <label>Body:
-          <input
-            className="input"
-            ref="title"
-            value={this.state.body}
-            placeholder="..."
-            onChange={this.update('body')}
-             />
-        </label>
+          <label>Body:
+            <input
+              className="input"
+              ref="title"
+              value={this.state.body}
+              placeholder="..."
+              onChange={this.update('body')}
+               />
+          </label>
 
-        <DatePicker
-          selected={this.state.remind_date}
-          onChange={this.handleDataChange} />
+          <DatePicker
+            selected={this.state.remind_date}
+            onChange={this.handleDataChange} />
 
-        <button className="create-button">Create reminder!</button>
-      </form>
+          <button className="create-button">Create reminder!</button>
+        </form>
+      </ListGroupItem>
     )
   }
 }

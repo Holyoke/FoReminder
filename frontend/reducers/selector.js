@@ -24,6 +24,8 @@ export const parseErrors = ({ errors }) => {
   switch (errors.statusText) {
     case 'Unauthorized':
       return errors.responseJSON.errors
+    case 'Unprocessable Entity':
+      return errors.responseJSON
     case 'error':
       return errors.responseJSON
   }
