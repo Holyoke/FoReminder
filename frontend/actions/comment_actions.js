@@ -25,6 +25,14 @@ export const createComment = (comment, reminder_id) => {
   }
 }
 
+export const deleteComment = (comment, reminder_id) => {
+  return (dispatch) => {
+    return util.deleteComment({comment, reminder_id})
+               .then(comment => { dispatch(removeComment(comment)) })
+  }
+}
+
+// sync
 export const receiveComment = comment => ({
   type: RECEIVE_COMMENT,
   comment

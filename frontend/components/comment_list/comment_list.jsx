@@ -12,14 +12,14 @@ class CommentList extends React.Component {
   }
 
   render () {
-    const { reminder_id, comments, createComment } = this.props
+    const { reminder_id, comments, createComment, deleteComment } = this.props
 
     const commentItems = comments.map(comment => {
       return (
         <CommentListItemContainer
           key={`comment-list-item${comment.id}`}
           comment={comment}
-        />
+          reminder_id={reminder_id} />
       )
     })
 

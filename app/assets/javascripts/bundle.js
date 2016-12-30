@@ -52644,7 +52644,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.removeComment = exports.receiveComments = exports.receiveComment = exports.createComment = exports.fetchComments = exports.REMOVE_COMMENT = exports.RECEIVE_COMMENT = exports.RECEIVE_COMMENTS = undefined;
+	exports.removeComment = exports.receiveComments = exports.receiveComment = exports.deleteComment = exports.createComment = exports.fetchComments = exports.REMOVE_COMMENT = exports.RECEIVE_COMMENT = exports.RECEIVE_COMMENTS = undefined;
 	
 	var _comment_api_util = __webpack_require__(409);
 	
@@ -52679,6 +52679,15 @@
 	  };
 	};
 	
+	var deleteComment = exports.deleteComment = function deleteComment(comment, reminder_id) {
+	  return function (dispatch) {
+	    return util.deleteComment({ comment: comment, reminder_id: reminder_id }).then(function (comment) {
+	      dispatch(removeComment(comment));
+	    });
+	  };
+	};
+	
+	// sync
 	var receiveComment = exports.receiveComment = function receiveComment(comment) {
 	  return {
 	    type: RECEIVE_COMMENT,
@@ -66002,14 +66011,15 @@
 	      var _props2 = this.props,
 	          reminder_id = _props2.reminder_id,
 	          comments = _props2.comments,
-	          createComment = _props2.createComment;
+	          createComment = _props2.createComment,
+	          deleteComment = _props2.deleteComment;
 	
 	
 	      var commentItems = comments.map(function (comment) {
 	        return _react2.default.createElement(_comment_list_item_container2.default, {
 	          key: 'comment-list-item' + comment.id,
-	          comment: comment
-	        });
+	          comment: comment,
+	          reminder_id: reminder_id });
 	      });
 	
 	      return _react2.default.createElement(
@@ -66069,10 +66079,11 @@
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref2) {
-	  var comment = _ref2.comment;
+	  var comment = _ref2.comment,
+	      reminder_id = _ref2.reminder_id;
 	  return {
-	    removeComment: function removeComment() {
-	      return dispatch((0, _comment_actions.removeComment)(comment));
+	    deleteComment: function deleteComment() {
+	      dispatch((0, _comment_actions.deleteComment)(comment, reminder_id));
 	    }
 	  };
 	};
@@ -66127,7 +66138,7 @@
 	    value: function render() {
 	      var _props = this.props,
 	          comment = _props.comment,
-	          removeComment = _props.removeComment;
+	          deleteComment = _props.deleteComment;
 	      var body = comment.body;
 	      var active = this.state.active;
 	
@@ -66152,7 +66163,7 @@
 	        ),
 	        _react2.default.createElement(
 	          "button",
-	          { onClick: removeComment },
+	          { onClick: deleteComment },
 	          "Remove Comment"
 	        )
 	      );
