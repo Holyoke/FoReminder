@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 
 // components
 import Modal from 'react-bootstrap/lib/Modal'
@@ -20,16 +21,30 @@ class ReminderDetailView extends React.Component {
   }
 
   render () {
-    const { reminder, deleteReminder, show } = this.props
-    const { body, remind_date, title } = reminder
+    const { reminder, deleteReminder, show, toggleModal } = this.props
     const reminder_id = reminder.id
+    let { body, remind_date, title } = reminder
+    remind_date = moment(remind_date).format('MM/DD/YY')
+
     return (
       <Modal className='reminder-detail-view' show={show} onHide={this.props.onHide} >
-        <h1>{title}</h1>
-        <section>{body}</section>
-        <section>{remind_date}</section>
-        <CommentListContainer reminder_id={reminder_id} />
-        <Button bsStyle="warning" bsSize="xsmall" onClick={this.handleDeleteClick}>Delete reminder</Button>
+        <Modal.Header className='reminder-modal-header'>
+          <Modal.Title>{title}</Modal.Title>
+          <section>Due {remind_date}</section>
+          <Button bsStyle="warning" bsSize="xsmall" onClick={this.handleDeleteClick}>Delete</Button>
+        </Modal.Header>
+
+        <Modal.Body>
+          <section>{body}</section>
+          <Modal.Header>
+            <CommentListContainer reminder_id={reminder_id} />
+          </Modal.Header>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button onClick={toggleModal}>Close</Button>
+        </Modal.Footer>
+
       </Modal>
     )
   }
