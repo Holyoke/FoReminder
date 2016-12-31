@@ -61320,19 +61320,43 @@
 	  });
 	};
 	
-	var getVisibleReminders = exports.getVisibleReminders = function getVisibleReminders(_ref) {
-	  var reminders = _ref.reminders;
-	  var filter = reminders.filter;
+	var completedReminders = exports.completedReminders = function completedReminders(reminders) {
+	  var result = [];
+	  for (var id in reminders) {
+	    if (reminders[id].done === true) {
+	      result.push(reminders[id]);
+	    }
+	  }
+	  return result;
+	};
 	
-	  var arrayReminders = allReminders(reminders);
+	var incompleteReminders = exports.incompleteReminders = function incompleteReminders(reminders) {
+	  var result = [];
+	  for (var id in reminders) {
+	    if (reminders[id].done === false) {
+	      result.push(reminders[id]);
+	    }
+	  }
+	  return result;
+	};
+	
+	var getVisibleReminders = exports.getVisibleReminders = function getVisibleReminders(_ref) {
+	  var reminders = _ref.reminders,
+	      remindersFilter = _ref.remindersFilter;
+	  var filter = remindersFilter.filter;
+	
 	
 	  switch (filter) {
 	    case 'SHOW_ALL':
-	      return arrayReminders;
+	      return allReminders(reminders);
 	    case 'SHOW_COMPLETED':
-	      debugger;
+	      return completedReminders(reminders);
+	    case 'SHOW_INCOMPLETE':
+	      return incompleteReminders(reminders);
+	    case 'SHOW_NONE':
+	      return [];
 	    default:
-	      return arrayReminders;
+	      return allReminders(reminders);
 	  }
 	};
 	

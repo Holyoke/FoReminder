@@ -1,17 +1,36 @@
 //  reminders
 export const allReminders = (reminders) => Object.keys(reminders).map(id => reminders[id])
 
-export const getVisibleReminders = ({reminders}) => {
-  const { filter } = reminders
-  let arrayReminders = allReminders(reminders)
+export const completedReminders = (reminders) => {
+    let result = []
+    for (let id in reminders) {
+        if (reminders[id].done === true) { result.push(reminders[id]) }
+    }
+    return result
+}
+
+export const incompleteReminders = (reminders) => {
+    let result = []
+    for (let id in reminders) {
+        if (reminders[id].done === false) { result.push(reminders[id]) }
+    }
+    return result
+}
+
+export const getVisibleReminders = ({reminders, remindersFilter}) => {
+  const { filter } = remindersFilter
 
   switch (filter) {
     case 'SHOW_ALL':
-      return arrayReminders
+      return allReminders(reminders)
     case 'SHOW_COMPLETED':
-      debugger
+      return completedReminders(reminders)
+    case 'SHOW_INCOMPLETE':
+      return incompleteReminders(reminders)
+    case 'SHOW_NONE':
+      return []
     default:
-      return arrayReminders
+      return allReminders(reminders)
   }
 }
 
