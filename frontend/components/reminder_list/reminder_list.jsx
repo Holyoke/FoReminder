@@ -5,6 +5,7 @@ import ReminderListItem from './reminder_list_item'
 import ReminderForm from './reminder_form'
 import ListGroup from 'react-bootstrap/lib/ListGroup'
 import ReminderDetailViewContainer from './reminder_detail_view_container'
+import ReminderFiltersContainer from '../filter_button_group/reminder_filters_container'
 
 class ReminderList extends React.Component {
 
@@ -52,6 +53,7 @@ class ReminderList extends React.Component {
     return (
       <ListGroup className="reminder-list" onClick={this.debug}>
         <h2>Reminders</h2>
+        <ReminderFiltersContainer />
         {reminderItems}
         {reminderModal}
         <ReminderForm createReminder={createReminder} errors={errors} />
