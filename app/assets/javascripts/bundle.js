@@ -66457,8 +66457,9 @@
 	
 	var mapStateToProps = function mapStateToProps(_ref) {
 	  var reminderFilter = _ref.reminderFilter;
-	
-	  reminderFilter;
+	  return {
+	    reminderFilter: reminderFilter
+	  };
 	};
 	
 	// actions
@@ -66466,7 +66467,7 @@
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    clearErrors: function clearErrors(filter) {
+	    receiveFilter: function receiveFilter(filter) {
 	      return dispatch((0, _reminder_actions.receiveFilter)(filter));
 	    }
 	  };
@@ -66483,7 +66484,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ReminderFilters = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
 	
@@ -66499,20 +66501,55 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var ReminderFilters = exports.ReminderFilters = function ReminderFilters(_ref) {
-	  var receiveFilter = _ref.receiveFilter;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	  return _react2.default.createElement(
-	    _ButtonGroup2.default,
-	    null,
-	    _react2.default.createElement(
-	      _Button2.default,
-	      null,
-	      'Test'
-	    )
-	  );
-	};
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ReminderFilters = function (_React$Component) {
+	  _inherits(ReminderFilters, _React$Component);
+	
+	  function ReminderFilters() {
+	    _classCallCheck(this, ReminderFilters);
+	
+	    return _possibleConstructorReturn(this, (ReminderFilters.__proto__ || Object.getPrototypeOf(ReminderFilters)).apply(this, arguments));
+	  }
+	
+	  _createClass(ReminderFilters, [{
+	    key: 'updateFilter',
+	    value: function updateFilter(e) {
+	      var filter = e.target.dataset.filter;
+	
+	      this.props.receiveFilter(filter);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _ButtonGroup2.default,
+	        null,
+	        _react2.default.createElement(
+	          _Button2.default,
+	          { 'data-filter': 'SHOW_ALL', onClick: this.updateFilter.bind(this) },
+	          'All'
+	        ),
+	        _react2.default.createElement(
+	          _Button2.default,
+	          { 'data-filter': 'SHOW_COMPLETED', onClick: this.updateFilter.bind(this) },
+	          'Complete'
+	        ),
+	        _react2.default.createElement(
+	          _Button2.default,
+	          { 'data-filter': 'SHOW_INCOMPLETE', onClick: this.updateFilter.bind(this) },
+	          'Incomplete'
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return ReminderFilters;
+	}(_react2.default.Component);
 	
 	exports.default = ReminderFilters;
 

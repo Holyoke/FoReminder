@@ -4,12 +4,12 @@ import ReminderFilters from './reminder_filters'
 // actions
 import { receiveFilter } from '../../actions/reminder_actions'
 
-const mapStateToProps = ({reminderFilter}) => {
+const mapStateToProps = ({reminderFilter}) => ({
   reminderFilter
-}
+})
 
 const mapDispatchToProps = (dispatch) => ({
-  clearErrors: (filter) => dispatch(receiveFilter(filter))
+  receiveFilter: (filter) => dispatch(receiveFilter(filter))
 })
 
 export default connect(
