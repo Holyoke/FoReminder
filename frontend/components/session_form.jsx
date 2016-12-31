@@ -1,7 +1,7 @@
 import React from 'react'
 
 // components
-import ErrorsList from './errors_list/errors_list'
+import ErrorsListContainer from './errors_list/errors_list_container'
 
 class SessionForm extends React.Component {
   constructor (props) {
@@ -41,7 +41,7 @@ class SessionForm extends React.Component {
 
     return (
       <form className="session-form" onSubmit={this.handleSubmit}>
-        <ErrorsList errors={this.props.errors} />
+        <ErrorsListContainer />
         <label>Email:
           <input
             className="input"

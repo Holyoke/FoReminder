@@ -61070,9 +61070,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _errors_list = __webpack_require__(648);
+	var _errors_list_container = __webpack_require__(649);
 	
-	var _errors_list2 = _interopRequireDefault(_errors_list);
+	var _errors_list_container2 = _interopRequireDefault(_errors_list_container);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -61151,7 +61151,7 @@
 	      return _react2.default.createElement(
 	        'form',
 	        { className: 'session-form', onSubmit: this.handleSubmit },
-	        _react2.default.createElement(_errors_list2.default, { errors: this.props.errors }),
+	        _react2.default.createElement(_errors_list_container2.default, null),
 	        _react2.default.createElement(
 	          'label',
 	          null,
@@ -61793,7 +61793,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
-	        { onClick: this.resetForm },
+	        null,
 	        _react2.default.createElement(
 	          'form',
 	          { className: 'reminder-form', onSubmit: this.handleSubmit },
@@ -61824,7 +61824,7 @@
 	          _react2.default.createElement(_reactDatepicker2.default, {
 	            selected: this.state.remind_date,
 	            onChange: this.handleDataChange }),
-	          _react2.default.createElement(_Button2.default, { style: { visibility: 'hidden' } })
+	          _react2.default.createElement('button', { style: { visibility: 'hidden' } })
 	        )
 	      );
 	    }
@@ -66238,7 +66238,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var ErrorsList = exports.ErrorsList = function ErrorsList(_ref) {
-	  var errors = _ref.errors;
+	  var clearErrors = _ref.clearErrors,
+	      errors = _ref.errors;
 	
 	  var errorItems = errors.map(function (error, idx) {
 	    return _react2.default.createElement(
@@ -66250,7 +66251,9 @@
 	
 	  return _react2.default.createElement(
 	    'ul',
-	    { className: 'error-list' },
+	    { onClick: function onClick() {
+	        return clearErrors();
+	      }, className: 'error-list' },
 	    errorItems
 	  );
 	};
@@ -66290,7 +66293,11 @@
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {};
+	  return {
+	    clearErrors: function clearErrors() {
+	      return dispatch((0, _error_actions.clearErrors)());
+	    }
+	  };
 	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_errors_list2.default);

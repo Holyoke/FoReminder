@@ -56,7 +56,7 @@ class ReminderForm extends React.Component {
 
   render () {
     return (
-      <ListGroupItem onClick={this.resetForm}>
+      <ListGroupItem >
         <form className="reminder-form" onSubmit={this.handleSubmit}>
           <Button onClick={this.handleSubmit} className="glyphicon glyphicon-plus-sign"></Button>
           <ErrorsListContainer />
@@ -84,7 +84,7 @@ class ReminderForm extends React.Component {
             selected={this.state.remind_date}
             onChange={this.handleDataChange} />
 
-          <Button style={{visibility: 'hidden'}}></Button>
+          <button style={{visibility: 'hidden'}}></button>
 
         </form>
       </ListGroupItem>

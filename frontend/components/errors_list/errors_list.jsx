@@ -1,10 +1,10 @@
 import React from 'react'
 
-export const ErrorsList = ({errors}) => {
+export const ErrorsList = ({clearErrors, errors}) => {
   const errorItems = errors.map((error, idx) => <li style={{color: 'red'}} key={idx}>{error}</li>)
-
+  
   return (
-    <ul className="error-list">
+    <ul onClick={() => clearErrors()} className="error-list">
       {errorItems}
     </ul>
   )

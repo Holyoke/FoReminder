@@ -5,14 +5,14 @@ import ErrorsList from './errors_list'
 import { clearErrors } from '../../actions/error_actions'
 
 // selectors
-import { allReminders, parseErrors } from '../../reducers/selector'
+import { parseErrors } from '../../reducers/selector'
 
 const mapStateToProps = state => ({
   errors: parseErrors(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+  clearErrors: () => dispatch(clearErrors())
 })
 
 export default connect(
