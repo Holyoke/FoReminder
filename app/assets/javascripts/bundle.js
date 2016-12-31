@@ -22616,6 +22616,10 @@
 	
 	var _reminders_reducer2 = _interopRequireDefault(_reminders_reducer);
 	
+	var _reminders_filter_reducer = __webpack_require__(649);
+	
+	var _reminders_filter_reducer2 = _interopRequireDefault(_reminders_filter_reducer);
+	
 	var _comments_reducer = __webpack_require__(407);
 	
 	var _comments_reducer2 = _interopRequireDefault(_comments_reducer);
@@ -22633,6 +22637,7 @@
 	var RootReducer = (0, _redux.combineReducers)({
 	  session: _session_reducer2.default,
 	  reminders: _reminders_reducer2.default,
+	  remindersFilter: _reminders_filter_reducer2.default,
 	  comments: _comments_reducer2.default,
 	  errors: _errors_reducer2.default
 	});
@@ -22677,8 +22682,7 @@
 	    body: "#2 dog is dirty",
 	    done: true,
 	    remind_date: (0, _moment2.default)().add(24, 'hours').format('LLL')
-	  },
-	  "filter": 'SHOW_ALL'
+	  }
 	};
 	
 	var remindersReducer = function remindersReducer() {
@@ -22700,9 +22704,6 @@
 	    case _reminder_actions.REMOVE_REMINDER:
 	      newState = (0, _merge2.default)({}, state);
 	      delete newState[action.reminder.id];
-	      return newState;
-	    case _reminder_actions.RECEIVE_FILTER:
-	      newState = (0, _merge2.default)({}, state, { filter: action.filter });
 	      return newState;
 	    default:
 	      return state;
@@ -61323,12 +61324,15 @@
 	  var reminders = _ref.reminders;
 	  var filter = reminders.filter;
 	
+	  var arrayReminders = allReminders(reminders);
 	
 	  switch (filter) {
 	    case 'SHOW_ALL':
-	      return allReminders(reminders);
+	      return arrayReminders;
+	    case 'SHOW_COMPLETED':
+	      debugger;
 	    default:
-	      return allReminders(reminders);
+	      return arrayReminders;
 	  }
 	};
 	
@@ -66339,6 +66343,43 @@
 	}(_react2.default.Component);
 	
 	exports.default = CommentForm;
+
+/***/ },
+/* 649 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reminder_actions = __webpack_require__(202);
+	
+	var _merge = __webpack_require__(322);
+	
+	var _merge2 = _interopRequireDefault(_merge);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var initialState = { filter: 'SHOW_ALL' };
+	
+	var remindersFilterReducer = function remindersFilterReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	  var action = arguments[1];
+	
+	  Object.freeze(state);
+	  var newState = {};
+	
+	  switch (action.type) {
+	    case _reminder_actions.RECEIVE_FILTER:
+	      return newState, state, { filter: action.filter };
+	    default:
+	      return (0, _merge2.default)({}, state);
+	  }
+	};
+	
+	exports.default = remindersFilterReducer;
 
 /***/ }
 /******/ ]);

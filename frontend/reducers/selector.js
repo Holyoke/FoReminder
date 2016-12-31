@@ -3,12 +3,15 @@ export const allReminders = (reminders) => Object.keys(reminders).map(id => remi
 
 export const getVisibleReminders = ({reminders}) => {
   const { filter } = reminders
+  let arrayReminders = allReminders(reminders)
 
   switch (filter) {
     case 'SHOW_ALL':
-      return allReminders(reminders)
+      return arrayReminders
+    case 'SHOW_COMPLETED':
+      debugger
     default:
-      return allReminders(reminders)
+      return arrayReminders
   }
 }
 
