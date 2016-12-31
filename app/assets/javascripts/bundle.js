@@ -66456,9 +66456,9 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(_ref) {
-	  var reminderFilter = _ref.reminderFilter;
+	  var remindersFilter = _ref.remindersFilter;
 	  return {
-	    reminderFilter: reminderFilter
+	    remindersFilter: remindersFilter
 	  };
 	};
 	
@@ -66491,6 +66491,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _ButtonToolBar = __webpack_require__(680);
+	
+	var _ButtonToolBar2 = _interopRequireDefault(_ButtonToolBar);
+	
 	var _ButtonGroup = __webpack_require__(678);
 	
 	var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
@@ -66510,10 +66514,14 @@
 	var ReminderFilters = function (_React$Component) {
 	  _inherits(ReminderFilters, _React$Component);
 	
-	  function ReminderFilters() {
+	  function ReminderFilters(props) {
 	    _classCallCheck(this, ReminderFilters);
 	
-	    return _possibleConstructorReturn(this, (ReminderFilters.__proto__ || Object.getPrototypeOf(ReminderFilters)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (ReminderFilters.__proto__ || Object.getPrototypeOf(ReminderFilters)).call(this, props));
+	
+	    _this.updateFilter = _this.updateFilter.bind(_this);
+	    _this.buttonActive = _this.buttonActive.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(ReminderFilters, [{
@@ -66524,25 +66532,38 @@
 	      this.props.receiveFilter(filter);
 	    }
 	  }, {
+	    key: 'buttonActive',
+	    value: function buttonActive(e) {
+	      debugger;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var buttonActive = this.buttonActive,
+	          updateFilter = this.updateFilter;
+	      var filter = this.props.remindersFilter.filter;
+	
 	      return _react2.default.createElement(
-	        _ButtonGroup2.default,
+	        _ButtonToolBar2.default,
 	        null,
 	        _react2.default.createElement(
-	          _Button2.default,
-	          { 'data-filter': 'SHOW_ALL', onClick: this.updateFilter.bind(this) },
-	          'All'
-	        ),
-	        _react2.default.createElement(
-	          _Button2.default,
-	          { 'data-filter': 'SHOW_COMPLETED', onClick: this.updateFilter.bind(this) },
-	          'Complete'
-	        ),
-	        _react2.default.createElement(
-	          _Button2.default,
-	          { 'data-filter': 'SHOW_INCOMPLETE', onClick: this.updateFilter.bind(this) },
-	          'Incomplete'
+	          _ButtonGroup2.default,
+	          null,
+	          _react2.default.createElement(
+	            _Button2.default,
+	            { active: filter === 'SHOW_ALL', 'data-filter': 'SHOW_ALL', onClick: updateFilter },
+	            'All'
+	          ),
+	          _react2.default.createElement(
+	            _Button2.default,
+	            { active: filter === 'SHOW_COMPLETED', 'data-filter': 'SHOW_COMPLETED', onClick: updateFilter },
+	            'Complete'
+	          ),
+	          _react2.default.createElement(
+	            _Button2.default,
+	            { active: filter === 'SHOW_INCOMPLETE', 'data-filter': 'SHOW_INCOMPLETE', onClick: updateFilter },
+	            'Incomplete'
+	          )
 	        )
 	      );
 	    }
@@ -66704,6 +66725,81 @@
 	
 	  return (0, _createChainableTypeChecker2.default)(allPropTypes);
 	}
+
+/***/ },
+/* 680 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _extends2 = __webpack_require__(518);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _objectWithoutProperties2 = __webpack_require__(517);
+	
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+	
+	var _classCallCheck2 = __webpack_require__(525);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(526);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(562);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _classnames = __webpack_require__(570);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Button = __webpack_require__(481);
+	
+	var _Button2 = _interopRequireDefault(_Button);
+	
+	var _bootstrapUtils = __webpack_require__(573);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var ButtonToolbar = function (_React$Component) {
+	  (0, _inherits3['default'])(ButtonToolbar, _React$Component);
+	
+	  function ButtonToolbar() {
+	    (0, _classCallCheck3['default'])(this, ButtonToolbar);
+	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
+	  }
+	
+	  ButtonToolbar.prototype.render = function render() {
+	    var _props = this.props,
+	        className = _props.className,
+	        props = (0, _objectWithoutProperties3['default'])(_props, ['className']);
+	
+	    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(props),
+	        bsProps = _splitBsProps[0],
+	        elementProps = _splitBsProps[1];
+	
+	    var classes = (0, _bootstrapUtils.getClassSet)(bsProps);
+	
+	    return _react2['default'].createElement('div', (0, _extends3['default'])({}, elementProps, {
+	      role: 'toolbar',
+	      className: (0, _classnames2['default'])(className, classes)
+	    }));
+	  };
+	
+	  return ButtonToolbar;
+	}(_react2['default'].Component);
+	
+	exports['default'] = (0, _bootstrapUtils.bsClass)('btn-toolbar', (0, _bootstrapUtils.bsSizes)(_Button2['default'].SIZES, ButtonToolbar));
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);
