@@ -1,4 +1,16 @@
-export const allReminders = ({reminders}) => Object.keys(reminders).map(id => reminders[id])
+//  reminders
+export const allReminders = (reminders) => Object.keys(reminders).map(id => reminders[id])
+
+export const getVisibleReminders = ({reminders}) => {
+  const { filter } = reminders
+
+  switch (filter) {
+    case 'SHOW_ALL':
+      return allReminders(reminders)
+    default:
+      return allReminders(reminders)
+  }
+}
 
 export const commentsByReminderId = ({ comments }, reminder_id) => {
   const commentsByReminderId = []

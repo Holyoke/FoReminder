@@ -61312,11 +61312,24 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var allReminders = exports.allReminders = function allReminders(_ref) {
-	  var reminders = _ref.reminders;
+	//  reminders
+	var allReminders = exports.allReminders = function allReminders(reminders) {
 	  return Object.keys(reminders).map(function (id) {
 	    return reminders[id];
 	  });
+	};
+	
+	var getVisibleReminders = exports.getVisibleReminders = function getVisibleReminders(_ref) {
+	  var reminders = _ref.reminders;
+	  var filter = reminders.filter;
+	
+	
+	  switch (filter) {
+	    case 'SHOW_ALL':
+	      return allReminders(reminders);
+	    default:
+	      return allReminders(reminders);
+	  }
 	};
 	
 	var commentsByReminderId = exports.commentsByReminderId = function commentsByReminderId(_ref2, reminder_id) {
@@ -61381,7 +61394,7 @@
 	// actions
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    reminders: (0, _selector.allReminders)(state),
+	    reminders: (0, _selector.getVisibleReminders)(state),
 	    errors: (0, _selector.parseErrors)(state)
 	  };
 	};
