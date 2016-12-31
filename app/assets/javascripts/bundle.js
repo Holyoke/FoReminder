@@ -61504,13 +61504,15 @@
 	        _react2.default.createElement('span', { className: glyph, 'aria-hidden': 'true' })
 	      );
 	
+	      var itemTextStatus = done ? 'line-through' : '';
+	
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
 	        { className: 'reminder-list-item' },
 	        toggleButton,
 	        _react2.default.createElement(
 	          'span',
-	          { onClick: function onClick() {
+	          { style: { textDecoration: itemTextStatus }, onClick: function onClick() {
 	              return selectReminder(reminder);
 	            } },
 	          title,
@@ -61799,28 +61801,20 @@
 	          { className: 'reminder-form', onSubmit: this.handleSubmit },
 	          _react2.default.createElement(_Button2.default, { onClick: this.handleSubmit, className: 'glyphicon glyphicon-plus-sign' }),
 	          _react2.default.createElement(_errors_list_container2.default, null),
-	          _react2.default.createElement(
-	            'label',
-	            null,
-	            _react2.default.createElement('input', {
-	              className: 'input',
-	              ref: 'title',
-	              value: this.state.title,
-	              placeholder: 'Anything on your mind?...',
-	              onChange: this.update('title')
-	            })
-	          ),
-	          _react2.default.createElement(
-	            'label',
-	            null,
-	            _react2.default.createElement('input', {
-	              className: 'input',
-	              ref: 'title',
-	              value: this.state.body,
-	              placeholder: 'Add a description...',
-	              onChange: this.update('body')
-	            })
-	          ),
+	          _react2.default.createElement('input', {
+	            className: 'input',
+	            ref: 'title',
+	            value: this.state.title,
+	            placeholder: 'Anything on your mind?...',
+	            onChange: this.update('title')
+	          }),
+	          _react2.default.createElement('input', {
+	            className: 'input',
+	            ref: 'title',
+	            value: this.state.body,
+	            placeholder: 'Add a description...',
+	            onChange: this.update('body')
+	          }),
 	          _react2.default.createElement(_reactDatepicker2.default, {
 	            selected: this.state.remind_date,
 	            onChange: this.handleDataChange }),

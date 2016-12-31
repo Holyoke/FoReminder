@@ -37,10 +37,13 @@ class ReminderListItem extends React.Component {
         <span className={glyph} aria-hidden="true"></span>
       </Button>
 
+
+    const itemTextStatus = done ? 'line-through' : ''
+
     return (
       <ListGroupItem className="reminder-list-item">
           {toggleButton}
-          <span onClick={() => selectReminder(reminder)}>{title} | </span>
+          <span style={{textDecoration: itemTextStatus}} onClick={() => selectReminder(reminder)}>{title} | </span>
           <span>{remind_date}</span>
       </ListGroupItem>
     )

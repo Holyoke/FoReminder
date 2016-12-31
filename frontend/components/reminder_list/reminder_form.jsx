@@ -56,11 +56,10 @@ class ReminderForm extends React.Component {
 
   render () {
     return (
-      <ListGroupItem >
+      <ListGroupItem>
         <form className="reminder-form" onSubmit={this.handleSubmit}>
           <Button onClick={this.handleSubmit} className="glyphicon glyphicon-plus-sign"></Button>
           <ErrorsListContainer />
-          <label>
             <input
               className="input"
               ref="title"
@@ -68,9 +67,7 @@ class ReminderForm extends React.Component {
               placeholder="Anything on your mind?..."
               onChange={this.update('title')}
                />
-          </label>
 
-          <label>
             <input
               className="input"
               ref="title"
@@ -78,7 +75,6 @@ class ReminderForm extends React.Component {
               placeholder="Add a description..."
               onChange={this.update('body')}
                />
-          </label>
 
           <DatePicker
             selected={this.state.remind_date}
