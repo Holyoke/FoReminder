@@ -61091,9 +61091,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _errors_list = __webpack_require__(581);
+	var _errors_list_container = __webpack_require__(649);
 	
-	var _errors_list2 = _interopRequireDefault(_errors_list);
+	var _errors_list_container2 = _interopRequireDefault(_errors_list_container);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -61172,7 +61172,7 @@
 	      return _react2.default.createElement(
 	        'form',
 	        { className: 'session-form', onSubmit: this.handleSubmit },
-	        _react2.default.createElement(_errors_list2.default, { errors: this.props.errors }),
+	        _react2.default.createElement(_errors_list_container2.default, null),
 	        _react2.default.createElement(
 	          'label',
 	          null,
@@ -61209,43 +61209,7 @@
 	exports.default = SessionForm;
 
 /***/ },
-/* 581 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ErrorsList = undefined;
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ErrorsList = exports.ErrorsList = function ErrorsList(_ref) {
-	  var errors = _ref.errors;
-	
-	  var errorItems = errors.map(function (error, idx) {
-	    return _react2.default.createElement(
-	      "li",
-	      { key: idx },
-	      error
-	    );
-	  });
-	
-	  return _react2.default.createElement(
-	    "ul",
-	    { className: "error-list" },
-	    errorItems
-	  );
-	};
-	
-	exports.default = ErrorsList;
-
-/***/ },
+/* 581 */,
 /* 582 */
 /***/ function(module, exports) {
 
@@ -61289,6 +61253,8 @@
 	  switch (errors.statusText) {
 	    case 'Unauthorized':
 	      return errors.responseJSON.errors;
+	    case 'Unprocessable Entity':
+	      return errors.responseJSON;
 	    case 'error':
 	      return errors.responseJSON;
 	  }
@@ -61457,9 +61423,9 @@
 	          null,
 	          'Reminders'
 	        ),
-	        _react2.default.createElement(_reminder_form2.default, { createReminder: createReminder, errors: errors }),
 	        reminderItems,
-	        reminderModal
+	        reminderModal,
+	        _react2.default.createElement(_reminder_form2.default, { createReminder: createReminder, errors: errors })
 	      );
 	    }
 	  }]);
@@ -61488,6 +61454,10 @@
 	var _merge = __webpack_require__(322);
 	
 	var _merge2 = _interopRequireDefault(_merge);
+	
+	var _moment = __webpack_require__(211);
+	
+	var _moment2 = _interopRequireDefault(_moment);
 	
 	var _ListGroupItem = __webpack_require__(586);
 	
@@ -61546,30 +61516,36 @@
 	          reminder = _props2.reminder,
 	          selectReminder = _props2.selectReminder;
 	      var title = reminder.title,
-	          done = reminder.done;
+	          done = reminder.done,
+	          remind_date = reminder.remind_date;
 	
+	      remind_date = (0, _moment2.default)(remind_date).format('MM/DD');
+	      var glyph = done ? 'glyphicon glyphicon-check' : 'glyphicon glyphicon-unchecked';
 	      var toggleButton = _react2.default.createElement(
 	        _Button2.default,
 	        { onClick: this.toggleDone },
-	        done ? 'Undo' : 'Complete'
+	        _react2.default.createElement('span', { className: glyph, 'aria-hidden': 'true' })
 	      );
+	
+	      var itemTextStatus = done ? 'line-through' : '';
+	
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
 	        { className: 'reminder-list-item' },
+	        toggleButton,
 	        _react2.default.createElement(
-	          'h4',
-	          { onClick: function onClick() {
+	          'span',
+	          { style: { textDecoration: itemTextStatus }, onClick: function onClick() {
 	              return selectReminder(reminder);
 	            } },
-	          title
+	          title,
+	          ' | '
 	        ),
 	        _react2.default.createElement(
-	          'section',
+	          'span',
 	          null,
-	          'Done: ',
-	          done.toString()
-	        ),
-	        toggleButton
+	          remind_date
+	        )
 	      );
 	    }
 	  }]);
@@ -61753,9 +61729,17 @@
 	
 	var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
 	
-	var _errors_list = __webpack_require__(581);
+	var _errors_list_container = __webpack_require__(649);
 	
-	var _errors_list2 = _interopRequireDefault(_errors_list);
+	var _errors_list_container2 = _interopRequireDefault(_errors_list_container);
+	
+	var _ListGroupItem = __webpack_require__(586);
+	
+	var _ListGroupItem2 = _interopRequireDefault(_ListGroupItem);
+	
+	var _Button = __webpack_require__(481);
+	
+	var _Button2 = _interopRequireDefault(_Button);
 	
 	__webpack_require__(591);
 	
@@ -61789,6 +61773,7 @@
 	
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
 	    _this.handleDataChange = _this.handleDataChange.bind(_this);
+	    _this.resetForm = _this.resetForm.bind(_this);
 	    return _this;
 	  }
 	
@@ -61804,21 +61789,13 @@
 	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(e) {
-	      var _this3 = this;
-	
 	      e.preventDefault();
 	      var reminder = Object.assign({}, this.state, { id: (0, _id_generator2.default)() });
 	
 	      //  parse date
 	      reminder.remind_date = reminder.remind_date.format('LLL');
 	
-	      this.props.createReminder(reminder).then(function () {
-	        _this3.setState({
-	          title: '',
-	          body: '',
-	          remind_date: (0, _moment2.default)().add(24, 'hours')
-	        });
-	      });
+	      this.props.createReminder(reminder).then(this.resetForm());
 	    }
 	  }, {
 	    key: 'handleDataChange',
@@ -61828,43 +61805,43 @@
 	      });
 	    }
 	  }, {
+	    key: 'resetForm',
+	    value: function resetForm() {
+	      this.setState({
+	        title: '',
+	        body: '',
+	        remind_date: (0, _moment2.default)().add(24, 'hours')
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'form',
-	        { className: 'reminder-form', onSubmit: this.handleSubmit },
-	        _react2.default.createElement(_errors_list2.default, { errors: this.props.errors }),
+	        _ListGroupItem2.default,
+	        null,
 	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Title:',
+	          'form',
+	          { className: 'reminder-form', onSubmit: this.handleSubmit },
+	          _react2.default.createElement(_Button2.default, { onClick: this.handleSubmit, className: 'glyphicon glyphicon-plus-sign' }),
+	          _react2.default.createElement(_errors_list_container2.default, null),
 	          _react2.default.createElement('input', {
 	            className: 'input',
 	            ref: 'title',
 	            value: this.state.title,
-	            placeholder: 'Please enter a reminder...',
+	            placeholder: 'Anything on your mind?...',
 	            onChange: this.update('title')
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'label',
-	          null,
-	          'Body:',
+	          }),
 	          _react2.default.createElement('input', {
 	            className: 'input',
 	            ref: 'title',
 	            value: this.state.body,
-	            placeholder: '...',
+	            placeholder: 'Add a description...',
 	            onChange: this.update('body')
-	          })
-	        ),
-	        _react2.default.createElement(_reactDatepicker2.default, {
-	          selected: this.state.remind_date,
-	          onChange: this.handleDataChange }),
-	        _react2.default.createElement(
-	          'button',
-	          { className: 'create-button' },
-	          'Create reminder!'
+	          }),
+	          _react2.default.createElement(_reactDatepicker2.default, {
+	            selected: this.state.remind_date,
+	            onChange: this.handleDataChange }),
+	          _react2.default.createElement('button', { style: { visibility: 'hidden' } })
 	        )
 	      );
 	    }
@@ -66255,6 +66232,88 @@
 	}(_react2.default.Component);
 	
 	exports.default = CommentForm;
+
+/***/ },
+/* 648 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ErrorsList = undefined;
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ErrorsList = exports.ErrorsList = function ErrorsList(_ref) {
+	  var clearErrors = _ref.clearErrors,
+	      errors = _ref.errors;
+	
+	  var errorItems = errors.map(function (error, idx) {
+	    return _react2.default.createElement(
+	      'li',
+	      { style: { color: 'red' }, key: idx },
+	      error
+	    );
+	  });
+	
+	  return _react2.default.createElement(
+	    'ul',
+	    { onClick: function onClick() {
+	        return clearErrors();
+	      }, className: 'error-list' },
+	    errorItems
+	  );
+	};
+	
+	exports.default = ErrorsList;
+
+/***/ },
+/* 649 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(416);
+	
+	var _errors_list = __webpack_require__(648);
+	
+	var _errors_list2 = _interopRequireDefault(_errors_list);
+	
+	var _error_actions = __webpack_require__(210);
+	
+	var _selector = __webpack_require__(582);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// actions
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    errors: (0, _selector.parseErrors)(state)
+	  };
+	};
+	
+	// selectors
+	
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    clearErrors: function clearErrors() {
+	      return dispatch((0, _error_actions.clearErrors)());
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_errors_list2.default);
 
 /***/ }
 /******/ ]);
