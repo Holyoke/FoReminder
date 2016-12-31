@@ -5,6 +5,7 @@ import { receiveErrors, clearErrors } from './error_actions'
 export const RECEIVE_REMINDERS = 'RECEIVE_REMINDERS'
 export const RECEIVE_REMINDER = 'RECEIVE_REMINDER'
 export const REMOVE_REMINDER = 'REMOVE_REMINDER'
+export const RECEIVE_FILTER = 'RECEIVE_FILTER'
 
 // api interactions
 export const fetchReminders = () => {
@@ -66,4 +67,10 @@ export const receiveReminders = reminders => ({
 export const removeReminder = reminder => ({
   type: REMOVE_REMINDER,
   reminder
+})
+
+// filter actions
+export const receiveFilter = filter => ({
+  type: RECEIVE_FILTER,
+  filter
 })

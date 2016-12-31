@@ -1,4 +1,4 @@
-import { RECEIVE_REMINDER, RECEIVE_REMINDERS, REMOVE_REMINDER } from '../actions/reminder_actions'
+import { RECEIVE_REMINDER, RECEIVE_REMINDERS, REMOVE_REMINDER, RECEIVE_FILTER } from '../actions/reminder_actions'
 import moment from 'moment'
 import merge from 'lodash/merge'
 
@@ -16,7 +16,8 @@ const initialState = {
     body: "#2 dog is dirty",
     done: true,
     remind_date: moment().add(24, 'hours').format('LLL')
-  }
+  },
+  "filter": 'SHOW_ALL'
 }
 
 const remindersReducer = (state = initialState, action) => {
@@ -33,6 +34,9 @@ const remindersReducer = (state = initialState, action) => {
     case REMOVE_REMINDER:
       newState = merge({}, state)
       delete newState[action.reminder.id]
+      return newState
+    case RECEIVE_FILTER:
+      newState = merge({}, state, { filter: action.filter})
       return newState
     default:
       return state
