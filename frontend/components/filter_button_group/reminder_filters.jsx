@@ -23,19 +23,21 @@ class ReminderFilters extends React.Component {
   render () {
     const { buttonActive, updateFilter} = this
     const { filter } = this.props.remindersFilter
+    const filters = ['SHOW_ALL', 'SHOW_COMPLETED', 'SHOW_INCOMPLETE']
+    // assumes filters starts with 'SHOW_'...
+    const buttonItems = filters.map((rFilter, idx) => {
+      return(
+        <ButtonGroup key={idx}>
+          <Button active={ filter === {rFilter}}
+                  data-filter={rFilter}
+                  onClick={updateFilter}>
+                  {rFilter[5] + rFilter.substring(6, rFilter.length).toLowerCase()}</Button>
+        </ButtonGroup>
+      )
+    })
     return (
         <ButtonGroup justified>
-          <ButtonGroup>
-            <Button active={ filter === 'SHOW_ALL'} data-filter='SHOW_ALL' onClick={updateFilter}>All</Button>
-          </ButtonGroup>
-
-          <ButtonGroup>
-            <Button active={ filter === 'SHOW_COMPLETED'} data-filter='SHOW_COMPLETED' onClick={updateFilter}>Complete</Button>
-          </ButtonGroup>
-
-          <ButtonGroup>
-            <Button active={ filter === 'SHOW_INCOMPLETE'} data-filter='SHOW_INCOMPLETE' onClick={updateFilter}>Incomplete</Button>
-          </ButtonGroup>
+          {buttonItems}
         </ButtonGroup>
     )
   }

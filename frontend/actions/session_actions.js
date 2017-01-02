@@ -24,7 +24,7 @@ export const login = (user) => {
 
 export const logout = () => {
   return (dispatch) => {
-    return util.logout().then(() => dispatch(logoutCurrentUser()))
+    return util.logout().then(() => dispatch(logoutCurrentUser()), () => dispatch(logoutCurrentUser()))
   }
 }
 

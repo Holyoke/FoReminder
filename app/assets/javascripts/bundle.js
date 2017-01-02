@@ -52944,6 +52944,8 @@
 	  return function (dispatch) {
 	    return util.logout().then(function () {
 	      return dispatch(logoutCurrentUser());
+	    }, function () {
+	      return dispatch(logoutCurrentUser());
 	    });
 	  };
 	};
@@ -66552,36 +66554,25 @@
 	          updateFilter = this.updateFilter;
 	      var filter = this.props.remindersFilter.filter;
 	
+	      var filters = ['SHOW_ALL', 'SHOW_COMPLETED', 'SHOW_INCOMPLETE'];
+	      // assumes filters starts with 'SHOW_'...
+	      var buttonItems = filters.map(function (rFilter, idx) {
+	        return _react2.default.createElement(
+	          _ButtonGroup2.default,
+	          { key: idx },
+	          _react2.default.createElement(
+	            _Button2.default,
+	            { active: filter === { rFilter: rFilter },
+	              'data-filter': rFilter,
+	              onClick: updateFilter },
+	            rFilter[5] + rFilter.substring(6, rFilter.length).toLowerCase()
+	          )
+	        );
+	      });
 	      return _react2.default.createElement(
 	        _ButtonGroup2.default,
 	        { justified: true },
-	        _react2.default.createElement(
-	          _ButtonGroup2.default,
-	          null,
-	          _react2.default.createElement(
-	            _Button2.default,
-	            { active: filter === 'SHOW_ALL', 'data-filter': 'SHOW_ALL', onClick: updateFilter },
-	            'All'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _ButtonGroup2.default,
-	          null,
-	          _react2.default.createElement(
-	            _Button2.default,
-	            { active: filter === 'SHOW_COMPLETED', 'data-filter': 'SHOW_COMPLETED', onClick: updateFilter },
-	            'Complete'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _ButtonGroup2.default,
-	          null,
-	          _react2.default.createElement(
-	            _Button2.default,
-	            { active: filter === 'SHOW_INCOMPLETE', 'data-filter': 'SHOW_INCOMPLETE', onClick: updateFilter },
-	            'Incomplete'
-	          )
-	        )
+	        buttonItems
 	      );
 	    }
 	  }]);
