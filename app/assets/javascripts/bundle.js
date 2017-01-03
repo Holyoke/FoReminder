@@ -22721,7 +22721,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.receiveFilter = exports.removeReminder = exports.receiveReminders = exports.receiveReminder = exports.deleteReminder = exports.updateReminder = exports.createReminder = exports.fetchReminders = exports.RECEIVE_FILTER = exports.REMOVE_REMINDER = exports.RECEIVE_REMINDER = exports.RECEIVE_REMINDERS = undefined;
+	exports.receiveCounts = exports.receiveFilter = exports.removeReminder = exports.receiveReminders = exports.receiveReminder = exports.deleteReminder = exports.updateReminder = exports.createReminder = exports.fetchReminders = exports.RECEIVE_COUNTS = exports.RECEIVE_FILTER = exports.REMOVE_REMINDER = exports.RECEIVE_REMINDER = exports.RECEIVE_REMINDERS = undefined;
 	
 	var _reminder_api_util = __webpack_require__(203);
 	
@@ -22737,6 +22737,7 @@
 	var RECEIVE_REMINDER = exports.RECEIVE_REMINDER = 'RECEIVE_REMINDER';
 	var REMOVE_REMINDER = exports.REMOVE_REMINDER = 'REMOVE_REMINDER';
 	var RECEIVE_FILTER = exports.RECEIVE_FILTER = 'RECEIVE_FILTER';
+	var RECEIVE_COUNTS = exports.RECEIVE_COUNTS = 'RECEIVE_COUNTS';
 	
 	// api interactions
 	var fetchReminders = exports.fetchReminders = function fetchReminders() {
@@ -22807,6 +22808,13 @@
 	  return {
 	    type: RECEIVE_FILTER,
 	    filter: filter
+	  };
+	};
+	
+	var receiveCounts = exports.receiveCounts = function receiveCounts(counts) {
+	  return {
+	    type: RECEIVE_COUNTS,
+	    counts: counts
 	  };
 	};
 
@@ -52609,7 +52617,14 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var initialState = { filter: 'SHOW_ALL' };
+	var initialState = {
+	  filter: 'SHOW_ALL',
+	  counts: {
+	    'All': 0,
+	    'Incomplete': 0,
+	    'Completed': 0
+	  }
+	};
 	
 	var remindersFilterReducer = function remindersFilterReducer() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -52620,7 +52635,9 @@
 	
 	  switch (action.type) {
 	    case _reminder_actions.RECEIVE_FILTER:
-	      return newState, state, { filter: action.filter };
+	      return (0, _merge2.default)(newState, state, { filter: action.filter });
+	    case _reminder_actions.RECEIVE_COUNTS:
+	      return (0, _merge2.default)(newState, state, { counts: action.counts });
 	    default:
 	      return (0, _merge2.default)({}, state);
 	  }
@@ -68141,21 +68158,17 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ButtonToolBar = __webpack_require__(665);
-	
-	var _ButtonToolBar2 = _interopRequireDefault(_ButtonToolBar);
-	
 	var _ButtonGroup = __webpack_require__(666);
 	
 	var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
 	
-	var _DropdownButton = __webpack_require__(668);
-	
-	var _DropdownButton2 = _interopRequireDefault(_DropdownButton);
-	
 	var _Button = __webpack_require__(482);
 	
 	var _Button2 = _interopRequireDefault(_Button);
+	
+	var _Badge = __webpack_require__(686);
+	
+	var _Badge2 = _interopRequireDefault(_Badge);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -68174,7 +68187,6 @@
 	    var _this = _possibleConstructorReturn(this, (ReminderFilters.__proto__ || Object.getPrototypeOf(ReminderFilters)).call(this, props));
 	
 	    _this.updateFilter = _this.updateFilter.bind(_this);
-	    _this.buttonActive = _this.buttonActive.bind(_this);
 	    return _this;
 	  }
 	
@@ -68186,20 +68198,25 @@
 	      this.props.receiveFilter(filter);
 	    }
 	  }, {
-	    key: 'buttonActive',
-	    value: function buttonActive(e) {
-	      debugger;
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var buttonActive = this.buttonActive,
-	          updateFilter = this.updateFilter;
-	      var filter = this.props.remindersFilter.filter;
+	      var updateFilter = this.updateFilter;
+	      var _props$remindersFilte = this.props.remindersFilter,
+	          filter = _props$remindersFilte.filter,
+	          counts = _props$remindersFilte.counts;
 	
 	      var filters = ['SHOW_ALL', 'SHOW_COMPLETED', 'SHOW_INCOMPLETE'];
-	      // assumes filters starts with 'SHOW_'...
+	      console.log(this.props.remindersFilter);
 	      var buttonItems = filters.map(function (rFilter, idx) {
+	        // assumes filters starts with 'SHOW_'...
+	        var filterName = rFilter[5] + rFilter.substring(6, rFilter.length).toLowerCase();
+	        var _badge = counts[filterName] > 0 ? _react2.default.createElement(
+	          _Badge2.default,
+	          { style: { padding: '4px 3px', marginLeft: '5px' } },
+	          ' ',
+	          counts[filterName]
+	        ) : '';
+	
 	        return _react2.default.createElement(
 	          _ButtonGroup2.default,
 	          { key: idx },
@@ -68208,7 +68225,8 @@
 	            { active: filter === { rFilter: rFilter },
 	              'data-filter': rFilter,
 	              onClick: updateFilter },
-	            rFilter[5] + rFilter.substring(6, rFilter.length).toLowerCase()
+	            filterName,
+	            _badge
 	          )
 	        );
 	      });
@@ -68226,81 +68244,7 @@
 	exports.default = ReminderFilters;
 
 /***/ },
-/* 665 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _extends2 = __webpack_require__(519);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _objectWithoutProperties2 = __webpack_require__(518);
-	
-	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-	
-	var _classCallCheck2 = __webpack_require__(526);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(527);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(563);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _classnames = __webpack_require__(571);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Button = __webpack_require__(482);
-	
-	var _Button2 = _interopRequireDefault(_Button);
-	
-	var _bootstrapUtils = __webpack_require__(574);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var ButtonToolbar = function (_React$Component) {
-	  (0, _inherits3['default'])(ButtonToolbar, _React$Component);
-	
-	  function ButtonToolbar() {
-	    (0, _classCallCheck3['default'])(this, ButtonToolbar);
-	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
-	  }
-	
-	  ButtonToolbar.prototype.render = function render() {
-	    var _props = this.props,
-	        className = _props.className,
-	        props = (0, _objectWithoutProperties3['default'])(_props, ['className']);
-	
-	    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(props),
-	        bsProps = _splitBsProps[0],
-	        elementProps = _splitBsProps[1];
-	
-	    var classes = (0, _bootstrapUtils.getClassSet)(bsProps);
-	
-	    return _react2['default'].createElement('div', (0, _extends3['default'])({}, elementProps, {
-	      role: 'toolbar',
-	      className: (0, _classnames2['default'])(className, classes)
-	    }));
-	  };
-	
-	  return ButtonToolbar;
-	}(_react2['default'].Component);
-	
-	exports['default'] = (0, _bootstrapUtils.bsClass)('btn-toolbar', (0, _bootstrapUtils.bsSizes)(_Button2['default'].SIZES, ButtonToolbar));
-	module.exports = exports['default'];
-
-/***/ },
+/* 665 */,
 /* 666 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -68452,127 +68396,38 @@
 	}
 
 /***/ },
-/* 668 */
+/* 668 */,
+/* 669 */,
+/* 670 */,
+/* 671 */,
+/* 672 */,
+/* 673 */,
+/* 674 */,
+/* 675 */,
+/* 676 */,
+/* 677 */,
+/* 678 */,
+/* 679 */,
+/* 680 */,
+/* 681 */,
+/* 682 */,
+/* 683 */,
+/* 684 */,
+/* 685 */,
+/* 686 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _objectWithoutProperties2 = __webpack_require__(518);
-	
-	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-	
-	var _classCallCheck2 = __webpack_require__(526);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(527);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(563);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
 	var _extends2 = __webpack_require__(519);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Dropdown = __webpack_require__(669);
-	
-	var _Dropdown2 = _interopRequireDefault(_Dropdown);
-	
-	var _splitComponentProps2 = __webpack_require__(644);
-	
-	var _splitComponentProps3 = _interopRequireDefault(_splitComponentProps2);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var propTypes = (0, _extends3['default'])({}, _Dropdown2['default'].propTypes, {
-	
-	  // Toggle props.
-	  bsStyle: _react2['default'].PropTypes.string,
-	  bsSize: _react2['default'].PropTypes.string,
-	  title: _react2['default'].PropTypes.node.isRequired,
-	  noCaret: _react2['default'].PropTypes.bool,
-	
-	  // Override generated docs from <Dropdown>.
-	  /**
-	   * @private
-	   */
-	  children: _react2['default'].PropTypes.node
-	});
-	
-	var DropdownButton = function (_React$Component) {
-	  (0, _inherits3['default'])(DropdownButton, _React$Component);
-	
-	  function DropdownButton() {
-	    (0, _classCallCheck3['default'])(this, DropdownButton);
-	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
-	  }
-	
-	  DropdownButton.prototype.render = function render() {
-	    var _props = this.props,
-	        bsSize = _props.bsSize,
-	        bsStyle = _props.bsStyle,
-	        title = _props.title,
-	        children = _props.children,
-	        props = (0, _objectWithoutProperties3['default'])(_props, ['bsSize', 'bsStyle', 'title', 'children']);
-	
-	    var _splitComponentProps = (0, _splitComponentProps3['default'])(props, _Dropdown2['default'].ControlledComponent),
-	        dropdownProps = _splitComponentProps[0],
-	        toggleProps = _splitComponentProps[1];
-	
-	    return _react2['default'].createElement(
-	      _Dropdown2['default'],
-	      (0, _extends3['default'])({}, dropdownProps, {
-	        bsSize: bsSize,
-	        bsStyle: bsStyle
-	      }),
-	      _react2['default'].createElement(
-	        _Dropdown2['default'].Toggle,
-	        (0, _extends3['default'])({}, toggleProps, {
-	          bsSize: bsSize,
-	          bsStyle: bsStyle
-	        }),
-	        title
-	      ),
-	      _react2['default'].createElement(
-	        _Dropdown2['default'].Menu,
-	        null,
-	        children
-	      )
-	    );
-	  };
-	
-	  return DropdownButton;
-	}(_react2['default'].Component);
-	
-	DropdownButton.propTypes = propTypes;
-	
-	exports['default'] = DropdownButton;
-	module.exports = exports['default'];
-
-/***/ },
-/* 669 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-	
-	exports.__esModule = true;
-	
 	var _objectWithoutProperties2 = __webpack_require__(518);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-	
-	var _extends2 = __webpack_require__(519);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
 	
 	var _classCallCheck2 = __webpack_require__(526);
 	
@@ -68590,1439 +68445,83 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _activeElement = __webpack_require__(634);
-	
-	var _activeElement2 = _interopRequireDefault(_activeElement);
-	
-	var _contains = __webpack_require__(607);
-	
-	var _contains2 = _interopRequireDefault(_contains);
-	
-	var _keycode = __webpack_require__(670);
-	
-	var _keycode2 = _interopRequireDefault(_keycode);
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _all = __webpack_require__(667);
-	
-	var _all2 = _interopRequireDefault(_all);
-	
-	var _elementType = __webpack_require__(572);
-	
-	var _elementType2 = _interopRequireDefault(_elementType);
-	
-	var _isRequiredForA11y = __webpack_require__(650);
-	
-	var _isRequiredForA11y2 = _interopRequireDefault(_isRequiredForA11y);
-	
-	var _uncontrollable = __webpack_require__(671);
-	
-	var _uncontrollable2 = _interopRequireDefault(_uncontrollable);
-	
-	var _warning = __webpack_require__(433);
-	
-	var _warning2 = _interopRequireDefault(_warning);
-	
-	var _ButtonGroup = __webpack_require__(666);
-	
-	var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
-	
-	var _DropdownMenu = __webpack_require__(674);
-	
-	var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
-	
-	var _DropdownToggle = __webpack_require__(684);
-	
-	var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
 	
 	var _bootstrapUtils = __webpack_require__(574);
 	
-	var _createChainedFunction = __webpack_require__(642);
-	
-	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
-	
-	var _PropTypes = __webpack_require__(685);
-	
-	var _ValidComponentChildren = __webpack_require__(598);
-	
-	var _ValidComponentChildren2 = _interopRequireDefault(_ValidComponentChildren);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var TOGGLE_ROLE = _DropdownToggle2['default'].defaultProps.bsRole;
-	var MENU_ROLE = _DropdownMenu2['default'].defaultProps.bsRole;
+	// TODO: `pullRight` doesn't belong here. There's no special handling here.
 	
 	var propTypes = {
-	  /**
-	   * The menu will open above the dropdown button, instead of below it.
-	   */
-	  dropup: _react2['default'].PropTypes.bool,
-	
-	  /**
-	   * An html id attribute, necessary for assistive technologies, such as screen readers.
-	   * @type {string|number}
-	   * @required
-	   */
-	  id: (0, _isRequiredForA11y2['default'])(_react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])),
-	
-	  componentClass: _elementType2['default'],
-	
-	  /**
-	   * The children of a Dropdown may be a `<Dropdown.Toggle>` or a `<Dropdown.Menu>`.
-	   * @type {node}
-	   */
-	  children: (0, _all2['default'])((0, _PropTypes.requiredRoles)(TOGGLE_ROLE, MENU_ROLE), (0, _PropTypes.exclusiveRoles)(MENU_ROLE)),
-	
-	  /**
-	   * Whether or not component is disabled.
-	   */
-	  disabled: _react2['default'].PropTypes.bool,
-	
-	  /**
-	   * Align the menu to the right side of the Dropdown toggle
-	   */
-	  pullRight: _react2['default'].PropTypes.bool,
-	
-	  /**
-	   * Whether or not the Dropdown is visible.
-	   *
-	   * @controllable onToggle
-	   */
-	  open: _react2['default'].PropTypes.bool,
-	
-	  /**
-	   * A callback fired when the Dropdown closes.
-	   */
-	  onClose: _react2['default'].PropTypes.func,
-	
-	  /**
-	   * A callback fired when the Dropdown wishes to change visibility. Called with the requested
-	   * `open` value.
-	   *
-	   * ```js
-	   * function(Boolean isOpen) {}
-	   * ```
-	   * @controllable open
-	   */
-	  onToggle: _react2['default'].PropTypes.func,
-	
-	  /**
-	   * A callback fired when a menu item is selected.
-	   *
-	   * ```js
-	   * (eventKey: any, event: Object) => any
-	   * ```
-	   */
-	  onSelect: _react2['default'].PropTypes.func,
-	
-	  /**
-	   * If `'menuitem'`, causes the dropdown to behave like a menu item rather than
-	   * a menu button.
-	   */
-	  role: _react2['default'].PropTypes.string,
-	
-	  /**
-	   * Which event when fired outside the component will cause it to be closed
-	   */
-	  rootCloseEvent: _react2['default'].PropTypes.oneOf(['click', 'mousedown']),
-	
-	  /**
-	   * @private
-	   */
-	  onMouseEnter: _react2['default'].PropTypes.func,
-	  /**
-	   * @private
-	   */
-	  onMouseLeave: _react2['default'].PropTypes.func
+	  pullRight: _react2['default'].PropTypes.bool
 	};
 	
 	var defaultProps = {
-	  componentClass: _ButtonGroup2['default']
-	};
-	
-	var Dropdown = function (_React$Component) {
-	  (0, _inherits3['default'])(Dropdown, _React$Component);
-	
-	  function Dropdown(props, context) {
-	    (0, _classCallCheck3['default'])(this, Dropdown);
-	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props, context));
-	
-	    _this.handleClick = _this.handleClick.bind(_this);
-	    _this.handleKeyDown = _this.handleKeyDown.bind(_this);
-	    _this.handleClose = _this.handleClose.bind(_this);
-	
-	    _this._focusInDropdown = false;
-	    _this.lastOpenEventType = null;
-	    return _this;
-	  }
-	
-	  Dropdown.prototype.componentDidMount = function componentDidMount() {
-	    this.focusNextOnOpen();
-	  };
-	
-	  Dropdown.prototype.componentWillUpdate = function componentWillUpdate(nextProps) {
-	    if (!nextProps.open && this.props.open) {
-	      this._focusInDropdown = (0, _contains2['default'])(_reactDom2['default'].findDOMNode(this.menu), (0, _activeElement2['default'])(document));
-	    }
-	  };
-	
-	  Dropdown.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
-	    var open = this.props.open;
-	
-	    var prevOpen = prevProps.open;
-	
-	    if (open && !prevOpen) {
-	      this.focusNextOnOpen();
-	    }
-	
-	    if (!open && prevOpen) {
-	      // if focus hasn't already moved from the menu lets return it
-	      // to the toggle
-	      if (this._focusInDropdown) {
-	        this._focusInDropdown = false;
-	        this.focus();
-	      }
-	    }
-	  };
-	
-	  Dropdown.prototype.handleClick = function handleClick() {
-	    if (this.props.disabled) {
-	      return;
-	    }
-	
-	    this.toggleOpen('click');
-	  };
-	
-	  Dropdown.prototype.handleKeyDown = function handleKeyDown(event) {
-	    if (this.props.disabled) {
-	      return;
-	    }
-	
-	    switch (event.keyCode) {
-	      case _keycode2['default'].codes.down:
-	        if (!this.props.open) {
-	          this.toggleOpen('keydown');
-	        } else if (this.menu.focusNext) {
-	          this.menu.focusNext();
-	        }
-	        event.preventDefault();
-	        break;
-	      case _keycode2['default'].codes.esc:
-	      case _keycode2['default'].codes.tab:
-	        this.handleClose(event);
-	        break;
-	      default:
-	    }
-	  };
-	
-	  Dropdown.prototype.toggleOpen = function toggleOpen(eventType) {
-	    var open = !this.props.open;
-	
-	    if (open) {
-	      this.lastOpenEventType = eventType;
-	    }
-	
-	    if (this.props.onToggle) {
-	      this.props.onToggle(open);
-	    }
-	  };
-	
-	  Dropdown.prototype.handleClose = function handleClose() {
-	    if (!this.props.open) {
-	      return;
-	    }
-	
-	    this.toggleOpen(null);
-	  };
-	
-	  Dropdown.prototype.focusNextOnOpen = function focusNextOnOpen() {
-	    var menu = this.menu;
-	
-	    if (!menu.focusNext) {
-	      return;
-	    }
-	
-	    if (this.lastOpenEventType === 'keydown' || this.props.role === 'menuitem') {
-	      menu.focusNext();
-	    }
-	  };
-	
-	  Dropdown.prototype.focus = function focus() {
-	    var toggle = _reactDom2['default'].findDOMNode(this.toggle);
-	
-	    if (toggle && toggle.focus) {
-	      toggle.focus();
-	    }
-	  };
-	
-	  Dropdown.prototype.renderToggle = function renderToggle(child, props) {
-	    var _this2 = this;
-	
-	    var ref = function ref(c) {
-	      _this2.toggle = c;
-	    };
-	
-	    if (typeof child.ref === 'string') {
-	      process.env.NODE_ENV !== 'production' ? (0, _warning2['default'])(false, 'String refs are not supported on `<Dropdown.Toggle>` components. ' + 'To apply a ref to the component use the callback signature:\n\n ' + 'https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute') : void 0;
-	    } else {
-	      ref = (0, _createChainedFunction2['default'])(child.ref, ref);
-	    }
-	
-	    return (0, _react.cloneElement)(child, (0, _extends3['default'])({}, props, {
-	      ref: ref,
-	      bsClass: (0, _bootstrapUtils.prefix)(props, 'toggle'),
-	      onClick: (0, _createChainedFunction2['default'])(child.props.onClick, this.handleClick),
-	      onKeyDown: (0, _createChainedFunction2['default'])(child.props.onKeyDown, this.handleKeyDown)
-	    }));
-	  };
-	
-	  Dropdown.prototype.renderMenu = function renderMenu(child, _ref) {
-	    var _this3 = this;
-	
-	    var id = _ref.id,
-	        onClose = _ref.onClose,
-	        onSelect = _ref.onSelect,
-	        rootCloseEvent = _ref.rootCloseEvent,
-	        props = (0, _objectWithoutProperties3['default'])(_ref, ['id', 'onClose', 'onSelect', 'rootCloseEvent']);
-	
-	    var ref = function ref(c) {
-	      _this3.menu = c;
-	    };
-	
-	    if (typeof child.ref === 'string') {
-	      process.env.NODE_ENV !== 'production' ? (0, _warning2['default'])(false, 'String refs are not supported on `<Dropdown.Menu>` components. ' + 'To apply a ref to the component use the callback signature:\n\n ' + 'https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute') : void 0;
-	    } else {
-	      ref = (0, _createChainedFunction2['default'])(child.ref, ref);
-	    }
-	
-	    return (0, _react.cloneElement)(child, (0, _extends3['default'])({}, props, {
-	      ref: ref,
-	      labelledBy: id,
-	      bsClass: (0, _bootstrapUtils.prefix)(props, 'menu'),
-	      onClose: (0, _createChainedFunction2['default'])(child.props.onClose, onClose, this.handleClose),
-	      onSelect: (0, _createChainedFunction2['default'])(child.props.onSelect, onSelect, this.handleClose),
-	      rootCloseEvent: rootCloseEvent
-	    }));
-	  };
-	
-	  Dropdown.prototype.render = function render() {
-	    var _classes,
-	        _this4 = this;
-	
-	    var _props = this.props,
-	        Component = _props.componentClass,
-	        id = _props.id,
-	        dropup = _props.dropup,
-	        disabled = _props.disabled,
-	        pullRight = _props.pullRight,
-	        open = _props.open,
-	        onClose = _props.onClose,
-	        onSelect = _props.onSelect,
-	        role = _props.role,
-	        bsClass = _props.bsClass,
-	        className = _props.className,
-	        rootCloseEvent = _props.rootCloseEvent,
-	        children = _props.children,
-	        props = (0, _objectWithoutProperties3['default'])(_props, ['componentClass', 'id', 'dropup', 'disabled', 'pullRight', 'open', 'onClose', 'onSelect', 'role', 'bsClass', 'className', 'rootCloseEvent', 'children']);
-	
-	
-	    delete props.onToggle;
-	
-	    var classes = (_classes = {}, _classes[bsClass] = true, _classes.open = open, _classes.disabled = disabled, _classes);
-	
-	    if (dropup) {
-	      classes[bsClass] = false;
-	      classes.dropup = true;
-	    }
-	
-	    // This intentionally forwards bsSize and bsStyle (if set) to the
-	    // underlying component, to allow it to render size and style variants.
-	
-	    return _react2['default'].createElement(
-	      Component,
-	      (0, _extends3['default'])({}, props, {
-	        className: (0, _classnames2['default'])(className, classes)
-	      }),
-	      _ValidComponentChildren2['default'].map(children, function (child) {
-	        switch (child.props.bsRole) {
-	          case TOGGLE_ROLE:
-	            return _this4.renderToggle(child, {
-	              id: id, disabled: disabled, open: open, role: role, bsClass: bsClass
-	            });
-	          case MENU_ROLE:
-	            return _this4.renderMenu(child, {
-	              id: id, open: open, pullRight: pullRight, bsClass: bsClass, onClose: onClose, onSelect: onSelect, rootCloseEvent: rootCloseEvent
-	            });
-	          default:
-	            return child;
-	        }
-	      })
-	    );
-	  };
-	
-	  return Dropdown;
-	}(_react2['default'].Component);
-	
-	Dropdown.propTypes = propTypes;
-	Dropdown.defaultProps = defaultProps;
-	
-	(0, _bootstrapUtils.bsClass)('dropdown', Dropdown);
-	
-	var UncontrolledDropdown = (0, _uncontrollable2['default'])(Dropdown, { open: 'onToggle' });
-	
-	UncontrolledDropdown.Toggle = _DropdownToggle2['default'];
-	UncontrolledDropdown.Menu = _DropdownMenu2['default'];
-	
-	exports['default'] = UncontrolledDropdown;
-	module.exports = exports['default'];
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 670 */
-/***/ function(module, exports) {
-
-	// Source: http://jsfiddle.net/vWx8V/
-	// http://stackoverflow.com/questions/5603195/full-list-of-javascript-keycodes
-	
-	/**
-	 * Conenience method returns corresponding value for given keyName or keyCode.
-	 *
-	 * @param {Mixed} keyCode {Number} or keyName {String}
-	 * @return {Mixed}
-	 * @api public
-	 */
-	
-	exports = module.exports = function(searchInput) {
-	  // Keyboard Events
-	  if (searchInput && 'object' === typeof searchInput) {
-	    var hasKeyCode = searchInput.which || searchInput.keyCode || searchInput.charCode
-	    if (hasKeyCode) searchInput = hasKeyCode
-	  }
-	
-	  // Numbers
-	  if ('number' === typeof searchInput) return names[searchInput]
-	
-	  // Everything else (cast to string)
-	  var search = String(searchInput)
-	
-	  // check codes
-	  var foundNamedKey = codes[search.toLowerCase()]
-	  if (foundNamedKey) return foundNamedKey
-	
-	  // check aliases
-	  var foundNamedKey = aliases[search.toLowerCase()]
-	  if (foundNamedKey) return foundNamedKey
-	
-	  // weird character?
-	  if (search.length === 1) return search.charCodeAt(0)
-	
-	  return undefined
-	}
-	
-	/**
-	 * Get by name
-	 *
-	 *   exports.code['enter'] // => 13
-	 */
-	
-	var codes = exports.code = exports.codes = {
-	  'backspace': 8,
-	  'tab': 9,
-	  'enter': 13,
-	  'shift': 16,
-	  'ctrl': 17,
-	  'alt': 18,
-	  'pause/break': 19,
-	  'caps lock': 20,
-	  'esc': 27,
-	  'space': 32,
-	  'page up': 33,
-	  'page down': 34,
-	  'end': 35,
-	  'home': 36,
-	  'left': 37,
-	  'up': 38,
-	  'right': 39,
-	  'down': 40,
-	  'insert': 45,
-	  'delete': 46,
-	  'command': 91,
-	  'left command': 91,
-	  'right command': 93,
-	  'numpad *': 106,
-	  'numpad +': 107,
-	  'numpad -': 109,
-	  'numpad .': 110,
-	  'numpad /': 111,
-	  'num lock': 144,
-	  'scroll lock': 145,
-	  'my computer': 182,
-	  'my calculator': 183,
-	  ';': 186,
-	  '=': 187,
-	  ',': 188,
-	  '-': 189,
-	  '.': 190,
-	  '/': 191,
-	  '`': 192,
-	  '[': 219,
-	  '\\': 220,
-	  ']': 221,
-	  "'": 222
-	}
-	
-	// Helper aliases
-	
-	var aliases = exports.aliases = {
-	  'windows': 91,
-	  '⇧': 16,
-	  '⌥': 18,
-	  '⌃': 17,
-	  '⌘': 91,
-	  'ctl': 17,
-	  'control': 17,
-	  'option': 18,
-	  'pause': 19,
-	  'break': 19,
-	  'caps': 20,
-	  'return': 13,
-	  'escape': 27,
-	  'spc': 32,
-	  'pgup': 33,
-	  'pgdn': 34,
-	  'ins': 45,
-	  'del': 46,
-	  'cmd': 91
-	}
-	
-	
-	/*!
-	 * Programatically add the following
-	 */
-	
-	// lower case chars
-	for (i = 97; i < 123; i++) codes[String.fromCharCode(i)] = i - 32
-	
-	// numbers
-	for (var i = 48; i < 58; i++) codes[i - 48] = i
-	
-	// function keys
-	for (i = 1; i < 13; i++) codes['f'+i] = i + 111
-	
-	// numpad keys
-	for (i = 0; i < 10; i++) codes['numpad '+i] = i + 96
-	
-	/**
-	 * Get by code
-	 *
-	 *   exports.name[13] // => 'Enter'
-	 */
-	
-	var names = exports.names = exports.title = {} // title for backward compat
-	
-	// Create reverse mapping
-	for (i in codes) names[codes[i]] = i
-	
-	// Add aliases
-	for (var alias in aliases) {
-	  codes[alias] = aliases[alias]
-	}
-
-
-/***/ },
-/* 671 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _createUncontrollable = __webpack_require__(672);
-	
-	var _createUncontrollable2 = _interopRequireDefault(_createUncontrollable);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mixin = {
-	  shouldComponentUpdate: function shouldComponentUpdate() {
-	    //let the forceUpdate trigger the update
-	    return !this._notifying;
-	  }
-	};
-	
-	function set(component, propName, handler, value, args) {
-	  if (handler) {
-	    component._notifying = true;
-	    handler.call.apply(handler, [component, value].concat(args));
-	    component._notifying = false;
-	  }
-	
-	  component._values[propName] = value;
-	
-	  if (component.isMounted()) component.forceUpdate();
-	}
-	
-	exports.default = (0, _createUncontrollable2.default)([mixin], set);
-	module.exports = exports['default'];
-
-/***/ },
-/* 672 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	exports.default = createUncontrollable;
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _invariant = __webpack_require__(425);
-	
-	var _invariant2 = _interopRequireDefault(_invariant);
-	
-	var _utils = __webpack_require__(673);
-	
-	var utils = _interopRequireWildcard(_utils);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function createUncontrollable(mixins, set) {
-	
-	  return uncontrollable;
-	
-	  function uncontrollable(Component, controlledValues) {
-	    var methods = arguments.length <= 2 || arguments[2] === undefined ? [] : arguments[2];
-	
-	    var displayName = Component.displayName || Component.name || 'Component',
-	        basePropTypes = utils.getType(Component).propTypes,
-	        isCompositeComponent = utils.isReactComponent(Component),
-	        controlledProps = Object.keys(controlledValues),
-	        propTypes;
-	
-	    var OMIT_PROPS = ['valueLink', 'checkedLink'].concat(controlledProps.map(utils.defaultKey));
-	
-	    propTypes = utils.uncontrolledPropTypes(controlledValues, basePropTypes, displayName);
-	
-	    (0, _invariant2.default)(isCompositeComponent || !methods.length, '[uncontrollable] stateless function components cannot pass through methods ' + 'because they have no associated instances. Check component: ' + displayName + ', ' + 'attempting to pass through methods: ' + methods.join(', '));
-	
-	    methods = utils.transform(methods, function (obj, method) {
-	      obj[method] = function () {
-	        var _refs$inner;
-	
-	        return (_refs$inner = this.refs.inner)[method].apply(_refs$inner, arguments);
-	      };
-	    }, {});
-	
-	    var component = _react2.default.createClass(_extends({
-	
-	      displayName: 'Uncontrolled(' + displayName + ')',
-	
-	      mixins: mixins,
-	
-	      propTypes: propTypes
-	
-	    }, methods, {
-	      componentWillMount: function componentWillMount() {
-	        var _this = this;
-	
-	        var props = this.props;
-	
-	        this._values = {};
-	
-	        controlledProps.forEach(function (key) {
-	          _this._values[key] = props[utils.defaultKey(key)];
-	        });
-	      },
-	
-	
-	      /**
-	       * If a prop switches from controlled to Uncontrolled
-	       * reset its value to the defaultValue
-	       */
-	      componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	        var _this2 = this;
-	
-	        var props = this.props;
-	
-	        controlledProps.forEach(function (key) {
-	          if (utils.getValue(nextProps, key) === undefined && utils.getValue(props, key) !== undefined) {
-	            _this2._values[key] = nextProps[utils.defaultKey(key)];
-	          }
-	        });
-	      },
-	      getControlledInstance: function getControlledInstance() {
-	        return this.refs.inner;
-	      },
-	      render: function render() {
-	        var _this3 = this;
-	
-	        var newProps = {},
-	            props = omitProps(this.props);
-	
-	        utils.each(controlledValues, function (handle, propName) {
-	          var linkPropName = utils.getLinkName(propName),
-	              prop = _this3.props[propName];
-	
-	          if (linkPropName && !isProp(_this3.props, propName) && isProp(_this3.props, linkPropName)) {
-	            prop = _this3.props[linkPropName].value;
-	          }
-	
-	          newProps[propName] = prop !== undefined ? prop : _this3._values[propName];
-	
-	          newProps[handle] = setAndNotify.bind(_this3, propName);
-	        });
-	
-	        newProps = _extends({}, props, newProps, {
-	          ref: isCompositeComponent ? 'inner' : null
-	        });
-	
-	        return _react2.default.createElement(Component, newProps);
-	      }
-	    }));
-	
-	    component.ControlledComponent = Component;
-	
-	    /**
-	     * useful when wrapping a Component and you want to control
-	     * everything
-	     */
-	    component.deferControlTo = function (newComponent) {
-	      var additions = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	      var nextMethods = arguments[2];
-	
-	      return uncontrollable(newComponent, _extends({}, controlledValues, additions), nextMethods);
-	    };
-	
-	    return component;
-	
-	    function setAndNotify(propName, value) {
-	      var linkName = utils.getLinkName(propName),
-	          handler = this.props[controlledValues[propName]];
-	
-	      if (linkName && isProp(this.props, linkName) && !handler) {
-	        handler = this.props[linkName].requestChange;
-	      }
-	
-	      for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-	        args[_key - 2] = arguments[_key];
-	      }
-	
-	      set(this, propName, handler, value, args);
-	    }
-	
-	    function isProp(props, prop) {
-	      return props[prop] !== undefined;
-	    }
-	
-	    function omitProps(props) {
-	      var result = {};
-	
-	      utils.each(props, function (value, key) {
-	        if (OMIT_PROPS.indexOf(key) === -1) result[key] = value;
-	      });
-	
-	      return result;
-	    }
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ },
-/* 673 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-	
-	exports.__esModule = true;
-	exports.version = undefined;
-	exports.uncontrolledPropTypes = uncontrolledPropTypes;
-	exports.getType = getType;
-	exports.getValue = getValue;
-	exports.getLinkName = getLinkName;
-	exports.defaultKey = defaultKey;
-	exports.chain = chain;
-	exports.transform = transform;
-	exports.each = each;
-	exports.has = has;
-	exports.isReactComponent = isReactComponent;
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _invariant = __webpack_require__(425);
-	
-	var _invariant2 = _interopRequireDefault(_invariant);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function readOnlyPropType(handler, name) {
-	  return function (props, propName) {
-	    if (props[propName] !== undefined) {
-	      if (!props[handler]) {
-	        return new Error('You have provided a `' + propName + '` prop to ' + '`' + name + '` without an `' + handler + '` handler. This will render a read-only field. ' + 'If the field should be mutable use `' + defaultKey(propName) + '`. Otherwise, set `' + handler + '`');
-	      }
-	    }
-	  };
-	}
-	
-	function uncontrolledPropTypes(controlledValues, basePropTypes, displayName) {
-	  var propTypes = {};
-	
-	  if (process.env.NODE_ENV !== 'production' && basePropTypes) {
-	    transform(controlledValues, function (obj, handler, prop) {
-	      (0, _invariant2.default)(typeof handler === 'string' && handler.trim().length, 'Uncontrollable - [%s]: the prop `%s` needs a valid handler key name in order to make it uncontrollable', displayName, prop);
-	
-	      obj[prop] = readOnlyPropType(handler, displayName);
-	    }, propTypes);
-	  }
-	
-	  return propTypes;
-	}
-	
-	var version = exports.version = _react2.default.version.split('.').map(parseFloat);
-	
-	function getType(component) {
-	  if (version[0] >= 15 || version[0] === 0 && version[1] >= 13) return component;
-	
-	  return component.type;
-	}
-	
-	function getValue(props, name) {
-	  var linkPropName = getLinkName(name);
-	
-	  if (linkPropName && !isProp(props, name) && isProp(props, linkPropName)) return props[linkPropName].value;
-	
-	  return props[name];
-	}
-	
-	function isProp(props, prop) {
-	  return props[prop] !== undefined;
-	}
-	
-	function getLinkName(name) {
-	  return name === 'value' ? 'valueLink' : name === 'checked' ? 'checkedLink' : null;
-	}
-	
-	function defaultKey(key) {
-	  return 'default' + key.charAt(0).toUpperCase() + key.substr(1);
-	}
-	
-	function chain(thisArg, a, b) {
-	  return function chainedFunction() {
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-	
-	    a && a.call.apply(a, [thisArg].concat(args));
-	    b && b.call.apply(b, [thisArg].concat(args));
-	  };
-	}
-	
-	function transform(obj, cb, seed) {
-	  each(obj, cb.bind(null, seed = seed || (Array.isArray(obj) ? [] : {})));
-	  return seed;
-	}
-	
-	function each(obj, cb, thisArg) {
-	  if (Array.isArray(obj)) return obj.forEach(cb, thisArg);
-	
-	  for (var key in obj) {
-	    if (has(obj, key)) cb.call(thisArg, obj[key], key, obj);
-	  }
-	}
-	
-	function has(o, k) {
-	  return o ? Object.prototype.hasOwnProperty.call(o, k) : false;
-	}
-	
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 */
-	function isReactComponent(component) {
-	  return !!(component && component.prototype && component.prototype.isReactComponent);
-	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 674 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _extends3 = __webpack_require__(519);
-	
-	var _extends4 = _interopRequireDefault(_extends3);
-	
-	var _objectWithoutProperties2 = __webpack_require__(518);
-	
-	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-	
-	var _from = __webpack_require__(675);
-	
-	var _from2 = _interopRequireDefault(_from);
-	
-	var _classCallCheck2 = __webpack_require__(526);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(527);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(563);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _classnames = __webpack_require__(571);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _keycode = __webpack_require__(670);
-	
-	var _keycode2 = _interopRequireDefault(_keycode);
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _RootCloseWrapper = __webpack_require__(661);
-	
-	var _RootCloseWrapper2 = _interopRequireDefault(_RootCloseWrapper);
-	
-	var _bootstrapUtils = __webpack_require__(574);
-	
-	var _createChainedFunction = __webpack_require__(642);
-	
-	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
-	
-	var _ValidComponentChildren = __webpack_require__(598);
-	
-	var _ValidComponentChildren2 = _interopRequireDefault(_ValidComponentChildren);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var propTypes = {
-	  open: _react2['default'].PropTypes.bool,
-	  pullRight: _react2['default'].PropTypes.bool,
-	  onClose: _react2['default'].PropTypes.func,
-	  labelledBy: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
-	  onSelect: _react2['default'].PropTypes.func,
-	  rootCloseEvent: _react2['default'].PropTypes.oneOf(['click', 'mousedown'])
-	};
-	
-	var defaultProps = {
-	  bsRole: 'menu',
 	  pullRight: false
 	};
 	
-	var DropdownMenu = function (_React$Component) {
-	  (0, _inherits3['default'])(DropdownMenu, _React$Component);
+	var Badge = function (_React$Component) {
+	  (0, _inherits3['default'])(Badge, _React$Component);
 	
-	  function DropdownMenu(props) {
-	    (0, _classCallCheck3['default'])(this, DropdownMenu);
-	
-	    var _this = (0, _possibleConstructorReturn3['default'])(this, _React$Component.call(this, props));
-	
-	    _this.handleKeyDown = _this.handleKeyDown.bind(_this);
-	    return _this;
+	  function Badge() {
+	    (0, _classCallCheck3['default'])(this, Badge);
+	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
 	  }
 	
-	  DropdownMenu.prototype.handleKeyDown = function handleKeyDown(event) {
-	    switch (event.keyCode) {
-	      case _keycode2['default'].codes.down:
-	        this.focusNext();
-	        event.preventDefault();
-	        break;
-	      case _keycode2['default'].codes.up:
-	        this.focusPrevious();
-	        event.preventDefault();
-	        break;
-	      case _keycode2['default'].codes.esc:
-	      case _keycode2['default'].codes.tab:
-	        this.props.onClose(event);
-	        break;
-	      default:
-	    }
+	  Badge.prototype.hasContent = function hasContent(children) {
+	    var result = false;
+	
+	    _react2['default'].Children.forEach(children, function (child) {
+	      if (result) {
+	        return;
+	      }
+	
+	      if (child || child === 0) {
+	        result = true;
+	      }
+	    });
+	
+	    return result;
 	  };
 	
-	  DropdownMenu.prototype.getItemsAndActiveIndex = function getItemsAndActiveIndex() {
-	    var items = this.getFocusableMenuItems();
-	    var activeIndex = items.indexOf(document.activeElement);
-	
-	    return { items: items, activeIndex: activeIndex };
-	  };
-	
-	  DropdownMenu.prototype.getFocusableMenuItems = function getFocusableMenuItems() {
-	    var node = _reactDom2['default'].findDOMNode(this);
-	    if (!node) {
-	      return [];
-	    }
-	
-	    return (0, _from2['default'])(node.querySelectorAll('[tabIndex="-1"]'));
-	  };
-	
-	  DropdownMenu.prototype.focusNext = function focusNext() {
-	    var _getItemsAndActiveInd = this.getItemsAndActiveIndex(),
-	        items = _getItemsAndActiveInd.items,
-	        activeIndex = _getItemsAndActiveInd.activeIndex;
-	
-	    if (items.length === 0) {
-	      return;
-	    }
-	
-	    var nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
-	    items[nextIndex].focus();
-	  };
-	
-	  DropdownMenu.prototype.focusPrevious = function focusPrevious() {
-	    var _getItemsAndActiveInd2 = this.getItemsAndActiveIndex(),
-	        items = _getItemsAndActiveInd2.items,
-	        activeIndex = _getItemsAndActiveInd2.activeIndex;
-	
-	    if (items.length === 0) {
-	      return;
-	    }
-	
-	    var prevIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
-	    items[prevIndex].focus();
-	  };
-	
-	  DropdownMenu.prototype.render = function render() {
-	    var _extends2,
-	        _this2 = this;
-	
+	  Badge.prototype.render = function render() {
 	    var _props = this.props,
-	        open = _props.open,
 	        pullRight = _props.pullRight,
-	        onClose = _props.onClose,
-	        labelledBy = _props.labelledBy,
-	        onSelect = _props.onSelect,
 	        className = _props.className,
-	        rootCloseEvent = _props.rootCloseEvent,
 	        children = _props.children,
-	        props = (0, _objectWithoutProperties3['default'])(_props, ['open', 'pullRight', 'onClose', 'labelledBy', 'onSelect', 'className', 'rootCloseEvent', 'children']);
+	        props = (0, _objectWithoutProperties3['default'])(_props, ['pullRight', 'className', 'children']);
 	
 	    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(props),
 	        bsProps = _splitBsProps[0],
 	        elementProps = _splitBsProps[1];
 	
-	    var classes = (0, _extends4['default'])({}, (0, _bootstrapUtils.getClassSet)(bsProps), (_extends2 = {}, _extends2[(0, _bootstrapUtils.prefix)(bsProps, 'right')] = pullRight, _extends2));
+	    var classes = (0, _extends3['default'])({}, (0, _bootstrapUtils.getClassSet)(bsProps), {
+	      'pull-right': pullRight,
+	
+	      // Hack for collapsing on IE8.
+	      hidden: !this.hasContent(children)
+	    });
 	
 	    return _react2['default'].createElement(
-	      _RootCloseWrapper2['default'],
-	      {
-	        disabled: !open,
-	        onRootClose: onClose,
-	        event: rootCloseEvent
-	      },
-	      _react2['default'].createElement(
-	        'ul',
-	        (0, _extends4['default'])({}, elementProps, {
-	          role: 'menu',
-	          className: (0, _classnames2['default'])(className, classes),
-	          'aria-labelledby': labelledBy
-	        }),
-	        _ValidComponentChildren2['default'].map(children, function (child) {
-	          return _react2['default'].cloneElement(child, {
-	            onKeyDown: (0, _createChainedFunction2['default'])(child.props.onKeyDown, _this2.handleKeyDown),
-	            onSelect: (0, _createChainedFunction2['default'])(child.props.onSelect, onSelect)
-	          });
-	        })
-	      )
-	    );
-	  };
-	
-	  return DropdownMenu;
-	}(_react2['default'].Component);
-	
-	DropdownMenu.propTypes = propTypes;
-	DropdownMenu.defaultProps = defaultProps;
-	
-	exports['default'] = (0, _bootstrapUtils.bsClass)('dropdown-menu', DropdownMenu);
-	module.exports = exports['default'];
-
-/***/ },
-/* 675 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(676), __esModule: true };
-
-/***/ },
-/* 676 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(531);
-	__webpack_require__(677);
-	module.exports = __webpack_require__(488).Array.from;
-
-/***/ },
-/* 677 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var ctx            = __webpack_require__(489)
-	  , $export        = __webpack_require__(486)
-	  , toObject       = __webpack_require__(525)
-	  , call           = __webpack_require__(678)
-	  , isArrayIter    = __webpack_require__(679)
-	  , toLength       = __webpack_require__(510)
-	  , createProperty = __webpack_require__(680)
-	  , getIterFn      = __webpack_require__(681);
-	
-	$export($export.S + $export.F * !__webpack_require__(683)(function(iter){ Array.from(iter); }), 'Array', {
-	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
-	  from: function from(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
-	    var O       = toObject(arrayLike)
-	      , C       = typeof this == 'function' ? this : Array
-	      , aLen    = arguments.length
-	      , mapfn   = aLen > 1 ? arguments[1] : undefined
-	      , mapping = mapfn !== undefined
-	      , index   = 0
-	      , iterFn  = getIterFn(O)
-	      , length, result, step, iterator;
-	    if(mapping)mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
-	    // if object isn't iterable or it's array with default iterator - use simple case
-	    if(iterFn != undefined && !(C == Array && isArrayIter(iterFn))){
-	      for(iterator = iterFn.call(O), result = new C; !(step = iterator.next()).done; index++){
-	        createProperty(result, index, mapping ? call(iterator, mapfn, [step.value, index], true) : step.value);
-	      }
-	    } else {
-	      length = toLength(O.length);
-	      for(result = new C(length); length > index; index++){
-	        createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
-	      }
-	    }
-	    result.length = index;
-	    return result;
-	  }
-	});
-
-
-/***/ },
-/* 678 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// call something on iterator step with safe closing on error
-	var anObject = __webpack_require__(493);
-	module.exports = function(iterator, fn, value, entries){
-	  try {
-	    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
-	  // 7.4.6 IteratorClose(iterator, completion)
-	  } catch(e){
-	    var ret = iterator['return'];
-	    if(ret !== undefined)anObject(ret.call(iterator));
-	    throw e;
-	  }
-	};
-
-/***/ },
-/* 679 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// check on default Array iterator
-	var Iterators  = __webpack_require__(536)
-	  , ITERATOR   = __webpack_require__(542)('iterator')
-	  , ArrayProto = Array.prototype;
-	
-	module.exports = function(it){
-	  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
-	};
-
-/***/ },
-/* 680 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var $defineProperty = __webpack_require__(492)
-	  , createDesc      = __webpack_require__(500);
-	
-	module.exports = function(object, index, value){
-	  if(index in object)$defineProperty.f(object, index, createDesc(0, value));
-	  else object[index] = value;
-	};
-
-/***/ },
-/* 681 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var classof   = __webpack_require__(682)
-	  , ITERATOR  = __webpack_require__(542)('iterator')
-	  , Iterators = __webpack_require__(536);
-	module.exports = __webpack_require__(488).getIteratorMethod = function(it){
-	  if(it != undefined)return it[ITERATOR]
-	    || it['@@iterator']
-	    || Iterators[classof(it)];
-	};
-
-/***/ },
-/* 682 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// getting tag from 19.1.3.6 Object.prototype.toString()
-	var cof = __webpack_require__(507)
-	  , TAG = __webpack_require__(542)('toStringTag')
-	  // ES3 wrong here
-	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
-	
-	// fallback for IE11 Script Access Denied error
-	var tryGet = function(it, key){
-	  try {
-	    return it[key];
-	  } catch(e){ /* empty */ }
-	};
-	
-	module.exports = function(it){
-	  var O, T, B;
-	  return it === undefined ? 'Undefined' : it === null ? 'Null'
-	    // @@toStringTag case
-	    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
-	    // builtinTag case
-	    : ARG ? cof(O)
-	    // ES3 arguments fallback
-	    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
-	};
-
-/***/ },
-/* 683 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var ITERATOR     = __webpack_require__(542)('iterator')
-	  , SAFE_CLOSING = false;
-	
-	try {
-	  var riter = [7][ITERATOR]();
-	  riter['return'] = function(){ SAFE_CLOSING = true; };
-	  Array.from(riter, function(){ throw 2; });
-	} catch(e){ /* empty */ }
-	
-	module.exports = function(exec, skipClosing){
-	  if(!skipClosing && !SAFE_CLOSING)return false;
-	  var safe = false;
-	  try {
-	    var arr  = [7]
-	      , iter = arr[ITERATOR]();
-	    iter.next = function(){ return {done: safe = true}; };
-	    arr[ITERATOR] = function(){ return iter; };
-	    exec(arr);
-	  } catch(e){ /* empty */ }
-	  return safe;
-	};
-
-/***/ },
-/* 684 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _extends2 = __webpack_require__(519);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _objectWithoutProperties2 = __webpack_require__(518);
-	
-	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-	
-	var _classCallCheck2 = __webpack_require__(526);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(527);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(563);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _classnames = __webpack_require__(571);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _Button = __webpack_require__(482);
-	
-	var _Button2 = _interopRequireDefault(_Button);
-	
-	var _SafeAnchor = __webpack_require__(579);
-	
-	var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
-	
-	var _bootstrapUtils = __webpack_require__(574);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var propTypes = {
-	  noCaret: _react2['default'].PropTypes.bool,
-	  open: _react2['default'].PropTypes.bool,
-	  title: _react2['default'].PropTypes.string,
-	  useAnchor: _react2['default'].PropTypes.bool
-	};
-	
-	var defaultProps = {
-	  open: false,
-	  useAnchor: false,
-	  bsRole: 'toggle'
-	};
-	
-	var DropdownToggle = function (_React$Component) {
-	  (0, _inherits3['default'])(DropdownToggle, _React$Component);
-	
-	  function DropdownToggle() {
-	    (0, _classCallCheck3['default'])(this, DropdownToggle);
-	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
-	  }
-	
-	  DropdownToggle.prototype.render = function render() {
-	    var _props = this.props,
-	        noCaret = _props.noCaret,
-	        open = _props.open,
-	        useAnchor = _props.useAnchor,
-	        bsClass = _props.bsClass,
-	        className = _props.className,
-	        children = _props.children,
-	        props = (0, _objectWithoutProperties3['default'])(_props, ['noCaret', 'open', 'useAnchor', 'bsClass', 'className', 'children']);
-	
-	
-	    delete props.bsRole;
-	
-	    var Component = useAnchor ? _SafeAnchor2['default'] : _Button2['default'];
-	    var useCaret = !noCaret;
-	
-	    // This intentionally forwards bsSize and bsStyle (if set) to the
-	    // underlying component, to allow it to render size and style variants.
-	
-	    // FIXME: Should this really fall back to `title` as children?
-	
-	    return _react2['default'].createElement(
-	      Component,
-	      (0, _extends3['default'])({}, props, {
-	        role: 'button',
-	        className: (0, _classnames2['default'])(className, bsClass),
-	        'aria-haspopup': true,
-	        'aria-expanded': open
+	      'span',
+	      (0, _extends3['default'])({}, elementProps, {
+	        className: (0, _classnames2['default'])(className, classes)
 	      }),
-	      children || props.title,
-	      useCaret && ' ',
-	      useCaret && _react2['default'].createElement('span', { className: 'caret' })
+	      children
 	    );
 	  };
 	
-	  return DropdownToggle;
+	  return Badge;
 	}(_react2['default'].Component);
 	
-	DropdownToggle.propTypes = propTypes;
-	DropdownToggle.defaultProps = defaultProps;
+	Badge.propTypes = propTypes;
+	Badge.defaultProps = defaultProps;
 	
-	exports['default'] = (0, _bootstrapUtils.bsClass)('dropdown-toggle', DropdownToggle);
+	exports['default'] = (0, _bootstrapUtils.bsClass)('badge', Badge);
 	module.exports = exports['default'];
-
-/***/ },
-/* 685 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports.requiredRoles = requiredRoles;
-	exports.exclusiveRoles = exclusiveRoles;
-	
-	var _createChainableTypeChecker = __webpack_require__(573);
-	
-	var _createChainableTypeChecker2 = _interopRequireDefault(_createChainableTypeChecker);
-	
-	var _ValidComponentChildren = __webpack_require__(598);
-	
-	var _ValidComponentChildren2 = _interopRequireDefault(_ValidComponentChildren);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function requiredRoles() {
-	  for (var _len = arguments.length, roles = Array(_len), _key = 0; _key < _len; _key++) {
-	    roles[_key] = arguments[_key];
-	  }
-	
-	  return (0, _createChainableTypeChecker2['default'])(function (props, propName, component) {
-	    var missing = void 0;
-	
-	    roles.every(function (role) {
-	      if (!_ValidComponentChildren2['default'].some(props.children, function (child) {
-	        return child.props.bsRole === role;
-	      })) {
-	        missing = role;
-	        return false;
-	      }
-	
-	      return true;
-	    });
-	
-	    if (missing) {
-	      return new Error('(children) ' + component + ' - Missing a required child with bsRole: ' + (missing + '. ' + component + ' must have at least one child of each of ') + ('the following bsRoles: ' + roles.join(', ')));
-	    }
-	
-	    return null;
-	  });
-	}
-	
-	function exclusiveRoles() {
-	  for (var _len2 = arguments.length, roles = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-	    roles[_key2] = arguments[_key2];
-	  }
-	
-	  return (0, _createChainableTypeChecker2['default'])(function (props, propName, component) {
-	    var duplicate = void 0;
-	
-	    roles.every(function (role) {
-	      var childrenWithRole = _ValidComponentChildren2['default'].filter(props.children, function (child) {
-	        return child.props.bsRole === role;
-	      });
-	
-	      if (childrenWithRole.length > 1) {
-	        duplicate = role;
-	        return false;
-	      }
-	
-	      return true;
-	    });
-	
-	    if (duplicate) {
-	      return new Error('(children) ' + component + ' - Duplicate children detected of bsRole: ' + (duplicate + '. Only one child each allowed with the following ') + ('bsRoles: ' + roles.join(', ')));
-	    }
-	
-	    return null;
-	  });
-	}
 
 /***/ }
 /******/ ]);

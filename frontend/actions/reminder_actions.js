@@ -7,6 +7,7 @@ export const RECEIVE_REMINDERS = 'RECEIVE_REMINDERS'
 export const RECEIVE_REMINDER = 'RECEIVE_REMINDER'
 export const REMOVE_REMINDER = 'REMOVE_REMINDER'
 export const RECEIVE_FILTER = 'RECEIVE_FILTER'
+export const RECEIVE_COUNTS = 'RECEIVE_COUNTS'
 
 // api interactions
 export const fetchReminders = () => {
@@ -74,4 +75,9 @@ export const removeReminder = reminder => ({
 export const receiveFilter = filter => ({
   type: RECEIVE_FILTER,
   filter
+})
+
+export const receiveCounts = counts => ({
+  type: RECEIVE_COUNTS,
+  counts
 })
