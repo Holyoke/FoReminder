@@ -36,9 +36,7 @@ class ReminderDetailView extends React.Component {
 
         <Modal.Body>
           <section>{body}</section>
-          <Modal.Header>
-            <CommentListContainer reminder_id={reminder_id} />
-          </Modal.Header>
+          <CommentListContainer reminder_id={reminder_id} />
         </Modal.Body>
 
         <Modal.Footer>

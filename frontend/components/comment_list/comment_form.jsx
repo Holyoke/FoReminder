@@ -1,5 +1,6 @@
 import React from 'react'
 import uniqueId from '../../util/id_generator'
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
 
 class CommentForm extends React.Component {
   constructor (props) {
@@ -28,7 +29,7 @@ class CommentForm extends React.Component {
   render () {
     return (
       <form className="comment-form" onSubmit={this.handleSubmit}>
-        <label>Add comment:
+        <label>
           <input
             className="input"
             ref="title"

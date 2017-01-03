@@ -1,4 +1,9 @@
 import React from 'react'
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
+import Button from 'react-bootstrap/lib/Button'
+import ToolTip from 'react-bootstrap/lib/ToolTip'
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
+
 
 class CommentListItem extends React.Component {
   constructor (props) {
@@ -16,13 +21,21 @@ class CommentListItem extends React.Component {
     const { comment, deleteComment } = this.props
     const { body } = comment
     const { active } = this.state
+    const textColor = active ? 'black' : 'lightgray'
+    const deleteButtonToolTip = <ToolTip id="delete-tool-tip">Delete comment</ToolTip>
+    const deleteButton =
+    <OverlayTrigger placement="bottom" overlay={deleteButtonToolTip}>
+      <Button className="glyphicon glyphicon-minus-sign" onClick={deleteComment}>
+      </Button>
+    </OverlayTrigger>
+
     return (
-      <li className="comment-list-item">
-        <h5>{body}</h5>
-        <section>active:{active.toString()}</section>
-        <button onClick={this.toggleComment}>Toggle Comment</button>
-        <button onClick={deleteComment}>Remove Comment</button>
-      </li>
+      <ListGroupItem className="comment-list-item">
+        <h5 onClick={this.toggleComment} style={{color: textColor}}>
+          {body}
+        </h5>
+        {deleteButton}
+      </ListGroupItem>
     )
   }
 }
