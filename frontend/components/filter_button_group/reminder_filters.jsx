@@ -27,8 +27,8 @@ class ReminderFilters extends React.Component {
         : ''
 
       return (
-        <ButtonGroup key={idx}>
-          <Button style={{height: '40 px'}} active={filter === {rFilter}}
+        <ButtonGroup bsSize="large" key={idx}>
+          <Button active={filter === {rFilter}}
             data-filter={rFilter}
             onClick={updateFilter}>
               {filterName}

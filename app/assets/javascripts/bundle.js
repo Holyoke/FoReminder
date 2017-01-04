@@ -68227,10 +68227,10 @@
 	
 	        return _react2.default.createElement(
 	          _ButtonGroup2.default,
-	          { key: idx },
+	          { bsSize: 'large', key: idx },
 	          _react2.default.createElement(
 	            _Button2.default,
-	            { style: { height: '40 px' }, active: filter === { rFilter: rFilter },
+	            { active: filter === { rFilter: rFilter },
 	              'data-filter': rFilter,
 	              onClick: updateFilter },
 	            filterName,
