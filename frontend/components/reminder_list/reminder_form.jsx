@@ -8,7 +8,6 @@ import ErrorsListContainer from '../errors_list/errors_list_container'
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
 import Button from 'react-bootstrap/lib/Button'
 
-
 import 'react-datepicker/dist/react-datepicker.css'
 
 class ReminderForm extends React.Component {
@@ -27,7 +26,7 @@ class ReminderForm extends React.Component {
   }
 
   update (property) {
-    return e => this.setState({[property]: e.target.value })
+    return (e) => this.setState({[property]: e.target.value })
   }
 
   handleSubmit (e) {
@@ -58,7 +57,7 @@ class ReminderForm extends React.Component {
     return (
       <ListGroupItem>
         <form className="reminder-form" onSubmit={this.handleSubmit}>
-          <Button onClick={this.handleSubmit} className="glyphicon glyphicon-plus-sign"></Button>
+          <Button type="submit" onClick={this.handleSubmit} className="glyphicon glyphicon-plus-sign"></Button>
           <ErrorsListContainer />
             <input
               className="input"
@@ -68,19 +67,9 @@ class ReminderForm extends React.Component {
               onChange={this.update('title')}
                />
 
-            <input
-              className="input"
-              ref="title"
-              value={this.state.body}
-              placeholder="Add a description..."
-              onChange={this.update('body')}
-               />
-
           <DatePicker
             selected={this.state.remind_date}
             onChange={this.handleDataChange} />
-
-          <button style={{visibility: 'hidden'}}></button>
 
         </form>
       </ListGroupItem>

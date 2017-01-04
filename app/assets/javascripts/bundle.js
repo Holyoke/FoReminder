@@ -61335,6 +61335,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _Alert = __webpack_require__(688);
+	
+	var _Alert2 = _interopRequireDefault(_Alert);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var ErrorsList = exports.ErrorsList = function ErrorsList(_ref) {
@@ -61345,7 +61349,11 @@
 	    return _react2.default.createElement(
 	      'li',
 	      { style: { color: 'red' }, key: idx },
-	      error
+	      _react2.default.createElement(
+	        _Alert2.default,
+	        { bsStyle: 'warning' },
+	        error
+	      )
 	    );
 	  });
 	
@@ -62018,7 +62026,7 @@
 	        _react2.default.createElement(
 	          'form',
 	          { className: 'reminder-form', onSubmit: this.handleSubmit },
-	          _react2.default.createElement(_Button2.default, { onClick: this.handleSubmit, className: 'glyphicon glyphicon-plus-sign' }),
+	          _react2.default.createElement(_Button2.default, { type: 'submit', onClick: this.handleSubmit, className: 'glyphicon glyphicon-plus-sign' }),
 	          _react2.default.createElement(_errors_list_container2.default, null),
 	          _react2.default.createElement('input', {
 	            className: 'input',
@@ -62027,17 +62035,9 @@
 	            placeholder: 'Anything on your mind?...',
 	            onChange: this.update('title')
 	          }),
-	          _react2.default.createElement('input', {
-	            className: 'input',
-	            ref: 'title',
-	            value: this.state.body,
-	            placeholder: 'Add a description...',
-	            onChange: this.update('body')
-	          }),
 	          _react2.default.createElement(_reactDatepicker2.default, {
 	            selected: this.state.remind_date,
-	            onChange: this.handleDataChange }),
-	          _react2.default.createElement('button', { style: { visibility: 'hidden' } })
+	            onChange: this.handleDataChange })
 	        )
 	      );
 	    }
@@ -68222,7 +68222,7 @@
 	          { key: idx },
 	          _react2.default.createElement(
 	            _Button2.default,
-	            { active: filter === { rFilter: rFilter },
+	            { style: { height: '40 px' }, active: filter === { rFilter: rFilter },
 	              'data-filter': rFilter,
 	              onClick: updateFilter },
 	            filterName,
@@ -68557,6 +68557,137 @@
 	    Incomplete: incompleteCount
 	  };
 	};
+
+/***/ },
+/* 688 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _values = __webpack_require__(483);
+	
+	var _values2 = _interopRequireDefault(_values);
+	
+	var _extends3 = __webpack_require__(519);
+	
+	var _extends4 = _interopRequireDefault(_extends3);
+	
+	var _objectWithoutProperties2 = __webpack_require__(518);
+	
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+	
+	var _classCallCheck2 = __webpack_require__(526);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(527);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(563);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _classnames = __webpack_require__(571);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _bootstrapUtils = __webpack_require__(574);
+	
+	var _StyleConfig = __webpack_require__(578);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var propTypes = {
+	  onDismiss: _react2['default'].PropTypes.func,
+	  closeLabel: _react2['default'].PropTypes.string
+	};
+	
+	var defaultProps = {
+	  closeLabel: 'Close alert'
+	};
+	
+	var Alert = function (_React$Component) {
+	  (0, _inherits3['default'])(Alert, _React$Component);
+	
+	  function Alert() {
+	    (0, _classCallCheck3['default'])(this, Alert);
+	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
+	  }
+	
+	  Alert.prototype.renderDismissButton = function renderDismissButton(onDismiss) {
+	    return _react2['default'].createElement(
+	      'button',
+	      {
+	        type: 'button',
+	        className: 'close',
+	        onClick: onDismiss,
+	        'aria-hidden': 'true',
+	        tabIndex: '-1'
+	      },
+	      _react2['default'].createElement(
+	        'span',
+	        null,
+	        '\xD7'
+	      )
+	    );
+	  };
+	
+	  Alert.prototype.renderSrOnlyDismissButton = function renderSrOnlyDismissButton(onDismiss, closeLabel) {
+	    return _react2['default'].createElement(
+	      'button',
+	      {
+	        type: 'button',
+	        className: 'close sr-only',
+	        onClick: onDismiss
+	      },
+	      closeLabel
+	    );
+	  };
+	
+	  Alert.prototype.render = function render() {
+	    var _extends2;
+	
+	    var _props = this.props,
+	        onDismiss = _props.onDismiss,
+	        closeLabel = _props.closeLabel,
+	        className = _props.className,
+	        children = _props.children,
+	        props = (0, _objectWithoutProperties3['default'])(_props, ['onDismiss', 'closeLabel', 'className', 'children']);
+	
+	    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(props),
+	        bsProps = _splitBsProps[0],
+	        elementProps = _splitBsProps[1];
+	
+	    var dismissable = !!onDismiss;
+	    var classes = (0, _extends4['default'])({}, (0, _bootstrapUtils.getClassSet)(bsProps), (_extends2 = {}, _extends2[(0, _bootstrapUtils.prefix)(bsProps, 'dismissable')] = dismissable, _extends2));
+	
+	    return _react2['default'].createElement(
+	      'div',
+	      (0, _extends4['default'])({}, elementProps, {
+	        role: 'alert',
+	        className: (0, _classnames2['default'])(className, classes)
+	      }),
+	      dismissable && this.renderDismissButton(onDismiss),
+	      children,
+	      dismissable && this.renderSrOnlyDismissButton(onDismiss, closeLabel)
+	    );
+	  };
+	
+	  return Alert;
+	}(_react2['default'].Component);
+	
+	Alert.propTypes = propTypes;
+	Alert.defaultProps = defaultProps;
+	
+	exports['default'] = (0, _bootstrapUtils.bsStyles)((0, _values2['default'])(_StyleConfig.State), _StyleConfig.State.INFO, (0, _bootstrapUtils.bsClass)('alert', Alert));
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);
