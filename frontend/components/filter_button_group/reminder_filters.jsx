@@ -16,9 +16,9 @@ class ReminderFilters extends React.Component {
 
   render () {
     const {updateFilter} = this
-    const { filter, counts } = this.props.remindersFilter
+    const { filter } = this.props.remindersFilter
+    const { counts } = this.props
     const filters = ['SHOW_ALL', 'SHOW_COMPLETED', 'SHOW_INCOMPLETE']
-    console.log(this.props.remindersFilter)
     const buttonItems = filters.map((rFilter, idx) => {
       // assumes filters starts with 'SHOW_'...
       const filterName = rFilter[5] + rFilter.substring(6, rFilter.length).toLowerCase()

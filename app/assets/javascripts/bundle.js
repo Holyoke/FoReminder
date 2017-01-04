@@ -68118,14 +68118,16 @@
 	
 	var _reminder_filters2 = _interopRequireDefault(_reminder_filters);
 	
+	var _reminder_filters_selectors = __webpack_require__(687);
+	
 	var _reminder_actions = __webpack_require__(202);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var mapStateToProps = function mapStateToProps(_ref) {
-	  var remindersFilter = _ref.remindersFilter;
+	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    remindersFilter: remindersFilter
+	    remindersFilter: state.remindersFilter,
+	    counts: (0, _reminder_filters_selectors.filterCounts)(state)
 	  };
 	};
 	
@@ -68201,12 +68203,10 @@
 	    key: 'render',
 	    value: function render() {
 	      var updateFilter = this.updateFilter;
-	      var _props$remindersFilte = this.props.remindersFilter,
-	          filter = _props$remindersFilte.filter,
-	          counts = _props$remindersFilte.counts;
+	      var filter = this.props.remindersFilter.filter;
+	      var counts = this.props.counts;
 	
 	      var filters = ['SHOW_ALL', 'SHOW_COMPLETED', 'SHOW_INCOMPLETE'];
-	      console.log(this.props.remindersFilter);
 	      var buttonItems = filters.map(function (rFilter, idx) {
 	        // assumes filters starts with 'SHOW_'...
 	        var filterName = rFilter[5] + rFilter.substring(6, rFilter.length).toLowerCase();
@@ -68522,6 +68522,41 @@
 	
 	exports['default'] = (0, _bootstrapUtils.bsClass)('badge', Badge);
 	module.exports = exports['default'];
+
+/***/ },
+/* 687 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var filters = exports.filters = function filters(_ref) {
+	  var remindersFilter = _ref.remindersFilter;
+	
+	  return remindersFilter.filter;
+	};
+	
+	var filterCounts = exports.filterCounts = function filterCounts(_ref2) {
+	  var reminders = _ref2.reminders;
+	
+	  var allCount = Object.keys(reminders).length;
+	
+	  var completedCount = 0;
+	  for (var id in reminders) {
+	    if (reminders[id].done === true) {
+	      completedCount += 1;
+	    }
+	  }
+	
+	  var incompleteCount = allCount - completedCount;
+	  return {
+	    All: Object.keys(reminders).length,
+	    Completed: completedCount,
+	    Incomplete: incompleteCount
+	  };
+	};
 
 /***/ }
 /******/ ]);
