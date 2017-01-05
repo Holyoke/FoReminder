@@ -62972,6 +62972,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -62990,9 +62992,9 @@
 	    var _this = _possibleConstructorReturn(this, (ReminderDetailView.__proto__ || Object.getPrototypeOf(ReminderDetailView)).call(this, props));
 	
 	    _this.handleDeleteClick = _this.handleDeleteClick.bind(_this);
-	    _this.state = { body: "" };
+	    _this.state = { body: "", title: "", edited: false };
 	    _this.handleDeleteClick = _this.handleDeleteClick.bind(_this);
-	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.update = _this.update.bind(_this);
 	    _this.loadReminder = _this.loadReminder.bind(_this);
 	    _this.handleCloseClick = _this.handleCloseClick.bind(_this);
 	    return _this;
@@ -63011,33 +63013,47 @@
 	      toggleModal(e);
 	    }
 	  }, {
-	    key: 'handleChange',
-	    value: function handleChange(e) {
-	      this.setState({ body: e.target.value });
+	    key: 'update',
+	    value: function update(property) {
+	      var _this2 = this;
+	
+	      return function (e) {
+	        var _this2$setState;
+	
+	        return _this2.setState((_this2$setState = {}, _defineProperty(_this2$setState, property, e.target.value), _defineProperty(_this2$setState, 'edited', true), _this2$setState));
+	      };
 	    }
 	  }, {
 	    key: 'loadReminder',
 	    value: function loadReminder() {
-	      var body = this.props.reminder.body;
+	      var _props$reminder = this.props.reminder,
+	          body = _props$reminder.body,
+	          title = _props$reminder.title;
 	
-	      this.setState({ body: body });
+	      this.setState({ body: body, title: title, edited: false });
 	    }
 	  }, {
 	    key: 'handleCloseClick',
 	    value: function handleCloseClick() {
-	      var reminder = this.props.reminder;
+	      var _props2 = this.props,
+	          reminder = _props2.reminder,
+	          updateReminder = _props2.updateReminder,
+	          toggleModal = _props2.toggleModal;
 	
 	      reminder.body = this.state.body;
+	      reminder.title = this.state.title;
 	      var data = { reminder: reminder };
-	      this.props.updateReminder(data);
-	      this.props.toggleModal();
+	      if (this.state.edited) {
+	        updateReminder(data);
+	      }
+	      toggleModal();
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props2 = this.props,
-	          reminder = _props2.reminder,
-	          show = _props2.show;
+	      var _props3 = this.props,
+	          reminder = _props3.reminder,
+	          show = _props3.show;
 	
 	      var reminder_id = reminder.id;
 	      var body = reminder.body,
@@ -63057,7 +63073,7 @@
 	          _react2.default.createElement(
 	            _Modal2.default.Title,
 	            null,
-	            title
+	            _react2.default.createElement(_reactContenteditable2.default, { html: title, disabled: false, onChange: this.update('title') })
 	          ),
 	          _react2.default.createElement(
 	            'section',
@@ -63077,7 +63093,7 @@
 	          _react2.default.createElement(
 	            'section',
 	            { style: { fontStyle: 'italic', fontSize: '0.75em' } },
-	            _react2.default.createElement(_reactContenteditable2.default, { html: reminderBody, disabled: false, onChange: this.handleChange })
+	            _react2.default.createElement(_reactContenteditable2.default, { html: reminderBody, disabled: false, onChange: this.update('body') })
 	          ),
 	          _react2.default.createElement(_comment_list_container2.default, { reminder_id: reminder_id })
 	        ),

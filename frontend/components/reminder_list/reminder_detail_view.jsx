@@ -12,9 +12,9 @@ class ReminderDetailView extends React.Component {
   constructor (props) {
     super (props)
     this.handleDeleteClick = this.handleDeleteClick.bind(this)
-    this.state = { body: "" }
+    this.state = { body: "", title: "", edited: false }
     this.handleDeleteClick = this.handleDeleteClick.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.update = this.update.bind(this)
     this.loadReminder = this.loadReminder.bind(this)
     this.handleCloseClick = this.handleCloseClick.bind(this)
   }
@@ -26,21 +26,22 @@ class ReminderDetailView extends React.Component {
     toggleModal(e)
   }
 
-  handleChange (e) {
-    this.setState({body: e.target.value})
+  update (property) {
+    return (e) => this.setState({[property]: e.target.value, edited: true })
   }
 
   loadReminder () {
-    const { body } = this.props.reminder
-    this.setState({body})
+    const { body,title } = this.props.reminder
+    this.setState({body, title, edited: false})
   }
 
   handleCloseClick () {
-    const { reminder } = this.props
+    const { reminder, updateReminder, toggleModal } = this.props
     reminder.body = this.state.body
+    reminder.title = this.state.title
     const data = { reminder }
-    this.props.updateReminder(data)
-    this.props.toggleModal()
+    if (this.state.edited) { updateReminder(data) }
+    toggleModal()
   }
 
   render () {
@@ -54,14 +55,16 @@ class ReminderDetailView extends React.Component {
     return (
       <Modal style={style} className='reminder-detail-view' show={show} onHide={this.props.onHide} onShow={this.loadReminder} >
         <Modal.Header className='reminder-modal-header'>
-          <Modal.Title>{title}</Modal.Title>
+          <Modal.Title>
+            <ContentEditable html={title} disabled={false} onChange={this.update('title')} />
+          </Modal.Title>
           <section>Due {remind_date}</section>
           <Button bsStyle="warning" bsSize="xsmall" onClick={this.handleDeleteClick}>Delete</Button>
         </Modal.Header>
 
         <Modal.Body>
           <section style={{fontStyle: 'italic', fontSize: '0.75em'}}>
-            <ContentEditable html={reminderBody} disabled={false} onChange={this.handleChange} />
+            <ContentEditable html={reminderBody} disabled={false} onChange={this.update('body')} />
           </section>
           <CommentListContainer reminder_id={reminder_id} />
         </Modal.Body>
