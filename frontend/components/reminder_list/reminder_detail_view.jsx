@@ -25,9 +25,10 @@ class ReminderDetailView extends React.Component {
     const reminder_id = reminder.id
     let { body, remind_date, title } = reminder
     remind_date = moment(remind_date).format('MM/DD/YY')
+    const style = {width: '75%', marginLeft: 'auto', marginRight: 'auto', marginTop: '12.5%'}
 
     return (
-      <Modal className='reminder-detail-view' show={show} onHide={this.props.onHide} >
+      <Modal style={style} className='reminder-detail-view' show={show} onHide={this.props.onHide} >
         <Modal.Header className='reminder-modal-header'>
           <Modal.Title>{title}</Modal.Title>
           <section>Due {remind_date}</section>

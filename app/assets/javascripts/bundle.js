@@ -63013,10 +63013,11 @@
 	          title = reminder.title;
 	
 	      remind_date = (0, _moment2.default)(remind_date).format('MM/DD/YY');
+	      var style = { width: '75%', marginLeft: 'auto', marginRight: 'auto', marginTop: '12.5%' };
 	
 	      return _react2.default.createElement(
 	        _Modal2.default,
-	        { className: 'reminder-detail-view', show: show, onHide: this.props.onHide },
+	        { style: style, className: 'reminder-detail-view', show: show, onHide: this.props.onHide },
 	        _react2.default.createElement(
 	          _Modal2.default.Header,
 	          { className: 'reminder-modal-header' },
