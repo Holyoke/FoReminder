@@ -27,7 +27,10 @@ class ReminderDetailView extends React.Component {
   }
 
   update (property) {
-    return (e) => this.setState({[property]: e.target.value, edited: true })
+    return (e) => {
+      debugger
+      this.setState({[property]: e.target.value, edited: true })
+    }
   }
 
   loadReminder () {
@@ -53,7 +56,12 @@ class ReminderDetailView extends React.Component {
     const reminderBody = body === '' ? 'Click to add a description' : body
 
     return (
-      <Modal style={style} className='reminder-detail-view' show={show} onHide={this.props.onHide} onShow={this.loadReminder} >
+      <Modal style={style}
+             className='reminder-detail-view'
+             show={show}
+             onHide={this.handleCloseClick}
+             onShow={this.loadReminder}>
+             
         <Modal.Header className='reminder-modal-header'>
           <Modal.Title>
             <ContentEditable html={title} disabled={false} onChange={this.update('title')} />
