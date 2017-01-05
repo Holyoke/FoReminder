@@ -62048,8 +62048,6 @@
 	      return errors.data.errors;
 	    case 'Failed to submit email registration.':
 	      return errors.data.errors.full_messages;
-	    default:
-	      break;
 	  }
 	
 	  // api resources errors
@@ -62230,9 +62228,9 @@
 	          'Reminders'
 	        ),
 	        _react2.default.createElement(_reminder_filters_container2.default, null),
+	        _react2.default.createElement(_reminder_form2.default, { createReminder: createReminder, errors: errors }),
 	        reminderItems,
-	        reminderModal,
-	        _react2.default.createElement(_reminder_form2.default, { createReminder: createReminder, errors: errors })
+	        reminderModal
 	      );
 	    }
 	  }]);
@@ -63127,6 +63125,7 @@
 	    _this.update = _this.update.bind(_this);
 	    _this.loadReminder = _this.loadReminder.bind(_this);
 	    _this.handleCloseClick = _this.handleCloseClick.bind(_this);
+	    _this._sanitizeContentEditable = _this._sanitizeContentEditable.bind(_this);
 	    return _this;
 	  }
 	
@@ -63150,7 +63149,6 @@
 	      return function (e) {
 	        var _this2$setState;
 	
-	        debugger;
 	        _this2.setState((_this2$setState = {}, _defineProperty(_this2$setState, property, e.target.value), _defineProperty(_this2$setState, 'edited', true), _this2$setState));
 	      };
 	    }
@@ -63164,18 +63162,33 @@
 	      this.setState({ body: body, title: title, edited: false });
 	    }
 	  }, {
+	    key: '_sanitizeContentEditable',
+	    value: function _sanitizeContentEditable(string) {
+	      // regex to remove tags created after pressing enter
+	      string = string.replace(/<div>/g, '');
+	      string = string.replace(/<\/div>/g, '');
+	      string = string.replace(/<br>/g, '');
+	      return string;
+	    }
+	  }, {
 	    key: 'handleCloseClick',
 	    value: function handleCloseClick() {
+	      var _this3 = this;
+	
 	      var _props2 = this.props,
 	          reminder = _props2.reminder,
 	          updateReminder = _props2.updateReminder,
 	          toggleModal = _props2.toggleModal;
 	
-	      reminder.body = this.state.body;
-	      reminder.title = this.state.title;
+	      var edittedTitle = this._sanitizeContentEditable(this.state.title);
+	      reminder.title = edittedTitle !== "" ? edittedTitle : reminder.title;
+	      reminder.body = this._sanitizeContentEditable(this.state.body);
 	      var data = { reminder: reminder };
+	
 	      if (this.state.edited) {
-	        updateReminder(data);
+	        updateReminder(data).then(function () {}, function (err) {
+	          return _this3.setState({ title: reminder.body });
+	        });
 	      }
 	      toggleModal();
 	    }

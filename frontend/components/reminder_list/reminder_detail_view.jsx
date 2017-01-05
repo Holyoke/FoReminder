@@ -10,13 +10,14 @@ import CommentListContainer from '../comment_list/comment_list_container'
 
 class ReminderDetailView extends React.Component {
   constructor (props) {
-    super (props)
+    super(props)
     this.handleDeleteClick = this.handleDeleteClick.bind(this)
     this.state = { body: "", title: "", edited: false }
     this.handleDeleteClick = this.handleDeleteClick.bind(this)
     this.update = this.update.bind(this)
     this.loadReminder = this.loadReminder.bind(this)
     this.handleCloseClick = this.handleCloseClick.bind(this)
+    this._sanitizeContentEditable = this._sanitizeContentEditable.bind(this)
   }
 
   handleDeleteClick (e) {
@@ -28,7 +29,6 @@ class ReminderDetailView extends React.Component {
 
   update (property) {
     return (e) => {
-      debugger
       this.setState({[property]: e.target.value, edited: true })
     }
   }
@@ -38,12 +38,25 @@ class ReminderDetailView extends React.Component {
     this.setState({body, title, edited: false})
   }
 
+  _sanitizeContentEditable (string) {
+    // regex to remove tags created after pressing enter
+    string = string.replace(/<div>/g, '')
+    string = string.replace(/<\/div>/g, '')
+    string = string.replace(/<br>/g, '')
+    return string
+  }
+
   handleCloseClick () {
     const { reminder, updateReminder, toggleModal } = this.props
-    reminder.body = this.state.body
-    reminder.title = this.state.title
+    const edittedTitle = this._sanitizeContentEditable(this.state.title)
+    reminder.title = edittedTitle !== "" ? edittedTitle : reminder.title
+    reminder.body = this._sanitizeContentEditable(this.state.body)
     const data = { reminder }
-    if (this.state.edited) { updateReminder(data) }
+    
+    if (this.state.edited) {
+      updateReminder(data).then(() => {},
+      (err) => this.setState({title: reminder.body}))
+    }
     toggleModal()
   }
 
@@ -61,7 +74,7 @@ class ReminderDetailView extends React.Component {
              show={show}
              onHide={this.handleCloseClick}
              onShow={this.loadReminder}>
-             
+
         <Modal.Header className='reminder-modal-header'>
           <Modal.Title>
             <ContentEditable html={title} disabled={false} onChange={this.update('title')} />

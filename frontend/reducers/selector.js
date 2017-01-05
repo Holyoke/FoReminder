@@ -50,8 +50,6 @@ export const parseErrors = ({ errors }) => {
       return errors.data.errors
     case 'Failed to submit email registration.':
       return errors.data.errors.full_messages
-    default:
-      break
   }
 
   // api resources errors
