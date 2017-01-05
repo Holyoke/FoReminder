@@ -63,13 +63,15 @@ class ReminderForm extends React.Component {
               className="input"
               ref="title"
               value={this.state.title}
-              placeholder="Anything on your mind?..."
+              placeholder="Create reminder..."
               onChange={this.update('title')}
                />
-
-          <DatePicker
+          <label>
+             Remind by
+            <DatePicker
             selected={this.state.remind_date}
             onChange={this.handleDataChange} />
+          </label>
 
         </form>
       </ListGroupItem>

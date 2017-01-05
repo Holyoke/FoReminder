@@ -58634,7 +58634,7 @@
 	  var children = _ref.children;
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'app' },
+	    { className: 'app', style: { width: "75%", marginLeft: "auto", marginRight: "auto" } },
 	    _react2.default.createElement(
 	      'h1',
 	      null,
@@ -62040,12 +62040,17 @@
 	            className: 'input',
 	            ref: 'title',
 	            value: this.state.title,
-	            placeholder: 'Anything on your mind?...',
+	            placeholder: 'Create reminder...',
 	            onChange: this.update('title')
 	          }),
-	          _react2.default.createElement(_reactDatepicker2.default, {
-	            selected: this.state.remind_date,
-	            onChange: this.handleDataChange })
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            'Remind by',
+	            _react2.default.createElement(_reactDatepicker2.default, {
+	              selected: this.state.remind_date,
+	              onChange: this.handleDataChange })
+	          )
 	        )
 	      );
 	    }
