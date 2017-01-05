@@ -7,7 +7,6 @@ import * as styles from '../../styles/reminder_styles'
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
 import Button from 'react-bootstrap/lib/Button'
 
-
 class ReminderListItem extends React.Component {
   constructor (props) {
     super(props)
@@ -28,25 +27,26 @@ class ReminderListItem extends React.Component {
     updateReminder(toggledReminder)
   }
 
-
   render () {
     const { reminder, selectReminder } = this.props
     let { title, done, remind_date } = reminder
     remind_date = moment(remind_date).format('MM/DD')
+
     const glyph = done ? 'glyphicon glyphicon-check' : 'glyphicon glyphicon-unchecked'
     const toggleButton =
       <Button style={{marginRight: '1em'}} onClick={this.toggleDone}>
         <span className={glyph} aria-hidden="true"></span>
       </Button>
 
-
+    const dateColor = moment().isBefore(reminder.remind_date) ? 'grey' : 'red'
     const itemTextStatus = done ? 'line-through' : ''
+
     return (
       <ListGroupItem className="reminder-list-item">
           {toggleButton}
           <div style={styles.reminderListItemTitleDate} className="title-date">
             <div style={{textDecoration: itemTextStatus}} onClick={() => selectReminder(reminder)}>{title}</div>
-            <div style={{fontSize: '0.75em', color: 'grey'}}>{remind_date}</div>
+            <div style={{fontSize: '0.75em', color: dateColor }}>{remind_date}</div>
           </div>
       </ListGroupItem>
     )

@@ -17,7 +17,7 @@ class ReminderForm extends React.Component {
       title: '',
       body: '',
       done: false,
-      remind_date: moment().add(24, 'hours')
+      remind_date: moment().add(1, 'hours')
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)

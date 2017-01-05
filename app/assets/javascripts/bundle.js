@@ -62331,6 +62331,7 @@
 	          remind_date = reminder.remind_date;
 	
 	      remind_date = (0, _moment2.default)(remind_date).format('MM/DD');
+	
 	      var glyph = done ? 'glyphicon glyphicon-check' : 'glyphicon glyphicon-unchecked';
 	      var toggleButton = _react2.default.createElement(
 	        _Button2.default,
@@ -62338,7 +62339,9 @@
 	        _react2.default.createElement('span', { className: glyph, 'aria-hidden': 'true' })
 	      );
 	
+	      var dateColor = (0, _moment2.default)().isBefore(reminder.remind_date) ? 'grey' : 'red';
 	      var itemTextStatus = done ? 'line-through' : '';
+	
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
 	        { className: 'reminder-list-item' },
@@ -62355,7 +62358,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { style: { fontSize: '0.75em', color: 'grey' } },
+	            { style: { fontSize: '0.75em', color: dateColor } },
 	            remind_date
 	          )
 	        )
@@ -62450,7 +62453,7 @@
 	      title: '',
 	      body: '',
 	      done: false,
-	      remind_date: (0, _moment2.default)().add(24, 'hours')
+	      remind_date: (0, _moment2.default)().add(1, 'hours')
 	    };
 	
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
