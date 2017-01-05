@@ -3,8 +3,10 @@ import merge from 'lodash/merge'
 import moment from 'moment'
 
 // components
+import * as styles from '../../styles/reminder_styles'
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
 import Button from 'react-bootstrap/lib/Button'
+
 
 class ReminderListItem extends React.Component {
   constructor (props) {
@@ -33,18 +35,19 @@ class ReminderListItem extends React.Component {
     remind_date = moment(remind_date).format('MM/DD')
     const glyph = done ? 'glyphicon glyphicon-check' : 'glyphicon glyphicon-unchecked'
     const toggleButton =
-      <Button onClick={this.toggleDone}>
+      <Button style={{marginRight: '1em'}} onClick={this.toggleDone}>
         <span className={glyph} aria-hidden="true"></span>
       </Button>
 
 
     const itemTextStatus = done ? 'line-through' : ''
-
     return (
       <ListGroupItem className="reminder-list-item">
           {toggleButton}
-          <span style={{textDecoration: itemTextStatus}} onClick={() => selectReminder(reminder)}>{title} | </span>
-          <span>{remind_date}</span>
+          <div style={styles.reminderListItemTitleDate} className="title-date">
+            <div style={{textDecoration: itemTextStatus}} onClick={() => selectReminder(reminder)}>{title}</div>
+            <div style={{fontSize: '0.75em', color: 'grey'}}>{remind_date}</div>
+          </div>
       </ListGroupItem>
     )
   }

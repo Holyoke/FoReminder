@@ -67,7 +67,6 @@ class ReminderForm extends React.Component {
               onChange={this.update('title')}
                />
           <label>
-             Remind by
             <DatePicker
             selected={this.state.remind_date}
             onChange={this.handleDataChange} />
