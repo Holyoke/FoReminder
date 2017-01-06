@@ -52,7 +52,7 @@ class ReminderDetailView extends React.Component {
     reminder.title = edittedTitle !== "" ? edittedTitle : reminder.title
     reminder.body = this._sanitizeContentEditable(this.state.body)
     const data = { reminder }
-    
+
     if (this.state.edited) {
       updateReminder(data).then(() => {},
       (err) => this.setState({title: reminder.body}))
@@ -79,7 +79,7 @@ class ReminderDetailView extends React.Component {
           <Modal.Title>
             <ContentEditable html={title} disabled={false} onChange={this.update('title')} />
           </Modal.Title>
-          <section>Due {remind_date}</section>
+          <section>{remind_date}</section>
           <Button bsStyle="warning" bsSize="xsmall" onClick={this.handleDeleteClick}>Delete</Button>
         </Modal.Header>
 

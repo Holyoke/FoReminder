@@ -45,9 +45,9 @@ class ReminderList extends React.Component {
 
     const { selectedReminder } = this.state
     const reminderModal = <ReminderDetailViewContainer
-                                reminder={selectedReminder}
-                                show={this.state.showModal}
-                                toggleModal={this.toggleModal} />
+      reminder={selectedReminder}
+      show={this.state.showModal}
+      toggleModal={this.toggleModal} />
 
     return (
       <ListGroup className="reminder-list" onClick={this.debug}>

@@ -6,6 +6,8 @@ import moment from 'moment'
 import * as styles from '../../styles/reminder_styles'
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
 import Button from 'react-bootstrap/lib/Button'
+import ToolTip from 'react-bootstrap/lib/ToolTip'
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
 
 class ReminderListItem extends React.Component {
   constructor (props) {
@@ -32,6 +34,7 @@ class ReminderListItem extends React.Component {
     let { title, done, remind_date } = reminder
     remind_date = moment(remind_date).format('MM/DD')
 
+    // button for toggling
     const glyph = done ? 'glyphicon glyphicon-check' : 'glyphicon glyphicon-unchecked'
     const toggleButton =
       <Button style={{marginRight: '1em'}} onClick={this.toggleDone}>
@@ -41,13 +44,20 @@ class ReminderListItem extends React.Component {
     const dateColor = moment().isBefore(reminder.remind_date) ? 'grey' : 'red'
     const itemTextStatus = done ? 'line-through' : ''
 
+    //  tooltip for expanding modal
+    const reminderItemTip = <ToolTip id="reminder-item-tip" arrowOffsetLeft={"-100px !important"}>
+      Click for more details
+    </ToolTip>
+
     return (
       <ListGroupItem className="reminder-list-item">
-          {toggleButton}
-          <div style={styles.reminderListItemTitleDate} className="title-date">
-            <div style={{textDecoration: itemTextStatus}} onClick={() => selectReminder(reminder)}>{title}</div>
-            <div style={{fontSize: '0.75em', color: dateColor }}>{remind_date}</div>
-          </div>
+            {toggleButton}
+            <OverlayTrigger overlay={reminderItemTip} placement="top" delayShow={600}>
+              <div style={styles.reminderListItemTitleDate} className="title-date" onClick={() => selectReminder(reminder)}>
+                <div style={{textDecoration: itemTextStatus}}>{title}</div>
+                <div style={{fontSize: '0.75em', color: dateColor }}>{remind_date}</div>
+              </div>
+            </OverlayTrigger>
       </ListGroupItem>
     )
   }

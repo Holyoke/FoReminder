@@ -62276,6 +62276,14 @@
 	
 	var _Button2 = _interopRequireDefault(_Button);
 	
+	var _ToolTip = __webpack_require__(652);
+	
+	var _ToolTip2 = _interopRequireDefault(_ToolTip);
+	
+	var _OverlayTrigger = __webpack_require__(654);
+	
+	var _OverlayTrigger2 = _interopRequireDefault(_OverlayTrigger);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -62332,6 +62340,7 @@
 	
 	      remind_date = (0, _moment2.default)(remind_date).format('MM/DD');
 	
+	      // button for toggling
 	      var glyph = done ? 'glyphicon glyphicon-check' : 'glyphicon glyphicon-unchecked';
 	      var toggleButton = _react2.default.createElement(
 	        _Button2.default,
@@ -62342,24 +62351,35 @@
 	      var dateColor = (0, _moment2.default)().isBefore(reminder.remind_date) ? 'grey' : 'red';
 	      var itemTextStatus = done ? 'line-through' : '';
 	
+	      //  tooltip for expanding modal
+	      var reminderItemTip = _react2.default.createElement(
+	        _ToolTip2.default,
+	        { id: 'reminder-item-tip', arrowOffsetLeft: "-100px !important" },
+	        'Click for more details'
+	      );
+	
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
 	        { className: 'reminder-list-item' },
 	        toggleButton,
 	        _react2.default.createElement(
-	          'div',
-	          { style: styles.reminderListItemTitleDate, className: 'title-date' },
+	          _OverlayTrigger2.default,
+	          { overlay: reminderItemTip, placement: 'top', delayShow: 600 },
 	          _react2.default.createElement(
 	            'div',
-	            { style: { textDecoration: itemTextStatus }, onClick: function onClick() {
+	            { style: styles.reminderListItemTitleDate, className: 'title-date', onClick: function onClick() {
 	                return selectReminder(reminder);
 	              } },
-	            title
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { style: { fontSize: '0.75em', color: dateColor } },
-	            remind_date
+	            _react2.default.createElement(
+	              'div',
+	              { style: { textDecoration: itemTextStatus } },
+	              title
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { style: { fontSize: '0.75em', color: dateColor } },
+	              remind_date
+	            )
 	          )
 	        )
 	      );
@@ -62383,7 +62403,9 @@
 	var reminderListItemTitleDate = exports.reminderListItemTitleDate = {
 	  display: 'inline-block',
 	  verticalAlign: 'middle',
-	  marginTop: '-4px'
+	  marginTop: '-4px',
+	  width: '80%',
+	  cursor: 'pointer'
 	};
 
 /***/ },
@@ -63251,7 +63273,6 @@
 	          _react2.default.createElement(
 	            'section',
 	            null,
-	            'Due ',
 	            remind_date
 	          ),
 	          _react2.default.createElement(

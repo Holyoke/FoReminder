@@ -48,7 +48,6 @@ class CommentList extends React.Component {
         </OverlayTrigger>
       </h5>
 
-
     return (
       <ListGroup className="comment-list">
         {commentsHeader}
