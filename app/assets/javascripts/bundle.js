@@ -68582,7 +68582,7 @@
 	      var filter = this.props.remindersFilter.filter;
 	      var counts = this.props.counts;
 	
-	      var filters = ['SHOW_ALL', 'SHOW_COMPLETED', 'SHOW_INCOMPLETE'];
+	      var filters = ['SHOW_ALL', 'SHOW_INCOMPLETE', 'SHOW_COMPLETED'];
 	      var buttonItems = filters.map(function (rFilter, idx) {
 	        // assumes filters starts with 'SHOW_'...
 	        var filterName = rFilter[5] + rFilter.substring(6, rFilter.length).toLowerCase();
