@@ -63129,6 +63129,12 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
+	var _reactDatepicker = __webpack_require__(595);
+	
+	var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
+	
+	__webpack_require__(597);
+	
 	var _Modal = __webpack_require__(603);
 	
 	var _Modal2 = _interopRequireDefault(_Modal);
@@ -63167,11 +63173,12 @@
 	    var _this = _possibleConstructorReturn(this, (ReminderDetailView.__proto__ || Object.getPrototypeOf(ReminderDetailView)).call(this, props));
 	
 	    _this.handleDeleteClick = _this.handleDeleteClick.bind(_this);
-	    _this.state = { body: "", title: "", edited: false };
+	    _this.state = { body: "", title: "", edited: false, remind_date: (0, _moment2.default)() };
 	    _this.handleDeleteClick = _this.handleDeleteClick.bind(_this);
 	    _this.update = _this.update.bind(_this);
 	    _this.loadReminder = _this.loadReminder.bind(_this);
 	    _this.handleCloseClick = _this.handleCloseClick.bind(_this);
+	    _this.handleDataChange = _this.handleDataChange.bind(_this);
 	    _this._sanitizeContentEditable = _this._sanitizeContentEditable.bind(_this);
 	    return _this;
 	  }
@@ -63200,13 +63207,19 @@
 	      };
 	    }
 	  }, {
+	    key: 'handleDataChange',
+	    value: function handleDataChange(date) {
+	      this.setState({ remind_date: date, edited: true });
+	    }
+	  }, {
 	    key: 'loadReminder',
 	    value: function loadReminder() {
 	      var _props$reminder = this.props.reminder,
 	          body = _props$reminder.body,
-	          title = _props$reminder.title;
+	          title = _props$reminder.title,
+	          remind_date = _props$reminder.remind_date;
 	
-	      this.setState({ body: body, title: title, edited: false });
+	      this.setState({ body: body, title: title, edited: false, remind_date: (0, _moment2.default)(remind_date) });
 	    }
 	  }, {
 	    key: '_sanitizeContentEditable',
@@ -63228,8 +63241,9 @@
 	          toggleModal = _props2.toggleModal;
 	
 	      var edittedTitle = this._sanitizeContentEditable(this.state.title);
-	      reminder.title = edittedTitle !== "" ? edittedTitle : reminder.title;
+	      reminder.title = edittedTitle !== '' ? edittedTitle : reminder.title;
 	      reminder.body = this._sanitizeContentEditable(this.state.body);
+	      reminder.remind_date = this.state.remind_date.format();
 	      var data = { reminder: reminder };
 	
 	      if (this.state.edited) {
@@ -63271,10 +63285,13 @@
 	            _react2.default.createElement(_reactContenteditable2.default, { html: title, disabled: false, onChange: this.update('title') })
 	          ),
 	          _react2.default.createElement(
-	            'section',
+	            'label',
 	            null,
-	            remind_date
+	            _react2.default.createElement(_reactDatepicker2.default, {
+	              selected: this.state.remind_date,
+	              onChange: this.handleDataChange })
 	          ),
+	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            _Button2.default,
 	            { bsStyle: 'warning', bsSize: 'xsmall', onClick: this.handleDeleteClick },

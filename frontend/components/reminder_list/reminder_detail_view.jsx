@@ -1,22 +1,24 @@
 import React from 'react'
 import moment from 'moment'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 // components
 import Modal from 'react-bootstrap/lib/Modal'
 import Button from 'react-bootstrap/lib/Button'
 import ContentEditable from 'react-contenteditable'
-
 import CommentListContainer from '../comment_list/comment_list_container'
 
 class ReminderDetailView extends React.Component {
   constructor (props) {
     super(props)
     this.handleDeleteClick = this.handleDeleteClick.bind(this)
-    this.state = { body: "", title: "", edited: false }
+    this.state = { body: "", title: "", edited: false, remind_date: moment() }
     this.handleDeleteClick = this.handleDeleteClick.bind(this)
     this.update = this.update.bind(this)
     this.loadReminder = this.loadReminder.bind(this)
     this.handleCloseClick = this.handleCloseClick.bind(this)
+    this.handleDataChange = this.handleDataChange.bind(this)
     this._sanitizeContentEditable = this._sanitizeContentEditable.bind(this)
   }
 
@@ -28,14 +30,14 @@ class ReminderDetailView extends React.Component {
   }
 
   update (property) {
-    return (e) => {
-      this.setState({[property]: e.target.value, edited: true })
-    }
+    return (e) => { this.setState({[property]: e.target.value, edited: true }) }
   }
 
+  handleDataChange (date) { this.setState({ remind_date: date, edited: true }) }
+
   loadReminder () {
-    const { body,title } = this.props.reminder
-    this.setState({body, title, edited: false})
+    const { body,title, remind_date } = this.props.reminder
+    this.setState({body, title, edited: false, remind_date: moment(remind_date)})
   }
 
   _sanitizeContentEditable (string) {
@@ -49,8 +51,9 @@ class ReminderDetailView extends React.Component {
   handleCloseClick () {
     const { reminder, updateReminder, toggleModal } = this.props
     const edittedTitle = this._sanitizeContentEditable(this.state.title)
-    reminder.title = edittedTitle !== "" ? edittedTitle : reminder.title
+    reminder.title = edittedTitle !== '' ? edittedTitle : reminder.title
     reminder.body = this._sanitizeContentEditable(this.state.body)
+    reminder.remind_date = this.state.remind_date.format()
     const data = { reminder }
 
     if (this.state.edited) {
@@ -79,7 +82,12 @@ class ReminderDetailView extends React.Component {
           <Modal.Title>
             <ContentEditable html={title} disabled={false} onChange={this.update('title')} />
           </Modal.Title>
-          <section>{remind_date}</section>
+          <label>
+            <DatePicker
+              selected={this.state.remind_date}
+              onChange={this.handleDataChange} />
+          </label>
+          <br />
           <Button bsStyle="warning" bsSize="xsmall" onClick={this.handleDeleteClick}>Delete</Button>
         </Modal.Header>
 
