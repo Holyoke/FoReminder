@@ -26,7 +26,7 @@ class ReminderForm extends React.Component {
   }
 
   update (property) {
-    return (e) => this.setState({[property]: e.target.value })
+    return (e) => this.setState({[property]: e.target.value})
   }
 
   handleSubmit (e) {
@@ -57,19 +57,19 @@ class ReminderForm extends React.Component {
     return (
       <ListGroupItem>
         <form className="reminder-form" onSubmit={this.handleSubmit}>
-          <Button type="submit" onClick={this.handleSubmit} className="glyphicon glyphicon-plus-sign"></Button>
+          <Button type="submit" onClick={this.handleSubmit} className="glyphicon glyphicon-plus-sign" />
           <ErrorsListContainer />
-            <input
-              className="input"
-              ref="title"
-              value={this.state.title}
-              placeholder="Create reminder..."
-              onChange={this.update('title')}
-               />
+          <input
+            className="input"
+            ref="title"
+            value={this.state.title}
+            placeholder="Create reminder..."
+            onChange={this.update('title')}
+             />
           <label>
             <DatePicker
-            selected={this.state.remind_date}
-            onChange={this.handleDataChange} />
+              selected={this.state.remind_date}
+              onChange={this.handleDataChange} />
           </label>
 
         </form>

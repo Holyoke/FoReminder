@@ -2,8 +2,7 @@ import React from 'react'
 import Link from 'react-router/lib/Link'
 
 // components
-import Button from 'react-bootstrap/lib/Button'
-import NavBar from '../navbar/navbar'
+import NavBarContainer from '../navbar/navbar_container'
 
 class Greeting extends React.Component {
   constructor (props) {
@@ -17,22 +16,20 @@ class Greeting extends React.Component {
   }
 
   render () {
-    const { currentUser, logout } = this.props
+    const { currentUser } = this.props
     let greeting
 
-    if (!!currentUser) {
-      greeting = <NavBar currentUser={currentUser} />
+    if (Boolean(currentUser)) {
+      greeting = <NavBarContainer />
     } else {
       greeting =
         <ul>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/signup">Signup</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/signup">Signup</Link></li>
         </ul>
     }
 
-    return (
-        <div>{greeting}</div>
-    )
+    return (<div>{greeting}</div>)
   }
 }
 

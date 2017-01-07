@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/lib/Button'
 import Badge from 'react-bootstrap/lib/Badge'
 
 class ReminderFilters extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.updateFilter = this.updateFilter.bind(this)
   }

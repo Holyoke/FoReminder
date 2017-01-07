@@ -13,7 +13,7 @@ class ReminderDetailView extends React.Component {
   constructor (props) {
     super(props)
     this.handleDeleteClick = this.handleDeleteClick.bind(this)
-    this.state = { body: "", title: "", edited: false, remind_date: moment() }
+    this.state = { body: '', title: '', edited: false, remind_date: moment() }
     this.handleDeleteClick = this.handleDeleteClick.bind(this)
     this.update = this.update.bind(this)
     this.loadReminder = this.loadReminder.bind(this)
@@ -30,13 +30,15 @@ class ReminderDetailView extends React.Component {
   }
 
   update (property) {
-    return (e) => { this.setState({[property]: e.target.value, edited: true }) }
+    return (e) => {
+      this.setState({[property]: e.target.value, edited: true})
+    }
   }
 
   handleDataChange (date) { this.setState({ remind_date: date, edited: true }) }
 
   loadReminder () {
-    const { body,title, remind_date } = this.props.reminder
+    const { body, title, remind_date } = this.props.reminder
     this.setState({body, title, edited: false, remind_date: moment(remind_date)})
   }
 
@@ -58,7 +60,7 @@ class ReminderDetailView extends React.Component {
 
     if (this.state.edited) {
       updateReminder(data).then(() => {},
-      (err) => this.setState({title: reminder.body}))
+      () => this.setState({title: reminder.body}))
     }
     toggleModal()
   }
@@ -73,19 +75,17 @@ class ReminderDetailView extends React.Component {
 
     return (
       <Modal style={style}
-             className='reminder-detail-view'
-             show={show}
-             onHide={this.handleCloseClick}
-             onShow={this.loadReminder}>
+        className="reminder-detail-view"
+        show={show}
+        onHide={this.handleCloseClick}
+        onShow={this.loadReminder}>
 
-        <Modal.Header className='reminder-modal-header'>
+        <Modal.Header className="reminder-modal-header">
           <Modal.Title>
             <ContentEditable html={title} disabled={false} onChange={this.update('title')} />
           </Modal.Title>
           <label>
-            <DatePicker
-              selected={this.state.remind_date}
-              onChange={this.handleDataChange} />
+            <DatePicker selected={this.state.remind_date} onChange={this.handleDataChange} />
           </label>
           <br />
           <Button bsStyle="warning" bsSize="xsmall" onClick={this.handleDeleteClick}>Delete</Button>

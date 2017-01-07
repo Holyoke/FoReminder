@@ -58707,13 +58707,9 @@
 	
 	var _Link2 = _interopRequireDefault(_Link);
 	
-	var _Button = __webpack_require__(482);
+	var _navbar_container = __webpack_require__(673);
 	
-	var _Button2 = _interopRequireDefault(_Button);
-	
-	var _navbar = __webpack_require__(580);
-	
-	var _navbar2 = _interopRequireDefault(_navbar);
+	var _navbar_container2 = _interopRequireDefault(_navbar_container);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -58747,14 +58743,12 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props = this.props,
-	          currentUser = _props.currentUser,
-	          logout = _props.logout;
+	      var currentUser = this.props.currentUser;
 	
 	      var greeting = void 0;
 	
-	      if (!!currentUser) {
-	        greeting = _react2.default.createElement(_navbar2.default, { currentUser: currentUser });
+	      if (Boolean(currentUser)) {
+	        greeting = _react2.default.createElement(_navbar_container2.default, null);
 	      } else {
 	        greeting = _react2.default.createElement(
 	          'ul',
@@ -61100,16 +61094,18 @@
 	var NavBar = function (_React$Component) {
 	  _inherits(NavBar, _React$Component);
 	
-	  function NavBar(props) {
+	  function NavBar() {
 	    _classCallCheck(this, NavBar);
 	
-	    return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
+	    return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).apply(this, arguments));
 	  }
 	
 	  _createClass(NavBar, [{
 	    key: 'render',
 	    value: function render() {
-	      var currentUser = this.props.currentUser;
+	      var _props = this.props,
+	          currentUser = _props.currentUser,
+	          logout = _props.logout;
 	
 	      return _react2.default.createElement(
 	        'ul',
@@ -61122,7 +61118,7 @@
 	          null,
 	          _react2.default.createElement(
 	            _Link2.default,
-	            { to: '/', onClick: function onClick() {} },
+	            { to: '/', onClick: logout },
 	            'Logout'
 	          )
 	        ),
@@ -65943,7 +65939,7 @@
 	    var _this = _possibleConstructorReturn(this, (ReminderDetailView.__proto__ || Object.getPrototypeOf(ReminderDetailView)).call(this, props));
 	
 	    _this.handleDeleteClick = _this.handleDeleteClick.bind(_this);
-	    _this.state = { body: "", title: "", edited: false, remind_date: (0, _moment2.default)() };
+	    _this.state = { body: '', title: '', edited: false, remind_date: (0, _moment2.default)() };
 	    _this.handleDeleteClick = _this.handleDeleteClick.bind(_this);
 	    _this.update = _this.update.bind(_this);
 	    _this.loadReminder = _this.loadReminder.bind(_this);
@@ -66017,7 +66013,7 @@
 	      var data = { reminder: reminder };
 	
 	      if (this.state.edited) {
-	        updateReminder(data).then(function () {}, function (err) {
+	        updateReminder(data).then(function () {}, function () {
 	          return _this3.setState({ title: reminder.body });
 	        });
 	      }
@@ -66057,9 +66053,7 @@
 	          _react2.default.createElement(
 	            'label',
 	            null,
-	            _react2.default.createElement(_reactDatepicker2.default, {
-	              selected: this.state.remind_date,
-	              onChange: this.handleDataChange })
+	            _react2.default.createElement(_reactDatepicker2.default, { selected: this.state.remind_date, onChange: this.handleDataChange })
 	          ),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
@@ -68969,6 +68963,46 @@
 	    Incomplete: incompleteCount
 	  };
 	};
+
+/***/ },
+/* 673 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(417);
+	
+	var _navbar = __webpack_require__(580);
+	
+	var _navbar2 = _interopRequireDefault(_navbar);
+	
+	var _session_actions = __webpack_require__(413);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStatetoProps = function mapStatetoProps(_ref) {
+	  var session = _ref.session;
+	  return {
+	    currentUser: session.currentUser
+	  };
+	};
+	
+	//  actions
+	
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    logout: function logout() {
+	      return dispatch((0, _session_actions.logout)());
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps, mapDispatchToProps)(_navbar2.default);
 
 /***/ }
 /******/ ]);
