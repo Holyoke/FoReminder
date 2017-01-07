@@ -3,6 +3,7 @@ import Link from 'react-router/lib/Link'
 
 // components
 import Button from 'react-bootstrap/lib/Button'
+import NavBar from '../navbar/navbar'
 
 class Greeting extends React.Component {
   constructor (props) {
@@ -20,11 +21,7 @@ class Greeting extends React.Component {
     let greeting
 
     if (!!currentUser) {
-      greeting =
-        <ul>Welcome {currentUser.email}.
-          <li><Link to="/" onClick={logout}>Logout</Link></li>
-          <li><Link to="/reminders">Reminders</Link></li>
-        </ul>
+      greeting = <NavBar currentUser={currentUser} />
     } else {
       greeting =
         <ul>
