@@ -6,7 +6,7 @@ import NavBarContainer from '../navbar/navbar_container'
 
 class Greeting extends React.Component {
   constructor (props) {
-    super (props)
+    super(props)
     this.handleLogOutButton = this.handleLogOutButton.bind(this)
   }
 
