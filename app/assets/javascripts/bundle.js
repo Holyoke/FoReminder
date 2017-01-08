@@ -58624,9 +58624,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _greeting_container = __webpack_require__(480);
+	var _navbar_container = __webpack_require__(673);
 	
-	var _greeting_container2 = _interopRequireDefault(_greeting_container);
+	var _navbar_container2 = _interopRequireDefault(_navbar_container);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -58640,7 +58640,7 @@
 	      null,
 	      'foReminder App'
 	    ),
-	    _react2.default.createElement(_greeting_container2.default, null),
+	    _react2.default.createElement(_navbar_container2.default, null),
 	    children
 	  );
 	};
@@ -58648,146 +58648,8 @@
 	exports.default = App;
 
 /***/ },
-/* 480 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _reactRedux = __webpack_require__(417);
-	
-	var _greeting = __webpack_require__(481);
-	
-	var _greeting2 = _interopRequireDefault(_greeting);
-	
-	var _session_actions = __webpack_require__(413);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStatetoProps = function mapStatetoProps(_ref) {
-	  var session = _ref.session;
-	  return {
-	    currentUser: session.currentUser
-	  };
-	};
-	
-	//  actions
-	
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    logout: function logout() {
-	      return dispatch((0, _session_actions.logout)());
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStatetoProps, mapDispatchToProps)(_greeting2.default);
-
-/***/ },
-/* 481 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Link = __webpack_require__(446);
-	
-	var _Link2 = _interopRequireDefault(_Link);
-	
-	var _navbar_container = __webpack_require__(673);
-	
-	var _navbar_container2 = _interopRequireDefault(_navbar_container);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	// components
-	
-	
-	var Greeting = function (_React$Component) {
-	  _inherits(Greeting, _React$Component);
-	
-	  function Greeting(props) {
-	    _classCallCheck(this, Greeting);
-	
-	    var _this = _possibleConstructorReturn(this, (Greeting.__proto__ || Object.getPrototypeOf(Greeting)).call(this, props));
-	
-	    _this.handleLogOutButton = _this.handleLogOutButton.bind(_this);
-	    return _this;
-	  }
-	
-	  _createClass(Greeting, [{
-	    key: 'handleLogOutButton',
-	    value: function handleLogOutButton() {
-	      this.props.router.push('/');
-	      this.props.logout();
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var currentUser = this.props.currentUser;
-	
-	      var greeting = void 0;
-	
-	      if (Boolean(currentUser)) {
-	        greeting = _react2.default.createElement(_navbar_container2.default, null);
-	      } else {
-	        greeting = _react2.default.createElement(
-	          'ul',
-	          null,
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              _Link2.default,
-	              { to: '/login' },
-	              'Login'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              _Link2.default,
-	              { to: '/signup' },
-	              'Signup'
-	            )
-	          )
-	        );
-	      }
-	
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        greeting
-	      );
-	    }
-	  }]);
-	
-	  return Greeting;
-	}(_react2.default.Component);
-	
-	exports.default = Greeting;
-
-/***/ },
+/* 480 */,
+/* 481 */,
 /* 482 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -61079,7 +60941,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactRouterBootstrap = __webpack_require__(688);
+	var _LinkContainer = __webpack_require__(690);
+	
+	var _LinkContainer2 = _interopRequireDefault(_LinkContainer);
 	
 	var _Navbar = __webpack_require__(674);
 	
@@ -61117,20 +60981,46 @@
 	          currentUser = _props.currentUser,
 	          logout = _props.logout;
 	
+	
+	      var navRightItems = [];
+	      if (currentUser) {
+	        navRightItems.push(_react2.default.createElement(
+	          _LinkContainer2.default,
+	          { to: '/', key: 'nls' },
+	          _react2.default.createElement(
+	            _NavItem2.default,
+	            { onClick: logout },
+	            'Logout'
+	          )
+	        ));
+	      } else {
+	        navRightItems.push(_react2.default.createElement(
+	          _LinkContainer2.default,
+	          { to: '/login', key: 'nl1' },
+	          _react2.default.createElement(
+	            _NavItem2.default,
+	            null,
+	            'Login'
+	          )
+	        ));
+	        navRightItems.push(_react2.default.createElement(
+	          _LinkContainer2.default,
+	          { to: '/signup', key: 'nl2' },
+	          _react2.default.createElement(
+	            _NavItem2.default,
+	            null,
+	            'Sign Up'
+	          )
+	        ));
+	      }
 	      return _react2.default.createElement(
 	        _Navbar2.default,
 	        { fluid: true },
 	        _react2.default.createElement(
-	          _Navbar2.default.Text,
-	          null,
-	          'Welcome ',
-	          currentUser.email
-	        ),
-	        _react2.default.createElement(
 	          _Nav2.default,
 	          null,
 	          _react2.default.createElement(
-	            _reactRouterBootstrap.LinkContainer,
+	            _LinkContainer2.default,
 	            { to: '/reminders' },
 	            _react2.default.createElement(
 	              _NavItem2.default,
@@ -61142,15 +61032,7 @@
 	        _react2.default.createElement(
 	          _Nav2.default,
 	          { pullRight: true },
-	          _react2.default.createElement(
-	            _reactRouterBootstrap.LinkContainer,
-	            { to: '/' },
-	            _react2.default.createElement(
-	              _NavItem2.default,
-	              { onClick: logout },
-	              'Logout'
-	            )
-	          )
+	          navRightItems
 	        )
 	      );
 	    }
@@ -71100,77 +70982,8 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 688 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports.LinkContainer = exports.IndexLinkContainer = undefined;
-	
-	var _IndexLinkContainer2 = __webpack_require__(689);
-	
-	var _IndexLinkContainer3 = _interopRequireDefault(_IndexLinkContainer2);
-	
-	var _LinkContainer2 = __webpack_require__(690);
-	
-	var _LinkContainer3 = _interopRequireDefault(_LinkContainer2);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.IndexLinkContainer = _IndexLinkContainer3.default;
-	exports.LinkContainer = _LinkContainer3.default;
-
-/***/ },
-/* 689 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _LinkContainer = __webpack_require__(690);
-	
-	var _LinkContainer2 = _interopRequireDefault(_LinkContainer);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	// Don't use a stateless function, to allow users to set a ref.
-	/* eslint-disable react/prefer-stateless-function */
-	var IndexLinkContainer = function (_React$Component) {
-	  _inherits(IndexLinkContainer, _React$Component);
-	
-	  function IndexLinkContainer() {
-	    _classCallCheck(this, IndexLinkContainer);
-	
-	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
-	  }
-	
-	  IndexLinkContainer.prototype.render = function render() {
-	    return _react2.default.createElement(_LinkContainer2.default, _extends({}, this.props, { onlyActiveOnIndex: true }));
-	  };
-	
-	  return IndexLinkContainer;
-	}(_react2.default.Component);
-	/* eslint-enable react/prefer-stateless-function */
-	
-	
-	exports.default = IndexLinkContainer;
-	module.exports = exports['default'];
-
-/***/ },
+/* 688 */,
+/* 689 */,
 /* 690 */
 /***/ function(module, exports, __webpack_require__) {
 

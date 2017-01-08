@@ -19,8 +19,8 @@ class Greeting extends React.Component {
     const { currentUser } = this.props
     let greeting
 
-    if (Boolean(currentUser)) {
-      greeting = <NavBarContainer />
+    if (currentUser) {
+      greeting = ""
     } else {
       greeting =
         <ul>
