@@ -62302,7 +62302,7 @@
 	        _react2.default.createElement('span', { className: glyph, 'aria-hidden': 'true' })
 	      );
 	
-	      var dateColor = (0, _moment2.default)().isBefore(reminder.remind_date) ? 'grey' : 'red';
+	      var dateColor = (0, _moment2.default)().isSameOrBefore(reminder.remind_date, 'd') ? 'grey' : 'red';
 	      var itemTextStatus = done ? 'line-through' : '';
 	
 	      //  tooltip for expanding modal
