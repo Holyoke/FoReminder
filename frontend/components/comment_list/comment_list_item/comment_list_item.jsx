@@ -24,12 +24,12 @@ class CommentListItem extends React.Component {
     const deleteButtonToolTip = <ToolTip id="delete-tool-tip">Delete comment</ToolTip>
     const deleteButton =
     <OverlayTrigger placement="bottom" overlay={deleteButtonToolTip}>
-      <Button style={{float: 'right'}}className="glyphicon glyphicon-minus-sign" onClick={deleteComment}>
+      <Button className="glyphicon glyphicon-minus-sign" onClick={deleteComment}>
       </Button>
     </OverlayTrigger>
 
     return (
-      <ListGroupItem className="comment-list-item">
+      <ListGroupItem className="comment-list-item" style={{display:'flex', justifyContent: 'space-between'}}>
         <h5 onClick={this.toggleComment} style={{color: textColor, display: 'inline-flex'}}>
           {body}
         </h5>
