@@ -48,19 +48,25 @@ class ReminderDetailView extends React.Component {
     this.setState({body, title, edited: false, remind_date: moment(remind_date)})
   }
 
-  _sanitizeContentEditable (string) {
+  _sanitizeContentEditable (string, type) {
     // regex to remove tags created after pressing enter
-    string = string.replace(/<div>/g, '')
-    string = string.replace(/<\/div>/g, '')
-    string = string.replace(/<br>/g, '')
+    if (type === 'title') {
+      // take away new lines
+      string = string.replace(/<div>/g, '')
+      string = string.replace(/<\/div>/g, '')
+      string = string.replace(/<br>/g, '')
+    } else {
+      string
+    }
+
     return string
   }
 
   handleCloseClick () {
     const { reminder, updateReminder, toggleModal } = this.props
-    const edittedTitle = this._sanitizeContentEditable(this.state.title)
+    const edittedTitle = this._sanitizeContentEditable(this.state.title, 'title')
     reminder.title = edittedTitle !== '' ? edittedTitle : reminder.title
-    reminder.body = this._sanitizeContentEditable(this.state.body)
+    reminder.body = this._sanitizeContentEditable(this.state.body, 'body')
     reminder.remind_date = this.state.remind_date.format()
     const data = { reminder }
 

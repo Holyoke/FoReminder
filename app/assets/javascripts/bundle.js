@@ -65896,11 +65896,17 @@
 	    }
 	  }, {
 	    key: '_sanitizeContentEditable',
-	    value: function _sanitizeContentEditable(string) {
+	    value: function _sanitizeContentEditable(string, type) {
 	      // regex to remove tags created after pressing enter
-	      string = string.replace(/<div>/g, '');
-	      string = string.replace(/<\/div>/g, '');
-	      string = string.replace(/<br>/g, '');
+	      if (type === 'title') {
+	        // take away new lines
+	        string = string.replace(/<div>/g, '');
+	        string = string.replace(/<\/div>/g, '');
+	        string = string.replace(/<br>/g, '');
+	      } else {
+	        string;
+	      }
+	
 	      return string;
 	    }
 	  }, {
@@ -65913,9 +65919,9 @@
 	          updateReminder = _props2.updateReminder,
 	          toggleModal = _props2.toggleModal;
 	
-	      var edittedTitle = this._sanitizeContentEditable(this.state.title);
+	      var edittedTitle = this._sanitizeContentEditable(this.state.title, 'title');
 	      reminder.title = edittedTitle !== '' ? edittedTitle : reminder.title;
-	      reminder.body = this._sanitizeContentEditable(this.state.body);
+	      reminder.body = this._sanitizeContentEditable(this.state.body, 'body');
 	      reminder.remind_date = this.state.remind_date.format();
 	      var data = { reminder: reminder };
 	
