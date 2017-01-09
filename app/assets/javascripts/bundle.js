@@ -61152,12 +61152,12 @@
 	  _createClass(SessionForm, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.props.clearErrors();
+	      // this.props.clearErrors()
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
-	      this.props.clearErrors();
+	      // this.props.clearErrors()
 	    }
 	  }, {
 	    key: 'update',
@@ -62308,7 +62308,7 @@
 	      //  tooltip for expanding modal
 	      var reminderItemTip = _react2.default.createElement(
 	        _ToolTip2.default,
-	        { id: 'reminder-item-tip', arrowOffsetLeft: "-100px !important" },
+	        { id: 'reminder-item-tip', arrowOffsetLeft: '10%' },
 	        'Click for more details'
 	      );
 	
@@ -65878,7 +65878,11 @@
 	  }, {
 	    key: 'handleDataChange',
 	    value: function handleDataChange(date) {
-	      this.setState({ remind_date: date, edited: true });
+	      if (date.isValid()) {
+	        this.setState({ remind_date: date, edited: true });
+	      } else {
+	        this.setState({ remind_date: this.state.remind_date });
+	      }
 	    }
 	  }, {
 	    key: 'loadReminder',
@@ -65951,7 +65955,7 @@
 	          _react2.default.createElement(
 	            _Modal2.default.Title,
 	            null,
-	            _react2.default.createElement(_reactContenteditable2.default, { html: title, disabled: false, onChange: this.update('title') })
+	            _react2.default.createElement(_reactContenteditable2.default, { style: { marginBottom: '0.15em', display: 'inline-flex' }, html: title, disabled: false, onChange: this.update('title') })
 	          ),
 	          _react2.default.createElement(
 	            'label',

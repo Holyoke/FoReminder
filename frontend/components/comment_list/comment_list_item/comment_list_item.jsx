@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/lib/Button'
 import ToolTip from 'react-bootstrap/lib/ToolTip'
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
 
-
 class CommentListItem extends React.Component {
   constructor (props) {
     super(props)

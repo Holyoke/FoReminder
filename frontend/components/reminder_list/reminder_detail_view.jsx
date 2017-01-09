@@ -35,7 +35,13 @@ class ReminderDetailView extends React.Component {
     }
   }
 
-  handleDataChange (date) { this.setState({ remind_date: date, edited: true }) }
+  handleDataChange (date) {
+    if (date.isValid()) {
+      this.setState({ remind_date: date, edited: true })
+    } else {
+      this.setState({remind_date: this.state.remind_date})
+    }
+  }
 
   loadReminder () {
     const { body, title, remind_date } = this.props.reminder
@@ -82,7 +88,7 @@ class ReminderDetailView extends React.Component {
 
         <Modal.Header className="reminder-modal-header">
           <Modal.Title>
-            <ContentEditable html={title} disabled={false} onChange={this.update('title')} />
+            <ContentEditable style={{marginBottom: '0.15em', display: 'inline-flex'}}html={title} disabled={false} onChange={this.update('title')} />
           </Modal.Title>
           <label>
             <DatePicker selected={this.state.remind_date} onChange={this.handleDataChange} />

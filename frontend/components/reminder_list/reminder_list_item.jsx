@@ -45,7 +45,7 @@ class ReminderListItem extends React.Component {
     const itemTextStatus = done ? 'line-through' : ''
 
     //  tooltip for expanding modal
-    const reminderItemTip = <ToolTip id="reminder-item-tip" arrowOffsetLeft={"-100px !important"}>
+    const reminderItemTip = <ToolTip id="reminder-item-tip" arrowOffsetLeft="10%">
       Click for more details
     </ToolTip>
 
