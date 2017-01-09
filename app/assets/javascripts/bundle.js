@@ -68321,7 +68321,7 @@
 	      var deleteButton = _react2.default.createElement(
 	        _OverlayTrigger2.default,
 	        { placement: 'bottom', overlay: deleteButtonToolTip },
-	        _react2.default.createElement(_Button2.default, { className: 'glyphicon glyphicon-minus-sign', onClick: deleteComment })
+	        _react2.default.createElement(_Button2.default, { style: { float: 'right' }, className: 'glyphicon glyphicon-minus-sign', onClick: deleteComment })
 	      );
 	
 	      return _react2.default.createElement(
@@ -68329,7 +68329,7 @@
 	        { className: 'comment-list-item' },
 	        _react2.default.createElement(
 	          'h5',
-	          { onClick: this.toggleComment, style: { color: textColor } },
+	          { onClick: this.toggleComment, style: { color: textColor, display: 'inline-flex' } },
 	          body
 	        ),
 	        deleteButton
