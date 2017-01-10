@@ -13,14 +13,18 @@ class CommentListItem extends React.Component {
 
   toggleComment (e) {
     e.preventDefault()
-    this.setState({active: !this.state.active})
+    const { updateComment, comment } = this.props
+    comment.active = !comment.active
+    updateComment().then(
+      () => this.setState({active: comment.active})
+    )
   }
 
   render () {
     const { comment, deleteComment } = this.props
     const { body } = comment
     const { active } = this.state
-    const textColor = active ? 'black' : 'lightgray'
+    const textColor = comment.active ? 'black' : 'lightgray'
     const deleteButtonToolTip = <ToolTip id="delete-tool-tip">Delete comment</ToolTip>
     const deleteButton =
       <OverlayTrigger placement="bottom" overlay={deleteButtonToolTip}>

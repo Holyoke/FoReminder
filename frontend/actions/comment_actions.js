@@ -11,7 +11,7 @@ export const fetchComments = (reminder_id) => {
   return (dispatch) => {
     return util.fetchComments(reminder_id).then(
       comments => dispatch(receiveComments(comments)),
-      err => alert(err)
+      err => console.log("FetchComments error: ", err)
     )
   }
 }
@@ -22,6 +22,20 @@ export const createComment = (comment, reminder_id) => {
                .then(comment => {
                  dispatch(receiveComment(comment))
                })
+  }
+}
+
+export const updateComment = (comment, reminder_id) => {
+  return (dispatch) => {
+    return util.updateComment({comment, reminder_id})
+               .then(comment => {
+                 dispatch(receiveComment(comment))
+                 dispatch(clearErrors())
+               },
+                 err => {
+                   dispatch(receiveErrors(err))
+                 }
+               )
   }
 }
 

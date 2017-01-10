@@ -52716,7 +52716,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.removeComment = exports.receiveComments = exports.receiveComment = exports.deleteComment = exports.createComment = exports.fetchComments = exports.REMOVE_COMMENT = exports.RECEIVE_COMMENT = exports.RECEIVE_COMMENTS = undefined;
+	exports.removeComment = exports.receiveComments = exports.receiveComment = exports.deleteComment = exports.updateComment = exports.createComment = exports.fetchComments = exports.REMOVE_COMMENT = exports.RECEIVE_COMMENT = exports.RECEIVE_COMMENTS = undefined;
 	
 	var _comment_api_util = __webpack_require__(410);
 	
@@ -52738,7 +52738,7 @@
 	    return util.fetchComments(reminder_id).then(function (comments) {
 	      return dispatch(receiveComments(comments));
 	    }, function (err) {
-	      return alert(err);
+	      return console.log("FetchComments error: ", err);
 	    });
 	  };
 	};
@@ -52747,6 +52747,17 @@
 	  return function (dispatch) {
 	    return util.createComment({ comment: comment, reminder_id: reminder_id }).then(function (comment) {
 	      dispatch(receiveComment(comment));
+	    });
+	  };
+	};
+	
+	var updateComment = exports.updateComment = function updateComment(comment, reminder_id) {
+	  return function (dispatch) {
+	    return util.updateComment({ comment: comment, reminder_id: reminder_id }).then(function (comment) {
+	      dispatch(receiveComment(comment));
+	      dispatch((0, _error_actions.clearErrors)());
+	    }, function (err) {
+	      dispatch((0, _error_actions.receiveErrors)(err));
 	    });
 	  };
 	};
@@ -70509,18 +70520,16 @@
 	
 	var _comment_actions = __webpack_require__(409);
 	
-	var _selector = __webpack_require__(616);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// actions
 	var mapStateToProps = function mapStateToProps(state, _ref) {
 	  var comment = _ref.comment;
 	  return {
 	    comment: comment
 	  };
 	};
-	// selectors
+	
+	// actions
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref2) {
@@ -70528,7 +70537,10 @@
 	      reminder_id = _ref2.reminder_id;
 	  return {
 	    deleteComment: function deleteComment() {
-	      dispatch((0, _comment_actions.deleteComment)(comment, reminder_id));
+	      return dispatch((0, _comment_actions.deleteComment)(comment, reminder_id));
+	    },
+	    updateComment: function updateComment() {
+	      return dispatch((0, _comment_actions.updateComment)(comment, reminder_id));
 	    }
 	  };
 	};
@@ -70591,19 +70603,28 @@
 	  _createClass(CommentListItem, [{
 	    key: 'toggleComment',
 	    value: function toggleComment(e) {
+	      var _this2 = this;
+	
 	      e.preventDefault();
-	      this.setState({ active: !this.state.active });
+	      var _props = this.props,
+	          updateComment = _props.updateComment,
+	          comment = _props.comment;
+	
+	      comment.active = !comment.active;
+	      updateComment().then(function () {
+	        return _this2.setState({ active: comment.active });
+	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props = this.props,
-	          comment = _props.comment,
-	          deleteComment = _props.deleteComment;
+	      var _props2 = this.props,
+	          comment = _props2.comment,
+	          deleteComment = _props2.deleteComment;
 	      var body = comment.body;
 	      var active = this.state.active;
 	
-	      var textColor = active ? 'black' : 'lightgray';
+	      var textColor = comment.active ? 'black' : 'lightgray';
 	      var deleteButtonToolTip = _react2.default.createElement(
 	        _ToolTip2.default,
 	        { id: 'delete-tool-tip' },
