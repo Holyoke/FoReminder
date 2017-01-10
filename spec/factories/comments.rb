@@ -5,6 +5,7 @@
 #  id          :integer          not null, primary key
 #  body        :string
 #  reminder_id :integer
+#  active      :boolean          default(FALSE), not null
 #
 
 FactoryGirl.define do

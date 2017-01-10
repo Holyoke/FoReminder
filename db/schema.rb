@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161223000422) do
+ActiveRecord::Schema.define(version: 20170110182618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20161223000422) do
   create_table "comments", force: :cascade do |t|
     t.string  "body"
     t.integer "reminder_id"
+    t.boolean "active",      default: false, null: false
     t.index ["reminder_id"], name: "index_comments_on_reminder_id", using: :btree
   end
 
