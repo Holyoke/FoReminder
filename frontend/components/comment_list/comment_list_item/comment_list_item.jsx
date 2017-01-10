@@ -23,13 +23,12 @@ class CommentListItem extends React.Component {
     const textColor = active ? 'black' : 'lightgray'
     const deleteButtonToolTip = <ToolTip id="delete-tool-tip">Delete comment</ToolTip>
     const deleteButton =
-    <OverlayTrigger placement="bottom" overlay={deleteButtonToolTip}>
-      <Button className="glyphicon glyphicon-minus-sign" onClick={deleteComment}>
-      </Button>
-    </OverlayTrigger>
+      <OverlayTrigger placement="bottom" overlay={deleteButtonToolTip}>
+        <Button className="glyphicon glyphicon-minus-sign" onClick={deleteComment} />
+      </OverlayTrigger>
 
     return (
-      <ListGroupItem className="comment-list-item" style={{display:'flex', justifyContent: 'space-between'}}>
+      <ListGroupItem className="comment-list-item" style={{display: 'flex', justifyContent: 'space-between'}}>
         <h5 onClick={this.toggleComment} style={{color: textColor, display: 'inline-flex'}}>
           {body}
         </h5>
