@@ -7,8 +7,8 @@ import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
 class CommentListItem extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { active: true }
     this.toggleComment = this.toggleComment.bind(this)
+    this.update = this.update.bind(this)
   }
 
   toggleComment (e) {
@@ -20,22 +20,35 @@ class CommentListItem extends React.Component {
     )
   }
 
+  update (e) {
+    debugger
+  }
+
   render () {
     const { comment, deleteComment } = this.props
     const { body } = comment
-    const { active } = this.state
     const textColor = comment.active ? 'black' : 'lightgray'
     const deleteButtonToolTip = <ToolTip id="delete-tool-tip">Delete comment</ToolTip>
     const deleteButton =
       <OverlayTrigger placement="bottom" overlay={deleteButtonToolTip}>
-        <Button className="glyphicon glyphicon-minus-sign" onClick={deleteComment} />
+        <Button className="glyphicon glyphicon-minus-sign" style={{top: '-0.5px'}} onClick={deleteComment} />
+      </OverlayTrigger>
+
+    const glyph = comment.active ? 'glyphicon glyphicon-eye-open' : 'glyphicon glyphicon-eye-close'
+    const toggleButtonTip = <ToolTip id="toggle-comment-tool-tip">Toggle comment</ToolTip>
+    const toggleButton =
+      <OverlayTrigger placement="bottom" overlay={toggleButtonTip}>
+        <Button style={{marginRight: '1em', marginLeft: 'auto'}} onClick={this.toggleComment}>
+          <span className={glyph} aria-hidden="true"></span>
+        </Button>
       </OverlayTrigger>
 
     return (
       <ListGroupItem className="comment-list-item" style={{display: 'flex', justifyContent: 'space-between'}}>
-        <h5 onClick={this.toggleComment} style={{color: textColor, display: 'inline-flex'}}>
+        <h5 onClick={this.toggleComment} style={{color: textColor}}>
           {body}
         </h5>
+        {toggleButton}
         {deleteButton}
       </ListGroupItem>
     )
