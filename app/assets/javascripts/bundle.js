@@ -70579,6 +70579,10 @@
 	
 	var _OverlayTrigger2 = _interopRequireDefault(_OverlayTrigger);
 	
+	var _reactContenteditable = __webpack_require__(676);
+	
+	var _reactContenteditable2 = _interopRequireDefault(_reactContenteditable);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -70595,8 +70599,8 @@
 	
 	    var _this = _possibleConstructorReturn(this, (CommentListItem.__proto__ || Object.getPrototypeOf(CommentListItem)).call(this, props));
 	
-	    _this.state = { active: true };
 	    _this.toggleComment = _this.toggleComment.bind(_this);
+	    _this.update = _this.update.bind(_this);
 	    return _this;
 	  }
 	
@@ -70616,15 +70620,28 @@
 	      });
 	    }
 	  }, {
+	    key: 'update',
+	    value: function update(e) {
+	      console.log(e.target.value);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _props2 = this.props,
 	          comment = _props2.comment,
 	          deleteComment = _props2.deleteComment;
 	      var body = comment.body;
-	      var active = this.state.active;
 	
 	      var textColor = comment.active ? 'black' : 'lightgray';
+	
+	      //  comment body
+	      var commentBody = _react2.default.createElement(
+	        'h5',
+	        { onClick: this.toggleComment, style: { color: textColor } },
+	        body
+	      );
+	
+	      //  delete button
 	      var deleteButtonToolTip = _react2.default.createElement(
 	        _ToolTip2.default,
 	        { id: 'delete-tool-tip' },
@@ -70633,17 +70650,31 @@
 	      var deleteButton = _react2.default.createElement(
 	        _OverlayTrigger2.default,
 	        { placement: 'bottom', overlay: deleteButtonToolTip },
-	        _react2.default.createElement(_Button2.default, { className: 'glyphicon glyphicon-minus-sign', onClick: deleteComment })
+	        _react2.default.createElement(_Button2.default, { className: 'glyphicon glyphicon-minus-sign', style: { top: '-0.5px' }, onClick: deleteComment })
+	      );
+	
+	      //  toggle button
+	      var glyph = comment.active ? 'glyphicon glyphicon-eye-open' : 'glyphicon glyphicon-eye-close';
+	      var toggleButtonTip = _react2.default.createElement(
+	        _ToolTip2.default,
+	        { id: 'toggle-comment-tool-tip' },
+	        'Toggle comment'
+	      );
+	      var toggleButton = _react2.default.createElement(
+	        _OverlayTrigger2.default,
+	        { placement: 'bottom', overlay: toggleButtonTip },
+	        _react2.default.createElement(
+	          _Button2.default,
+	          { style: { marginRight: '1em', marginLeft: 'auto' }, onClick: this.toggleComment },
+	          _react2.default.createElement('span', { className: glyph, 'aria-hidden': 'true' })
+	        )
 	      );
 	
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
 	        { className: 'comment-list-item', style: { display: 'flex', justifyContent: 'space-between' } },
-	        _react2.default.createElement(
-	          'h5',
-	          { onClick: this.toggleComment, style: { color: textColor, display: 'inline-flex' } },
-	          body
-	        ),
+	        commentBody,
+	        toggleButton,
 	        deleteButton
 	      );
 	    }
