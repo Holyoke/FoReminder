@@ -17,7 +17,10 @@ require 'rails_helper'
 RSpec.describe Reminder, type: :model do
   it { should validate_presence_of(:title) }
   it { should belong_to :user }
+  it { should belong_to :list }
   it { should have_many :comments }
+
+  it { should "belong to a default list "}
   
   it "should default done to false" do
     reminder = Reminder.new(title: "test", remind_date: Date.new)
