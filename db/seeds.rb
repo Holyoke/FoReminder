@@ -13,7 +13,7 @@ jane = User.create(email: "jane@test.com", password: "passw0rd", password_confir
 10.times do |n|
   user = [joe, jane].sample
 
-  user.reminders.create(
+  user.default_list.reminders.create(
     title: "Reminder ##{n}",
     remind_date: Date.new + n % 7,
     done: false,
@@ -21,6 +21,6 @@ jane = User.create(email: "jane@test.com", password: "passw0rd", password_confir
   )
 
   if n == 5
-    5.times { |body| user.reminders.first.comments.create(body: "test comment  #{body} ", active: [true,false].sample) }
+    5.times { |body| user.default_list.reminders.first.comments.create(body: "test comment  #{body} ", active: [true,false].sample) }
   end
 end

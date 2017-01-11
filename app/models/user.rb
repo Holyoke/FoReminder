@@ -34,5 +34,17 @@ class User < ActiveRecord::Base
           :omniauthable
   include DeviseTokenAuth::Concerns::User
 
-  has_many :reminders, dependent: :destroy
+  has_many :lists, dependent: :destroy
+  has_many :reminders, through: :lists
+  
+  after_initialize :set_default_list
+
+  def default_list
+    self.lists.first
+  end
+
+  private
+    def set_default_list
+      self.lists.build(title: "Reminders")
+    end
 end

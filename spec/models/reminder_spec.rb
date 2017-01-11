@@ -10,18 +10,16 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :integer
+#  list_id     :integer
 #
 
 require 'rails_helper'
 
 RSpec.describe Reminder, type: :model do
   it { should validate_presence_of(:title) }
-  it { should belong_to :user }
   it { should belong_to :list }
   it { should have_many :comments }
 
-  it { should "belong to a default list "}
-  
   it "should default done to false" do
     reminder = Reminder.new(title: "test", remind_date: Date.new)
     expect(reminder.done).to eq false
@@ -36,4 +34,6 @@ RSpec.describe Reminder, type: :model do
     reminder = Reminder.new(title: "test", remind_date: Date.new)
     expect(reminder.remind_date).to be_present
   end
+
+  it "should have a user via list"
 end

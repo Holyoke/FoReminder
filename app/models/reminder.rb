@@ -10,24 +10,23 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :integer
+#  list_id     :integer
 #
 
 class Reminder < ApplicationRecord
   validates :title, :remind_date, presence: true
   validates :done, inclusion: { in: [true, false] }
 
-  belongs_to :user
+  belongs_to :list
+  delegate :user, to: :list
+
   has_many :comments, dependent: :destroy
 
-  after_initialize :set_done_status
-  after_initialize :set_default_remind_date
+  after_initialize :set_default_values
 
   private
-    def set_done_status
+    def set_default_values
       self.done ||= false
-    end
-
-    def set_default_remind_date
       self.remind_date ||= Time.now + 1.day
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110182618) do
+ActiveRecord::Schema.define(version: 20170111031208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 20170110182618) do
     t.index ["reminder_id"], name: "index_comments_on_reminder_id", using: :btree
   end
 
+  create_table "lists", force: :cascade do |t|
+    t.string  "title"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_lists_on_user_id", using: :btree
+  end
+
   create_table "reminders", force: :cascade do |t|
     t.string   "title"
     t.string   "body"
@@ -30,6 +36,8 @@ ActiveRecord::Schema.define(version: 20170110182618) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
+    t.integer  "list_id"
+    t.index ["list_id"], name: "index_reminders_on_list_id", using: :btree
     t.index ["user_id"], name: "index_reminders_on_user_id", using: :btree
   end
 
@@ -62,5 +70,7 @@ ActiveRecord::Schema.define(version: 20170110182618) do
   end
 
   add_foreign_key "comments", "reminders"
+  add_foreign_key "lists", "users"
+  add_foreign_key "reminders", "lists"
   add_foreign_key "reminders", "users"
 end
