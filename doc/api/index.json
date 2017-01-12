@@ -5,10 +5,17 @@
       "explanation": null,
       "examples": [
         {
-          "description": "Getting a list of lists unauthorized",
-          "link": "lists/getting_a_list_of_lists_unauthorized.json",
+          "description": "Getting an index of lists",
+          "link": "lists/getting_an_index_of_lists.json",
           "groups": "all",
           "route": "/api/lists",
+          "method": "get"
+        },
+        {
+          "description": "Getting a specified list",
+          "link": "lists/getting_a_specified_list.json",
+          "groups": "all",
+          "route": "api/lists/:id",
           "method": "get"
         }
       ]

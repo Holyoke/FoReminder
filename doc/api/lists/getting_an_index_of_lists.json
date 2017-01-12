@@ -1,0 +1,37 @@
+{
+  "resource": "Lists",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/lists",
+  "description": "Getting an index of lists",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/lists",
+      "request_body": null,
+      "request_headers": {
+        "Access-Token": "Egzjhk47sNldrWLqWsj-jw",
+        "Uid": "mozell.pollich@emmerichbuckridge.biz"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[\n  {\n    \"id\": 81,\n    \"title\": \"Default Reminders\",\n    \"user_id\": 41\n  },\n  {\n    \"id\": 82,\n    \"title\": \"open architecture\",\n    \"user_id\": 41\n  },\n  {\n    \"id\": 83,\n    \"title\": \"pricing structure\",\n    \"user_id\": 41\n  }\n]",
+      "response_headers": {
+        "access-token": "Egzjhk47sNldrWLqWsj-jw",
+        "uid": "mozell.pollich@emmerichbuckridge.biz"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"/api/lists\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: Egzjhk47sNldrWLqWsj-jw\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: TcPXWkidXQemtRBCzvpJ-A\" \\\n\t-H \"Expiry: 1485466548\" \\\n\t-H \"Uid: mozell.pollich@emmerichbuckridge.biz\""
+    }
+  ]
+}

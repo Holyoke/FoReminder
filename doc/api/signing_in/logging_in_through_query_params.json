@@ -4,7 +4,7 @@
   "http_method": "POST",
   "route": "/auth/sign_in",
   "description": "Logging in through query params",
-  "explanation": "This returns an 'access-token' and 'uid' to be set in the response headers, in order to validate requests.",
+  "explanation": "This returns an 'access-token' and 'uid' to be set in the response headers, in order to validate requests./n POST with the parameters to receive a response for the validation headers.",
   "parameters": [
     {
       "required": true,
@@ -24,7 +24,7 @@
     {
       "request_method": "POST",
       "request_path": "/auth/sign_in",
-      "request_body": "{\"email\":\"emilia@kohler.info\",\"password\":\"passw0rd\"}",
+      "request_body": "{\"email\":\"myriam@ortizgraham.biz\",\"password\":\"passw0rd\"}",
       "request_headers": {
       },
       "request_query_parameters": {
@@ -32,13 +32,13 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": 26,\n    \"email\": \"emilia@kohler.info\",\n    \"provider\": \"email\",\n    \"uid\": \"emilia@kohler.info\",\n    \"name\": null,\n    \"nickname\": null,\n    \"image\": null\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": 43,\n    \"email\": \"myriam@ortizgraham.biz\",\n    \"provider\": \"email\",\n    \"uid\": \"myriam@ortizgraham.biz\",\n    \"name\": null,\n    \"nickname\": null,\n    \"image\": null\n  }\n}",
       "response_headers": {
-        "access-token": "EyPwY8XZVU5XUnPmUp3hTg",
-        "uid": "emilia@kohler.info"
+        "access-token": "K_SC810zagPqUEYHP9KhNw",
+        "uid": "myriam@ortizgraham.biz"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"/auth/sign_in\" -d '{\"email\":\"emilia@kohler.info\",\"password\":\"passw0rd\"}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\""
+      "curl": "curl \"/auth/sign_in\" -d '{\"email\":\"myriam@ortizgraham.biz\",\"password\":\"passw0rd\"}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\""
     }
   ]
 }

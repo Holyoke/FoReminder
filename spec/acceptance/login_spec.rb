@@ -31,7 +31,7 @@ resource "Signing In" do
 
     example_request "Logging in through query params" do
       text = "This returns an 'access-token' and 'uid' to be set in the response headers, in order to validate requests."
-      text += "/n POST with the parameters to receive a response for the validation headers."
+      text += "\n POST with the parameters to receive a response for the validation headers."
 
       explanation text
 
