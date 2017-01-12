@@ -12,6 +12,19 @@
           "method": "get"
         }
       ]
+    },
+    {
+      "name": "Signing In",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Logging in through query params",
+          "link": "signing_in/logging_in_through_query_params.json",
+          "groups": "all",
+          "route": "/auth/sign_in",
+          "method": "post"
+        }
+      ]
     }
   ]
 }
