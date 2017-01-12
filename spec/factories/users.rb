@@ -27,26 +27,30 @@
 #  updated_at             :datetime         not null
 #
 
-class User < ActiveRecord::Base
-  # Include default devise modules.
-  devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :trackable, :validatable,
-          :omniauthable
-  include DeviseTokenAuth::Concerns::User
+FactoryGirl.define do
+  factory :user do
+    email { Faker::Internet.email }
+    password "passw0rd"
+    password_confirmation "passw0rd"
 
-  has_many :lists, dependent: :destroy
-  has_many :reminders, through: :lists
-  has_many :comments, through: :reminders
+    factory :user_with_lists_reminders_comments do
+      # posts_count is declared as a transient attribute and available in
+      # attributes on the factory, as well as the callback via the evaluator
+      transient do
+        lists_count 2
+        reminders_count 3
+        comments_count 3
+      end
 
-  after_initialize :set_default_list
-
-  def default_list
-    self.lists.create(title: "Default Reminders") if self.lists.empty?
-    self.lists.first
-  end
-
-  private
-    def set_default_list
-      self.lists.build(title: "Default Reminders") if self.new_record?
+      after(:create) do |user, evaluator|
+        create_list(:list, evaluator.lists_count, user: user)
+        user.lists.each do |list|
+          create_list(:reminder, evaluator.reminders_count, list: list)
+          list.reminders.each do |reminder|
+            create_list(:comment, evaluator.comments_count, reminder: reminder)
+          end
+        end
+      end
     end
+  end
 end

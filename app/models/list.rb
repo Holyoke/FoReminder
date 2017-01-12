@@ -12,4 +12,5 @@ class List < ApplicationRecord
 
   belongs_to :user
   has_many :reminders
+  has_many :comments, through: :reminders
 end

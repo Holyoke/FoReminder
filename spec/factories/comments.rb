@@ -10,7 +10,7 @@
 
 FactoryGirl.define do
   factory :comment do
-    body "MyString"
-    belongs_to ""
+    body { Faker::Hacker.verb }
+    active { [true, false].sample }
   end
 end

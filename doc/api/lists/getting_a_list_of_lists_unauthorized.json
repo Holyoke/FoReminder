@@ -17,8 +17,6 @@
       "request_path": "/api/lists",
       "request_body": null,
       "request_headers": {
-        "Host": "example.org",
-        "Cookie": ""
       },
       "request_query_parameters": {
       },
@@ -27,17 +25,9 @@
       "response_status_text": "Unauthorized",
       "response_body": "{\n  \"errors\": [\n    \"Authorized users only.\"\n  ]\n}",
       "response_headers": {
-        "X-Frame-Options": "SAMEORIGIN",
-        "X-XSS-Protection": "1; mode=block",
-        "X-Content-Type-Options": "nosniff",
-        "Content-Type": "application/json; charset=utf-8",
-        "Cache-Control": "no-cache",
-        "X-Request-Id": "6e341aaf-b740-48ef-8231-dc90dbf5949b",
-        "X-Runtime": "0.040024",
-        "Content-Length": "37"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": null
+      "curl": "curl \"/api/lists\" -X GET "
     }
   ]
 }
