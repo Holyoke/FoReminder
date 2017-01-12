@@ -24,6 +24,8 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
 gem 'fog'
 gem 'fog-aws', '~> 0.11.0'
+
+gem 'rspec_api_documentation'
 gem 'apitome'
 
 gem 'figaro'
@@ -40,6 +42,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem "letter_opener", "~> 1.4.1"
   gem "pry-rails"
+  gem 'rspec_api_documentation'
 end
 
 group :test do
@@ -67,8 +70,6 @@ group :development do
   #For optimizing db queries
   gem 'bullet'
   gem 'lol_dba'
-
-  gem 'rspec_api_documentation'
 
   #Common Debugging Gems
   gem 'better_errors'

@@ -1,0 +1,17 @@
+{
+  "resources": [
+    {
+      "name": "Lists",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Getting a list of lists unauthorized",
+          "link": "lists/getting_a_list_of_lists_unauthorized.json",
+          "groups": "all",
+          "route": "/api/lists",
+          "method": "get"
+        }
+      ]
+    }
+  ]
+}
