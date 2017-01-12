@@ -39,5 +39,4 @@ RSpec.describe User, type: :model do
     expect(joe.default_list).to be_present
     expect(joe.default_list).to eq(joe.lists.first)
   end
-
 end

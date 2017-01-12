@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     resources :reminders, only: [:index, :show, :create, :destroy, :update]
+    resources :lists, only: [:index, :show, :create, :destroy, :update]
     resources :comments, only: [:index, :create, :destroy, :update]
   end
 end

@@ -36,15 +36,16 @@ class User < ActiveRecord::Base
 
   has_many :lists, dependent: :destroy
   has_many :reminders, through: :lists
-  
+
   after_initialize :set_default_list
 
   def default_list
+    self.lists.create(title: "Default Reminders") if self.lists.empty?
     self.lists.first
   end
 
   private
     def set_default_list
-      self.lists.build(title: "Reminders")
+      self.lists.build(title: "Default Reminders") if self.new_record?
     end
 end

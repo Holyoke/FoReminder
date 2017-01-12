@@ -24,6 +24,10 @@ class Reminder < ApplicationRecord
 
   after_initialize :set_default_values
 
+  def list_title
+    self.list.title || "No List"
+  end
+
   private
     def set_default_values
       self.done ||= false
