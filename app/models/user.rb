@@ -41,12 +41,12 @@ class User < ActiveRecord::Base
   after_initialize :set_default_list
 
   def default_list
-    self.lists.create(title: "Default Reminders") if self.lists.empty?
+    self.lists.create(title: "Reminders") if self.lists.empty?
     self.lists.first
   end
 
   private
     def set_default_list
-      self.lists.build(title: "Default Reminders") if self.new_record?
+      self.lists.build(title: "Reminders") if self.new_record?
     end
 end

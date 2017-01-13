@@ -17,7 +17,8 @@ class ReminderList extends React.Component {
   }
 
   componentDidMount () {
-    this.props.fetchReminders()
+    const { fetchList, currentList } = this.props
+    fetchList(currentList)
   }
 
   toggleModal (e) {
@@ -30,7 +31,7 @@ class ReminderList extends React.Component {
   }
 
   render () {
-    const { reminders, errors, createReminder, removeReminder, updateReminder } = this.props
+    const { reminders, errors, createReminder, removeReminder, updateReminder, currentList } = this.props
 
     const reminderItems = reminders.map(reminder => {
       return (
@@ -50,8 +51,8 @@ class ReminderList extends React.Component {
       toggleModal={this.toggleModal} />
 
     return (
-      <ListGroup className="reminder-list" onClick={this.debug}>
-        <h2>Reminders</h2>
+      <ListGroup className='reminder-list' onClick={this.debug}>
+        <h2>{currentList.title}</h2>
         <ReminderFiltersContainer />
         {reminderItems}
         <ReminderForm createReminder={createReminder} errors={errors} />

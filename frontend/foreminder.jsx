@@ -16,6 +16,7 @@ import * as commentActions from './actions/comment_actions'
 import * as errorActions from './actions/error_actions'
 import * as sessionActions from './actions/session_actions'
 import * as listActions from './actions/list_actions'
+import * as currentListActions from './actions/current_list_actions'
 
 import moment from 'moment'
 
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.commentActions = commentActions
   window.errorActions = errorActions
   window.sessionActions = sessionActions
+  window.currentListActions = currentListActions
   window.store = store
   window.selectors = selectors
   window.api = api
