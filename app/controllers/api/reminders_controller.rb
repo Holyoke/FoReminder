@@ -1,6 +1,6 @@
 class Api::RemindersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_list, only: [:index, :new]
+  before_action :set_list, only: [:index, :create]
   before_action :set_reminder, only: [:show, :update, :destroy]
 
   def index
@@ -37,8 +37,8 @@ class Api::RemindersController < ApplicationController
 
   private
     def set_list
-      list_id = params[:list_id]
-      @list = list_id.present? ? current_user.lists.find(list_id) : current_user.default_list
+      list = current_user.lists.find(params[:list_id]) if params[:list_id].present?
+      @list = list.present? ? list : current_user.default_list
     end
 
     def set_reminder
