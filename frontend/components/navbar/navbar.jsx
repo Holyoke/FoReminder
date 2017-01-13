@@ -28,6 +28,9 @@ class NavBar extends React.Component {
     return (
       <Navbar fluid>
         <Nav>
+          <LinkContainer to="/lists">
+            <NavItem>Lists</NavItem>
+          </LinkContainer>
           <LinkContainer to="/reminders">
             <NavItem>Reminders</NavItem>
           </LinkContainer>

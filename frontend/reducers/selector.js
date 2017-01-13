@@ -1,3 +1,6 @@
+// lists
+export const getLists = ({lists}) => Object.keys(lists).map(id => lists[id])
+
 //  reminders
 export const allReminders = (reminders) => Object.keys(reminders).map(id => reminders[id])
 
