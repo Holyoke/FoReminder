@@ -98,6 +98,10 @@
 	
 	var sessionActions = _interopRequireWildcard(_session_actions);
 	
+	var _list_actions = __webpack_require__(687);
+	
+	var listActions = _interopRequireWildcard(_list_actions);
+	
 	var _moment = __webpack_require__(211);
 	
 	var _moment2 = _interopRequireDefault(_moment);
@@ -106,7 +110,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// components
+	//  testing
 	document.addEventListener('DOMContentLoaded', function () {
 	  var root = document.getElementById('root');
 	  var preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {};
@@ -130,6 +134,7 @@
 	
 	  //  testing
 	  // window.Auth = Auth
+	  window.listActions = listActions;
 	  window.reminderActions = reminderActions;
 	  window.commentActions = commentActions;
 	  window.errorActions = errorActions;
@@ -143,7 +148,7 @@
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 	});
 	
-	//  testing
+	// components
 
 /***/ },
 /* 1 */
@@ -71174,6 +71179,159 @@
 	    Completed: completedCount,
 	    Incomplete: incompleteCount
 	  };
+	};
+
+/***/ },
+/* 687 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.removeList = exports.receiveLists = exports.receiveList = exports.deleteList = exports.updateList = exports.createList = exports.fetchLists = exports.REMOVE_LIST = exports.RECEIVE_LISTS = exports.RECEIVE_LIST = undefined;
+	
+	var _list_api_util = __webpack_require__(688);
+	
+	var util = _interopRequireWildcard(_list_api_util);
+	
+	var _session_api_util = __webpack_require__(204);
+	
+	var _error_actions = __webpack_require__(210);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	var RECEIVE_LIST = exports.RECEIVE_LIST = 'RECEIVE_LIST';
+	var RECEIVE_LISTS = exports.RECEIVE_LISTS = 'RECEIVE_LISTS';
+	var REMOVE_LIST = exports.REMOVE_LIST = 'REMOVE_LIST';
+	
+	// async actions
+	var fetchLists = exports.fetchLists = function fetchLists() {
+	  return function (dispatch) {
+	    return util.fetchLists().then(function (lists) {
+	      return dispatch(receiveLists(lists));
+	    });
+	  };
+	};
+	
+	var createList = exports.createList = function createList(list) {
+	  return function (dispatch) {
+	    return util.createList(list).then(function (list) {
+	      dispatch(receiveList(list));
+	      dispatch((0, _error_actions.clearErrors)());
+	    }, function (err) {
+	      return dispatch((0, _error_actions.receiveErrors)(err));
+	    });
+	  };
+	};
+	
+	var updateList = exports.updateList = function updateList(list) {
+	  return function (dispatch) {
+	    return util.updateList(list).then(function (list) {
+	      dispatch(receiveList(list));
+	      dispatch((0, _error_actions.clearErrors)());
+	    }, function (err) {
+	      return dispatch((0, _error_actions.receiveErrors)(err));
+	    });
+	  };
+	};
+	
+	var deleteList = exports.deleteList = function deleteList(list) {
+	  return function (dispatch) {
+	    return util.deleteList(list).then(function (list) {
+	      dispatch(receiveList(list));
+	      dispatch((0, _error_actions.clearErrors)());
+	    }, function (err) {
+	      return dispatch((0, _error_actions.receiveErrors)(err));
+	    });
+	  };
+	};
+	
+	// sync actions
+	var receiveList = exports.receiveList = function receiveList(list) {
+	  return {
+	    type: RECEIVE_LIST,
+	    list: list
+	  };
+	};
+	
+	var receiveLists = exports.receiveLists = function receiveLists(lists) {
+	  return {
+	    type: RECEIVE_LISTS,
+	    lists: lists
+	  };
+	};
+	
+	var removeList = exports.removeList = function removeList(list) {
+	  return {
+	    type: REMOVE_LIST,
+	    list: list
+	  };
+	};
+
+/***/ },
+/* 688 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.deleteList = exports.updateList = exports.createList = exports.fetchLists = undefined;
+	
+	var _session_api_util = __webpack_require__(204);
+	
+	var _jToker = __webpack_require__(205);
+	
+	var _jToker2 = _interopRequireDefault(_jToker);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var fetchLists = exports.fetchLists = function fetchLists(success, error) {
+	  (0, _session_api_util._setHeaders)();
+	  return $.ajax({
+	    method: 'GET',
+	    url: 'api/lists',
+	    success: success,
+	    error: error
+	  });
+	};
+	
+	var createList = exports.createList = function createList(data, success, error) {
+	  (0, _session_api_util._setHeaders)();
+	  return $.ajax({
+	    method: 'POST',
+	    url: 'api/lists',
+	    data: data,
+	    success: success,
+	    error: error
+	  });
+	};
+	
+	var updateList = exports.updateList = function updateList(data, success, error) {
+	  (0, _session_api_util._setHeaders)();
+	  var url = 'api/lists/' + data.list.id;
+	  return $.ajax({
+	    method: 'PUT',
+	    url: url,
+	    data: data,
+	    success: _session_api_util._setHeaders,
+	    error: error
+	  });
+	};
+	
+	var deleteList = exports.deleteList = function deleteList(data, success, error) {
+	  (0, _session_api_util._setHeaders)();
+	  var url = 'api/lists/' + data.list.id;
+	  return $.ajax({
+	    method: 'DELETE',
+	    url: url,
+	    data: data,
+	    success: success,
+	    error: error
+	  });
 	};
 
 /***/ }

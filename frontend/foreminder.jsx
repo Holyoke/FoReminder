@@ -15,6 +15,7 @@ import * as reminderActions from './actions/reminder_actions'
 import * as commentActions from './actions/comment_actions'
 import * as errorActions from './actions/error_actions'
 import * as sessionActions from './actions/session_actions'
+import * as listActions from './actions/list_actions'
 
 import moment from 'moment'
 
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //  testing
   // window.Auth = Auth
+  window.listActions = listActions
   window.reminderActions = reminderActions
   window.commentActions = commentActions
   window.errorActions = errorActions
