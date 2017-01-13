@@ -12,7 +12,9 @@ export const RECEIVE_COUNTS = 'RECEIVE_COUNTS'
 // api interactions
 export const fetchReminders = () => {
   return (dispatch) => {
-    return util.fetchReminders().then(reminders => dispatch(receiveReminders(reminders)))
+    return util.fetchReminders().then(reminders => {
+      dispatch(receiveReminders(reminders))
+    })
   }
 }
 

@@ -22666,9 +22666,7 @@
 	
 	var _reminder_actions = __webpack_require__(202);
 	
-	var _moment = __webpack_require__(211);
-	
-	var _moment2 = _interopRequireDefault(_moment);
+	var _list_actions = __webpack_require__(416);
 	
 	var _merge = __webpack_require__(322);
 	
@@ -22679,19 +22677,12 @@
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	var initialState = {
-	  "1": {
+	  '1': {
 	    id: 1,
-	    title: "reminder #1 think of chai",
-	    body: "#1 it is dirty",
+	    title: 'initial Title',
+	    body: 'initial Body',
 	    done: false,
-	    remind_date: (0, _moment2.default)().add(24, 'hours').format('LLL')
-	  },
-	  "2": {
-	    id: 2,
-	    title: "reminder #2",
-	    body: "#2 dog is dirty",
-	    done: true,
-	    remind_date: (0, _moment2.default)().add(24, 'hours').format('LLL')
+	    remind_date: ''
 	  }
 	};
 	
@@ -22753,7 +22744,7 @@
 	var fetchReminders = exports.fetchReminders = function fetchReminders() {
 	  return function (dispatch) {
 	    return util.fetchReminders().then(function (reminders) {
-	      return dispatch(receiveReminders(reminders));
+	      dispatch(receiveReminders(reminders));
 	    });
 	  };
 	};
@@ -53089,13 +53080,15 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.removeList = exports.receiveLists = exports.receiveList = exports.deleteList = exports.updateList = exports.createList = exports.fetchLists = exports.REMOVE_LIST = exports.RECEIVE_LISTS = exports.RECEIVE_LIST = undefined;
+	exports.removeList = exports.receiveLists = exports.receiveList = exports.deleteList = exports.updateList = exports.createList = exports.fetchLists = exports.fetchList = exports.REMOVE_LIST = exports.RECEIVE_LISTS = exports.RECEIVE_LIST = undefined;
 	
 	var _list_api_util = __webpack_require__(417);
 	
 	var util = _interopRequireWildcard(_list_api_util);
 	
 	var _session_api_util = __webpack_require__(204);
+	
+	var _reminder_actions = __webpack_require__(202);
 	
 	var _error_actions = __webpack_require__(210);
 	
@@ -53106,6 +53099,15 @@
 	var REMOVE_LIST = exports.REMOVE_LIST = 'REMOVE_LIST';
 	
 	// async actions
+	var fetchList = exports.fetchList = function fetchList(list) {
+	  return function (dispatch) {
+	    return util.fetchList(list).then(function (list) {
+	      dispatch((0, _reminder_actions.receiveReminders)(list.reminders));
+	      dispatch(receiveList(list));
+	    });
+	  };
+	};
+	
 	var fetchLists = exports.fetchLists = function fetchLists() {
 	  return function (dispatch) {
 	    return util.fetchLists().then(function (lists) {
@@ -53178,7 +53180,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.deleteList = exports.updateList = exports.createList = exports.fetchLists = undefined;
+	exports.deleteList = exports.updateList = exports.createList = exports.fetchList = exports.fetchLists = undefined;
 	
 	var _session_api_util = __webpack_require__(204);
 	
@@ -53193,6 +53195,17 @@
 	  return $.ajax({
 	    method: 'GET',
 	    url: 'api/lists',
+	    success: success,
+	    error: error
+	  });
+	};
+	
+	var fetchList = exports.fetchList = function fetchList(list, success, error) {
+	  (0, _session_api_util._setHeaders)();
+	  var url = 'api/lists/' + list.id;
+	  return $.ajax({
+	    method: 'GET',
+	    url: url,
 	    success: success,
 	    error: error
 	  });
@@ -71447,14 +71460,16 @@
 	// selectors
 	
 	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
-	  var list = _ref.list;
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
 	    createList: function createList(list) {
 	      return dispatch((0, _list_actions.createList)({ list: list }));
 	    },
 	    fetchLists: function fetchLists() {
 	      return dispatch((0, _list_actions.fetchLists)());
+	    },
+	    fetchList: function fetchList(list) {
+	      return dispatch((0, _list_actions.fetchList)(list));
 	    },
 	    updateList: function updateList(list) {
 	      return dispatch((0, _list_actions.updateList)({ list: list }));

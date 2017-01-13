@@ -11,6 +11,17 @@ export const fetchLists = (success, error) => {
   })
 }
 
+export const fetchList = (list, success, error) => {
+  _setHeaders()
+  const url = 'api/lists/' + list.id
+  return $.ajax({
+    method: 'GET',
+    url: url,
+    success,
+    error
+  })
+}
+
 export const createList = (data, success, error) => {
   _setHeaders()
   return $.ajax({

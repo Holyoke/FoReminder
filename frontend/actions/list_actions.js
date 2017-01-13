@@ -1,6 +1,7 @@
 import * as util from '../util/list_api_util'
 import { _setHeaders } from '../util/session_api_util'
 
+import { receiveReminders } from './reminder_actions'
 import { receiveErrors, clearErrors } from './error_actions'
 
 export const RECEIVE_LIST = 'RECEIVE_LIST'
@@ -8,6 +9,15 @@ export const RECEIVE_LISTS = 'RECEIVE_LISTS'
 export const REMOVE_LIST = 'REMOVE_LIST'
 
 // async actions
+export const fetchList = (list) => {
+  return (dispatch) => {
+    return util.fetchList(list).then(list => {
+      dispatch(receiveReminders(list.reminders))
+      dispatch(receiveList(list))
+    })
+  }
+}
+
 export const fetchLists = () => {
   return (dispatch) => {
     return util.fetchLists().then(lists => dispatch(receiveLists(lists)))

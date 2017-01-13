@@ -1,6 +1,6 @@
 class Api::RemindersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_list
+  before_action :set_list, only: [:index, :new]
   before_action :set_reminder, only: [:show, :update, :destroy]
 
   def index
