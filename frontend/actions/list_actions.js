@@ -42,7 +42,7 @@ export const deleteList = list => {
   return dispatch => {
     return util.deleteList(list)
                .then(list => {
-                 dispatch(receiveList(list))
+                 dispatch(removeList(list))
                  dispatch(clearErrors())
                },
                 err => dispatch(receiveErrors(err))

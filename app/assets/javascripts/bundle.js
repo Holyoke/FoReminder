@@ -22637,6 +22637,10 @@
 	
 	var _session_reducer2 = _interopRequireDefault(_session_reducer);
 	
+	var _lists_reducer = __webpack_require__(689);
+	
+	var _lists_reducer2 = _interopRequireDefault(_lists_reducer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var RootReducer = (0, _redux.combineReducers)({
@@ -22644,7 +22648,8 @@
 	  reminders: _reminders_reducer2.default,
 	  remindersFilter: _reminders_filter_reducer2.default,
 	  comments: _comments_reducer2.default,
-	  errors: _errors_reducer2.default
+	  errors: _errors_reducer2.default,
+	  lists: _lists_reducer2.default
 	});
 	
 	exports.default = RootReducer;
@@ -71240,7 +71245,7 @@
 	var deleteList = exports.deleteList = function deleteList(list) {
 	  return function (dispatch) {
 	    return util.deleteList(list).then(function (list) {
-	      dispatch(receiveList(list));
+	      dispatch(removeList(list));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
 	      return dispatch((0, _error_actions.receiveErrors)(err));
@@ -71333,6 +71338,60 @@
 	    error: error
 	  });
 	};
+
+/***/ },
+/* 689 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _list_actions = __webpack_require__(687);
+	
+	var _merge = __webpack_require__(322);
+	
+	var _merge2 = _interopRequireDefault(_merge);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	var initialState = {
+	  '1': {
+	    id: 1,
+	    title: 'Etheral List'
+	  }
+	};
+	
+	var listsReducer = function listsReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	  var action = arguments[1];
+	
+	  Object.freeze(state);
+	  var newState = {};
+	  switch (action.type) {
+	    case _list_actions.RECEIVE_LISTS:
+	      action.lists.forEach(function (list) {
+	        return newState[list.id] = list;
+	      });
+	      return newState;
+	    case _list_actions.RECEIVE_LIST:
+	      var newList = _defineProperty({}, action.list.id, action.list);
+	      newState = (0, _merge2.default)({}, state, newList);
+	      return newState;
+	    case _list_actions.REMOVE_LIST:
+	      newState = (0, _merge2.default)({}, state);
+	      delete newState[action.list.id];
+	      return newState;
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = listsReducer;
 
 /***/ }
 /******/ ]);
