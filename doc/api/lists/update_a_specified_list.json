@@ -1,0 +1,42 @@
+{
+  "resource": "Lists",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/lists/:id",
+  "description": "Update a specified list",
+  "explanation": "Updating a list by id",
+  "parameters": [
+    {
+      "scope": "list",
+      "name": "title",
+      "description": "Title of list"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/lists/14",
+      "request_body": "{\"list\":{\"title\":\"Updated title.\"}}",
+      "request_headers": {
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"id\": 14,\n  \"user_id\": 5,\n  \"title\": \"Updated title.\"\n}",
+      "response_headers": {
+        "access-token": "kjQW0uiKS0sTw-4C6oiwqg",
+        "token-type": "Bearer",
+        "client": "B2og7OdySsf3gYDQckmKmA",
+        "expiry": "1485476696",
+        "uid": "dillan@will.org"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"fomind.com//api/lists/14\" -d '{\"list\":{\"title\":\"Updated title.\"}}' -X PUT \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: kjQW0uiKS0sTw-4C6oiwqg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: B2og7OdySsf3gYDQckmKmA\" \\\n\t-H \"Expiry: 1485476696\" \\\n\t-H \"Uid: dillan@will.org\""
+    }
+  ]
+}

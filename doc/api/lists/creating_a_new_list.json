@@ -1,0 +1,47 @@
+{
+  "resource": "Lists",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/lists",
+  "description": "Creating a new list",
+  "explanation": "Creates a new list for user.",
+  "parameters": [
+    {
+      "scope": "list",
+      "required": true,
+      "name": "title",
+      "description": "Title of list"
+    }
+  ],
+  "response_fields": [
+    {
+      "scope": "list",
+      "name": "title",
+      "description": "Title for list"
+    }
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/lists",
+      "request_body": "{\"list\":{\"title\":\"New list title\"}}",
+      "request_headers": {
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\n  \"id\": 5,\n  \"title\": \"New list title\",\n  \"user_id\": 2\n}",
+      "response_headers": {
+        "access-token": "L2Mev6cfmDue7EQbmV7opA",
+        "token-type": "Bearer",
+        "client": "eb2Lu7quA3Ke2kWIIaB_AA",
+        "expiry": "1485476695",
+        "uid": "rollin@lehner.co"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"fomind.com//api/lists\" -d '{\"list\":{\"title\":\"New list title\"}}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: L2Mev6cfmDue7EQbmV7opA\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: eb2Lu7quA3Ke2kWIIaB_AA\" \\\n\t-H \"Expiry: 1485476695\" \\\n\t-H \"Uid: rollin@lehner.co\""
+    }
+  ]
+}

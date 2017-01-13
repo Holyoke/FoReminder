@@ -1,35 +1,56 @@
 {
   "resources": [
     {
+      "name": "Authorization",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Logging in through query params",
+          "link": "authorization/logging_in_through_query_params.json",
+          "groups": "all",
+          "route": "/auth/sign_in",
+          "method": "post"
+        }
+      ]
+    },
+    {
       "name": "Lists",
       "explanation": null,
       "examples": [
         {
-          "description": "Getting an index of lists",
-          "link": "lists/getting_an_index_of_lists.json",
+          "description": "Creating a new list",
+          "link": "lists/creating_a_new_list.json",
+          "groups": "all",
+          "route": "/api/lists",
+          "method": "post"
+        },
+        {
+          "description": "Retrieving an index of lists",
+          "link": "lists/retrieving_an_index_of_lists.json",
           "groups": "all",
           "route": "/api/lists",
           "method": "get"
         },
         {
-          "description": "Getting a specified list",
-          "link": "lists/getting_a_specified_list.json",
+          "description": "Retrieving a specified list",
+          "link": "lists/retrieving_a_specified_list.json",
           "groups": "all",
           "route": "api/lists/:id",
           "method": "get"
-        }
-      ]
-    },
-    {
-      "name": "Signing In",
-      "explanation": null,
-      "examples": [
+        },
         {
-          "description": "Logging in through query params",
-          "link": "signing_in/logging_in_through_query_params.json",
+          "description": "Update a specified list",
+          "link": "lists/update_a_specified_list.json",
           "groups": "all",
-          "route": "/auth/sign_in",
-          "method": "post"
+          "route": "/api/lists/:id",
+          "method": "put"
+        },
+        {
+          "description": "Deleting a specified list",
+          "link": "lists/deleting_a_specified_list.json",
+          "groups": "all",
+          "route": "/api/lists/:id",
+          "method": "delete"
         }
       ]
     }

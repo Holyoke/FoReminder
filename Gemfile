@@ -25,8 +25,8 @@ gem 'mini_magick', '~> 4.3'
 gem 'fog'
 gem 'fog-aws', '~> 0.11.0'
 
-gem 'rspec_api_documentation'
 gem 'apitome'
+gem 'database_cleaner'
 
 gem 'figaro'
 
@@ -50,7 +50,6 @@ group :test do
   gem 'capybara'
   gem 'guard-rspec'
   gem 'launchy'
-  gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
 end

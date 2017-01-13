@@ -1,0 +1,38 @@
+{
+  "resource": "Lists",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/lists",
+  "description": "Retrieving an index of lists",
+  "explanation": "Retrieves user's lists and their ids.",
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/lists",
+      "request_body": null,
+      "request_headers": {
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[\n  {\n    \"id\": 6,\n    \"title\": \"Default Reminders\",\n    \"user_id\": 3\n  },\n  {\n    \"id\": 7,\n    \"title\": \"clear-thinking\",\n    \"user_id\": 3\n  },\n  {\n    \"id\": 8,\n    \"title\": \"solution\",\n    \"user_id\": 3\n  }\n]",
+      "response_headers": {
+        "access-token": "WPo1wMpMmb-erhapgArLfw",
+        "token-type": "Bearer",
+        "client": "x_DiCyiy9E1d-l2IOyZnUQ",
+        "expiry": "1485476696",
+        "uid": "muhammad@champlin.co"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"fomind.com//api/lists\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: WPo1wMpMmb-erhapgArLfw\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: x_DiCyiy9E1d-l2IOyZnUQ\" \\\n\t-H \"Expiry: 1485476696\" \\\n\t-H \"Uid: muhammad@champlin.co\""
+    }
+  ]
+}

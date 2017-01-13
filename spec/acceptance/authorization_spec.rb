@@ -3,7 +3,7 @@ require 'acceptance_helper'
 require 'rails_helper'
 require 'byebug'
 
-resource "Signing In" do
+resource "Authorization" do
   header "Accept", "application/json"
   header "Content-Type", "application/json"
 
@@ -30,7 +30,7 @@ resource "Signing In" do
     end
 
     example_request "Logging in through query params" do
-      text = "This returns an 'access-token' and 'uid' to be set in the response headers, in order to validate requests."
+      text = "This returns authorization headers, in order to validate requests."
       text += "\n POST with the parameters to receive a response for the validation headers."
 
       explanation text

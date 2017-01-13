@@ -1,0 +1,38 @@
+{
+  "resource": "Lists",
+  "resource_explanation": null,
+  "http_method": "DELETE",
+  "route": "/api/lists/:id",
+  "description": "Deleting a specified list",
+  "explanation": "Deletes a List by id",
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "DELETE",
+      "request_path": "/api/lists/17",
+      "request_body": null,
+      "request_headers": {
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"id\": 17,\n  \"title\": \"instruction set\",\n  \"user_id\": 6\n}",
+      "response_headers": {
+        "access-token": "Pc9RJ3FOPVyMMMGQS2lIeA",
+        "token-type": "Bearer",
+        "client": "AKSj48A1tdqrnP2ZPDQQ-A",
+        "expiry": "1485476697",
+        "uid": "nicholas@maggioauer.org"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"fomind.com//api/lists/17\" -d '' -X DELETE \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: Pc9RJ3FOPVyMMMGQS2lIeA\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: AKSj48A1tdqrnP2ZPDQQ-A\" \\\n\t-H \"Expiry: 1485476697\" \\\n\t-H \"Uid: nicholas@maggioauer.org\""
+    }
+  ]
+}

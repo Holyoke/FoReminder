@@ -21,9 +21,9 @@ resource "Lists" do
   let(:uid_header) {  auth_headers["uid"] }
 
   post "/api/lists" do
-    parameter :title, "Title of list", scope: :list
+    parameter :title, "Title of list", scope: :list, required: true
 
-    response_field :title, "list title", scope: :list
+    response_field :title, "Title for list", scope: :list
 
     let(:title) { "New list title" }
     let(:raw_post) { params.to_json }
