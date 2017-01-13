@@ -35070,6 +35070,8 @@
 	  return function (dispatch) {
 	    return util.fetchList(list).then(function (list) {
 	      dispatch((0, _reminder_actions.receiveReminders)(list.reminders));
+	      dispatch(receiveList(list));
+	      // currently assumes that each time we fetch a list, we set it as the current one
 	      dispatch((0, _current_list_actions.receiveCurrentList)(list));
 	    });
 	  };
@@ -50338,7 +50340,7 @@
 	      return dispatch((0, _reminder_actions.createReminder)({ reminder: reminder }));
 	    },
 	    fetchList: function fetchList(list) {
-	      return dispatch((0, _list_actions.fetchList)(list));
+	      dispatch((0, _list_actions.fetchList)(list));
 	    },
 	    fetchReminders: function fetchReminders() {
 	      return dispatch((0, _reminder_actions.fetchReminders)());
@@ -50419,7 +50421,11 @@
 	          fetchList = _props.fetchList,
 	          currentList = _props.currentList;
 	
-	      fetchList(currentList);
+	      //  if currentList fails, then set default list from back end
+	
+	      fetchList(currentList).then(function () {}, function () {
+	        return fetchList({ id: 'default' });
+	      });
 	    }
 	  }, {
 	    key: 'toggleModal',
@@ -71528,11 +71534,12 @@
 	
 	var _list_actions = __webpack_require__(211);
 	
+	var _current_list_actions = __webpack_require__(308);
+	
 	var _selector = __webpack_require__(510);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// actions
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    lists: (0, _selector.getLists)(state),
@@ -71543,6 +71550,9 @@
 	// selectors
 	
 	
+	// actions
+	
+	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
 	    createList: function createList(list) {
@@ -71551,8 +71561,8 @@
 	    fetchLists: function fetchLists() {
 	      return dispatch((0, _list_actions.fetchLists)());
 	    },
-	    fetchList: function fetchList(list) {
-	      return dispatch((0, _list_actions.fetchList)(list));
+	    receiveCurrentList: function receiveCurrentList(list) {
+	      return dispatch((0, _current_list_actions.receiveCurrentList)(list));
 	    },
 	    updateList: function updateList(list) {
 	      return dispatch((0, _list_actions.updateList)({ list: list }));
@@ -71610,15 +71620,28 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.props.fetchLists();
+	      this.handleListItemClick = this.handleListItemClick.bind(this);
+	    }
+	  }, {
+	    key: 'handleListItemClick',
+	    value: function handleListItemClick(list) {
+	      this.props.receiveCurrentList(list);
+	      this.props.router.push("/reminders");
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var lists = this.props.lists;
+	      var _this2 = this;
+	
+	      var _props = this.props,
+	          lists = _props.lists,
+	          receiveCurrentList = _props.receiveCurrentList;
 	
 	
 	      var listItems = lists.map(function (list, idx) {
-	        return _react2.default.createElement(_lists_list_item2.default, { key: list.id, list: list });
+	        return _react2.default.createElement(_lists_list_item2.default, { key: list.id, list: list, handleClick: function handleClick() {
+	            return _this2.handleListItemClick(list);
+	          } });
 	      });
 	
 	      return _react2.default.createElement(
@@ -71679,12 +71702,14 @@
 	  _createClass(ListsListItem, [{
 	    key: 'render',
 	    value: function render() {
-	      var list = this.props.list;
+	      var _props = this.props,
+	          list = _props.list,
+	          handleClick = _props.handleClick;
 	      var title = list.title;
 	
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
-	        null,
+	        { onClick: handleClick },
 	        title
 	      );
 	    }

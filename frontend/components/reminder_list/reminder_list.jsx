@@ -18,7 +18,9 @@ class ReminderList extends React.Component {
 
   componentDidMount () {
     const { fetchList, currentList } = this.props
-    fetchList(currentList)
+
+    //  if currentList fails, then set default list from back end
+    fetchList(currentList).then(() => {}, () => fetchList({id: 'default'}))
   }
 
   toggleModal (e) {

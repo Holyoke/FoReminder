@@ -16,7 +16,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, { reminder }) => ({
   createReminder: (reminder) => dispatch(createReminder({reminder})),
-  fetchList: (list) => dispatch(fetchList(list)),
+  fetchList: (list) => {
+    dispatch(fetchList(list))
+  },
   fetchReminders: () => dispatch(fetchReminders()),
   updateReminder: (reminder) => dispatch(updateReminder({reminder}))
 })

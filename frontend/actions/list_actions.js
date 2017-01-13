@@ -14,6 +14,8 @@ export const fetchList = (list) => {
   return (dispatch) => {
     return util.fetchList(list).then(list => {
       dispatch(receiveReminders(list.reminders))
+      dispatch(receiveList(list))
+      // currently assumes that each time we fetch a list, we set it as the current one
       dispatch(receiveCurrentList(list))
     })
   }
