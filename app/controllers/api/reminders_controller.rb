@@ -37,8 +37,11 @@ class Api::RemindersController < ApplicationController
 
   private
     def set_list
-      list = current_user.lists.find(params[:list_id]) if params[:list_id].present?
-      @list = list.present? ? list : current_user.default_list
+      if params[:list_id] == 'default' || params[:list_id].nil?
+        @list = current_user.default_list
+      else
+        @list = current_user.lists.find(params[:list_id])
+      end
     end
 
     def set_reminder

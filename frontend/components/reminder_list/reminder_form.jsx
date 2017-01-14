@@ -32,11 +32,12 @@ class ReminderForm extends React.Component {
   handleSubmit (e) {
     e.preventDefault()
     const reminder = Object.assign({}, this.state, {id: uniqueId()})
+    const { createReminder, list_id } = this.props
 
     //  parse date
     reminder.remind_date = reminder.remind_date.format('LLL')
 
-    this.props.createReminder(reminder).then(this.resetForm())
+    createReminder(reminder, list_id).then(this.resetForm())
   }
 
   handleDataChange (date) {

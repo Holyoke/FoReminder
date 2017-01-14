@@ -22676,7 +22676,9 @@
 	
 	var _reminder_actions = __webpack_require__(202);
 	
-	var _list_actions = __webpack_require__(211);
+	var _current_list_actions = __webpack_require__(308);
+	
+	var _session_actions = __webpack_require__(304);
 	
 	var _merge = __webpack_require__(213);
 	
@@ -22705,7 +22707,7 @@
 	  switch (action.type) {
 	    case _reminder_actions.RECEIVE_REMINDERS:
 	      action.reminders.forEach(function (reminder) {
-	        return newState[reminder.id] = reminder;
+	        newState[reminder.id] = reminder;
 	      });
 	      return newState;
 	    case _reminder_actions.RECEIVE_REMINDER:
@@ -22715,6 +22717,8 @@
 	    case _reminder_actions.REMOVE_REMINDER:
 	      newState = (0, _merge2.default)({}, state);
 	      delete newState[action.reminder.id];
+	      return newState;
+	    case _session_actions.LOGOUT:
 	      return newState;
 	    default:
 	      return state;
@@ -22759,9 +22763,9 @@
 	  };
 	};
 	
-	var createReminder = exports.createReminder = function createReminder(reminder) {
+	var createReminder = exports.createReminder = function createReminder(data) {
 	  return function (dispatch) {
-	    return util.createReminder(reminder).then(function (reminder) {
+	    return util.createReminder(data).then(function (reminder) {
 	      dispatch(receiveReminder(reminder));
 	      dispatch((0, _error_actions.clearErrors)());
 	    }, function (err) {
@@ -35066,13 +35070,11 @@
 	var REMOVE_LIST = exports.REMOVE_LIST = 'REMOVE_LIST';
 	
 	// async actions
-	var fetchList = exports.fetchList = function fetchList(list) {
+	var fetchList = exports.fetchList = function fetchList(list, success, error) {
 	  return function (dispatch) {
-	    return util.fetchList(list).then(function (list) {
+	    return util.fetchList(list, success, error).then(function (list) {
 	      dispatch((0, _reminder_actions.receiveReminders)(list.reminders));
 	      dispatch(receiveList(list));
-	      // currently assumes that each time we fetch a list, we set it as the current one
-	      dispatch((0, _current_list_actions.receiveCurrentList)(list));
 	    });
 	  };
 	};
@@ -38336,7 +38338,7 @@
 	  switch (action.type) {
 	    case _list_actions.RECEIVE_LISTS:
 	      action.lists.forEach(function (list) {
-	        return newState[list.id] = list;
+	        newState[list.id] = list;
 	      });
 	      return newState;
 	    case _list_actions.RECEIVE_LIST:
@@ -38366,6 +38368,8 @@
 	
 	var _current_list_actions = __webpack_require__(308);
 	
+	var _session_actions = __webpack_require__(304);
+	
 	var _merge = __webpack_require__(213);
 	
 	var _merge2 = _interopRequireDefault(_merge);
@@ -38374,7 +38378,8 @@
 	
 	var initialState = {
 	  'id': 'default',
-	  'title': 'Reminders'
+	  'title': 'Reminders',
+	  'reminders': {}
 	};
 	
 	var currentListReducer = function currentListReducer() {
@@ -38387,6 +38392,8 @@
 	    case _current_list_actions.RECEIVE_CURRENT_LIST:
 	      newState = (0, _merge2.default)({}, state, action.list);
 	      return newState;
+	    case _session_actions.LOGOUT:
+	      return initialState;
 	    default:
 	      return state;
 	  }
@@ -50290,6 +50297,8 @@
 	      return errors.responseJSON;
 	    case 'error':
 	      return errors.responseJSON;
+	    case 'Not Found':
+	      return ['Resource not found'];
 	  }
 	
 	  return errors;
@@ -50315,10 +50324,13 @@
 	
 	var _list_actions = __webpack_require__(211);
 	
+	var _current_list_actions = __webpack_require__(308);
+	
 	var _selector = __webpack_require__(510);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// actions
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    currentList: state.currentList,
@@ -50330,17 +50342,17 @@
 	// selectors
 	
 	
-	// actions
-	
-	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
 	  var reminder = _ref.reminder;
 	  return {
-	    createReminder: function createReminder(reminder) {
-	      return dispatch((0, _reminder_actions.createReminder)({ reminder: reminder }));
+	    createReminder: function createReminder(reminder, list_id) {
+	      return dispatch((0, _reminder_actions.createReminder)({ reminder: reminder, list_id: list_id }));
 	    },
 	    fetchList: function fetchList(list) {
-	      dispatch((0, _list_actions.fetchList)(list));
+	      return dispatch((0, _list_actions.fetchList)(list));
+	    },
+	    setCurrentList: function setCurrentList(currentList) {
+	      return dispatch((0, _current_list_actions.receiveCurrentList)(currentList));
 	    },
 	    fetchReminders: function fetchReminders() {
 	      return dispatch((0, _reminder_actions.fetchReminders)());
@@ -50419,13 +50431,23 @@
 	    value: function componentDidMount() {
 	      var _props = this.props,
 	          fetchList = _props.fetchList,
-	          currentList = _props.currentList;
+	          currentList = _props.currentList,
+	          setCurrentList = _props.setCurrentList,
+	          reminders = _props.reminders;
 	
-	      //  if currentList fails, then set default list from back end
+	      var suc = function suc(list) {
+	        return setCurrentList(list);
+	      };
+	      var err = function err() {
+	        return fetchList({ id: 'default' }).then(suc);
+	      };
 	
-	      fetchList(currentList).then(function () {}, function () {
-	        return fetchList({ id: 'default' });
-	      });
+	      var tmpId = typeof reminders[0] !== 'undefined' ? reminders[0].list_id : 'default';
+	      //  attempt to not make extra api calls
+	      if (currentList.id !== tmpId) {
+	        //  if currentList fails, then set default list from back end
+	        fetchList(currentList).then(suc, err);
+	      }
 	    }
 	  }, {
 	    key: 'toggleModal',
@@ -50478,7 +50500,7 @@
 	        ),
 	        _react2.default.createElement(_reminder_filters_container2.default, null),
 	        reminderItems,
-	        _react2.default.createElement(_reminder_form2.default, { createReminder: createReminder, errors: errors }),
+	        _react2.default.createElement(_reminder_form2.default, { createReminder: createReminder, errors: errors, list_id: currentList.id }),
 	        reminderModal
 	      );
 	    }
@@ -67809,11 +67831,15 @@
 	    value: function handleSubmit(e) {
 	      e.preventDefault();
 	      var reminder = Object.assign({}, this.state, { id: (0, _id_generator2.default)() });
+	      var _props = this.props,
+	          createReminder = _props.createReminder,
+	          list_id = _props.list_id;
 	
 	      //  parse date
+	
 	      reminder.remind_date = reminder.remind_date.format('LLL');
 	
-	      this.props.createReminder(reminder).then(this.resetForm());
+	      createReminder(reminder, list_id).then(this.resetForm());
 	    }
 	  }, {
 	    key: 'handleDataChange',
@@ -71610,10 +71636,13 @@
 	var ListsList = function (_React$Component) {
 	  _inherits(ListsList, _React$Component);
 	
-	  function ListsList() {
+	  function ListsList(props) {
 	    _classCallCheck(this, ListsList);
 	
-	    return _possibleConstructorReturn(this, (ListsList.__proto__ || Object.getPrototypeOf(ListsList)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (ListsList.__proto__ || Object.getPrototypeOf(ListsList)).call(this, props));
+	
+	    _this.handleListItemClick = _this.handleListItemClick.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(ListsList, [{
@@ -71625,17 +71654,19 @@
 	  }, {
 	    key: 'handleListItemClick',
 	    value: function handleListItemClick(list) {
-	      this.props.receiveCurrentList(list);
-	      this.props.router.push("/reminders");
+	      var _props = this.props,
+	          receiveCurrentList = _props.receiveCurrentList,
+	          router = _props.router;
+	
+	      receiveCurrentList(list);
+	      router.push('/reminders');
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 	
-	      var _props = this.props,
-	          lists = _props.lists,
-	          receiveCurrentList = _props.receiveCurrentList;
+	      var lists = this.props.lists;
 	
 	
 	      var listItems = lists.map(function (list, idx) {

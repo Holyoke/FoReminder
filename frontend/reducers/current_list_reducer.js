@@ -1,10 +1,12 @@
 import { RECEIVE_CURRENT_LIST } from '../actions/current_list_actions'
+import { LOGOUT } from '../actions/session_actions'
 
 import merge from 'lodash/merge'
 
 const initialState = {
   'id': 'default',
-  'title': 'Reminders'
+  'title': 'Reminders',
+  'reminders': {}
 }
 
 const currentListReducer = (state = initialState, action) => {
@@ -14,6 +16,8 @@ const currentListReducer = (state = initialState, action) => {
     case RECEIVE_CURRENT_LIST:
       newState = merge({}, state, action.list)
       return newState
+    case LOGOUT:
+      return initialState
     default:
       return state
   }

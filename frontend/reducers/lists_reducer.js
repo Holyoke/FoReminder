@@ -14,7 +14,7 @@ const listsReducer = (state = initialState, action) => {
   let newState = {}
   switch (action.type) {
     case RECEIVE_LISTS:
-      action.lists.forEach(list => newState[list.id] = list)
+      action.lists.forEach(list => { newState[list.id] = list })
       return newState
     case RECEIVE_LIST:
       const newList = { [action.list.id]: action.list }

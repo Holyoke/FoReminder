@@ -10,13 +10,11 @@ export const RECEIVE_LISTS = 'RECEIVE_LISTS'
 export const REMOVE_LIST = 'REMOVE_LIST'
 
 // async actions
-export const fetchList = (list) => {
+export const fetchList = (list, success, error) => {
   return (dispatch) => {
-    return util.fetchList(list).then(list => {
+    return util.fetchList(list, success, error).then(list => {
       dispatch(receiveReminders(list.reminders))
       dispatch(receiveList(list))
-      // currently assumes that each time we fetch a list, we set it as the current one
-      dispatch(receiveCurrentList(list))
     })
   }
 }

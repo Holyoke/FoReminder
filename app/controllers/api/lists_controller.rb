@@ -39,7 +39,7 @@ class Api::ListsController < ApplicationController
       if params[:id] == 'default'
         @list = current_user.default_list
       else
-        @list = current_user.lists.includes(:reminders).find(params[:id])
+        @list = current_user.lists.find(params[:id])
       end
     end
 

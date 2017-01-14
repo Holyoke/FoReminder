@@ -17,10 +17,16 @@ class ReminderList extends React.Component {
   }
 
   componentDidMount () {
-    const { fetchList, currentList } = this.props
+    const { fetchList, currentList, setCurrentList, reminders } = this.props
+    const suc = (list) => setCurrentList(list)
+    const err = () => fetchList({id: 'default'}).then(suc)
 
-    //  if currentList fails, then set default list from back end
-    fetchList(currentList).then(() => {}, () => fetchList({id: 'default'}))
+    let tmpId = typeof reminders[0] !== 'undefined' ? reminders[0].list_id : 'default'
+    //  attempt to not make extra api calls
+    if (currentList.id !== tmpId) {
+      //  if currentList fails, then set default list from back end
+      fetchList(currentList).then(suc, err)
+    }
   }
 
   toggleModal (e) {
@@ -57,7 +63,7 @@ class ReminderList extends React.Component {
         <h2>{currentList.title}</h2>
         <ReminderFiltersContainer />
         {reminderItems}
-        <ReminderForm createReminder={createReminder} errors={errors} />
+        <ReminderForm createReminder={createReminder} errors={errors} list_id={currentList.id} />
         {reminderModal}
       </ListGroup>
     )

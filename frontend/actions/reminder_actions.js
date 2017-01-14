@@ -18,9 +18,9 @@ export const fetchReminders = () => {
   }
 }
 
-export const createReminder = (reminder) => {
+export const createReminder = (data) => {
   return (dispatch) => {
-    return util.createReminder(reminder)
+    return util.createReminder(data)
                .then(reminder => {
                  dispatch(receiveReminder(reminder))
                  dispatch(clearErrors())

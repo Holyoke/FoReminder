@@ -5,19 +5,19 @@ export const getLists = ({lists}) => Object.keys(lists).map(id => lists[id])
 export const allReminders = (reminders) => Object.keys(reminders).map(id => reminders[id])
 
 export const completedReminders = (reminders) => {
-    let result = []
-    for (let id in reminders) {
-        if (reminders[id].done === true) { result.push(reminders[id]) }
-    }
-    return result
+  let result = []
+  for (let id in reminders) {
+    if (reminders[id].done === true) { result.push(reminders[id]) }
+  }
+  return result
 }
 
 export const incompleteReminders = (reminders) => {
-    let result = []
-    for (let id in reminders) {
-        if (reminders[id].done === false) { result.push(reminders[id]) }
-    }
-    return result
+  let result = []
+  for (let id in reminders) {
+    if (reminders[id].done === false) { result.push(reminders[id]) }
+  }
+  return result
 }
 
 export const getVisibleReminders = ({reminders, remindersFilter}) => {
@@ -63,6 +63,8 @@ export const parseErrors = ({ errors }) => {
       return errors.responseJSON
     case 'error':
       return errors.responseJSON
+    case 'Not Found':
+      return ['Resource not found']
   }
 
   return errors
