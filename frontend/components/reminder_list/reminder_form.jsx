@@ -23,6 +23,7 @@ class ReminderForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDataChange = this.handleDataChange.bind(this)
     this.resetForm = this.resetForm.bind(this)
+    this.update = this.update.bind(this)
   }
 
   update (property) {

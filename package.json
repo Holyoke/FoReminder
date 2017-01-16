@@ -1,10 +1,11 @@
 {
-  "name": "Foreminder",
+  "name": "Fominder",
   "version": "1.0.0",
   "description": "This is a Rails 5/React-Redux application to demonstrate the latest technologies and practices I've experienced thus far in my career.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --watch"
   },
   "keywords": [],
   "author": "",

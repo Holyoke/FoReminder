@@ -3,6 +3,7 @@ import React from 'react'
 // components
 import ListGroup from 'react-bootstrap/lib/ListGroup'
 import ListsListItem from './lists_list_item'
+import ListForm from './list_form'
 
 class ListsList extends React.Component {
   constructor (props) {
@@ -16,21 +17,25 @@ class ListsList extends React.Component {
 
   handleListItemClick (list) {
     const { receiveCurrentList, router } = this.props
-    receiveCurrentList(list)
     router.push('/reminders')
+    receiveCurrentList(list)
   }
 
   render () {
-    const { lists } = this.props
+    const { lists, createList, deleteList } = this.props
 
     const listItems = lists.map((list, idx) => {
-      return (<ListsListItem key={list.id} list={list} handleClick={() => this.handleListItemClick(list)} />)
+      return (<ListsListItem key={list.id}
+        list={list}
+        deleteList={() => deleteList(list)}
+        handleClick={() => this.handleListItemClick(list)} />)
     })
 
     return (
-      <ListGroup className='lists-list'>
+      <ListGroup className="lists-list">
         <h2>Lists</h2>
         {listItems}
+        <ListForm createList={createList} />
       </ListGroup>
     )
   }
