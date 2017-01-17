@@ -9,13 +9,13 @@
 
 class Lists::IndexSerializer < ActiveModel::Serializer
   attributes :id, :title
-  attributes :reminders_count, :comments_count
+  attributes :reminders_count, :incomplete_reminders_count
 
   def reminders_count
     object.reminders.count
   end
 
-  def comments_count
-    object.comments.count
+  def incomplete_reminders_count
+    object.reminders.incomplete.count
   end
 end

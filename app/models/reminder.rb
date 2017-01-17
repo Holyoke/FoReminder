@@ -28,6 +28,8 @@ class Reminder < ApplicationRecord
     self.list.title || "No List"
   end
 
+  scope :incomplete, -> { where done: false }
+
   private
     def set_default_values
       self.done ||= false

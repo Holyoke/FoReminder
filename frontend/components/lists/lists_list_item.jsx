@@ -16,15 +16,26 @@ class ListsListItem extends React.Component {
 
   render () {
     const { list, handleClick } = this.props
-    const { title } = list
+    const { title, reminders_count, incomplete_reminders_count } = list
 
-    let containerStyle = {display: 'flex'}
-    let deleteButtonStyle = {alignSelf: 'flex-end', marginLeft: 'auto'}
-    let headerStyle = {width: '100%', cursor: 'alias'}
+    let containerStyle = {display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}
+    let deleteButtonStyle = {width: '3em', height: '3em'}
+    let leftGroupStyle = {cursor: 'alias', display: 'flex', marginRight: 'auto'}
+    let rightGroupStyle = {display: 'inline-flex', alignItems: 'center'}
+    let listCountsStyle = {marginRight: '1em'}
+
     return (
       <ListGroupItem style={containerStyle}>
-        <h4 style={headerStyle} onClick={handleClick}>{title}</h4>
-        <Button style={deleteButtonStyle} onClick={this.handleDeleteClick} className="glyphicon glyphicon-minus-sign" />
+        <section onClick={handleClick} className="list-item-left-group" style={leftGroupStyle}>
+          <h4>{title}</h4>
+        </section>
+        <section onClick={handleClick} className="list-item-right-group" style={rightGroupStyle}>
+          <div className="list-counts" style={listCountsStyle}>
+            <h6>{reminders_count} reminders</h6>
+            <h6>{incomplete_reminders_count} incomplete</h6>
+          </div>
+          <Button style={deleteButtonStyle} onClick={this.handleDeleteClick} className="glyphicon glyphicon-minus-sign" />
+        </section>
       </ListGroupItem>
     )
   }

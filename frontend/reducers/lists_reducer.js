@@ -5,7 +5,9 @@ import merge from 'lodash/merge'
 const initialState = {
   '1': {
     id: 1,
-    title: 'Etheral List'
+    title: 'Ethearal List',
+    reminders_count: 0,
+    incomplete_reminders_count: 0
   }
 }
 

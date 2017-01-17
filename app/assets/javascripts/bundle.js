@@ -38166,7 +38166,9 @@
 	var initialState = {
 	  '1': {
 	    id: 1,
-	    title: 'Etheral List'
+	    title: 'Ethearal List',
+	    reminders_count: 0,
+	    incomplete_reminders_count: 0
 	  }
 	};
 	
@@ -71773,21 +71775,50 @@
 	      var _props = this.props,
 	          list = _props.list,
 	          handleClick = _props.handleClick;
-	      var title = list.title;
+	      var title = list.title,
+	          reminders_count = list.reminders_count,
+	          incomplete_reminders_count = list.incomplete_reminders_count;
 	
 	
-	      var containerStyle = { display: 'flex' };
-	      var deleteButtonStyle = { alignSelf: 'flex-end', marginLeft: 'auto' };
-	      var headerStyle = { width: '100%', cursor: 'alias' };
+	      var containerStyle = { display: 'flex', justifyContent: 'flex-start', alignItems: 'center' };
+	      var deleteButtonStyle = { width: '3em', height: '3em' };
+	      var leftGroupStyle = { cursor: 'alias', display: 'flex', marginRight: 'auto' };
+	      var rightGroupStyle = { display: 'inline-flex', alignItems: 'center' };
+	      var listCountsStyle = { marginRight: '1em' };
+	
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
 	        { style: containerStyle },
 	        _react2.default.createElement(
-	          'h4',
-	          { style: headerStyle, onClick: handleClick },
-	          title
+	          'section',
+	          { onClick: handleClick, className: 'list-item-left-group', style: leftGroupStyle },
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            title
+	          )
 	        ),
-	        _react2.default.createElement(_Button2.default, { style: deleteButtonStyle, onClick: this.handleDeleteClick, className: 'glyphicon glyphicon-minus-sign' })
+	        _react2.default.createElement(
+	          'section',
+	          { onClick: handleClick, className: 'list-item-right-group', style: rightGroupStyle },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'list-counts', style: listCountsStyle },
+	            _react2.default.createElement(
+	              'h6',
+	              null,
+	              reminders_count,
+	              ' reminders'
+	            ),
+	            _react2.default.createElement(
+	              'h6',
+	              null,
+	              incomplete_reminders_count,
+	              ' incomplete'
+	            )
+	          ),
+	          _react2.default.createElement(_Button2.default, { style: deleteButtonStyle, onClick: this.handleDeleteClick, className: 'glyphicon glyphicon-minus-sign' })
+	        )
 	      );
 	    }
 	  }]);
