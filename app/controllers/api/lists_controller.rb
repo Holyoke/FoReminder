@@ -4,7 +4,7 @@ class Api::ListsController < ApplicationController
 
   def index
     @lists = current_user.lists
-    render json: @lists
+    render json: @lists, each_serializer: Lists::IndexSerializer
   end
 
   def show

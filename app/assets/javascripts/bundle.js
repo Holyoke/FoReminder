@@ -50442,12 +50442,19 @@
 	        return fetchList({ id: 'default' }).then(suc);
 	      };
 	
-	      var tmpId = typeof reminders[0] !== 'undefined' ? reminders[0].list_id : 'default';
+	      // disabled due to unnecessary pre-optimization
 	      //  attempt to not make extra api calls
-	      if (currentList.id !== tmpId) {
-	        //  if currentList fails, then set default list from back end
-	        fetchList(currentList).then(suc, err);
-	      }
+	      // an attempt to distinguish currentList and fetching list data
+	
+	      // this checks if reminders are empty or if belong to a different list
+	      // let tmpId = typeof reminders[0] !== 'undefined' ? reminders[0].list_id : 'default'
+	
+	      // if (currentList.id !== tmpId) {
+	      //    if currentList fails, then set default list from back end
+	      //   fetchList(currentList).then(suc, err)
+	      // }
+	
+	      fetchList(currentList).then(suc, err);
 	    }
 	  }, {
 	    key: 'toggleModal',
