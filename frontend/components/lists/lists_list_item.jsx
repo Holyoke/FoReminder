@@ -20,7 +20,7 @@ class ListsListItem extends React.Component {
 
     let containerStyle = {display: 'flex'}
     let deleteButtonStyle = {alignSelf: 'flex-end', marginLeft: 'auto'}
-    let headerStyle = {width: '100%'}
+    let headerStyle = {width: '100%', cursor: 'alias'}
     return (
       <ListGroupItem style={containerStyle}>
         <h4 style={headerStyle} onClick={handleClick}>{title}</h4>

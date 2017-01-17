@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/lib/Button'
 class ListForm extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { title:'' }
+    this.state = { title: '' }
     this.resetForm = this.resetForm.bind(this)
     this.update = this.update.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -25,9 +25,7 @@ class ListForm extends React.Component {
   }
   resetForm () {
     this.setState({
-      title: '',
-      body: '',
-      remind_date: moment().add(24, 'hours')
+      title: ''
     })
   }
   render () {

@@ -71771,7 +71771,7 @@
 	
 	      var containerStyle = { display: 'flex' };
 	      var deleteButtonStyle = { alignSelf: 'flex-end', marginLeft: 'auto' };
-	      var headerStyle = { width: '100%' };
+	      var headerStyle = { width: '100%', cursor: 'alias' };
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
 	        { style: containerStyle },
@@ -71872,9 +71872,7 @@
 	    key: 'resetForm',
 	    value: function resetForm() {
 	      this.setState({
-	        title: '',
-	        body: '',
-	        remind_date: moment().add(24, 'hours')
+	        title: ''
 	      });
 	    }
 	  }, {
