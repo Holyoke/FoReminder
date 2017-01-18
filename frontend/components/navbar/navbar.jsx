@@ -9,8 +9,21 @@ class NavBar extends React.Component {
   render () {
     const { currentUser, logout } = this.props
 
+    let brandText = "Greetings - please sign or login!"
+
     let navRightItems = []
     if (currentUser) {
+      brandText = currentUser.email
+      navRightItems.push(
+        <LinkContainer to="/lists" key="ncd">
+          <NavItem>Lists</NavItem>
+        </LinkContainer>
+      )
+      navRightItems.push(
+        <LinkContainer to="/reminders" key="ncu">
+          <NavItem>Reminders</NavItem>
+        </LinkContainer>
+      )
       navRightItems.push(
         <LinkContainer to="/" key="nls">
           <NavItem onClick={logout}>Logout</NavItem>
@@ -25,19 +38,18 @@ class NavBar extends React.Component {
           <NavItem>Sign Up</NavItem>
         </LinkContainer>)
     }
+
     return (
       <Navbar fluid>
-        <Nav>
-          <LinkContainer to="/lists">
-            <NavItem>Lists</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/reminders">
-            <NavItem>Reminders</NavItem>
-          </LinkContainer>
-        </Nav>
-        <Nav pullRight>
-          {navRightItems}
-        </Nav>
+        <Navbar.Header>
+          <Navbar.Brand>{brandText}</Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav pullRight>
+            {navRightItems}
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     )
   }

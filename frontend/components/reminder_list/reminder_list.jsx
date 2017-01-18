@@ -6,6 +6,7 @@ import ReminderForm from './reminder_form'
 import ListGroup from 'react-bootstrap/lib/ListGroup'
 import ReminderDetailViewContainer from './reminder_detail_view_container'
 import ReminderFiltersContainer from '../filter_button_group/reminder_filters_container'
+import ContentEditable from 'react-contenteditable'
 
 class ReminderList extends React.Component {
 
@@ -14,26 +15,31 @@ class ReminderList extends React.Component {
     this.state = { showModal: false, selectedReminder: {} }
     this.selectReminder = this.selectReminder.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
+    this.handleTitleEdit = this.handleTitleEdit.bind(this)
+    this.checkKeyPress = this.checkKeyPress.bind(this)
+  }
+
+  checkKeyPress (e) {
+    console.log(e.charCode, e.charCode === 13)
+    if (e.charCode === 13) {
+      e.preventDefault()
+      return false
+    }
   }
 
   componentDidMount () {
-    const { fetchList, currentList, setCurrentList, reminders } = this.props
+    const { fetchList, currentList, setCurrentList } = this.props
     const suc = (list) => setCurrentList(list)
     const err = () => fetchList({id: 'default'}).then(suc)
-
-    // disabled due to unnecessary pre-optimization
-    //  attempt to not make extra api calls
-    // an attempt to distinguish currentList and fetching list data
-
-    // this checks if reminders are empty or if belong to a different list
-    // let tmpId = typeof reminders[0] !== 'undefined' ? reminders[0].list_id : 'default'
-
-    // if (currentList.id !== tmpId) {
-    //    if currentList fails, then set default list from back end
-    //   fetchList(currentList).then(suc, err)
-    // }
-
     fetchList(currentList).then(suc, err)
+  }
+
+  handleTitleEdit (e) {
+    e.preventDefault()
+    let list = this.props.currentList
+    let text = e.target.innerText === "" ? list.title : e.target.innerText
+    list.title = text
+    this.props.setCurrentList(list)
   }
 
   toggleModal (e) {
@@ -47,6 +53,8 @@ class ReminderList extends React.Component {
 
   render () {
     const { reminders, errors, createReminder, removeReminder, updateReminder, currentList } = this.props
+
+    const headerStyle = {display: 'inline'}
 
     const reminderItems = reminders.map(reminder => {
       return (
@@ -67,7 +75,13 @@ class ReminderList extends React.Component {
 
     return (
       <ListGroup className='reminder-list' onClick={this.debug}>
-        <h2>{currentList.title}</h2>
+        <h2>
+          <ContentEditable style={headerStyle}
+          html={currentList.title}
+          disabled={false}
+          onBlur={this.handleTitleEdit}
+          onKeyPress={this.checkKeyPress} />
+        </h2>
         <ReminderFiltersContainer />
         {reminderItems}
         <ReminderForm createReminder={createReminder} errors={errors} list_id={currentList.id} />
