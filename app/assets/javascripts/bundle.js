@@ -38516,8 +38516,7 @@
 	        _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _session_form_container2.default, onEnter: _redirectIfLoggedIn }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _session_form_container2.default, onEnter: _redirectIfLoggedIn }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'reminders', component: _reminder_list_container2.default, onEnter: _ensureLoggedIn }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'lists', component: _lists_list_container2.default, onEnter: _ensureLoggedIn }),
-	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _reminder_list_container2.default, onEnter: _ensureLoggedIn })
+	        _react2.default.createElement(_reactRouter.Route, { path: 'lists', component: _lists_list_container2.default, onEnter: _ensureLoggedIn })
 	      )
 	    )
 	  );
@@ -44160,12 +44159,16 @@
 	          logout = _props.logout;
 	
 	
-	      var brandText = "Greetings - please sign or login!";
+	      var brandHeader = 'Remindux';
 	
+	      var brandText = 'Greetings - please sign or login!';
+	      var emailText = currentUser ? currentUser.email : 'Greetings!';
 	      var navRightItems = [];
+	      var navLeftItems = [];
+	
 	      if (currentUser) {
 	        brandText = currentUser.email;
-	        navRightItems.push(_react2.default.createElement(
+	        navLeftItems.push(_react2.default.createElement(
 	          _LinkContainer2.default,
 	          { to: '/lists', key: 'ncd' },
 	          _react2.default.createElement(
@@ -44174,7 +44177,7 @@
 	            'Lists'
 	          )
 	        ));
-	        navRightItems.push(_react2.default.createElement(
+	        navLeftItems.push(_react2.default.createElement(
 	          _LinkContainer2.default,
 	          { to: '/reminders', key: 'ncu' },
 	          _react2.default.createElement(
@@ -44222,7 +44225,7 @@
 	          _react2.default.createElement(
 	            _Navbar2.default.Brand,
 	            null,
-	            brandText
+	            brandHeader
 	          ),
 	          _react2.default.createElement(_Navbar2.default.Toggle, null)
 	        ),
@@ -44231,8 +44234,18 @@
 	          null,
 	          _react2.default.createElement(
 	            _Nav2.default,
+	            { pullLeft: true },
+	            navLeftItems
+	          ),
+	          _react2.default.createElement(
+	            _Nav2.default,
 	            { pullRight: true },
 	            navRightItems
+	          ),
+	          _react2.default.createElement(
+	            _Navbar2.default.Text,
+	            { pullRight: true },
+	            emailText
 	          )
 	        )
 	      );

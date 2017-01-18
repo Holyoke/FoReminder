@@ -9,17 +9,21 @@ class NavBar extends React.Component {
   render () {
     const { currentUser, logout } = this.props
 
-    let brandText = "Greetings - please sign or login!"
+    const brandHeader = 'Remindux'
 
+    let brandText = 'Greetings - please sign or login!'
+    let emailText = currentUser ? currentUser.email : 'Greetings!'
     let navRightItems = []
+    let navLeftItems = []
+
     if (currentUser) {
       brandText = currentUser.email
-      navRightItems.push(
+      navLeftItems.push(
         <LinkContainer to="/lists" key="ncd">
           <NavItem>Lists</NavItem>
         </LinkContainer>
       )
-      navRightItems.push(
+      navLeftItems.push(
         <LinkContainer to="/reminders" key="ncu">
           <NavItem>Reminders</NavItem>
         </LinkContainer>
@@ -42,13 +46,17 @@ class NavBar extends React.Component {
     return (
       <Navbar fluid>
         <Navbar.Header>
-          <Navbar.Brand>{brandText}</Navbar.Brand>
+          <Navbar.Brand>{brandHeader}</Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
+          <Nav pullLeft>
+            {navLeftItems}
+          </Nav>
           <Nav pullRight>
             {navRightItems}
           </Nav>
+          <Navbar.Text pullRight>{emailText}</Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
     )
