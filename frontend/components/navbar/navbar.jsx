@@ -40,7 +40,7 @@ class NavBar extends React.Component {
     }
 
     return (
-      <Navbar fluid>
+      <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>{brandHeader}</Navbar.Brand>
           <Navbar.Toggle />

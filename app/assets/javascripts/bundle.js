@@ -44214,7 +44214,7 @@
 	
 	      return _react2.default.createElement(
 	        _Navbar2.default,
-	        { fluid: true },
+	        { fluid: true, collapseOnSelect: true },
 	        _react2.default.createElement(
 	          _Navbar2.default.Header,
 	          null,
