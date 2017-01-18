@@ -29,17 +29,29 @@ class ListForm extends React.Component {
     })
   }
   render () {
-    return(
-      <ListGroupItem>
-        <form className="list-form" onSubmit={this.handleSubmit}>
-          <input
-            className="input"
-            ref="title"
-            value={this.state.title}
-            placeholder="Create list"
-            onChange={this.update('title')}
-             />
-        </form>
+    let listGroupItemStyle = {}
+    let formStyle = {alignSelf: 'center'}
+    let addButtonStyle = {marginLeft: 'auto', height: '3em', width: '3em', top: '-0.35em'}
+    let errorContainerStyle = {}
+    let formContainerStyle = {display: 'flex', alignItems: 'center'}
+    return (
+      <ListGroupItem style={listGroupItemStyle}>
+        <div className="error-list-container" style={errorContainerStyle}>
+          <ErrorsListContainer />
+        </div>
+
+        <div className="list-form-container" style={formContainerStyle}>
+          <form className="list-form" onSubmit={this.handleSubmit} style={formStyle}>
+            <input
+              className="input"
+              ref="title"
+              value={this.state.title}
+              placeholder="Create list..."
+              onChange={this.update('title')}
+              />
+          </form>
+          <Button style={addButtonStyle} type="submit" onClick={this.handleSubmit} className="glyphicon glyphicon-plus-sign" />
+        </div>
       </ListGroupItem>
     )
   }

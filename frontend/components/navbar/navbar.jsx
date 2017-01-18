@@ -8,16 +8,12 @@ import NavItem from 'react-bootstrap/lib/NavItem'
 class NavBar extends React.Component {
   render () {
     const { currentUser, logout } = this.props
-
     const brandHeader = 'Remindux'
-
-    let brandText = 'Greetings - please sign or login!'
-    let emailText = currentUser ? currentUser.email : 'Greetings!'
     let navRightItems = []
     let navLeftItems = []
+    let emailText = currentUser ? currentUser.email : ''
 
     if (currentUser) {
-      brandText = currentUser.email
       navLeftItems.push(
         <LinkContainer to="/lists" key="ncd">
           <NavItem>Lists</NavItem>

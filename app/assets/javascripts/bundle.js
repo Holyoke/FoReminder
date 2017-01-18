@@ -44158,16 +44158,12 @@
 	          currentUser = _props.currentUser,
 	          logout = _props.logout;
 	
-	
 	      var brandHeader = 'Remindux';
-	
-	      var brandText = 'Greetings - please sign or login!';
-	      var emailText = currentUser ? currentUser.email : 'Greetings!';
 	      var navRightItems = [];
 	      var navLeftItems = [];
+	      var emailText = currentUser ? currentUser.email : '';
 	
 	      if (currentUser) {
-	        brandText = currentUser.email;
 	        navLeftItems.push(_react2.default.createElement(
 	          _LinkContainer2.default,
 	          { to: '/lists', key: 'ncd' },
@@ -49765,14 +49761,6 @@
 	
 	var _Alert2 = _interopRequireDefault(_Alert);
 	
-	var _ListGroup = __webpack_require__(508);
-	
-	var _ListGroup2 = _interopRequireDefault(_ListGroup);
-	
-	var _ListGroupItem = __webpack_require__(509);
-	
-	var _ListGroupItem2 = _interopRequireDefault(_ListGroupItem);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var ErrorsList = exports.ErrorsList = function ErrorsList(_ref) {
@@ -49782,7 +49770,7 @@
 	  var errorItems = errors.map(function (error, idx) {
 	    return _react2.default.createElement(
 	      'li',
-	      { style: { color: 'red' }, key: idx },
+	      { style: { color: 'red', width: '50%' }, key: idx },
 	      _react2.default.createElement(
 	        _Alert2.default,
 	        { bsStyle: 'warning' },
@@ -71976,19 +71964,34 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var listGroupItemStyle = {};
+	      var formStyle = { alignSelf: 'center' };
+	      var addButtonStyle = { marginLeft: 'auto', height: '3em', width: '3em', top: '-0.35em' };
+	      var errorContainerStyle = {};
+	      var formContainerStyle = { display: 'flex', alignItems: 'center' };
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
-	        null,
+	        { style: listGroupItemStyle },
 	        _react2.default.createElement(
-	          'form',
-	          { className: 'list-form', onSubmit: this.handleSubmit },
-	          _react2.default.createElement('input', {
-	            className: 'input',
-	            ref: 'title',
-	            value: this.state.title,
-	            placeholder: 'Create list',
-	            onChange: this.update('title')
-	          })
+	          'div',
+	          { className: 'error-list-container', style: errorContainerStyle },
+	          _react2.default.createElement(_errors_list_container2.default, null)
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'list-form-container', style: formContainerStyle },
+	          _react2.default.createElement(
+	            'form',
+	            { className: 'list-form', onSubmit: this.handleSubmit, style: formStyle },
+	            _react2.default.createElement('input', {
+	              className: 'input',
+	              ref: 'title',
+	              value: this.state.title,
+	              placeholder: 'Create list...',
+	              onChange: this.update('title')
+	            })
+	          ),
+	          _react2.default.createElement(_Button2.default, { style: addButtonStyle, type: 'submit', onClick: this.handleSubmit, className: 'glyphicon glyphicon-plus-sign' })
 	        )
 	      );
 	    }
