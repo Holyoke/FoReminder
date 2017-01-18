@@ -41,8 +41,9 @@ class ReminderListItem extends React.Component {
         <span className={glyph} aria-hidden="true"></span>
       </Button>
 
-    const dateColor = moment().isSameOrBefore(reminder.remind_date, 'd') ? 'grey' : 'red'
+    let dateColor = moment().isSameOrBefore(reminder.remind_date, 'd') ? 'grey' : 'red'
     const itemTextStatus = done ? 'line-through' : ''
+    dateColor = done ? 'lightgrey' : dateColor
 
     //  tooltip for expanding modal
     const reminderItemTip = <ToolTip id="reminder-item-tip" arrowOffsetLeft="10%">

@@ -18,11 +18,16 @@ class ListsListItem extends React.Component {
     const { list, handleClick } = this.props
     const { title, reminders_count, incomplete_reminders_count } = list
 
+
     let containerStyle = {display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}
     let deleteButtonStyle = {width: '3em', height: '3em'}
     let leftGroupStyle = {cursor: 'alias', display: 'flex', marginRight: 'auto'}
     let rightGroupStyle = {display: 'inline-flex', alignItems: 'center'}
     let listCountsStyle = {marginRight: '1em'}
+    let titleStyle = {}
+    if (incomplete_reminders_count <= 0) {
+      titleStyle.color = 'lightgrey'
+    }
 
     // reminder counts
     let reminderCounts = ''
@@ -37,7 +42,7 @@ class ListsListItem extends React.Component {
     return (
       <ListGroupItem style={containerStyle}>
         <section onClick={handleClick} className="list-item-left-group" style={leftGroupStyle}>
-          <h4>{title}</h4>
+          <h4 style={titleStyle}>{title}</h4>
         </section>
         <section className="list-item-right-group" style={rightGroupStyle}>
           {reminderCounts}
