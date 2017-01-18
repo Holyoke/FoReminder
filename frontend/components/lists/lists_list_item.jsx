@@ -24,16 +24,23 @@ class ListsListItem extends React.Component {
     let rightGroupStyle = {display: 'inline-flex', alignItems: 'center'}
     let listCountsStyle = {marginRight: '1em'}
 
+    // reminder counts
+    let reminderCounts = ''
+    if (reminders_count > 0) {
+      reminderCounts =
+          <div className="list-counts" style={listCountsStyle}>
+            <h6>{reminders_count} reminders</h6>
+            <h6>{incomplete_reminders_count} incomplete</h6>
+          </div>
+    }
+
     return (
       <ListGroupItem style={containerStyle}>
         <section onClick={handleClick} className="list-item-left-group" style={leftGroupStyle}>
           <h4>{title}</h4>
         </section>
         <section onClick={handleClick} className="list-item-right-group" style={rightGroupStyle}>
-          <div className="list-counts" style={listCountsStyle}>
-            <h6>{reminders_count} reminders</h6>
-            <h6>{incomplete_reminders_count} incomplete</h6>
-          </div>
+          {reminderCounts}
           <Button style={deleteButtonStyle} onClick={this.handleDeleteClick} className="glyphicon glyphicon-minus-sign" />
         </section>
       </ListGroupItem>

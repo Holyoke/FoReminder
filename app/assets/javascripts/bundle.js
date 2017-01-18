@@ -69621,6 +69621,27 @@
 	      var rightGroupStyle = { display: 'inline-flex', alignItems: 'center' };
 	      var listCountsStyle = { marginRight: '1em' };
 	
+	      // reminder counts
+	      var reminderCounts = '';
+	      if (reminders_count > 0) {
+	        reminderCounts = _react2.default.createElement(
+	          'div',
+	          { className: 'list-counts', style: listCountsStyle },
+	          _react2.default.createElement(
+	            'h6',
+	            null,
+	            reminders_count,
+	            ' reminders'
+	          ),
+	          _react2.default.createElement(
+	            'h6',
+	            null,
+	            incomplete_reminders_count,
+	            ' incomplete'
+	          )
+	        );
+	      }
+	
 	      return _react2.default.createElement(
 	        _ListGroupItem2.default,
 	        { style: containerStyle },
@@ -69636,22 +69657,7 @@
 	        _react2.default.createElement(
 	          'section',
 	          { onClick: handleClick, className: 'list-item-right-group', style: rightGroupStyle },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'list-counts', style: listCountsStyle },
-	            _react2.default.createElement(
-	              'h6',
-	              null,
-	              reminders_count,
-	              ' reminders'
-	            ),
-	            _react2.default.createElement(
-	              'h6',
-	              null,
-	              incomplete_reminders_count,
-	              ' incomplete'
-	            )
-	          ),
+	          reminderCounts,
 	          _react2.default.createElement(_Button2.default, { style: deleteButtonStyle, onClick: this.handleDeleteClick, className: 'glyphicon glyphicon-minus-sign' })
 	        )
 	      );
