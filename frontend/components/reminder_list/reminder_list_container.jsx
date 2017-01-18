@@ -3,7 +3,7 @@ import ReminderList from './reminder_list'
 
 // actions
 import { fetchReminders, createReminder, updateReminder } from '../../actions/reminder_actions'
-import { fetchList } from '../../actions/list_actions'
+import { fetchList, updateList } from '../../actions/list_actions'
 import { receiveCurrentList } from '../../actions/current_list_actions'
 
 // selectors
@@ -15,12 +15,13 @@ const mapStateToProps = state => ({
   errors: parseErrors(state)
 })
 
-const mapDispatchToProps = (dispatch, { reminder }) => ({
+const mapDispatchToProps = (dispatch, { reminder, currentList }) => ({
   createReminder: (reminder, list_id) => dispatch(createReminder({reminder, list_id})),
   fetchList: (list) => dispatch(fetchList(list)),
-  setCurrentList: (currentList) => dispatch(receiveCurrentList(currentList)),
+  setCurrentList: (list) => dispatch(receiveCurrentList(list)),
   fetchReminders: () => dispatch(fetchReminders()),
-  updateReminder: (reminder) => dispatch(updateReminder({reminder}))
+  updateReminder: (reminder) => dispatch(updateReminder({reminder})),
+  updateList: (list) => dispatch(updateList({list}))
 })
 
 export default connect(

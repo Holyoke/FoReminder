@@ -44058,7 +44058,7 @@
 	    _react2.default.createElement(
 	      'h1',
 	      null,
-	      'foReminder App'
+	      'Remindux'
 	    ),
 	    _react2.default.createElement(_navbar_container2.default, null),
 	    children
@@ -47281,7 +47281,8 @@
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
-	  var reminder = _ref.reminder;
+	  var reminder = _ref.reminder,
+	      currentList = _ref.currentList;
 	  return {
 	    createReminder: function createReminder(reminder, list_id) {
 	      return dispatch((0, _reminder_actions.createReminder)({ reminder: reminder, list_id: list_id }));
@@ -47289,14 +47290,17 @@
 	    fetchList: function fetchList(list) {
 	      return dispatch((0, _list_actions.fetchList)(list));
 	    },
-	    setCurrentList: function setCurrentList(currentList) {
-	      return dispatch((0, _current_list_actions.receiveCurrentList)(currentList));
+	    setCurrentList: function setCurrentList(list) {
+	      return dispatch((0, _current_list_actions.receiveCurrentList)(list));
 	    },
 	    fetchReminders: function fetchReminders() {
 	      return dispatch((0, _reminder_actions.fetchReminders)());
 	    },
 	    updateReminder: function updateReminder(reminder) {
 	      return dispatch((0, _reminder_actions.updateReminder)({ reminder: reminder }));
+	    },
+	    updateList: function updateList(list) {
+	      return dispatch((0, _list_actions.updateList)({ list: list }));
 	    }
 	  };
 	};
@@ -47399,10 +47403,20 @@
 	    key: 'handleTitleEdit',
 	    value: function handleTitleEdit(e) {
 	      e.preventDefault();
-	      var list = this.props.currentList;
-	      var text = e.target.innerText === "" ? list.title : e.target.innerText;
-	      list.title = text;
-	      this.props.setCurrentList(list);
+	      var _props2 = this.props,
+	          updateList = _props2.updateList,
+	          setCurrentList = _props2.setCurrentList;
+	      var currentList = this.props.currentList;
+	
+	      if (e.target.innerText === '') {
+	        e.target.innerText = currentList.title;
+	      }
+	
+	      var text = e.target.innerText;
+	      var updatedList = Object.assign({}, currentList, { title: text });
+	      if (updatedList.title !== currentList.title) {
+	        updateList(updatedList).then(setCurrentList(updatedList));
+	      }
 	    }
 	  }, {
 	    key: 'toggleModal',
@@ -47420,13 +47434,13 @@
 	    value: function render() {
 	      var _this2 = this;
 	
-	      var _props2 = this.props,
-	          reminders = _props2.reminders,
-	          errors = _props2.errors,
-	          createReminder = _props2.createReminder,
-	          removeReminder = _props2.removeReminder,
-	          updateReminder = _props2.updateReminder,
-	          currentList = _props2.currentList;
+	      var _props3 = this.props,
+	          reminders = _props3.reminders,
+	          errors = _props3.errors,
+	          createReminder = _props3.createReminder,
+	          removeReminder = _props3.removeReminder,
+	          updateReminder = _props3.updateReminder,
+	          currentList = _props3.currentList;
 	
 	
 	      var headerStyle = { display: 'inline' };

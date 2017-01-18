@@ -36,10 +36,17 @@ class ReminderList extends React.Component {
 
   handleTitleEdit (e) {
     e.preventDefault()
-    let list = this.props.currentList
-    let text = e.target.innerText === "" ? list.title : e.target.innerText
-    list.title = text
-    this.props.setCurrentList(list)
+    const { updateList, setCurrentList} = this.props
+    let { currentList } = this.props
+    if (e.target.innerText === '') {
+      e.target.innerText = currentList.title
+    }
+
+    let text = e.target.innerText
+    let updatedList = Object.assign({}, currentList, {title: text})
+    if (updatedList.title !== currentList.title) {
+      updateList(updatedList).then(setCurrentList(updatedList))
+    }
   }
 
   toggleModal (e) {
