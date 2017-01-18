@@ -36,8 +36,9 @@ class ReminderList extends React.Component {
 
   handleTitleEdit (e) {
     e.preventDefault()
-    const { updateList, setCurrentList} = this.props
-    let { currentList } = this.props
+    const {updateList, setCurrentList} = this.props
+    let {currentList} = this.props
+
     if (e.target.innerText === '') {
       e.target.innerText = currentList.title
     }

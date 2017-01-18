@@ -39,7 +39,7 @@ class ListsListItem extends React.Component {
         <section onClick={handleClick} className="list-item-left-group" style={leftGroupStyle}>
           <h4>{title}</h4>
         </section>
-        <section onClick={handleClick} className="list-item-right-group" style={rightGroupStyle}>
+        <section className="list-item-right-group" style={rightGroupStyle}>
           {reminderCounts}
           <Button style={deleteButtonStyle} onClick={this.handleDeleteClick} className="glyphicon glyphicon-minus-sign" />
         </section>

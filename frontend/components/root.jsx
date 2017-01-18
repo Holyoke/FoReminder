@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { Router, Route, hashHistory } from 'react-router'
+import { Router, IndexRoute, Route, hashHistory } from 'react-router'
 
 // components
 import App from './App'
@@ -26,6 +26,7 @@ const Root = ({store}) => {
           <Route path="login" component={SessionFormContainer} onEnter={_redirectIfLoggedIn} />
           <Route path="reminders" component={ReminderListContainer} onEnter={_ensureLoggedIn} />
           <Route path="lists" component={ListsListContainer} onEnter={_ensureLoggedIn} />
+          <IndexRoute component={ReminderListContainer} onEnter={_ensureLoggedIn} />
         </Route>
       </Router>
     </Provider>
