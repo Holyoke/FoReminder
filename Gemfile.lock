@@ -303,6 +303,7 @@ GEM
     mustache (1.0.3)
     nenv (0.3.0)
     netrc (0.11.0)
+    newrelic_rpm (3.17.2.327)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
@@ -351,6 +352,11 @@ GEM
       nokogiri (~> 1.6.0)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     railties (5.0.0.1)
       actionpack (= 5.0.0.1)
       activesupport (= 5.0.0.1)
@@ -479,6 +485,7 @@ DEPENDENCIES
   mailgun-ruby (~> 1.1.0)
   meta_request
   mini_magick (~> 4.3)
+  newrelic_rpm
   omniauth
   parallel_tests
   pg (~> 0.18)
@@ -486,6 +493,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.0)
   rails-controller-testing
+  rails_12factor
   rspec-rails
   rspec_api_documentation
   sass-rails (~> 5.0)

@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack --watch"
+    "webpack": "webpack --watch",
+    "postinstall": "./node_modules/.bin/webpack"
+  },
+  "engines": {
+  "node": "v0.12.6",
+  "npm": "3.9.x"
   },
   "keywords": [],
   "author": "",
