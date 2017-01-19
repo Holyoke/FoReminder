@@ -1,5 +1,5 @@
 {
-  "name": "Fominder",
+  "name": "Remindux",
   "version": "1.0.0",
   "description": "This is a Rails 5/React-Redux application to demonstrate the latest technologies and practices I've experienced thus far in my career.",
   "main": "index.js",
@@ -9,8 +9,8 @@
     "postinstall": "./node_modules/.bin/webpack"
   },
   "engines": {
-  "node": "v0.12.6",
-  "npm": "3.9.x"
+    "node": "v0.12.6",
+    "npm": "3.9.x"
   },
   "keywords": [],
   "author": "",
@@ -24,12 +24,13 @@
     "j-toker": "0.0.10-beta3",
     "lodash": "^4.17.2",
     "moment": "^2.17.0",
-    "react": "^15.4.0",
+    "react": "^15.4.x",
     "react-bootstrap": "^0.30.7",
     "react-contenteditable": "^2.0.2",
     "react-datepicker": "^0.34.0",
     "react-dom": "^15.4.0",
     "react-redux": "^4.4.6",
+    "react-router": "^3.0.2",
     "react-router-bootstrap": "^0.23.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",

@@ -4,7 +4,7 @@ import React from 'react'
 import CommentListItemContainer from './comment_list_item/comment_list_item_container'
 import CommentForm from './comment_form'
 import ListGroup from 'react-bootstrap/lib/ListGroup'
-import ToolTip from 'react-bootstrap/lib/ToolTip'
+import ToolTip from 'react-bootstrap/lib/Tooltip'
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
 
 class CommentList extends React.Component {

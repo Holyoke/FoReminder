@@ -6,7 +6,7 @@ import moment from 'moment'
 import * as styles from '../../styles/reminder_styles'
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
 import Button from 'react-bootstrap/lib/Button'
-import ToolTip from 'react-bootstrap/lib/ToolTip'
+import ToolTip from 'react-bootstrap/lib/Tooltip'
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
 
 class ReminderListItem extends React.Component {

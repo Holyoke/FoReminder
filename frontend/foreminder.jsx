@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //config Auth
   Auth.configure({
-    apiUrl: 'http://localhost:3000',
+    apiUrl: 'http://remindux.herokuapp.com/',
     handleLoginResponse: (resp) => {
       sessionApi._setHeaders()
       console.log("Headers set in loginhandle response.", resp)
