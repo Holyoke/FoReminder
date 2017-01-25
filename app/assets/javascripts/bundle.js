@@ -38499,14 +38499,15 @@
 	    var currentUser = store.getState().session.currentUser;
 	
 	    if (!currentUser) {
-	      replace('/welcome');
+	      replace('/login');
 	    }
 	  };
+	
 	  var _redirectIfLoggedIn = function _redirectIfLoggedIn(nextState, replace) {
 	    var currentUser = store.getState().session.currentUser;
 	
 	    if (currentUser) {
-	      replace('/reminders');
+	      replace('/lists');
 	    }
 	  };
 	
@@ -38522,8 +38523,7 @@
 	        _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _session_form_container2.default, onEnter: _redirectIfLoggedIn }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _session_form_container2.default, onEnter: _redirectIfLoggedIn }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'reminders', component: _reminder_list_container2.default, onEnter: _ensureLoggedIn }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'lists', component: _lists_list_container2.default, onEnter: _ensureLoggedIn }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'welcome', component: _greeting2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: 'lists', component: _lists_list_container2.default, onEnter: _ensureLoggedIn })
 	      )
 	    )
 	  );
@@ -44078,14 +44078,19 @@
 	
 	var _navbar_container2 = _interopRequireDefault(_navbar_container);
 	
+	var _greeting_container = __webpack_require__(698);
+	
+	var _greeting_container2 = _interopRequireDefault(_greeting_container);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var App = function App(_ref) {
 	  var children = _ref.children;
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'app', style: { width: "75%", marginLeft: "auto", marginRight: "auto" } },
+	    { className: 'app', style: { width: '75%', marginLeft: 'auto', marginRight: 'auto' } },
 	    _react2.default.createElement(_navbar_container2.default, null),
+	    _react2.default.createElement(_greeting_container2.default, null),
 	    children
 	  );
 	};
@@ -72053,6 +72058,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _Link = __webpack_require__(340);
+	
+	var _Link2 = _interopRequireDefault(_Link);
+	
 	var _Button = __webpack_require__(625);
 	
 	var _Button2 = _interopRequireDefault(_Button);
@@ -72081,29 +72090,72 @@
 	  _createClass(Greeting, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        _Jumbotron2.default,
-	        null,
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'Welcome to Remindux!'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'This is a reminder app built with Rails 5, React, and Redux.'
-	        ),
-	        _react2.default.createElement(
-	          'p',
+	      var content = '';
+	      var linkRowStyle = { display: 'flex', justifyContent: 'space-between' };
+	      var buttonRowStyle = { display: 'flex', justifyContent: 'space-around' };
+	
+	      if (this.props.currentUser) {
+	        content = _react2.default.createElement('div', null);
+	      } else {
+	        content = _react2.default.createElement(
+	          _Jumbotron2.default,
 	          null,
 	          _react2.default.createElement(
-	            _Button2.default,
-	            { bsStyle: 'primary' },
-	            'Demo'
+	            'h1',
+	            null,
+	            'Welcome to Remindux!'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'This is a reminder app built with Rails 5, React, and Redux.'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: linkRowStyle, className: 'icon-links' },
+	            _react2.default.createElement(
+	              'a',
+	              { href: 'https://github.com/holyoke/remindux' },
+	              'Github Repo'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { href: 'https://linkedin.com/in/jasonebueng' },
+	              'Developer\'s LinkedIn'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { href: 'http://remindux.herokuapp.com/api/docs' },
+	              'API Documentation'
+	            )
+	          ),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'div',
+	            { style: buttonRowStyle, className: 'greeting-buttons-container' },
+	            _react2.default.createElement(
+	              _Link2.default,
+	              { to: 'login' },
+	              _react2.default.createElement(
+	                _Button2.default,
+	                { bsStyle: 'primary' },
+	                'Login'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _Link2.default,
+	              { to: 'signup' },
+	              _react2.default.createElement(
+	                _Button2.default,
+	                { bsStyle: 'primary' },
+	                'Signup'
+	              )
+	            )
 	          )
-	        )
-	      );
+	        );
+	      }
+	
+	      return content;
 	    }
 	  }]);
 	
@@ -72197,6 +72249,46 @@
 	
 	exports['default'] = (0, _bootstrapUtils.bsClass)('jumbotron', Jumbotron);
 	module.exports = exports['default'];
+
+/***/ },
+/* 698 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(311);
+	
+	var _greeting = __webpack_require__(696);
+	
+	var _greeting2 = _interopRequireDefault(_greeting);
+	
+	var _session_actions = __webpack_require__(212);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStatetoProps = function mapStatetoProps(_ref) {
+	  var session = _ref.session;
+	  return {
+	    currentUser: session.currentUser
+	  };
+	};
+	
+	//  actions
+	
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    logout: function logout() {
+	      return dispatch((0, _session_actions.logout)());
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps, mapDispatchToProps)(_greeting2.default);
 
 /***/ }
 /******/ ]);
