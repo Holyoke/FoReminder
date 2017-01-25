@@ -2,6 +2,9 @@ import React from 'react'
 
 // components
 import ErrorsListContainer from './errors_list/errors_list_container'
+import FormControl from 'react-bootstrap/lib/FormControl'
+import ControlLabel from 'react-bootstrap/lib/ControlLabel'
+import FormGroup from 'react-bootstrap/lib/FormGroup'
 
 class SessionForm extends React.Component {
   constructor (props) {
@@ -29,7 +32,7 @@ class SessionForm extends React.Component {
   handleSubmit (e) {
     e.preventDefault()
     const user = Object.assign({}, this.state)
-    this.props.processForm(user).then(() => this.redirect())
+    this.props.processForm(user).then(() => this.redirect(), () => { e.preventDefault() })
   }
 
   redirect() {
@@ -42,28 +45,25 @@ class SessionForm extends React.Component {
     return (
       <form className="session-form" onSubmit={this.handleSubmit}>
         <ErrorsListContainer />
-        <label>Email:
-          <input
-            className="input"
-            ref="title"
+        <FormGroup>
+          <ControlLabel>Email: </ControlLabel>
+          <FormControl
+            type="text"
             value={this.state.email}
             placeholder="Enter email"
             onChange={this.update('email')}
              />
-        </label>
 
-        <label>Password:
-          <input
+          <ControlLabel>Password: </ControlLabel>
+          <FormControl
             type="password"
-            className="input"
-            ref="title"
             value={this.state.password}
-            placeholder="password"
+            placeholder="Enter password"
             onChange={this.update('password')}
-             />
-        </label>
+            />
 
-        {formButton}
+          {formButton}
+        </FormGroup>
       </form>
     )
   }

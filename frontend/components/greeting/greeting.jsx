@@ -6,7 +6,7 @@ import Jumbotron from 'react-bootstrap/lib/Jumbotron'
 class Greeting extends React.Component {
   render () {
     let content = ''
-    let linkRowStyle = {display: 'flex', justifyContent: 'space-between'}
+    let linkRowStyle = {display: 'flex', justifyContent: 'space-around'}
     let buttonRowStyle = {display: 'flex', justifyContent: 'space-around'}
 
     if (this.props.currentUser) {
