@@ -7,11 +7,12 @@ import App from './App'
 import SessionFormContainer from './session_form_container'
 import ReminderListContainer from './reminder_list/reminder_list_container'
 import ListsListContainer from './lists/lists_list_container'
+import Greeting from './greeting/greeting'
 
 const Root = ({store}) => {
   const _ensureLoggedIn = (nextState, replace) => {
     const {currentUser} = store.getState().session
-    if (!currentUser) { replace('/login') }
+    if (!currentUser) { replace('/welcome') }
   }
   const _redirectIfLoggedIn = (nextState, replace) => {
     const {currentUser} = store.getState().session
@@ -26,6 +27,7 @@ const Root = ({store}) => {
           <Route path="login" component={SessionFormContainer} onEnter={_redirectIfLoggedIn} />
           <Route path="reminders" component={ReminderListContainer} onEnter={_ensureLoggedIn} />
           <Route path="lists" component={ListsListContainer} onEnter={_ensureLoggedIn} />
+          <Route path="welcome" component={Greeting} />
         </Route>
       </Router>
     </Provider>

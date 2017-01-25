@@ -1,35 +1,16 @@
 import React from 'react'
-import Link from 'react-router/lib/Link'
-
-// components
-import NavBarContainer from '../navbar/navbar_container'
+import Button from 'react-bootstrap/lib/Button'
+import Jumbotron from 'react-bootstrap/lib/Jumbotron'
 
 class Greeting extends React.Component {
-  constructor (props) {
-    super(props)
-    this.handleLogOutButton = this.handleLogOutButton.bind(this)
-  }
-
-  handleLogOutButton () {
-    this.props.router.push('/')
-    this.props.logout()
-  }
-
   render () {
-    const { currentUser } = this.props
-    let greeting
-
-    if (currentUser) {
-      greeting = ""
-    } else {
-      greeting =
-        <ul>
-          <li><Link to="/login">Login</Link></li>
-          <li><Link to="/signup">Signup</Link></li>
-        </ul>
-    }
-
-    return (<div>{greeting}</div>)
+    return (
+      <Jumbotron>
+        <h1>Welcome to Remindux!</h1>
+        <p>This is a reminder app built with Rails 5, React, and Redux.</p>
+        <p><Button bsStyle="primary">Demo</Button></p>
+      </Jumbotron>
+    )
   }
 }
 

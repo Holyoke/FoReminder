@@ -121,7 +121,7 @@
 	
 	  //config Auth
 	  _jToker2.default.configure({
-	    apiUrl: 'http://localhost:3000',
+	    apiUrl: 'http://remindux.herokuapp.com/',
 	    handleLoginResponse: function handleLoginResponse(resp) {
 	      sessionApi._setHeaders();
 	      console.log("Headers set in loginhandle response.", resp);
@@ -38486,9 +38486,12 @@
 	
 	var _lists_list_container2 = _interopRequireDefault(_lists_list_container);
 	
+	var _greeting = __webpack_require__(696);
+	
+	var _greeting2 = _interopRequireDefault(_greeting);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// components
 	var Root = function Root(_ref) {
 	  var store = _ref.store;
 	
@@ -38496,7 +38499,7 @@
 	    var currentUser = store.getState().session.currentUser;
 	
 	    if (!currentUser) {
-	      replace('/login');
+	      replace('/welcome');
 	    }
 	  };
 	  var _redirectIfLoggedIn = function _redirectIfLoggedIn(nextState, replace) {
@@ -38519,12 +38522,14 @@
 	        _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _session_form_container2.default, onEnter: _redirectIfLoggedIn }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _session_form_container2.default, onEnter: _redirectIfLoggedIn }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'reminders', component: _reminder_list_container2.default, onEnter: _ensureLoggedIn }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'lists', component: _lists_list_container2.default, onEnter: _ensureLoggedIn })
+	        _react2.default.createElement(_reactRouter.Route, { path: 'lists', component: _lists_list_container2.default, onEnter: _ensureLoggedIn }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'welcome', component: _greeting2.default })
 	      )
 	    )
 	  );
 	};
 	
+	// components
 	exports.default = Root;
 
 /***/ },
@@ -72031,6 +72036,167 @@
 	}(_react2.default.Component);
 	
 	exports.default = ListForm;
+
+/***/ },
+/* 696 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Button = __webpack_require__(625);
+	
+	var _Button2 = _interopRequireDefault(_Button);
+	
+	var _Jumbotron = __webpack_require__(697);
+	
+	var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Greeting = function (_React$Component) {
+	  _inherits(Greeting, _React$Component);
+	
+	  function Greeting() {
+	    _classCallCheck(this, Greeting);
+	
+	    return _possibleConstructorReturn(this, (Greeting.__proto__ || Object.getPrototypeOf(Greeting)).apply(this, arguments));
+	  }
+	
+	  _createClass(Greeting, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _Jumbotron2.default,
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Welcome to Remindux!'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'This is a reminder app built with Rails 5, React, and Redux.'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          _react2.default.createElement(
+	            _Button2.default,
+	            { bsStyle: 'primary' },
+	            'Demo'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Greeting;
+	}(_react2.default.Component);
+	
+	exports.default = Greeting;
+
+/***/ },
+/* 697 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _extends2 = __webpack_require__(378);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _objectWithoutProperties2 = __webpack_require__(416);
+	
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+	
+	var _classCallCheck2 = __webpack_require__(417);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(418);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(454);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(462);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _elementType = __webpack_require__(463);
+	
+	var _elementType2 = _interopRequireDefault(_elementType);
+	
+	var _bootstrapUtils = __webpack_require__(469);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var propTypes = {
+	  componentClass: _elementType2['default']
+	};
+	
+	var defaultProps = {
+	  componentClass: 'div'
+	};
+	
+	var Jumbotron = function (_React$Component) {
+	  (0, _inherits3['default'])(Jumbotron, _React$Component);
+	
+	  function Jumbotron() {
+	    (0, _classCallCheck3['default'])(this, Jumbotron);
+	    return (0, _possibleConstructorReturn3['default'])(this, _React$Component.apply(this, arguments));
+	  }
+	
+	  Jumbotron.prototype.render = function render() {
+	    var _props = this.props,
+	        Component = _props.componentClass,
+	        className = _props.className,
+	        props = (0, _objectWithoutProperties3['default'])(_props, ['componentClass', 'className']);
+	
+	    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(props),
+	        bsProps = _splitBsProps[0],
+	        elementProps = _splitBsProps[1];
+	
+	    var classes = (0, _bootstrapUtils.getClassSet)(bsProps);
+	
+	    return _react2['default'].createElement(Component, (0, _extends3['default'])({}, elementProps, {
+	      className: (0, _classnames2['default'])(className, classes)
+	    }));
+	  };
+	
+	  return Jumbotron;
+	}(_react2['default'].Component);
+	
+	Jumbotron.propTypes = propTypes;
+	Jumbotron.defaultProps = defaultProps;
+	
+	exports['default'] = (0, _bootstrapUtils.bsClass)('jumbotron', Jumbotron);
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);
