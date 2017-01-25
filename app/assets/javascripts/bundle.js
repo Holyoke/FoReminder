@@ -119,9 +119,9 @@
 	  var root = document.getElementById('root');
 	  var preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {};
 	
-	  //config Auth
+	  //  config Auth
 	  _jToker2.default.configure({
-	    apiUrl: 'http://remindux.herokuapp.com/',
+	    apiUrl: window.apiRoute,
 	    handleLoginResponse: function handleLoginResponse(resp) {
 	      sessionApi._setHeaders();
 	      console.log("Headers set in loginhandle response.", resp);

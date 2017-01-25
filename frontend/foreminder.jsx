@@ -24,10 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root')
   const preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {}
 
-
-  //config Auth
+  //  config Auth
   Auth.configure({
-    apiUrl: 'http://remindux.herokuapp.com/',
+    apiUrl: window.apiRoute,
     handleLoginResponse: (resp) => {
       sessionApi._setHeaders()
       console.log("Headers set in loginhandle response.", resp)
