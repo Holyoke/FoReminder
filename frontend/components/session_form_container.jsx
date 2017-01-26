@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import SessionForm from './session_form'
 
 //  actions
-import { login, signup } from '../actions/session_actions'
+import { login, signup, logoutCurrentUser } from '../actions/session_actions'
 import { clearErrors } from '../actions/error_actions'
 
 // selectors
@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch, {location}) => {
   return {
     processForm: user => dispatch(processForm(user)),
     formType,
-    clearErrors: () => dispatch(clearErrors())
+    clearErrors: () => dispatch(logoutCurrentUser())
   }
 }
 

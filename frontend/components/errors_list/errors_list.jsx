@@ -10,7 +10,7 @@ export const ErrorsList = ({clearErrors, errors}) => {
     </li>)
 
   return (
-    <ul onClick={() => clearErrors()} className="error-list">
+    <ul onClick={clearErrors} className="error-list">
       {errorItems}
     </ul>
   )

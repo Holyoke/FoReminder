@@ -1,5 +1,4 @@
 import * as util from '../util/session_api_util'
-import { parseErrorResponse } from '../util/error_util'
 
 import { clearErrors } from './error_actions'
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER'
