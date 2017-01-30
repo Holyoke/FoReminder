@@ -14,7 +14,7 @@
   "requests": [
     {
       "request_method": "DELETE",
-      "request_path": "/api/lists/17",
+      "request_path": "/api/lists/18",
       "request_body": null,
       "request_headers": {
       },
@@ -23,16 +23,16 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 17,\n  \"title\": \"instruction set\",\n  \"user_id\": 6\n}",
+      "response_body": "{\n  \"id\": 18,\n  \"title\": \"asynchronous\",\n  \"user_id\": 7\n}",
       "response_headers": {
-        "access-token": "Pc9RJ3FOPVyMMMGQS2lIeA",
+        "access-token": "Am0Nvk6WXxjFS6Eed7_OwA",
         "token-type": "Bearer",
-        "client": "AKSj48A1tdqrnP2ZPDQQ-A",
-        "expiry": "1485476697",
-        "uid": "nicholas@maggioauer.org"
+        "client": "VLDYjGijQ7jA92otvE1GPw",
+        "expiry": "1487026855",
+        "uid": "lamar@swaniawski.org"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"fomind.com//api/lists/17\" -d '' -X DELETE \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: Pc9RJ3FOPVyMMMGQS2lIeA\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: AKSj48A1tdqrnP2ZPDQQ-A\" \\\n\t-H \"Expiry: 1485476697\" \\\n\t-H \"Uid: nicholas@maggioauer.org\""
+      "curl": "curl \"http://remindux.herokuapp.com/api/lists/18\" -d '' -X DELETE \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: Am0Nvk6WXxjFS6Eed7_OwA\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: VLDYjGijQ7jA92otvE1GPw\" \\\n\t-H \"Expiry: 1487026855\" \\\n\t-H \"Uid: lamar@swaniawski.org\""
     }
   ]
 }

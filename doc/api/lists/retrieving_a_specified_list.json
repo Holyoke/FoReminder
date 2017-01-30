@@ -14,7 +14,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "api/lists/9",
+      "request_path": "api/lists/10",
       "request_body": null,
       "request_headers": {
       },
@@ -23,16 +23,16 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 9,\n  \"title\": \"Default Reminders\",\n  \"user_id\": 4,\n  \"reminders\": [\n    {\n      \"id\": 21,\n      \"title\": \"disintermediate world-class users\",\n      \"body\": \"Celiac venmo microdosing cronut. Tote bag chicharrones fingerstache. Kickstarter five dollar toast quinoa.\",\n      \"done\": true,\n      \"remind_date\": \"2017-01-13T01:24:51.436Z\",\n      \"created_at\": \"2017-01-13T00:24:56.242Z\",\n      \"updated_at\": \"2017-01-13T00:24:56.242Z\",\n      \"user_id\": null,\n      \"list_id\": 9\n    },\n    {\n      \"id\": 20,\n      \"title\": \"maximize cutting-edge e-services\",\n      \"body\": \"Thundercats trust fund hammock kitsch vhs. Xoxo hashtag occupy vegan single-origin coffee drinking dreamcatcher. Bespoke synth chillwave vice normcore listicle. Actually wes anderson flexitarian distillery chicharrones tilde raw denim pabst. Normcore ramps pickled master ethical quinoa paleo.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-13T01:24:51.436Z\",\n      \"created_at\": \"2017-01-13T00:24:56.237Z\",\n      \"updated_at\": \"2017-01-13T00:24:56.237Z\",\n      \"user_id\": null,\n      \"list_id\": 9\n    },\n    {\n      \"id\": 19,\n      \"title\": \"empower visionary platforms\",\n      \"body\": \"Keffiyeh green juice meggings vegan portland. Meggings thundercats next level vhs mlkshk hella vinyl pork belly. Letterpress echo next level church-key kombucha whatever kinfolk.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-13T01:24:51.436Z\",\n      \"created_at\": \"2017-01-13T00:24:56.232Z\",\n      \"updated_at\": \"2017-01-13T00:24:56.232Z\",\n      \"user_id\": null,\n      \"list_id\": 9\n    }\n  ]\n}",
+      "response_body": "{\n  \"id\": 10,\n  \"title\": \"Reminders\",\n  \"user_id\": 5,\n  \"reminders\": [\n    {\n      \"id\": 21,\n      \"title\": \"mesh rich systems\",\n      \"body\": \"Selvage mustache tote bag kickstarter. Chartreuse asymmetrical vinegar hammock seitan loko messenger bag. Lomo raw denim mustache.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-31T00:00:49.553Z\",\n      \"created_at\": \"2017-01-30T23:00:54.276Z\",\n      \"updated_at\": \"2017-01-30T23:00:54.276Z\",\n      \"user_id\": null,\n      \"list_id\": 10\n    },\n    {\n      \"id\": 20,\n      \"title\": \"deploy dot-com applications\",\n      \"body\": \"Fixie shabby chic paleo normcore pour-over narwhal seitan. Art party salvia hella. Vinyl tousled put a bird on it.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-31T00:00:49.553Z\",\n      \"created_at\": \"2017-01-30T23:00:54.271Z\",\n      \"updated_at\": \"2017-01-30T23:00:54.271Z\",\n      \"user_id\": null,\n      \"list_id\": 10\n    },\n    {\n      \"id\": 19,\n      \"title\": \"integrate dynamic synergies\",\n      \"body\": \"Letterpress cray sustainable bitters yr xoxo. Gentrify xoxo kinfolk gluten-free migas. Tofu small batch butcher kinfolk cleanse you probably haven't heard of them. Before they sold out tote bag synth tumblr helvetica farm-to-table kickstarter.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-31T00:00:49.553Z\",\n      \"created_at\": \"2017-01-30T23:00:54.267Z\",\n      \"updated_at\": \"2017-01-30T23:00:54.267Z\",\n      \"user_id\": null,\n      \"list_id\": 10\n    }\n  ]\n}",
       "response_headers": {
-        "access-token": "WZDgsU4MlCazkgpYkx2kZA",
+        "access-token": "V7Z0z-kCZmHVhMYMMgRXYg",
         "token-type": "Bearer",
-        "client": "Yah4j3Sstwg3pDAtHbbtBw",
-        "expiry": "1485476696",
-        "uid": "daphnee@flatley.io"
+        "client": "TvHOCyDm0r7LcewgFNzkfg",
+        "expiry": "1487026854",
+        "uid": "corbin@dibbertmacgyver.info"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"fomind.com/api/lists/9\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: WZDgsU4MlCazkgpYkx2kZA\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: Yah4j3Sstwg3pDAtHbbtBw\" \\\n\t-H \"Expiry: 1485476696\" \\\n\t-H \"Uid: daphnee@flatley.io\""
+      "curl": "curl \"http://remindux.herokuapp.comapi/lists/10\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: V7Z0z-kCZmHVhMYMMgRXYg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: TvHOCyDm0r7LcewgFNzkfg\" \\\n\t-H \"Expiry: 1487026854\" \\\n\t-H \"Uid: corbin@dibbertmacgyver.info\""
     }
   ]
 }

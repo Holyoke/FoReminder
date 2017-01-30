@@ -5,11 +5,18 @@
       "explanation": null,
       "examples": [
         {
-          "description": "Logging in through query params",
-          "link": "authorization/logging_in_through_query_params.json",
+          "description": "Logging in via query params",
+          "link": "authorization/logging_in_via_query_params.json",
           "groups": "all",
           "route": "/auth/sign_in",
           "method": "post"
+        },
+        {
+          "description": "Logging out a user",
+          "link": "authorization/logging_out_a_user.json",
+          "groups": "all",
+          "route": "/auth/sign_out",
+          "method": "delete"
         }
       ]
     },
@@ -50,6 +57,54 @@
           "link": "lists/deleting_a_specified_list.json",
           "groups": "all",
           "route": "/api/lists/:id",
+          "method": "delete"
+        }
+      ]
+    },
+    {
+      "name": "Reminders",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Creating a new reminder",
+          "link": "reminders/creating_a_new_reminder.json",
+          "groups": "all",
+          "route": "/api/reminders",
+          "method": "post"
+        },
+        {
+          "description": "Retrieving the default list of reminders for user.",
+          "link": "reminders/retrieving_the_default_list_of_reminders_for_user..json",
+          "groups": "all",
+          "route": "/api/reminders",
+          "method": "get"
+        },
+        {
+          "description": "Retrieving a specified list of reminders for user.",
+          "link": "reminders/retrieving_a_specified_list_of_reminders_for_user..json",
+          "groups": "all",
+          "route": "/api/reminders",
+          "method": "get"
+        },
+        {
+          "description": "Retrieving a specified reminder",
+          "link": "reminders/retrieving_a_specified_reminder.json",
+          "groups": "all",
+          "route": "api/reminders/:id",
+          "method": "get"
+        },
+        {
+          "description": "Update a specified reminder",
+          "link": "reminders/update_a_specified_reminder.json",
+          "groups": "all",
+          "route": "/api/reminders/:id",
+          "method": "put"
+        },
+        {
+          "description": "Deleting a specified reminder",
+          "link": "reminders/deleting_a_specified_reminder.json",
+          "groups": "all",
+          "route": "/api/reminders/:id",
           "method": "delete"
         }
       ]

@@ -1,0 +1,38 @@
+{
+  "resource": "Reminders",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/reminders",
+  "description": "Retrieving the default list of reminders for user.",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/reminders",
+      "request_body": null,
+      "request_headers": {
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[\n  {\n    \"id\": 58,\n    \"title\": \"cultivate visionary content\",\n    \"body\": \"Gastropub normcore offal neutra. Williamsburg neutra blue bottle skateboard microdosing trust fund. Loko cardigan godard.\",\n    \"done\": false,\n    \"remind_date\": \"2017-01-31T00:00:49.553Z\",\n    \"created_at\": \"2017-01-30T23:00:56.526Z\",\n    \"updated_at\": \"2017-01-30T23:00:56.526Z\",\n    \"user_id\": null,\n    \"list_id\": 22\n  },\n  {\n    \"id\": 57,\n    \"title\": \"enable granular content\",\n    \"body\": \"Polaroid portland everyday irony lo-fi wayfarers chia fap. Chicharrones plaid everyday master vinegar. Lo-fi messenger bag paleo. Small batch chillwave neutra readymade hashtag. Leggings lo-fi lomo.\",\n    \"done\": false,\n    \"remind_date\": \"2017-01-31T00:00:49.553Z\",\n    \"created_at\": \"2017-01-30T23:00:56.522Z\",\n    \"updated_at\": \"2017-01-30T23:00:56.522Z\",\n    \"user_id\": null,\n    \"list_id\": 22\n  },\n  {\n    \"id\": 56,\n    \"title\": \"incentivize 24/7 mindshare\",\n    \"body\": \"Bitters tumblr kogi hoodie authentic poutine. Synth helvetica ramps brunch selvage xoxo bushwick. Letterpress helvetica 3 wolf moon cardigan kombucha. Kogi single-origin coffee pbr&b flexitarian chia. Tilde bushwick post-ironic vinyl kitsch waistcoat.\",\n    \"done\": false,\n    \"remind_date\": \"2017-01-31T00:00:49.553Z\",\n    \"created_at\": \"2017-01-30T23:00:56.518Z\",\n    \"updated_at\": \"2017-01-30T23:00:56.518Z\",\n    \"user_id\": null,\n    \"list_id\": 22\n  }\n]",
+      "response_headers": {
+        "access-token": "NXNBPYROJ31xegyGEX_bhA",
+        "token-type": "Bearer",
+        "client": "2iiUYKOF3U7a6-Hd6OUIzg",
+        "expiry": "1487026856",
+        "uid": "alfonzo@stamm.name"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://remindux.herokuapp.com/api/reminders\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: NXNBPYROJ31xegyGEX_bhA\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: 2iiUYKOF3U7a6-Hd6OUIzg\" \\\n\t-H \"Expiry: 1487026856\" \\\n\t-H \"Uid: alfonzo@stamm.name\""
+    }
+  ]
+}

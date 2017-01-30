@@ -32,16 +32,16 @@
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"id\": 5,\n  \"title\": \"New list title\",\n  \"user_id\": 2\n}",
+      "response_body": "{\n  \"id\": 6,\n  \"title\": \"New list title\",\n  \"user_id\": 3\n}",
       "response_headers": {
-        "access-token": "L2Mev6cfmDue7EQbmV7opA",
+        "access-token": "MAsaQjcCk4Ms0SZXMWJ4bw",
         "token-type": "Bearer",
-        "client": "eb2Lu7quA3Ke2kWIIaB_AA",
-        "expiry": "1485476695",
-        "uid": "rollin@lehner.co"
+        "client": "-MjR6hhjztSKqHKBKeCdJg",
+        "expiry": "1487026853",
+        "uid": "laila.lemke@watsica.net"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"fomind.com//api/lists\" -d '{\"list\":{\"title\":\"New list title\"}}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: L2Mev6cfmDue7EQbmV7opA\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: eb2Lu7quA3Ke2kWIIaB_AA\" \\\n\t-H \"Expiry: 1485476695\" \\\n\t-H \"Uid: rollin@lehner.co\""
+      "curl": "curl \"http://remindux.herokuapp.com/api/lists\" -d '{\"list\":{\"title\":\"New list title\"}}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: MAsaQjcCk4Ms0SZXMWJ4bw\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: -MjR6hhjztSKqHKBKeCdJg\" \\\n\t-H \"Expiry: 1487026853\" \\\n\t-H \"Uid: laila.lemke@watsica.net\""
     }
   ]
 }

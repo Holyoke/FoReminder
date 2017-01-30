@@ -18,7 +18,7 @@
   "requests": [
     {
       "request_method": "PUT",
-      "request_path": "/api/lists/14",
+      "request_path": "/api/lists/15",
       "request_body": "{\"list\":{\"title\":\"Updated title.\"}}",
       "request_headers": {
       },
@@ -27,16 +27,16 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 14,\n  \"user_id\": 5,\n  \"title\": \"Updated title.\"\n}",
+      "response_body": "{\n  \"user_id\": 6,\n  \"id\": 15,\n  \"title\": \"Updated title.\"\n}",
       "response_headers": {
-        "access-token": "kjQW0uiKS0sTw-4C6oiwqg",
+        "access-token": "Mho06aQLiwB-jbAA__eUtg",
         "token-type": "Bearer",
-        "client": "B2og7OdySsf3gYDQckmKmA",
-        "expiry": "1485476696",
-        "uid": "dillan@will.org"
+        "client": "rQJFn8X7wYEGv9h_g2Ielg",
+        "expiry": "1487026855",
+        "uid": "priscilla@padberg.io"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"fomind.com//api/lists/14\" -d '{\"list\":{\"title\":\"Updated title.\"}}' -X PUT \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: kjQW0uiKS0sTw-4C6oiwqg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: B2og7OdySsf3gYDQckmKmA\" \\\n\t-H \"Expiry: 1485476696\" \\\n\t-H \"Uid: dillan@will.org\""
+      "curl": "curl \"http://remindux.herokuapp.com/api/lists/15\" -d '{\"list\":{\"title\":\"Updated title.\"}}' -X PUT \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: Mho06aQLiwB-jbAA__eUtg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: rQJFn8X7wYEGv9h_g2Ielg\" \\\n\t-H \"Expiry: 1487026855\" \\\n\t-H \"Uid: priscilla@padberg.io\""
     }
   ]
 }

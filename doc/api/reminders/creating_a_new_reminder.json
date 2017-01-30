@@ -1,0 +1,62 @@
+{
+  "resource": "Reminders",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/reminders",
+  "description": "Creating a new reminder",
+  "explanation": "Creates a new reminder for user.",
+  "parameters": [
+    {
+      "scope": "reminder",
+      "required": true,
+      "name": "title",
+      "description": "Title of reminder"
+    },
+    {
+      "scope": "reminder",
+      "name": "remind_date",
+      "description": "Remind date for reminder."
+    },
+    {
+      "scope": "reminder",
+      "name": "body",
+      "description": "Description body for reminder."
+    },
+    {
+      "scope": "reminder",
+      "name": "list_id",
+      "description": "List assignment ID for reminder. If no list_id provided, then the user's Default list is used."
+    }
+  ],
+  "response_fields": [
+    {
+      "scope": "reminder",
+      "name": "title",
+      "description": "Title for reminder"
+    }
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/reminders",
+      "request_body": "{\"reminder\":{\"title\":\"New reminder title\"}}",
+      "request_headers": {
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\n  \"id\": 55,\n  \"title\": \"New reminder title\",\n  \"body\": null,\n  \"done\": false,\n  \"remind_date\": \"2017-01-31T23:00:56.463Z\",\n  \"created_at\": \"2017-01-30T23:00:56.464Z\",\n  \"updated_at\": \"2017-01-30T23:00:56.464Z\",\n  \"user_id\": null,\n  \"list_id\": 19\n}",
+      "response_headers": {
+        "access-token": "GDVtmNblZcIl6HwyhHslhg",
+        "token-type": "Bearer",
+        "client": "OCkgAzGdRUdBB0K_kP2SKQ",
+        "expiry": "1487026856",
+        "uid": "destin_gusikowski@hoppe.com"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://remindux.herokuapp.com/api/reminders\" -d '{\"reminder\":{\"title\":\"New reminder title\"}}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: GDVtmNblZcIl6HwyhHslhg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: OCkgAzGdRUdBB0K_kP2SKQ\" \\\n\t-H \"Expiry: 1487026856\" \\\n\t-H \"Uid: destin_gusikowski@hoppe.com\""
+    }
+  ]
+}

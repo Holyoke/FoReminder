@@ -23,16 +23,16 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "[\n  {\n    \"id\": 6,\n    \"title\": \"Default Reminders\",\n    \"user_id\": 3\n  },\n  {\n    \"id\": 7,\n    \"title\": \"clear-thinking\",\n    \"user_id\": 3\n  },\n  {\n    \"id\": 8,\n    \"title\": \"solution\",\n    \"user_id\": 3\n  }\n]",
+      "response_body": "[\n  {\n    \"id\": 7,\n    \"title\": \"Reminders\",\n    \"reminders_count\": 3,\n    \"incomplete_reminders_count\": 2\n  },\n  {\n    \"id\": 8,\n    \"title\": \"Seamless\",\n    \"reminders_count\": 3,\n    \"incomplete_reminders_count\": 2\n  },\n  {\n    \"id\": 9,\n    \"title\": \"productivity\",\n    \"reminders_count\": 3,\n    \"incomplete_reminders_count\": 2\n  }\n]",
       "response_headers": {
-        "access-token": "WPo1wMpMmb-erhapgArLfw",
+        "access-token": "ViRT6uAj2_xkC9PVQBsSaQ",
         "token-type": "Bearer",
-        "client": "x_DiCyiy9E1d-l2IOyZnUQ",
-        "expiry": "1485476696",
-        "uid": "muhammad@champlin.co"
+        "client": "V_Mvu9JJ9UEp2l7oWS3fSg",
+        "expiry": "1487026854",
+        "uid": "antonina@kohler.co"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"fomind.com//api/lists\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: WPo1wMpMmb-erhapgArLfw\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: x_DiCyiy9E1d-l2IOyZnUQ\" \\\n\t-H \"Expiry: 1485476696\" \\\n\t-H \"Uid: muhammad@champlin.co\""
+      "curl": "curl \"http://remindux.herokuapp.com/api/lists\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: ViRT6uAj2_xkC9PVQBsSaQ\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: V_Mvu9JJ9UEp2l7oWS3fSg\" \\\n\t-H \"Expiry: 1487026854\" \\\n\t-H \"Uid: antonina@kohler.co\""
     }
   ]
 }

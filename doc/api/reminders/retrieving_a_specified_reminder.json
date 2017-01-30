@@ -1,0 +1,38 @@
+{
+  "resource": "Reminders",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "api/reminders/:id",
+  "description": "Retrieving a specified reminder",
+  "explanation": "Retrieves a reminder by id",
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "api/reminders/75",
+      "request_body": null,
+      "request_headers": {
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"id\": 75,\n  \"title\": \"unleash plug-and-play systems\",\n  \"body\": \"Plaid beard ugh. Xoxo messenger bag heirloom listicle wolf carry intelligentsia. Swag beard gluten-free before they sold out +1 raw denim small batch. Kogi cred plaid xoxo literally. Church-key umami plaid ramps deep v tote bag meh.\",\n  \"done\": true,\n  \"remind_date\": \"2017-01-31T00:00:49.553Z\",\n  \"created_at\": \"2017-01-30T23:00:57.473Z\",\n  \"updated_at\": \"2017-01-30T23:00:57.473Z\",\n  \"user_id\": null,\n  \"list_id\": 28\n}",
+      "response_headers": {
+        "access-token": "zQEwn6a_x1wCSQ0yRBqYsg",
+        "token-type": "Bearer",
+        "client": "efzA_6J2tVSTxMdCnUFwbw",
+        "expiry": "1487026857",
+        "uid": "cristobal@bosco.net"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://remindux.herokuapp.comapi/reminders/75\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: zQEwn6a_x1wCSQ0yRBqYsg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: efzA_6J2tVSTxMdCnUFwbw\" \\\n\t-H \"Expiry: 1487026857\" \\\n\t-H \"Uid: cristobal@bosco.net\""
+    }
+  ]
+}
