@@ -14,7 +14,7 @@
 #
 
 class Reminder < ApplicationRecord
-  validates :title, :remind_date, presence: true
+  validates :title, presence: true
   validates :done, inclusion: { in: [true, false] }
 
   belongs_to :list

@@ -34,6 +34,4 @@ RSpec.describe Reminder, type: :model do
     reminder = Reminder.new(title: "test", remind_date: Date.new)
     expect(reminder.remind_date).to be_present
   end
-
-  it "should have a user via list"
 end
