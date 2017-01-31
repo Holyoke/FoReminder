@@ -44,7 +44,7 @@ resource "Lists" do
     let(:id) { user.default_list.id }
 
     example_request "Retrieving a specified list" do
-      explanation "Retrieves a list with reminders, by id"
+      explanation "Retrieves a list with reminders included. A List `has_many` reminders."
       expect(status).to eq 200
     end
   end

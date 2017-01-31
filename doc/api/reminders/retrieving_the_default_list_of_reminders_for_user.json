@@ -1,0 +1,43 @@
+{
+  "resource": "Reminders",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/reminders",
+  "description": "Retrieving the default list of reminders for user",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/reminders",
+      "request_body": null,
+      "request_headers": {
+        "Access-Token": "T2WSPk8XyEvU0v0wj3eMfw",
+        "Token-Type": "Bearer",
+        "Client": "Ib3yqrI6mcTRU9M_NBoEXw",
+        "Expiry": "1487042557",
+        "Uid": "isaiah_oreilly@kunde.biz"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[\n  {\n    \"id\": 94,\n    \"title\": \"drive 24/7 users\",\n    \"body\": \"Post-ironic kogi meh vinyl hammock before they sold out humblebrag tumblr. Poutine sustainable try-hard cleanse cold-pressed semiotics thundercats tilde. Knausgaard wayfarers blog keffiyeh. Bicycle rights fashion axe ramps craft beer occupy.\",\n    \"done\": false,\n    \"remind_date\": \"2017-01-31T04:22:26.310Z\",\n    \"created_at\": \"2017-01-31T03:22:37.550Z\",\n    \"updated_at\": \"2017-01-31T03:22:37.550Z\",\n    \"user_id\": 13,\n    \"list_id\": 34\n  },\n  {\n    \"id\": 93,\n    \"title\": \"innovate cross-media channels\",\n    \"body\": \"Synth vice literally hashtag quinoa. Pork belly everyday five dollar toast cleanse street you probably haven't heard of them tofu. Kale chips cleanse skateboard. Taxidermy knausgaard poutine biodiesel yr. Viral umami sartorial craft beer tacos disrupt seitan put a bird on it.\",\n    \"done\": true,\n    \"remind_date\": \"2017-01-31T04:22:26.310Z\",\n    \"created_at\": \"2017-01-31T03:22:37.545Z\",\n    \"updated_at\": \"2017-01-31T03:22:37.545Z\",\n    \"user_id\": 13,\n    \"list_id\": 34\n  },\n  {\n    \"id\": 92,\n    \"title\": \"morph 24/365 markets\",\n    \"body\": \"Pop-up polaroid butcher. Wes anderson leggings sartorial polaroid wolf paleo. Direct trade organic xoxo. Cred dreamcatcher migas.\",\n    \"done\": true,\n    \"remind_date\": \"2017-01-31T04:22:26.310Z\",\n    \"created_at\": \"2017-01-31T03:22:37.534Z\",\n    \"updated_at\": \"2017-01-31T03:22:37.534Z\",\n    \"user_id\": 13,\n    \"list_id\": 34\n  }\n]",
+      "response_headers": {
+        "access-token": "T2WSPk8XyEvU0v0wj3eMfw",
+        "token-type": "Bearer",
+        "client": "Ib3yqrI6mcTRU9M_NBoEXw",
+        "expiry": "1487042557",
+        "uid": "isaiah_oreilly@kunde.biz"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://remindux.herokuapp.com/api/reminders\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: T2WSPk8XyEvU0v0wj3eMfw\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: Ib3yqrI6mcTRU9M_NBoEXw\" \\\n\t-H \"Expiry: 1487042557\" \\\n\t-H \"Uid: isaiah_oreilly@kunde.biz\""
+    }
+  ]
+}

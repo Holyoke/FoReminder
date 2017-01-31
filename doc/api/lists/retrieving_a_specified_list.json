@@ -4,7 +4,7 @@
   "http_method": "GET",
   "route": "api/lists/:id",
   "description": "Retrieving a specified list",
-  "explanation": "Retrieves a list with reminders, by id",
+  "explanation": "Retrieves a list with reminders included. A List `has_many` reminders.",
   "parameters": [
 
   ],
@@ -14,30 +14,30 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "api/lists/10",
+      "request_path": "api/lists/22",
       "request_body": null,
       "request_headers": {
-        "Access-Token": "q1ycfqT27fcHrQHr3QzQRg",
+        "Access-Token": "mVYmVry_Cf1ECQPbpUsi3A",
         "Token-Type": "Bearer",
-        "Client": "Y4YaU33GfgLCJ_qwST5QwA",
-        "Expiry": "1487037927",
-        "Uid": "dusty.tremblay@swaniawski.co"
+        "Client": "52hVeneeVeYaU03yOTI3HA",
+        "Expiry": "1487042555",
+        "Uid": "selena.crooks@bruenwitting.io"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 10,\n  \"title\": \"Reminders\",\n  \"user_id\": 5,\n  \"reminders\": [\n    {\n      \"id\": 21,\n      \"title\": \"target cross-platform channels\",\n      \"body\": \"Yolo 8-bit synth ugh cornhole kitsch mlkshk health. Fashion axe heirloom paleo pop-up whatever drinking sriracha locavore. Helvetica offal pop-up kale chips. Yuccie swag asymmetrical +1 kogi art party blue bottle.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-31T03:05:20.995Z\",\n      \"created_at\": \"2017-01-31T02:05:26.964Z\",\n      \"updated_at\": \"2017-01-31T02:05:26.964Z\",\n      \"user_id\": null,\n      \"list_id\": 10\n    },\n    {\n      \"id\": 20,\n      \"title\": \"scale rich channels\",\n      \"body\": \"Humblebrag cold-pressed disrupt. Meggings bitters organic blue bottle twee. Cray kinfolk carry. Fap offal xoxo. Typewriter knausgaard fingerstache hammock.\",\n      \"done\": true,\n      \"remind_date\": \"2017-01-31T03:05:20.995Z\",\n      \"created_at\": \"2017-01-31T02:05:26.956Z\",\n      \"updated_at\": \"2017-01-31T02:05:26.956Z\",\n      \"user_id\": null,\n      \"list_id\": 10\n    },\n    {\n      \"id\": 19,\n      \"title\": \"exploit B2C experiences\",\n      \"body\": \"Irony next level quinoa asymmetrical selvage venmo dreamcatcher lo-fi. Distillery ramps photo booth plaid umami messenger bag. 8-bit franzen 90's messenger bag literally actually xoxo thundercats. Single-origin coffee fashion axe skateboard whatever paleo diy vinegar gentrify.\",\n      \"done\": true,\n      \"remind_date\": \"2017-01-31T03:05:20.995Z\",\n      \"created_at\": \"2017-01-31T02:05:26.945Z\",\n      \"updated_at\": \"2017-01-31T02:05:26.945Z\",\n      \"user_id\": null,\n      \"list_id\": 10\n    }\n  ]\n}",
+      "response_body": "{\n  \"id\": 22,\n  \"title\": \"Reminders\",\n  \"user_id\": 9,\n  \"reminders\": [\n    {\n      \"id\": 57,\n      \"title\": \"aggregate frictionless markets\",\n      \"body\": \"Butcher vegan neutra street. Chia stumptown lo-fi deep v echo. Butcher cleanse park authentic five dollar toast salvia literally selfies.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-31T04:22:26.310Z\",\n      \"created_at\": \"2017-01-31T03:22:34.998Z\",\n      \"updated_at\": \"2017-01-31T03:22:34.998Z\",\n      \"user_id\": 9,\n      \"list_id\": 22\n    },\n    {\n      \"id\": 56,\n      \"title\": \"redefine interactive infomediaries\",\n      \"body\": \"Ramps cold-pressed poutine park. Wolf listicle single-origin coffee salvia kombucha meditation iphone food truck. Taxidermy ennui chillwave. Heirloom chicharrones gluten-free tilde.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-31T04:22:26.310Z\",\n      \"created_at\": \"2017-01-31T03:22:34.993Z\",\n      \"updated_at\": \"2017-01-31T03:22:34.993Z\",\n      \"user_id\": 9,\n      \"list_id\": 22\n    },\n    {\n      \"id\": 55,\n      \"title\": \"benchmark collaborative mindshare\",\n      \"body\": \"Gastropub disrupt tousled plaid. Direct trade vice dreamcatcher organic chartreuse raw denim. Crucifix tumblr salvia microdosing +1 bespoke.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-31T04:22:26.310Z\",\n      \"created_at\": \"2017-01-31T03:22:34.985Z\",\n      \"updated_at\": \"2017-01-31T03:22:34.985Z\",\n      \"user_id\": 9,\n      \"list_id\": 22\n    }\n  ]\n}",
       "response_headers": {
-        "access-token": "q1ycfqT27fcHrQHr3QzQRg",
+        "access-token": "mVYmVry_Cf1ECQPbpUsi3A",
         "token-type": "Bearer",
-        "client": "Y4YaU33GfgLCJ_qwST5QwA",
-        "expiry": "1487037927",
-        "uid": "dusty.tremblay@swaniawski.co"
+        "client": "52hVeneeVeYaU03yOTI3HA",
+        "expiry": "1487042555",
+        "uid": "selena.crooks@bruenwitting.io"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.comapi/lists/10\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: q1ycfqT27fcHrQHr3QzQRg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: Y4YaU33GfgLCJ_qwST5QwA\" \\\n\t-H \"Expiry: 1487037927\" \\\n\t-H \"Uid: dusty.tremblay@swaniawski.co\""
+      "curl": "curl \"http://remindux.herokuapp.comapi/lists/22\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: mVYmVry_Cf1ECQPbpUsi3A\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: 52hVeneeVeYaU03yOTI3HA\" \\\n\t-H \"Expiry: 1487042555\" \\\n\t-H \"Uid: selena.crooks@bruenwitting.io\""
     }
   ]
 }

@@ -1,0 +1,48 @@
+{
+  "resource": "Comments",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/comments",
+  "description": "Retrieving a list of comments based on their reminder",
+  "explanation": "Retrieves a reminder's comments",
+  "parameters": [
+    {
+      "required": true,
+      "name": "reminder_id",
+      "description": "ID of parent Reminder"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/comments?reminder_id=10",
+      "request_body": null,
+      "request_headers": {
+        "Access-Token": "1iwFYHVfqrQOqERGQvV2tg",
+        "Token-Type": "Bearer",
+        "Client": "qcz2cAjndnvvNXYmA07agQ",
+        "Expiry": "1487042551",
+        "Uid": "nicholas_olson@crooks.io"
+      },
+      "request_query_parameters": {
+        "reminder_id": "10"
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[\n  {\n    \"id\": 37,\n    \"body\": \"synthesize\",\n    \"reminder_id\": 10,\n    \"active\": true\n  },\n  {\n    \"id\": 36,\n    \"body\": \"override\",\n    \"reminder_id\": 10,\n    \"active\": false\n  },\n  {\n    \"id\": 35,\n    \"body\": \"calculate\",\n    \"reminder_id\": 10,\n    \"active\": true\n  }\n]",
+      "response_headers": {
+        "access-token": "1iwFYHVfqrQOqERGQvV2tg",
+        "token-type": "Bearer",
+        "client": "qcz2cAjndnvvNXYmA07agQ",
+        "expiry": "1487042551",
+        "uid": "nicholas_olson@crooks.io"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://remindux.herokuapp.com/api/comments?reminder_id=10\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: 1iwFYHVfqrQOqERGQvV2tg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: qcz2cAjndnvvNXYmA07agQ\" \\\n\t-H \"Expiry: 1487042551\" \\\n\t-H \"Uid: nicholas_olson@crooks.io\""
+    }
+  ]
+}

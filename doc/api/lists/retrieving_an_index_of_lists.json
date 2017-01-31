@@ -4,7 +4,7 @@
   "http_method": "GET",
   "route": "/api/lists",
   "description": "Retrieving an index of lists",
-  "explanation": "Retrieves user's lists and their ids.",
+  "explanation": "Retrieves user's lists and their ids. Also returns aggregate metadata.",
   "parameters": [
 
   ],
@@ -17,27 +17,27 @@
       "request_path": "/api/lists",
       "request_body": null,
       "request_headers": {
-        "Access-Token": "tUk4xH6DArmhjGCnxqSYVg",
+        "Access-Token": "61OQW893g6ff10YWnvHtWA",
         "Token-Type": "Bearer",
-        "Client": "4YePs045MT10OYD3mIevPw",
-        "Expiry": "1487037926",
-        "Uid": "berneice@lehnerokeefe.name"
+        "Client": "g2MxEbvaDmMLOHoEorBPbA",
+        "Expiry": "1487042554",
+        "Uid": "malinda@hermanndach.name"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "[\n  {\n    \"id\": 7,\n    \"title\": \"Reminders\",\n    \"reminders_count\": 3,\n    \"incomplete_reminders_count\": 0\n  },\n  {\n    \"id\": 8,\n    \"title\": \"data-warehouse\",\n    \"reminders_count\": 3,\n    \"incomplete_reminders_count\": 2\n  },\n  {\n    \"id\": 9,\n    \"title\": \"process improvement\",\n    \"reminders_count\": 3,\n    \"incomplete_reminders_count\": 3\n  }\n]",
+      "response_body": "[\n  {\n    \"id\": 19,\n    \"title\": \"Reminders\",\n    \"reminders_count\": 3,\n    \"incomplete_reminders_count\": 2\n  },\n  {\n    \"id\": 20,\n    \"title\": \"success\",\n    \"reminders_count\": 3,\n    \"incomplete_reminders_count\": 3\n  },\n  {\n    \"id\": 21,\n    \"title\": \"bandwidth-monitored\",\n    \"reminders_count\": 3,\n    \"incomplete_reminders_count\": 2\n  }\n]",
       "response_headers": {
-        "access-token": "tUk4xH6DArmhjGCnxqSYVg",
+        "access-token": "61OQW893g6ff10YWnvHtWA",
         "token-type": "Bearer",
-        "client": "4YePs045MT10OYD3mIevPw",
-        "expiry": "1487037926",
-        "uid": "berneice@lehnerokeefe.name"
+        "client": "g2MxEbvaDmMLOHoEorBPbA",
+        "expiry": "1487042554",
+        "uid": "malinda@hermanndach.name"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.com/api/lists\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: tUk4xH6DArmhjGCnxqSYVg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: 4YePs045MT10OYD3mIevPw\" \\\n\t-H \"Expiry: 1487037926\" \\\n\t-H \"Uid: berneice@lehnerokeefe.name\""
+      "curl": "curl \"http://remindux.herokuapp.com/api/lists\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: 61OQW893g6ff10YWnvHtWA\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: g2MxEbvaDmMLOHoEorBPbA\" \\\n\t-H \"Expiry: 1487042554\" \\\n\t-H \"Uid: malinda@hermanndach.name\""
     }
   ]
 }

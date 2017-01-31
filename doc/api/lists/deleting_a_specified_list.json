@@ -14,30 +14,30 @@
   "requests": [
     {
       "request_method": "DELETE",
-      "request_path": "/api/lists/18",
+      "request_path": "/api/lists/30",
       "request_body": null,
       "request_headers": {
-        "Access-Token": "upLd628QeOY2P6R6eji9rw",
+        "Access-Token": "HJTpGuU7lExtrnaDAENdJg",
         "Token-Type": "Bearer",
-        "Client": "spf2Fi2BcLUvcBFu5YIgTw",
-        "Expiry": "1487037928",
-        "Uid": "marge_beer@ernsercrona.com"
+        "Client": "WUsMLEKbLLSvxjfLM3yK8A",
+        "Expiry": "1487042556",
+        "Uid": "lorenza_turcotte@priceortiz.name"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 18,\n  \"title\": \"zero administration\",\n  \"user_id\": 7\n}",
+      "response_body": "{\n  \"id\": 30,\n  \"title\": \"Customer-focused\",\n  \"user_id\": 11\n}",
       "response_headers": {
-        "access-token": "upLd628QeOY2P6R6eji9rw",
+        "access-token": "HJTpGuU7lExtrnaDAENdJg",
         "token-type": "Bearer",
-        "client": "spf2Fi2BcLUvcBFu5YIgTw",
-        "expiry": "1487037928",
-        "uid": "marge_beer@ernsercrona.com"
+        "client": "WUsMLEKbLLSvxjfLM3yK8A",
+        "expiry": "1487042556",
+        "uid": "lorenza_turcotte@priceortiz.name"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.com/api/lists/18\" -d '' -X DELETE \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: upLd628QeOY2P6R6eji9rw\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: spf2Fi2BcLUvcBFu5YIgTw\" \\\n\t-H \"Expiry: 1487037928\" \\\n\t-H \"Uid: marge_beer@ernsercrona.com\""
+      "curl": "curl \"http://remindux.herokuapp.com/api/lists/30\" -d '' -X DELETE \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: HJTpGuU7lExtrnaDAENdJg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: WUsMLEKbLLSvxjfLM3yK8A\" \\\n\t-H \"Expiry: 1487042556\" \\\n\t-H \"Uid: lorenza_turcotte@priceortiz.name\""
     }
   ]
 }

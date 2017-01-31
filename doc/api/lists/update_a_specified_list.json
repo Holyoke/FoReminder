@@ -18,30 +18,30 @@
   "requests": [
     {
       "request_method": "PUT",
-      "request_path": "/api/lists/15",
+      "request_path": "/api/lists/27",
       "request_body": "{\"list\":{\"title\":\"Updated title.\"}}",
       "request_headers": {
-        "Access-Token": "zxk1jnGD24LkpRvsjISaKA",
+        "Access-Token": "tjvm09EYjWSFBbQD8E9T6w",
         "Token-Type": "Bearer",
-        "Client": "7B4DLNsuFBYqG5Y-nSyDPQ",
-        "Expiry": "1487037927",
-        "Uid": "donnie@maggio.com"
+        "Client": "zvXpamHXF0UcqsKeVQQC4A",
+        "Expiry": "1487042556",
+        "Uid": "marco@bechtelarcrona.info"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"user_id\": 6,\n  \"id\": 15,\n  \"title\": \"Updated title.\"\n}",
+      "response_body": "{\n  \"user_id\": 10,\n  \"id\": 27,\n  \"title\": \"Updated title.\"\n}",
       "response_headers": {
-        "access-token": "zxk1jnGD24LkpRvsjISaKA",
+        "access-token": "tjvm09EYjWSFBbQD8E9T6w",
         "token-type": "Bearer",
-        "client": "7B4DLNsuFBYqG5Y-nSyDPQ",
-        "expiry": "1487037927",
-        "uid": "donnie@maggio.com"
+        "client": "zvXpamHXF0UcqsKeVQQC4A",
+        "expiry": "1487042556",
+        "uid": "marco@bechtelarcrona.info"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.com/api/lists/15\" -d '{\"list\":{\"title\":\"Updated title.\"}}' -X PUT \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: zxk1jnGD24LkpRvsjISaKA\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: 7B4DLNsuFBYqG5Y-nSyDPQ\" \\\n\t-H \"Expiry: 1487037927\" \\\n\t-H \"Uid: donnie@maggio.com\""
+      "curl": "curl \"http://remindux.herokuapp.com/api/lists/27\" -d '{\"list\":{\"title\":\"Updated title.\"}}' -X PUT \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: tjvm09EYjWSFBbQD8E9T6w\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: zvXpamHXF0UcqsKeVQQC4A\" \\\n\t-H \"Expiry: 1487042556\" \\\n\t-H \"Uid: marco@bechtelarcrona.info\""
     }
   ]
 }

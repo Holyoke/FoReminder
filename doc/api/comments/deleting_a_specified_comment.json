@@ -1,0 +1,43 @@
+{
+  "resource": "Comments",
+  "resource_explanation": null,
+  "http_method": "DELETE",
+  "route": "/api/comments/:id",
+  "description": "Deleting a specified comment",
+  "explanation": "Deletes a Comment by id",
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "DELETE",
+      "request_path": "/api/comments/109",
+      "request_body": null,
+      "request_headers": {
+        "Access-Token": "Pny_ARvzRCEqxZPZ_vpCRQ",
+        "Token-Type": "Bearer",
+        "Client": "8SiPib2u0TkZfWUiSqt6Tw",
+        "Expiry": "1487042553",
+        "Uid": "edd_batz@lesch.biz"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"id\": 109,\n  \"body\": \"hack\",\n  \"reminder_id\": 34,\n  \"active\": false\n}",
+      "response_headers": {
+        "access-token": "Pny_ARvzRCEqxZPZ_vpCRQ",
+        "token-type": "Bearer",
+        "client": "8SiPib2u0TkZfWUiSqt6Tw",
+        "expiry": "1487042553",
+        "uid": "edd_batz@lesch.biz"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://remindux.herokuapp.com/api/comments/109\" -d '' -X DELETE \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: Pny_ARvzRCEqxZPZ_vpCRQ\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: 8SiPib2u0TkZfWUiSqt6Tw\" \\\n\t-H \"Expiry: 1487042553\" \\\n\t-H \"Uid: edd_batz@lesch.biz\""
+    }
+  ]
+}

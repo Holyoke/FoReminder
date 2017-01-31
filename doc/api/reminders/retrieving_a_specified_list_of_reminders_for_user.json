@@ -1,0 +1,47 @@
+{
+  "resource": "Reminders",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/reminders",
+  "description": "Retrieving a specified list of reminders for user",
+  "explanation": null,
+  "parameters": [
+    {
+      "name": "list_id",
+      "description": "id of List to fetch"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/reminders?list_id=39",
+      "request_body": null,
+      "request_headers": {
+        "Access-Token": "Oo5jKM2RdkGT2AOR3bWYOQ",
+        "Token-Type": "Bearer",
+        "Client": "uI5bjwyUBvW_ZcrdiMRGzw",
+        "Expiry": "1487042558",
+        "Uid": "valentina@krajcik.com"
+      },
+      "request_query_parameters": {
+        "list_id": "39"
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[\n  {\n    \"id\": 109,\n    \"title\": \"synergize best-of-breed portals\",\n    \"body\": \"Street pickled xoxo scenester. Wolf jean shorts kinfolk selfies ugh retro. Taxidermy marfa blue bottle cliche wes anderson wayfarers. Austin craft beer listicle tumblr literally messenger bag readymade slow-carb. Normcore vice yuccie actually.\",\n    \"done\": false,\n    \"remind_date\": \"2017-01-31T04:22:26.310Z\",\n    \"created_at\": \"2017-01-31T03:22:38.380Z\",\n    \"updated_at\": \"2017-01-31T03:22:38.380Z\",\n    \"user_id\": 14,\n    \"list_id\": 39\n  },\n  {\n    \"id\": 108,\n    \"title\": \"streamline efficient functionalities\",\n    \"body\": \"Mustache seitan everyday street drinking wolf church-key. Chicharrones lo-fi gentrify literally dreamcatcher master meggings. Park selfies locavore kitsch deep v distillery drinking actually. Readymade blog listicle 90's irony chia.\",\n    \"done\": false,\n    \"remind_date\": \"2017-01-31T04:22:26.310Z\",\n    \"created_at\": \"2017-01-31T03:22:38.364Z\",\n    \"updated_at\": \"2017-01-31T03:22:38.364Z\",\n    \"user_id\": 14,\n    \"list_id\": 39\n  },\n  {\n    \"id\": 107,\n    \"title\": \"optimize innovative action-items\",\n    \"body\": \"Shoreditch portland kombucha skateboard waistcoat selvage brunch dreamcatcher. Celiac pop-up flannel mumblecore leggings loko yuccie. Hella cray tattooed.\",\n    \"done\": false,\n    \"remind_date\": \"2017-01-31T04:22:26.310Z\",\n    \"created_at\": \"2017-01-31T03:22:38.352Z\",\n    \"updated_at\": \"2017-01-31T03:22:38.352Z\",\n    \"user_id\": 14,\n    \"list_id\": 39\n  }\n]",
+      "response_headers": {
+        "access-token": "Oo5jKM2RdkGT2AOR3bWYOQ",
+        "token-type": "Bearer",
+        "client": "uI5bjwyUBvW_ZcrdiMRGzw",
+        "expiry": "1487042558",
+        "uid": "valentina@krajcik.com"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://remindux.herokuapp.com/api/reminders?list_id=39\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: Oo5jKM2RdkGT2AOR3bWYOQ\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: uI5bjwyUBvW_ZcrdiMRGzw\" \\\n\t-H \"Expiry: 1487042558\" \\\n\t-H \"Uid: valentina@krajcik.com\""
+    }
+  ]
+}

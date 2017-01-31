@@ -1,0 +1,47 @@
+{
+  "resource": "Comments",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/comments/:id",
+  "description": "Update a specified comment",
+  "explanation": "Updating a comment by id",
+  "parameters": [
+    {
+      "scope": "comment",
+      "name": "body",
+      "description": "Body of comment"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/comments/82",
+      "request_body": "{\"comment\":{\"body\":\"Updated body.\"}}",
+      "request_headers": {
+        "Access-Token": "k7cyiKiOrcM_AXiSmqOCjg",
+        "Token-Type": "Bearer",
+        "Client": "unMbAJ6kv1CoHeIBJsRJhQ",
+        "Expiry": "1487042552",
+        "Uid": "jaycee.bogan@gutkowski.com"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"id\": 82,\n  \"body\": \"Updated body.\",\n  \"reminder_id\": 25,\n  \"active\": true\n}",
+      "response_headers": {
+        "access-token": "k7cyiKiOrcM_AXiSmqOCjg",
+        "token-type": "Bearer",
+        "client": "unMbAJ6kv1CoHeIBJsRJhQ",
+        "expiry": "1487042552",
+        "uid": "jaycee.bogan@gutkowski.com"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://remindux.herokuapp.com/api/comments/82\" -d '{\"comment\":{\"body\":\"Updated body.\"}}' -X PUT \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: k7cyiKiOrcM_AXiSmqOCjg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: unMbAJ6kv1CoHeIBJsRJhQ\" \\\n\t-H \"Expiry: 1487042552\" \\\n\t-H \"Uid: jaycee.bogan@gutkowski.com\""
+    }
+  ]
+}

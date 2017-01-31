@@ -42,7 +42,7 @@ resource "Reminders" do
     end
 
     parameter :list_id, "id of List to fetch"
-    example "Retrieving a specified list of reminders for user." do
+    example "Retrieving a specified list of reminders for user" do
       do_request(:list_id => user.lists.last.id)
       expect(status).to eq 200
     end

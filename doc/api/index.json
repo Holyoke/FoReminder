@@ -21,6 +21,40 @@
       ]
     },
     {
+      "name": "Comments",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Creating a new comment",
+          "link": "comments/creating_a_new_comment.json",
+          "groups": "all",
+          "route": "/api/comments",
+          "method": "post"
+        },
+        {
+          "description": "Retrieving a list of comments based on their reminder",
+          "link": "comments/retrieving_a_list_of_comments_based_on_their_reminder.json",
+          "groups": "all",
+          "route": "/api/comments",
+          "method": "get"
+        },
+        {
+          "description": "Update a specified comment",
+          "link": "comments/update_a_specified_comment.json",
+          "groups": "all",
+          "route": "/api/comments/:id",
+          "method": "put"
+        },
+        {
+          "description": "Deleting a specified comment",
+          "link": "comments/deleting_a_specified_comment.json",
+          "groups": "all",
+          "route": "/api/comments/:id",
+          "method": "delete"
+        }
+      ]
+    },
+    {
       "name": "Lists",
       "explanation": null,
       "examples": [
@@ -73,15 +107,15 @@
           "method": "post"
         },
         {
-          "description": "Retrieving the default list of reminders for user.",
-          "link": "reminders/retrieving_the_default_list_of_reminders_for_user..json",
+          "description": "Retrieving the default list of reminders for user",
+          "link": "reminders/retrieving_the_default_list_of_reminders_for_user.json",
           "groups": "all",
           "route": "/api/reminders",
           "method": "get"
         },
         {
-          "description": "Retrieving a specified list of reminders for user.",
-          "link": "reminders/retrieving_a_specified_list_of_reminders_for_user..json",
+          "description": "Retrieving a specified list of reminders for user",
+          "link": "reminders/retrieving_a_specified_list_of_reminders_for_user.json",
           "groups": "all",
           "route": "/api/reminders",
           "method": "get"

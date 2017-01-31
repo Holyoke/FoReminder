@@ -14,30 +14,30 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "api/reminders/74",
+      "request_path": "api/reminders/110",
       "request_body": null,
       "request_headers": {
-        "Access-Token": "-OjGOj9Pz4VTSxOV9tN9YA",
+        "Access-Token": "kZ0bitP1x-ldBP-lNb72KQ",
         "Token-Type": "Bearer",
-        "Client": "CzZdyGxT8iaACpRqhahleQ",
-        "Expiry": "1487037931",
-        "Uid": "kristian@nikolauspagac.io"
+        "Client": "VgUu0zdVrSON-LTez7UKjw",
+        "Expiry": "1487042559",
+        "Uid": "hester_beier@beahan.name"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 74,\n  \"title\": \"exploit scalable portals\",\n  \"body\": \"Sustainable wayfarers pork belly lumbersexual photo booth kogi. Banh mi deep v gluten-free cred park organic. Helvetica chicharrones forage wayfarers 3 wolf moon. Banjo mumblecore shabby chic hoodie.\",\n  \"done\": false,\n  \"remind_date\": \"2017-01-31T03:05:20.995Z\",\n  \"created_at\": \"2017-01-31T02:05:30.765Z\",\n  \"updated_at\": \"2017-01-31T02:05:30.765Z\",\n  \"user_id\": null,\n  \"list_id\": 28\n}",
+      "response_body": "{\n  \"id\": 110,\n  \"title\": \"optimize sticky communities\",\n  \"body\": \"Jean shorts trust fund banjo quinoa gluten-free tote bag five dollar toast. Brooklyn post-ironic vice art party truffaut ethical celiac. Mixtape locavore waistcoat mlkshk cleanse. Street stumptown messenger bag.\",\n  \"done\": true,\n  \"remind_date\": \"2017-01-31T04:22:26.310Z\",\n  \"created_at\": \"2017-01-31T03:22:38.837Z\",\n  \"updated_at\": \"2017-01-31T03:22:38.837Z\",\n  \"user_id\": 15,\n  \"list_id\": 40\n}",
       "response_headers": {
-        "access-token": "-OjGOj9Pz4VTSxOV9tN9YA",
+        "access-token": "kZ0bitP1x-ldBP-lNb72KQ",
         "token-type": "Bearer",
-        "client": "CzZdyGxT8iaACpRqhahleQ",
-        "expiry": "1487037931",
-        "uid": "kristian@nikolauspagac.io"
+        "client": "VgUu0zdVrSON-LTez7UKjw",
+        "expiry": "1487042559",
+        "uid": "hester_beier@beahan.name"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.comapi/reminders/74\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: -OjGOj9Pz4VTSxOV9tN9YA\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: CzZdyGxT8iaACpRqhahleQ\" \\\n\t-H \"Expiry: 1487037931\" \\\n\t-H \"Uid: kristian@nikolauspagac.io\""
+      "curl": "curl \"http://remindux.herokuapp.comapi/reminders/110\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: kZ0bitP1x-ldBP-lNb72KQ\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: VgUu0zdVrSON-LTez7UKjw\" \\\n\t-H \"Expiry: 1487042559\" \\\n\t-H \"Uid: hester_beier@beahan.name\""
     }
   ]
 }

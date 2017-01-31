@@ -4,7 +4,7 @@
   "http_method": "POST",
   "route": "/api/reminders",
   "description": "Creating a new reminder",
-  "explanation": "Creates a new reminder for user.",
+  "explanation": "Creates a new reminder for a user's List. A List `has_many` reminders.",
   "parameters": [
     {
       "scope": "reminder",
@@ -25,15 +25,11 @@
     {
       "scope": "reminder",
       "name": "list_id",
-      "description": "List assignment ID for reminder. If no list_id provided, then the user's Default list is used."
+      "description": "List assignment ID for reminder. If no list_id provided, then the user's Default List is used."
     }
   ],
   "response_fields": [
-    {
-      "scope": "reminder",
-      "name": "title",
-      "description": "Title for reminder"
-    }
+
   ],
   "requests": [
     {
@@ -41,27 +37,27 @@
       "request_path": "/api/reminders",
       "request_body": "{\"reminder\":{\"title\":\"New reminder title\"}}",
       "request_headers": {
-        "Access-Token": "3wiKvJEgljDXZN948v3kFQ",
+        "Access-Token": "dzYH9XqdEfih4oa2nQyhkg",
         "Token-Type": "Bearer",
-        "Client": "OijhaM9x5gG3LpbN4k6ycg",
-        "Expiry": "1487037929",
-        "Uid": "andres@fisherraynor.com"
+        "Client": "m2kpofl4SSizu77zbPofaw",
+        "Expiry": "1487042557",
+        "Uid": "meggie@bruenhilll.name"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"id\": 55,\n  \"title\": \"New reminder title\",\n  \"body\": null,\n  \"done\": false,\n  \"remind_date\": \"2017-02-01T02:05:29.407Z\",\n  \"created_at\": \"2017-01-31T02:05:29.408Z\",\n  \"updated_at\": \"2017-01-31T02:05:29.408Z\",\n  \"user_id\": null,\n  \"list_id\": 19\n}",
+      "response_body": "{\n  \"id\": 91,\n  \"title\": \"New reminder title\",\n  \"body\": null,\n  \"done\": false,\n  \"remind_date\": \"2017-02-01T03:22:37.477Z\",\n  \"created_at\": \"2017-01-31T03:22:37.478Z\",\n  \"updated_at\": \"2017-01-31T03:22:37.478Z\",\n  \"user_id\": 12,\n  \"list_id\": 31\n}",
       "response_headers": {
-        "access-token": "3wiKvJEgljDXZN948v3kFQ",
+        "access-token": "dzYH9XqdEfih4oa2nQyhkg",
         "token-type": "Bearer",
-        "client": "OijhaM9x5gG3LpbN4k6ycg",
-        "expiry": "1487037929",
-        "uid": "andres@fisherraynor.com"
+        "client": "m2kpofl4SSizu77zbPofaw",
+        "expiry": "1487042557",
+        "uid": "meggie@bruenhilll.name"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.com/api/reminders\" -d '{\"reminder\":{\"title\":\"New reminder title\"}}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: 3wiKvJEgljDXZN948v3kFQ\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: OijhaM9x5gG3LpbN4k6ycg\" \\\n\t-H \"Expiry: 1487037929\" \\\n\t-H \"Uid: andres@fisherraynor.com\""
+      "curl": "curl \"http://remindux.herokuapp.com/api/reminders\" -d '{\"reminder\":{\"title\":\"New reminder title\"}}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: dzYH9XqdEfih4oa2nQyhkg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: m2kpofl4SSizu77zbPofaw\" \\\n\t-H \"Expiry: 1487042557\" \\\n\t-H \"Uid: meggie@bruenhilll.name\""
     }
   ]
 }

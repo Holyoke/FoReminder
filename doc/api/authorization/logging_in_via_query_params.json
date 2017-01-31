@@ -24,24 +24,25 @@
     {
       "request_method": "POST",
       "request_path": "/auth/sign_in",
-      "request_body": "{\"email\":\"lucious.dibbert@hammes.io\",\"password\":\"passw0rd\"}",
+      "request_body": "{\"email\":\"gerard@bogisich.co\",\"password\":\"passw0rd\"}",
       "request_headers": {
+        "Access-Token": "UY52KiR8zu_N1dnKC0aytw",
+        "Token-Type": "Bearer",
+        "Client": "H8K6VL091NTR2dEsf0IwAA",
+        "Expiry": "1487042549",
+        "Uid": "gerard@bogisich.co"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": 1,\n    \"email\": \"lucious.dibbert@hammes.io\",\n    \"provider\": \"email\",\n    \"uid\": \"lucious.dibbert@hammes.io\",\n    \"name\": null,\n    \"nickname\": null,\n    \"image\": null\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": 1,\n    \"email\": \"gerard@bogisich.co\",\n    \"provider\": \"email\",\n    \"uid\": \"gerard@bogisich.co\",\n    \"name\": null,\n    \"nickname\": null,\n    \"image\": null\n  }\n}",
       "response_headers": {
-        "access-token": "f8C-XhDVw9gFcISYHV9ATQ",
-        "token-type": "Bearer",
-        "client": "bO8l2YDjf9pgBft6UINjlg",
-        "expiry": "1487037924",
-        "uid": "lucious.dibbert@hammes.io"
+        "null": "nil"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.com/auth/sign_in\" -d '{\"email\":\"lucious.dibbert@hammes.io\",\"password\":\"passw0rd\"}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" "
+      "curl": "curl \"http://remindux.herokuapp.com/auth/sign_in\" -d '{\"email\":\"gerard@bogisich.co\",\"password\":\"passw0rd\"}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\""
     }
   ]
 }

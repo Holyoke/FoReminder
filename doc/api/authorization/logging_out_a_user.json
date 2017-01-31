@@ -17,11 +17,11 @@
       "request_path": "/auth/sign_out",
       "request_body": null,
       "request_headers": {
-        "Access-Token": "kiuF9hv0eXdbKDBv_8JJcA",
+        "Access-Token": "2xTn96b-ttRWMO6UoPxHpQ",
         "Token-Type": "Bearer",
-        "Client": "oMUKM2VP3zlIr7s-QVTVwA",
-        "Expiry": "1487037925",
-        "Uid": "meghan.bailey@keeling.biz"
+        "Client": "6aYHi37hcbMYSZLdAejCmQ",
+        "Expiry": "1487042550",
+        "Uid": "adolphus@barrowkiles.name"
       },
       "request_query_parameters": {
       },
@@ -32,7 +32,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.com/auth/sign_out\" -d '' -X DELETE \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: kiuF9hv0eXdbKDBv_8JJcA\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: oMUKM2VP3zlIr7s-QVTVwA\" \\\n\t-H \"Expiry: 1487037925\" \\\n\t-H \"Uid: meghan.bailey@keeling.biz\""
+      "curl": "curl \"http://remindux.herokuapp.com/auth/sign_out\" -d '' -X DELETE \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: 2xTn96b-ttRWMO6UoPxHpQ\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: 6aYHi37hcbMYSZLdAejCmQ\" \\\n\t-H \"Expiry: 1487042550\" \\\n\t-H \"Uid: adolphus@barrowkiles.name\""
     }
   ]
 }
