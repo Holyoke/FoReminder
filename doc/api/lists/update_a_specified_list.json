@@ -21,6 +21,11 @@
       "request_path": "/api/lists/15",
       "request_body": "{\"list\":{\"title\":\"Updated title.\"}}",
       "request_headers": {
+        "Access-Token": "zxk1jnGD24LkpRvsjISaKA",
+        "Token-Type": "Bearer",
+        "Client": "7B4DLNsuFBYqG5Y-nSyDPQ",
+        "Expiry": "1487037927",
+        "Uid": "donnie@maggio.com"
       },
       "request_query_parameters": {
       },
@@ -29,14 +34,14 @@
       "response_status_text": "OK",
       "response_body": "{\n  \"user_id\": 6,\n  \"id\": 15,\n  \"title\": \"Updated title.\"\n}",
       "response_headers": {
-        "access-token": "Mho06aQLiwB-jbAA__eUtg",
+        "access-token": "zxk1jnGD24LkpRvsjISaKA",
         "token-type": "Bearer",
-        "client": "rQJFn8X7wYEGv9h_g2Ielg",
-        "expiry": "1487026855",
-        "uid": "priscilla@padberg.io"
+        "client": "7B4DLNsuFBYqG5Y-nSyDPQ",
+        "expiry": "1487037927",
+        "uid": "donnie@maggio.com"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.com/api/lists/15\" -d '{\"list\":{\"title\":\"Updated title.\"}}' -X PUT \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: Mho06aQLiwB-jbAA__eUtg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: rQJFn8X7wYEGv9h_g2Ielg\" \\\n\t-H \"Expiry: 1487026855\" \\\n\t-H \"Uid: priscilla@padberg.io\""
+      "curl": "curl \"http://remindux.herokuapp.com/api/lists/15\" -d '{\"list\":{\"title\":\"Updated title.\"}}' -X PUT \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: zxk1jnGD24LkpRvsjISaKA\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: 7B4DLNsuFBYqG5Y-nSyDPQ\" \\\n\t-H \"Expiry: 1487037927\" \\\n\t-H \"Uid: donnie@maggio.com\""
     }
   ]
 }

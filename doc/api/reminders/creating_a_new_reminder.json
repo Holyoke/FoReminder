@@ -41,22 +41,27 @@
       "request_path": "/api/reminders",
       "request_body": "{\"reminder\":{\"title\":\"New reminder title\"}}",
       "request_headers": {
+        "Access-Token": "3wiKvJEgljDXZN948v3kFQ",
+        "Token-Type": "Bearer",
+        "Client": "OijhaM9x5gG3LpbN4k6ycg",
+        "Expiry": "1487037929",
+        "Uid": "andres@fisherraynor.com"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"id\": 55,\n  \"title\": \"New reminder title\",\n  \"body\": null,\n  \"done\": false,\n  \"remind_date\": \"2017-01-31T23:00:56.463Z\",\n  \"created_at\": \"2017-01-30T23:00:56.464Z\",\n  \"updated_at\": \"2017-01-30T23:00:56.464Z\",\n  \"user_id\": null,\n  \"list_id\": 19\n}",
+      "response_body": "{\n  \"id\": 55,\n  \"title\": \"New reminder title\",\n  \"body\": null,\n  \"done\": false,\n  \"remind_date\": \"2017-02-01T02:05:29.407Z\",\n  \"created_at\": \"2017-01-31T02:05:29.408Z\",\n  \"updated_at\": \"2017-01-31T02:05:29.408Z\",\n  \"user_id\": null,\n  \"list_id\": 19\n}",
       "response_headers": {
-        "access-token": "GDVtmNblZcIl6HwyhHslhg",
+        "access-token": "3wiKvJEgljDXZN948v3kFQ",
         "token-type": "Bearer",
-        "client": "OCkgAzGdRUdBB0K_kP2SKQ",
-        "expiry": "1487026856",
-        "uid": "destin_gusikowski@hoppe.com"
+        "client": "OijhaM9x5gG3LpbN4k6ycg",
+        "expiry": "1487037929",
+        "uid": "andres@fisherraynor.com"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.com/api/reminders\" -d '{\"reminder\":{\"title\":\"New reminder title\"}}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: GDVtmNblZcIl6HwyhHslhg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: OCkgAzGdRUdBB0K_kP2SKQ\" \\\n\t-H \"Expiry: 1487026856\" \\\n\t-H \"Uid: destin_gusikowski@hoppe.com\""
+      "curl": "curl \"http://remindux.herokuapp.com/api/reminders\" -d '{\"reminder\":{\"title\":\"New reminder title\"}}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: 3wiKvJEgljDXZN948v3kFQ\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: OijhaM9x5gG3LpbN4k6ycg\" \\\n\t-H \"Expiry: 1487037929\" \\\n\t-H \"Uid: andres@fisherraynor.com\""
     }
   ]
 }

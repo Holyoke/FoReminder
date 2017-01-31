@@ -1,7 +1,7 @@
 class Api::CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_reminder
-  before_action :set_comment, only: [:show, :update, :destroy]
+  before_action :set_reminder, only: [:index, :create]
+  before_action :set_comment, only: [:update, :destroy]
 
   def index
     @comments = @reminder.comments
@@ -37,7 +37,7 @@ class Api::CommentsController < ApplicationController
     end
 
     def set_comment
-      @comment = @reminder.comments.find(params[:id])
+      @comment = current_user.comments.find(params[:id])
     end
 
     def comment_params

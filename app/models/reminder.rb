@@ -28,6 +28,10 @@ class Reminder < ApplicationRecord
     self.list.title || "No List"
   end
 
+  def user_id
+    self.list.user.id
+  end
+
   scope :incomplete, -> { where done: false }
 
   private

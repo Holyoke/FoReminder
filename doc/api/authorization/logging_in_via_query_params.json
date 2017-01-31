@@ -24,7 +24,7 @@
     {
       "request_method": "POST",
       "request_path": "/auth/sign_in",
-      "request_body": "{\"email\":\"elinore_mante@bergstrom.org\",\"password\":\"passw0rd\"}",
+      "request_body": "{\"email\":\"lucious.dibbert@hammes.io\",\"password\":\"passw0rd\"}",
       "request_headers": {
       },
       "request_query_parameters": {
@@ -32,16 +32,16 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": 1,\n    \"email\": \"elinore_mante@bergstrom.org\",\n    \"provider\": \"email\",\n    \"uid\": \"elinore_mante@bergstrom.org\",\n    \"name\": null,\n    \"nickname\": null,\n    \"image\": null\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": 1,\n    \"email\": \"lucious.dibbert@hammes.io\",\n    \"provider\": \"email\",\n    \"uid\": \"lucious.dibbert@hammes.io\",\n    \"name\": null,\n    \"nickname\": null,\n    \"image\": null\n  }\n}",
       "response_headers": {
-        "access-token": "fCR2JDsAUkJfhmvgw7XgIw",
+        "access-token": "f8C-XhDVw9gFcISYHV9ATQ",
         "token-type": "Bearer",
-        "client": "uN7q1VdpbtAcPVFf6Y8GgA",
-        "expiry": "1487026852",
-        "uid": "elinore_mante@bergstrom.org"
+        "client": "bO8l2YDjf9pgBft6UINjlg",
+        "expiry": "1487037924",
+        "uid": "lucious.dibbert@hammes.io"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.com/auth/sign_in\" -d '{\"email\":\"elinore_mante@bergstrom.org\",\"password\":\"passw0rd\"}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: mIC551tU5Nz5RjI_5tsy7w\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: LPupKtjE69sJwNUZPQcGfg\" \\\n\t-H \"Expiry: 1487026852\" \\\n\t-H \"Uid: elinore_mante@bergstrom.org\""
+      "curl": "curl \"http://remindux.herokuapp.com/auth/sign_in\" -d '{\"email\":\"lucious.dibbert@hammes.io\",\"password\":\"passw0rd\"}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" "
     }
   ]
 }

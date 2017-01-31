@@ -17,22 +17,27 @@
       "request_path": "/api/reminders/100",
       "request_body": null,
       "request_headers": {
+        "Access-Token": "YFYmw6lu94FdEdWxeD2eTQ",
+        "Token-Type": "Bearer",
+        "Client": "GgXibGhVmhM8MS6hwszqXA",
+        "Expiry": "1487037933",
+        "Uid": "treie@funk.name"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 100,\n  \"title\": \"morph frictionless schemas\",\n  \"body\": \"Try-hard pitchfork gentrify meh direct trade wolf biodiesel. Kombucha mixtape 3 wolf moon freegan health humblebrag. Kale chips cred chambray kogi street beard etsy. Banh mi tote bag everyday.\",\n  \"done\": false,\n  \"remind_date\": \"2017-01-31T00:00:49.553Z\",\n  \"created_at\": \"2017-01-30T23:00:58.564Z\",\n  \"updated_at\": \"2017-01-30T23:00:58.564Z\",\n  \"user_id\": null,\n  \"list_id\": 36\n}",
+      "response_body": "{\n  \"id\": 100,\n  \"title\": \"embrace viral architectures\",\n  \"body\": \"Heirloom bicycle rights swag. Master carry helvetica pbr&b twee health. Intelligentsia pitchfork everyday microdosing slow-carb. Kitsch pabst pinterest xoxo photo booth.\",\n  \"done\": false,\n  \"remind_date\": \"2017-01-31T03:05:20.995Z\",\n  \"created_at\": \"2017-01-31T02:05:32.786Z\",\n  \"updated_at\": \"2017-01-31T02:05:32.786Z\",\n  \"user_id\": null,\n  \"list_id\": 36\n}",
       "response_headers": {
-        "access-token": "F3nbSLE6bQzTE1PNVbm6GQ",
+        "access-token": "YFYmw6lu94FdEdWxeD2eTQ",
         "token-type": "Bearer",
-        "client": "e8eIfM0kRgieNv5EG8vj6Q",
-        "expiry": "1487026858",
-        "uid": "derek@heathcote.io"
+        "client": "GgXibGhVmhM8MS6hwszqXA",
+        "expiry": "1487037933",
+        "uid": "treie@funk.name"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.com/api/reminders/100\" -d '' -X DELETE \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: F3nbSLE6bQzTE1PNVbm6GQ\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: e8eIfM0kRgieNv5EG8vj6Q\" \\\n\t-H \"Expiry: 1487026858\" \\\n\t-H \"Uid: derek@heathcote.io\""
+      "curl": "curl \"http://remindux.herokuapp.com/api/reminders/100\" -d '' -X DELETE \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: YFYmw6lu94FdEdWxeD2eTQ\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: GgXibGhVmhM8MS6hwszqXA\" \\\n\t-H \"Expiry: 1487037933\" \\\n\t-H \"Uid: treie@funk.name\""
     }
   ]
 }

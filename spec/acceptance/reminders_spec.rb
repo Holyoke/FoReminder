@@ -24,21 +24,20 @@ resource "Reminders" do
     parameter :title, "Title of reminder", scope: :reminder, required: true
     parameter :remind_date, "Remind date for reminder.", scope: :reminder
     parameter :body, "Description body for reminder.", scope: :reminder
-    parameter :list_id, "List assignment ID for reminder. If no list_id provided, then the user's Default list is used.", scope: :reminder
-    response_field :title, "Title for reminder", scope: :reminder
+    parameter :list_id, "List assignment ID for reminder. If no list_id provided, then the user's Default List is used.", scope: :reminder
 
     let(:title) { "New reminder title" }
     let(:raw_post) { params.to_json }
 
     example "Creating a new reminder" do
-      explanation "Creates a new reminder for user."
+      explanation "Creates a new reminder for a user's List. A List `has_many` reminders."
       do_request
       expect(status).to eq 201
     end
   end
 
   get "/api/reminders" do
-    example_request "Retrieving the default list of reminders for user." do
+    example_request "Retrieving the default list of reminders for user" do
       expect(status).to eq 200
     end
 

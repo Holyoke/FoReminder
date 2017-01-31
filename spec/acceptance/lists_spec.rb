@@ -23,8 +23,6 @@ resource "Lists" do
   post "/api/lists" do
     parameter :title, "Title of list", scope: :list, required: true
 
-    response_field :title, "Title for list", scope: :list
-
     let(:title) { "New list title" }
     let(:raw_post) { params.to_json }
 
@@ -37,7 +35,7 @@ resource "Lists" do
 
   get "/api/lists" do
     example_request "Retrieving an index of lists" do
-      explanation "Retrieves user's lists and their ids."
+      explanation "Retrieves user's lists and their ids. Also returns aggregate metadata."
       expect(status).to eq 200
     end
   end

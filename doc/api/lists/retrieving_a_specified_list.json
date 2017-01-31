@@ -17,22 +17,27 @@
       "request_path": "api/lists/10",
       "request_body": null,
       "request_headers": {
+        "Access-Token": "q1ycfqT27fcHrQHr3QzQRg",
+        "Token-Type": "Bearer",
+        "Client": "Y4YaU33GfgLCJ_qwST5QwA",
+        "Expiry": "1487037927",
+        "Uid": "dusty.tremblay@swaniawski.co"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 10,\n  \"title\": \"Reminders\",\n  \"user_id\": 5,\n  \"reminders\": [\n    {\n      \"id\": 21,\n      \"title\": \"mesh rich systems\",\n      \"body\": \"Selvage mustache tote bag kickstarter. Chartreuse asymmetrical vinegar hammock seitan loko messenger bag. Lomo raw denim mustache.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-31T00:00:49.553Z\",\n      \"created_at\": \"2017-01-30T23:00:54.276Z\",\n      \"updated_at\": \"2017-01-30T23:00:54.276Z\",\n      \"user_id\": null,\n      \"list_id\": 10\n    },\n    {\n      \"id\": 20,\n      \"title\": \"deploy dot-com applications\",\n      \"body\": \"Fixie shabby chic paleo normcore pour-over narwhal seitan. Art party salvia hella. Vinyl tousled put a bird on it.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-31T00:00:49.553Z\",\n      \"created_at\": \"2017-01-30T23:00:54.271Z\",\n      \"updated_at\": \"2017-01-30T23:00:54.271Z\",\n      \"user_id\": null,\n      \"list_id\": 10\n    },\n    {\n      \"id\": 19,\n      \"title\": \"integrate dynamic synergies\",\n      \"body\": \"Letterpress cray sustainable bitters yr xoxo. Gentrify xoxo kinfolk gluten-free migas. Tofu small batch butcher kinfolk cleanse you probably haven't heard of them. Before they sold out tote bag synth tumblr helvetica farm-to-table kickstarter.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-31T00:00:49.553Z\",\n      \"created_at\": \"2017-01-30T23:00:54.267Z\",\n      \"updated_at\": \"2017-01-30T23:00:54.267Z\",\n      \"user_id\": null,\n      \"list_id\": 10\n    }\n  ]\n}",
+      "response_body": "{\n  \"id\": 10,\n  \"title\": \"Reminders\",\n  \"user_id\": 5,\n  \"reminders\": [\n    {\n      \"id\": 21,\n      \"title\": \"target cross-platform channels\",\n      \"body\": \"Yolo 8-bit synth ugh cornhole kitsch mlkshk health. Fashion axe heirloom paleo pop-up whatever drinking sriracha locavore. Helvetica offal pop-up kale chips. Yuccie swag asymmetrical +1 kogi art party blue bottle.\",\n      \"done\": false,\n      \"remind_date\": \"2017-01-31T03:05:20.995Z\",\n      \"created_at\": \"2017-01-31T02:05:26.964Z\",\n      \"updated_at\": \"2017-01-31T02:05:26.964Z\",\n      \"user_id\": null,\n      \"list_id\": 10\n    },\n    {\n      \"id\": 20,\n      \"title\": \"scale rich channels\",\n      \"body\": \"Humblebrag cold-pressed disrupt. Meggings bitters organic blue bottle twee. Cray kinfolk carry. Fap offal xoxo. Typewriter knausgaard fingerstache hammock.\",\n      \"done\": true,\n      \"remind_date\": \"2017-01-31T03:05:20.995Z\",\n      \"created_at\": \"2017-01-31T02:05:26.956Z\",\n      \"updated_at\": \"2017-01-31T02:05:26.956Z\",\n      \"user_id\": null,\n      \"list_id\": 10\n    },\n    {\n      \"id\": 19,\n      \"title\": \"exploit B2C experiences\",\n      \"body\": \"Irony next level quinoa asymmetrical selvage venmo dreamcatcher lo-fi. Distillery ramps photo booth plaid umami messenger bag. 8-bit franzen 90's messenger bag literally actually xoxo thundercats. Single-origin coffee fashion axe skateboard whatever paleo diy vinegar gentrify.\",\n      \"done\": true,\n      \"remind_date\": \"2017-01-31T03:05:20.995Z\",\n      \"created_at\": \"2017-01-31T02:05:26.945Z\",\n      \"updated_at\": \"2017-01-31T02:05:26.945Z\",\n      \"user_id\": null,\n      \"list_id\": 10\n    }\n  ]\n}",
       "response_headers": {
-        "access-token": "V7Z0z-kCZmHVhMYMMgRXYg",
+        "access-token": "q1ycfqT27fcHrQHr3QzQRg",
         "token-type": "Bearer",
-        "client": "TvHOCyDm0r7LcewgFNzkfg",
-        "expiry": "1487026854",
-        "uid": "corbin@dibbertmacgyver.info"
+        "client": "Y4YaU33GfgLCJ_qwST5QwA",
+        "expiry": "1487037927",
+        "uid": "dusty.tremblay@swaniawski.co"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.comapi/lists/10\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: V7Z0z-kCZmHVhMYMMgRXYg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: TvHOCyDm0r7LcewgFNzkfg\" \\\n\t-H \"Expiry: 1487026854\" \\\n\t-H \"Uid: corbin@dibbertmacgyver.info\""
+      "curl": "curl \"http://remindux.herokuapp.comapi/lists/10\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: q1ycfqT27fcHrQHr3QzQRg\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: Y4YaU33GfgLCJ_qwST5QwA\" \\\n\t-H \"Expiry: 1487037927\" \\\n\t-H \"Uid: dusty.tremblay@swaniawski.co\""
     }
   ]
 }

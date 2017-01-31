@@ -21,22 +21,27 @@
       "request_path": "/api/reminders/91",
       "request_body": "{\"reminder\":{\"title\":\"Updated title.\"}}",
       "request_headers": {
+        "Access-Token": "PQprz_cDrU2Kmzn8y11Jhw",
+        "Token-Type": "Bearer",
+        "Client": "zhaPfSuIRuBzVIQVoLL6_g",
+        "Expiry": "1487037932",
+        "Uid": "emerson_leffler@zemlak.com"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"done\": true,\n  \"remind_date\": \"2017-01-31T00:00:49.553Z\",\n  \"id\": 91,\n  \"title\": \"Updated title.\",\n  \"list_id\": 33,\n  \"body\": \"Neutra keytar distillery kinfolk gluten-free biodiesel lomo heirloom. Try-hard occupy selfies etsy hella. Etsy shabby chic yuccie street. Mlkshk try-hard sriracha messenger bag cray.\",\n  \"created_at\": \"2017-01-30T23:00:58.081Z\",\n  \"updated_at\": \"2017-01-30T23:00:58.394Z\",\n  \"user_id\": null\n}",
+      "response_body": "{\n  \"done\": false,\n  \"remind_date\": \"2017-01-31T03:05:20.995Z\",\n  \"id\": 91,\n  \"title\": \"Updated title.\",\n  \"list_id\": 33,\n  \"body\": \"Pug keytar xoxo wes anderson listicle. Celiac pickled salvia. Roof typewriter ennui cliche kinfolk yuccie kale chips gastropub.\",\n  \"created_at\": \"2017-01-31T02:05:31.710Z\",\n  \"updated_at\": \"2017-01-31T02:05:32.339Z\",\n  \"user_id\": null\n}",
       "response_headers": {
-        "access-token": "IQrFGcvl9i2n60V9bOXjvQ",
+        "access-token": "PQprz_cDrU2Kmzn8y11Jhw",
         "token-type": "Bearer",
-        "client": "v8k58G5bO4R8KS_qDs3ypQ",
-        "expiry": "1487026858",
-        "uid": "jordan@hirthe.com"
+        "client": "zhaPfSuIRuBzVIQVoLL6_g",
+        "expiry": "1487037932",
+        "uid": "emerson_leffler@zemlak.com"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://remindux.herokuapp.com/api/reminders/91\" -d '{\"reminder\":{\"title\":\"Updated title.\"}}' -X PUT \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: IQrFGcvl9i2n60V9bOXjvQ\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: v8k58G5bO4R8KS_qDs3ypQ\" \\\n\t-H \"Expiry: 1487026858\" \\\n\t-H \"Uid: jordan@hirthe.com\""
+      "curl": "curl \"http://remindux.herokuapp.com/api/reminders/91\" -d '{\"reminder\":{\"title\":\"Updated title.\"}}' -X PUT \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Access-Token: PQprz_cDrU2Kmzn8y11Jhw\" \\\n\t-H \"Token-Type: Bearer\" \\\n\t-H \"Client: zhaPfSuIRuBzVIQVoLL6_g\" \\\n\t-H \"Expiry: 1487037932\" \\\n\t-H \"Uid: emerson_leffler@zemlak.com\""
     }
   ]
 }
