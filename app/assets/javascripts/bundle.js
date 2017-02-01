@@ -38478,12 +38478,9 @@
 	
 	var _lists_list_container2 = _interopRequireDefault(_lists_list_container);
 	
-	var _greeting = __webpack_require__(500);
-	
-	var _greeting2 = _interopRequireDefault(_greeting);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// components
 	var Root = function Root(_ref) {
 	  var store = _ref.store;
 	
@@ -38512,6 +38509,7 @@
 	      _react2.default.createElement(
 	        _reactRouter.Route,
 	        { path: '/', component: _App2.default },
+	        _react2.default.createElement(_reactRouter.IndexRedirect, { to: '/reminders' }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _session_form_container2.default, onEnter: _redirectIfLoggedIn }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _session_form_container2.default, onEnter: _redirectIfLoggedIn }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'reminders', component: _reminder_list_container2.default, onEnter: _ensureLoggedIn }),
@@ -38521,7 +38519,6 @@
 	  );
 	};
 	
-	// components
 	exports.default = Root;
 
 /***/ },
