@@ -51073,7 +51073,7 @@
 	    case 'Unprocessable Entity':
 	      return errors.responseJSON;
 	    case 'error':
-	      return errors.responseJSON;
+	      return errors.responseJSON || [errors.responseText || errors.statusText];
 	    case 'Not Found':
 	      return ['Resource not found'];
 	  }
