@@ -67,5 +67,5 @@ export const parseErrors = ({ errors }) => {
       return ['Resource not found']
   }
 
-  return errors
+  return []
 }

@@ -51078,7 +51078,7 @@
 	      return ['Resource not found'];
 	  }
 	
-	  return errors;
+	  return [];
 	};
 
 /***/ },
