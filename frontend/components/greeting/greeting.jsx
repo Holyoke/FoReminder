@@ -8,6 +8,7 @@ class Greeting extends React.Component {
     let content = ''
     let linkRowStyle = {display: 'flex', justifyContent: 'space-around'}
     let buttonRowStyle = {display: 'flex', justifyContent: 'space-around'}
+    const { guestLogin } = this.props
 
     if (this.props.currentUser) {
       content = <div />
@@ -22,8 +23,9 @@ class Greeting extends React.Component {
         </div>
         <br />
         <div style={buttonRowStyle} className="greeting-buttons-container">
-          <Link to="login"><Button bsStyle="primary">Login</Button></Link>
-          <Link to="signup"><Button bsStyle="primary">Signup</Button></Link>
+          <Button bsStyle="primary" onClick={guestLogin} >Demo as Guest!</Button>
+          <Link to="login"><Button bsStyle="success">Login</Button></Link>
+          <Link to="signup"><Button bsStyle="success">Signup</Button></Link>
         </div>
       </Jumbotron>
     }

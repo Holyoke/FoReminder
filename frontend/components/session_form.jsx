@@ -43,7 +43,7 @@ class SessionForm extends React.Component {
     const formButton = <button>{this.props.location.pathname.slice(1)}</button>
     const { errors, clearErrors } = this.props
     // currently clearErrors doesn't work for form errors
-    
+
     return (
       <form className="session-form" onSubmit={this.handleSubmit}>
         <ErrorsList errors={errors} clearErrors={clearErrors} />

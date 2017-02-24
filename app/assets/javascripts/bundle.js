@@ -38478,9 +38478,12 @@
 	
 	var _lists_list_container2 = _interopRequireDefault(_lists_list_container);
 	
+	var _greeting_container = __webpack_require__(499);
+	
+	var _greeting_container2 = _interopRequireDefault(_greeting_container);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// components
 	var Root = function Root(_ref) {
 	  var store = _ref.store;
 	
@@ -38513,12 +38516,14 @@
 	        _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _session_form_container2.default, onEnter: _redirectIfLoggedIn }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _session_form_container2.default, onEnter: _redirectIfLoggedIn }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'reminders', component: _reminder_list_container2.default, onEnter: _ensureLoggedIn }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'lists', component: _lists_list_container2.default, onEnter: _ensureLoggedIn })
+	        _react2.default.createElement(_reactRouter.Route, { path: 'lists', component: _lists_list_container2.default, onEnter: _ensureLoggedIn }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'greeting', component: _greeting_container2.default, onEnter: _redirectIfLoggedIn })
 	      )
 	    )
 	  );
 	};
 	
+	// components
 	exports.default = Root;
 
 /***/ },
@@ -44079,7 +44084,6 @@
 	    'div',
 	    { className: 'app', style: { width: '75%', marginLeft: 'auto', marginRight: 'auto' } },
 	    _react2.default.createElement(_navbar_container2.default, null),
-	    _react2.default.createElement(_greeting_container2.default, null),
 	    children
 	  );
 	};
@@ -44116,7 +44120,8 @@
 	//  actions
 	
 	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref2) {
+	  var router = _ref2.router;
 	  return {
 	    logout: function logout() {
 	      return dispatch((0, _session_actions.logout)());
@@ -44208,7 +44213,7 @@
 	        ));
 	        navRightItems.push(_react2.default.createElement(
 	          _LinkContainer2.default,
-	          { to: '/', key: 'nls' },
+	          { to: '/greeting', key: 'nls' },
 	          _react2.default.createElement(
 	            _NavItem2.default,
 	            { onClick: logout },
@@ -44218,7 +44223,7 @@
 	      } else {
 	        navRightItems.push(_react2.default.createElement(
 	          _LinkContainer2.default,
-	          { to: '/login', key: 'nl1' },
+	          { to: '/login', key: 'login' },
 	          _react2.default.createElement(
 	            _NavItem2.default,
 	            null,
@@ -44227,11 +44232,20 @@
 	        ));
 	        navRightItems.push(_react2.default.createElement(
 	          _LinkContainer2.default,
-	          { to: '/signup', key: 'nl2' },
+	          { to: '/signup', key: 'signup' },
 	          _react2.default.createElement(
 	            _NavItem2.default,
 	            null,
 	            'Sign Up'
+	          )
+	        ));
+	        navRightItems.push(_react2.default.createElement(
+	          _LinkContainer2.default,
+	          { to: '/greeting', key: 'greeting' },
+	          _react2.default.createElement(
+	            _NavItem2.default,
+	            null,
+	            'Overview'
 	          )
 	        ));
 	      }
@@ -49565,10 +49579,18 @@
 	//  actions
 	
 	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref2) {
+	  var router = _ref2.router;
 	  return {
 	    logout: function logout() {
 	      return dispatch((0, _session_actions.logout)());
+	    },
+	    guestLogin: function guestLogin() {
+	      var guest = { email: 'guest@remindux.com', password: 'guest1234' };
+	      var redirect = function redirect() {
+	        router.push('reminders');
+	      };
+	      return dispatch((0, _session_actions.login)(guest)).then(redirect);
 	    }
 	  };
 	};
@@ -49626,6 +49648,8 @@
 	      var content = '';
 	      var linkRowStyle = { display: 'flex', justifyContent: 'space-around' };
 	      var buttonRowStyle = { display: 'flex', justifyContent: 'space-around' };
+	      var guestLogin = this.props.guestLogin;
+	
 	
 	      if (this.props.currentUser) {
 	        content = _react2.default.createElement('div', null);
@@ -49667,11 +49691,16 @@
 	            'div',
 	            { style: buttonRowStyle, className: 'greeting-buttons-container' },
 	            _react2.default.createElement(
+	              _Button2.default,
+	              { bsStyle: 'primary', onClick: guestLogin },
+	              'Demo as Guest!'
+	            ),
+	            _react2.default.createElement(
 	              _Link2.default,
 	              { to: 'login' },
 	              _react2.default.createElement(
 	                _Button2.default,
-	                { bsStyle: 'primary' },
+	                { bsStyle: 'success' },
 	                'Login'
 	              )
 	            ),
@@ -49680,7 +49709,7 @@
 	              { to: 'signup' },
 	              _react2.default.createElement(
 	                _Button2.default,
-	                { bsStyle: 'primary' },
+	                { bsStyle: 'success' },
 	                'Signup'
 	              )
 	            )

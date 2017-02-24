@@ -25,17 +25,21 @@ class NavBar extends React.Component {
         </LinkContainer>
       )
       navRightItems.push(
-        <LinkContainer to="/" key="nls">
+        <LinkContainer to="/greeting" key="nls">
           <NavItem onClick={logout}>Logout</NavItem>
         </LinkContainer>)
     } else {
       navRightItems.push(
-        <LinkContainer to="/login" key="nl1">
+        <LinkContainer to="/login" key="login">
           <NavItem>Login</NavItem>
         </LinkContainer>)
       navRightItems.push(
-        <LinkContainer to="/signup" key="nl2">
+        <LinkContainer to="/signup" key="signup">
           <NavItem>Sign Up</NavItem>
+        </LinkContainer>)
+      navRightItems.push(
+        <LinkContainer to="/greeting" key="greeting">
+          <NavItem>Overview</NavItem>
         </LinkContainer>)
     }
 

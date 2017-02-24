@@ -8,8 +8,10 @@ const mapStatetoProps = ({session}) => ({
   currentUser: session.currentUser
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch(logout())
+const mapDispatchToProps = (dispatch, { router }) => ({
+  logout: () => {
+    return dispatch(logout())
+  }
 })
 
 export default connect(
