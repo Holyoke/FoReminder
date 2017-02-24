@@ -38491,7 +38491,7 @@
 	    var currentUser = store.getState().session.currentUser;
 	
 	    if (!currentUser) {
-	      replace('/login');
+	      replace('/greeting');
 	    }
 	  };
 	
@@ -44079,11 +44079,12 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var App = function App(_ref) {
-	  var children = _ref.children;
+	  var children = _ref.children,
+	      router = _ref.router;
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'app', style: { width: '75%', marginLeft: 'auto', marginRight: 'auto' } },
-	    _react2.default.createElement(_navbar_container2.default, null),
+	    _react2.default.createElement(_navbar_container2.default, { router: router }),
 	    children
 	  );
 	};
@@ -44124,7 +44125,10 @@
 	  var router = _ref2.router;
 	  return {
 	    logout: function logout() {
-	      return dispatch((0, _session_actions.logout)());
+	      var redirect = function redirect() {
+	        router.push('/greeting');
+	      };
+	      return dispatch((0, _session_actions.logout)()).then(redirect);
 	    }
 	  };
 	};

@@ -12,7 +12,7 @@ import GreetingContainer from './greeting/greeting_container'
 const Root = ({store}) => {
   const _ensureLoggedIn = (nextState, replace) => {
     const {currentUser} = store.getState().session
-    if (!currentUser) { replace('/login') }
+    if (!currentUser) { replace('/greeting') }
   }
 
   const _redirectIfLoggedIn = (nextState, replace) => {

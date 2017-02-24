@@ -10,7 +10,10 @@ const mapStatetoProps = ({session}) => ({
 
 const mapDispatchToProps = (dispatch, { router }) => ({
   logout: () => {
-    return dispatch(logout())
+    const redirect = () => {
+      router.push('/greeting')
+    }
+    return dispatch(logout()).then(redirect)
   }
 })
 
