@@ -19,15 +19,3 @@ My career thus far has primarily been back-end and specifically, RESTful JSON AP
 
 ##### Single Page Experience
 I've been working with the React library and Flux for my previous [projects](https://github.com/holyoke/Smash-Goals) but wanted to take the time to explore Redux. I strived for a single page experience due to the design from iOS's own reminder application, so elements like live editing and seamless transitions are present. However, I've not much experience with visual designing - I opted to utilize [`React-Bootstrap`](https://react-bootstrap.github.io/) for a more familiar and trustworthy aesthetic, tweaking the CSS properties instead.
-
-#### Next Steps
-
-Currently looking to implement...
-
-- a Drag and Drop sort with lists, reminders, and comments. There are variety of npm packages to explore for this.
-
-- Image/Screenshot upload with `carrierwave` and `minimagick`.
-
-- Integration testing that incorporates a Rails 5 / Redux setup.
-
-- HTML5 web notifications
