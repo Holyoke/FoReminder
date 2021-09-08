@@ -13,11 +13,11 @@
 #  list_id     :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :reminder do
     title { Faker::Company.bs }
     body { Faker::Hipster.paragraph }
     done { [true, false, false].sample }
-    remind_date Time.now + 1.hour
+    remind_date { Time.now + 1.hour }
   end
 end

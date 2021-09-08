@@ -27,19 +27,19 @@
 #  updated_at             :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
-    password "passw0rd"
-    password_confirmation "passw0rd"
+    password { "passw0rd" }
+    password_confirmation { "passw0rd" }
 
     factory :user_with_lists_reminders_comments do
       # posts_count is declared as a transient attribute and available in
       # attributes on the factory, as well as the callback via the evaluator
       transient do
-        lists_count 2
-        reminders_count 3
-        comments_count 3
+        lists_count { 2 }
+        reminders_count { 3 }
+        comments_count { 3 }
       end
 
       after(:create) do |user, evaluator|

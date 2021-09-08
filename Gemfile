@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.2.6'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -40,7 +40,7 @@ group :development, :test do
   gem 'parallel_tests', group: [:development, :test]
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem "letter_opener", "~> 1.4.1"
   gem "pry-rails"
   gem 'rspec_api_documentation'

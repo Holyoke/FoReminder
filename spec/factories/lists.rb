@@ -7,7 +7,7 @@
 #  user_id :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :list do
     title { Faker::Company.buzzword }
   end

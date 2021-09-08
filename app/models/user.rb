@@ -29,10 +29,11 @@
 
 class User < ActiveRecord::Base
   # Include default devise modules.
+  include DeviseTokenAuth::Concerns::User
+  
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
           :omniauthable
-  include DeviseTokenAuth::Concerns::User
 
   has_many :lists, dependent: :destroy
   has_many :reminders, through: :lists

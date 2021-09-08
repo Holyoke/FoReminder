@@ -8,7 +8,7 @@
 #  active      :boolean          default(FALSE), not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :comment do
     body { Faker::Hacker.verb }
     active { [true, false].sample }
