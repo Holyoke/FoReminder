@@ -22,7 +22,7 @@
     "babel-preset-react": "^6.16.0",
     "css-loader": "^0.26.0",
     "j-toker": "0.0.10-beta3",
-    "lodash": "^4.17.2",
+    "lodash": "^4.17.21",
     "moment": "^2.17.0",
     "react": "^15.4.x",
     "react-bootstrap": "^0.30.7",
